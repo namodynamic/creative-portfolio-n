@@ -18,6 +18,13 @@
             "label": "Heading",
             "placeholder": ""
           }
+        },
+        "intro": {
+          "type": "Text",
+          "config": {
+            "label": "Intro",
+            "placeholder": ""
+          }
         }
       },
       "items": {

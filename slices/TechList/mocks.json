@@ -7,6 +7,11 @@
 				"__TYPE__": "FieldContent",
 				"value": "war",
 				"type": "Text"
+			},
+			"intro": {
+				"__TYPE__": "FieldContent",
+				"value": "asleep",
+				"type": "Text"
 			}
 		},
 		"items": [

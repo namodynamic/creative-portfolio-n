@@ -1,9 +1,14 @@
+"use client";
 import Bounded from "@/components/Bounded";
 import Heading from "@/components/Heading";
 import { Content } from "@prismicio/client";
+import { PrismicNextImage } from "@prismicio/next";
 import { PrismicRichText, SliceComponentProps } from "@prismicio/react";
 
-import { VerticalTimeline, VerticalTimelineElement } from "react-vertical-timeline-component";
+import {
+  VerticalTimeline,
+  VerticalTimelineElement,
+} from "react-vertical-timeline-component";
 import "react-vertical-timeline-component/style.min.css";
 
 /**
@@ -20,25 +25,56 @@ const Experience = ({ slice }: ExperienceProps): JSX.Element => {
       data-slice-type={slice.slice_type}
       data-slice-variation={slice.variation}
     >
-      <Heading as="h2" size="lg">
+      <Heading as="h2" size="lg" className="max-md:text-5xl">
         {slice.primary.heading}
       </Heading>
-      {slice.items.map((item, index) => (
-        <div key={index} className="ml-6 mt-8 max-w-prose md:ml-12 md:mt-16">
-          <Heading as="h3" size="sm">
-            {item.title}
-          </Heading>
 
-          <div className="mt-1 flex w-fit items-center gap-1 text-2xl font-semibold tracking-tight text-slate-400">
-            <span>{item.time_period}</span>{" "}
-            <span className="text-3xl font-extralight">/</span>{" "}
-            <span>{item.institution}</span>
-          </div>
-          <div className="prose prose-lg prose-invert mt-4">
-            <PrismicRichText field={item.description} />
-          </div>
-        </div>
-      ))}
+      <div className="prose prose-sm prose-invert col-start-1 mt-5 text-slate-500  sm:prose-lg">
+        <p>{slice.primary.intro}</p>
+      </div>
+
+      <div className="mt-8 flex sm:mt-16">
+        <VerticalTimeline
+          animate={false}
+          lineColor="white"
+          className="vertical-timeline--red"
+        >
+          {slice.items.map((item, index) => (
+            <VerticalTimelineElement
+              key={index}
+              date={item.time_period ? item.time_period : ""}
+              icon={
+                <div className="flex h-full w-full items-center justify-center">
+                  <PrismicNextImage
+                    field={item.icon}
+                    className="h-[60%] w-[60%] object-contain"
+                  />
+                </div>
+              }
+              iconStyle={{
+                background: item.icon_bg ? item.icon_bg : "#1d1836",
+              }}
+              contentStyle={{ background: "#1d1836", color: "#fff" }}
+              contentArrowStyle={{ borderRight: "7px solid  #232631" }}
+            >
+              <div>
+                <h3 className="text-[24px] font-bold text-white ">
+                  {item.title}
+                </h3>
+                <p
+                  className="text-[16px] font-semibold text-slate-400"
+                  style={{ margin: 0 }}
+                >
+                  {item.company}
+                </p>
+              </div>
+              <div className="prose prose-sm prose-slate prose-invert col-start-1 sm:prose-lg">
+                <PrismicRichText field={item.description} />
+              </div>
+            </VerticalTimelineElement>
+          ))}
+        </VerticalTimeline>
+      </div>
     </Bounded>
   );
 };

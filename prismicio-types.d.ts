@@ -168,6 +168,7 @@ export type HomepageDocument<Lang extends string = string> =
   >;
 
 type PageDocumentDataSlicesSlice =
+  | EducationSlice
   | ExperienceSlice
   | ContentIndexSlice
   | TechListSlice
@@ -662,6 +663,96 @@ export type ContentIndexSlice = prismic.SharedSlice<
 >;
 
 /**
+ * Primary content in *Education → Primary*
+ */
+export interface EducationSliceDefaultPrimary {
+  /**
+   * Heading field in *Education → Primary*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: education.primary.heading
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  heading: prismic.KeyTextField;
+}
+
+/**
+ * Primary content in *Education → Items*
+ */
+export interface EducationSliceDefaultItem {
+  /**
+   * Title field in *Education → Items*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: education.items[].title
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  title: prismic.KeyTextField;
+
+  /**
+   * Time Period field in *Education → Items*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: education.items[].time_period
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  time_period: prismic.KeyTextField;
+
+  /**
+   * Institution field in *Education → Items*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: education.items[].institution
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  institution: prismic.KeyTextField;
+
+  /**
+   * Description field in *Education → Items*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: education.items[].description
+   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+   */
+  description: prismic.RichTextField;
+}
+
+/**
+ * Default variation for Education Slice
+ *
+ * - **API ID**: `default`
+ * - **Description**: Default
+ * - **Documentation**: https://prismic.io/docs/slice
+ */
+export type EducationSliceDefault = prismic.SharedSliceVariation<
+  "default",
+  Simplify<EducationSliceDefaultPrimary>,
+  Simplify<EducationSliceDefaultItem>
+>;
+
+/**
+ * Slice variation for *Education*
+ */
+type EducationSliceVariation = EducationSliceDefault;
+
+/**
+ * Education Shared Slice
+ *
+ * - **API ID**: `education`
+ * - **Description**: Education
+ * - **Documentation**: https://prismic.io/docs/slice
+ */
+export type EducationSlice = prismic.SharedSlice<
+  "education",
+  EducationSliceVariation
+>;
+
+/**
  * Primary content in *Experience → Primary*
  */
 export interface ExperienceSliceDefaultPrimary {
@@ -674,6 +765,16 @@ export interface ExperienceSliceDefaultPrimary {
    * - **Documentation**: https://prismic.io/docs/field#key-text
    */
   heading: prismic.KeyTextField;
+
+  /**
+   * Intro field in *Experience → Primary*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: experience.primary.intro
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  intro: prismic.KeyTextField;
 }
 
 /**
@@ -691,6 +792,36 @@ export interface ExperienceSliceDefaultItem {
   title: prismic.KeyTextField;
 
   /**
+   * Company field in *Experience → Items*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: experience.items[].company
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  company: prismic.KeyTextField;
+
+  /**
+   * Icon field in *Experience → Items*
+   *
+   * - **Field Type**: Image
+   * - **Placeholder**: *None*
+   * - **API ID Path**: experience.items[].icon
+   * - **Documentation**: https://prismic.io/docs/field#image
+   */
+  icon: prismic.ImageField<never>;
+
+  /**
+   * Icon Bg field in *Experience → Items*
+   *
+   * - **Field Type**: Color
+   * - **Placeholder**: *None*
+   * - **API ID Path**: experience.items[].icon_bg
+   * - **Documentation**: https://prismic.io/docs/field#color
+   */
+  icon_bg: prismic.ColorField;
+
+  /**
    * Time Period field in *Experience → Items*
    *
    * - **Field Type**: Text
@@ -699,16 +830,6 @@ export interface ExperienceSliceDefaultItem {
    * - **Documentation**: https://prismic.io/docs/field#key-text
    */
   time_period: prismic.KeyTextField;
-
-  /**
-   * Institution field in *Experience → Items*
-   *
-   * - **Field Type**: Text
-   * - **Placeholder**: *None*
-   * - **API ID Path**: experience.items[].institution
-   * - **Documentation**: https://prismic.io/docs/field#key-text
-   */
-  institution: prismic.KeyTextField;
 
   /**
    * Description field in *Experience → Items*
@@ -871,6 +992,16 @@ export interface TechListSliceDefaultPrimary {
    * - **Documentation**: https://prismic.io/docs/field#key-text
    */
   heading: prismic.KeyTextField;
+
+  /**
+   * Intro field in *TechList → Primary*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: tech_list.primary.intro
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  intro: prismic.KeyTextField;
 }
 
 /**
@@ -1007,6 +1138,11 @@ declare module "@prismicio/client" {
       ContentIndexSliceDefaultPrimary,
       ContentIndexSliceVariation,
       ContentIndexSliceDefault,
+      EducationSlice,
+      EducationSliceDefaultPrimary,
+      EducationSliceDefaultItem,
+      EducationSliceVariation,
+      EducationSliceDefault,
       ExperienceSlice,
       ExperienceSliceDefaultPrimary,
       ExperienceSliceDefaultItem,

@@ -1,8 +1,8 @@
 {
-  "id": "experience",
+  "id": "education",
   "type": "SharedSlice",
-  "name": "Experience",
-  "description": "Experience",
+  "name": "Education",
+  "description": "Education",
   "variations": [
     {
       "id": "default",
@@ -18,13 +18,6 @@
             "label": "Heading",
             "placeholder": ""
           }
-        },
-        "intro": {
-          "type": "Text",
-          "config": {
-            "label": "Intro",
-            "placeholder": ""
-          }
         }
       },
       "items": {
@@ -35,32 +28,17 @@
             "placeholder": ""
           }
         },
-        "company": {
-          "type": "Text",
-          "config": {
-            "label": "Company",
-            "placeholder": ""
-          }
-        },
-        "icon": {
-          "type": "Image",
-          "config": {
-            "label": "Icon",
-            "constraint": {},
-            "thumbnails": []
-          }
-        },
-        "icon_bg": {
-          "type": "Color",
-          "config": {
-            "label": "Icon Bg",
-            "placeholder": ""
-          }
-        },
         "time_period": {
           "type": "Text",
           "config": {
             "label": "Time Period",
+            "placeholder": ""
+          }
+        },
+        "institution": {
+          "type": "Text",
+          "config": {
+            "label": "Institution",
             "placeholder": ""
           }
         },
@@ -69,8 +47,8 @@
           "config": {
             "label": "Description",
             "placeholder": "",
-            "allowTargetBlank": false,
-            "multi": "list-item,rtl,paragraph,embed,strong,preformatted"
+            "allowTargetBlank": true,
+            "single": "paragraph,preformatted,heading1,heading2,heading3,heading4,heading5,heading6,strong,em,hyperlink,image,embed,list-item,o-list-item,rtl"
           }
         }
       }
