@@ -1,11 +1,12 @@
 import type { Metadata } from "next";
 import { Urbanist } from "next/font/google";
 import "./globals.css";
-import Header from "../components/Header";
-import Footer from "@/components/Footer";
 import clsx from "clsx";
 import { PrismicPreview } from "@prismicio/next";
 import { createClient, repositoryName } from "@/prismicio";
+
+import Header from "../components/Header";
+import Footer from "@/components/Footer";
 
 const urbanist = Urbanist({ subsets: ["latin"] });
 
@@ -28,13 +29,13 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className="bg-slate-900 text-slate-100">
+    <html lang="en" className="bg-[#050816]">
       <body className={clsx(urbanist.className, "relative min-h-screen")}>
         <Header />
         {children}
+        <div className="background-gradient absolute inset-0 -z-50 max-h-screen" />
+        <div className="pointer-events-none absolute inset-0 -z-40 h-full bg-[url('/noisetexture.jpg')] opacity-40 mix-blend-soft-light"></div>
         <Footer />
-        <div className="background-gradient absolute inset-0 -z-50 max-h-screen"></div>
-        <div className="pointer-events-none absolute inset-0 -z-40 h-full bg-[url('/noisetexture.jpg')] opacity-20 mix-blend-soft-light"></div>
       </body>
       <PrismicPreview repositoryName={repositoryName} />
     </html>

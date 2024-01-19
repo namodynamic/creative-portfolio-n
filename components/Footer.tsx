@@ -6,6 +6,7 @@ import Link from "next/link";
 import Bounded from "@/components/Bounded";
 import { isFilled } from "@prismicio/client";
 import { FaGithub, FaXTwitter, FaLinkedin } from "react-icons/fa6";
+import Image from "next/image";
 
 export default async function Footer() {
   const client = createClient();
@@ -18,7 +19,7 @@ export default async function Footer() {
             href="/"
             className="text-xl font-extrabold tracking-tighter text-slate-100 transition-colors duration-150 hover:text-yellow-400"
           >
-            {settings.data.name}
+            <Image src="/logo.svg" width={50} height={50} alt="logo" className="object-contain bg-transparent"/>
           </Link>
           <span
             className="hidden text-5xl font-extralight leading-[0] text-slate-400 sm:inline"
@@ -27,7 +28,7 @@ export default async function Footer() {
             
           </span>
           <p className=" text-sm text-slate-300 ">
-            © {new Date().getFullYear()} {settings.data.name}
+            © {new Date().getFullYear()} <strong>{settings.data.name}</strong>. All rights reserved.
           </p>
         </div>
         <nav className="navigation" aria-label="Footer Navigation">
