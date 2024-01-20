@@ -100,9 +100,12 @@ function NameLogo({ name }: { name: KeyTextField }) {
     <Link
       href="/"
       aria-label="Home page"
-      className="text-xl font-extrabold tracking-tighter text-slate-900"
+      className="rounded-2xl border-2 border-[#0e0b38]  bg-[#0e0b38]/80 shadow-xl"
     >
-      {name}
+      <p className=" rounded-2xl border-2 border-yellow-300 p-1 text-2xl font-extrabold tracking-tighter text-white">
+        {/* {name} */}
+        NE
+      </p>
     </Link>
   );
 }
