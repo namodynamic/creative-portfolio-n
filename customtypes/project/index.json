@@ -13,6 +13,22 @@
           "placeholder": ""
         }
       },
+      "source_code": {
+        "type": "Link",
+        "config": {
+          "label": "Source Code",
+          "placeholder": "",
+          "select": null
+        }
+      },
+      "view_live": {
+        "type": "Link",
+        "config": {
+          "label": "View Live",
+          "placeholder": "",
+          "select": null
+        }
+      },
       "uid": {
         "config": {
           "label": "UID"

@@ -22,9 +22,9 @@ export default async function Page({ params }: { params: Params }) {
     <Bounded as="article">
       <div className="rounded-2xl border-2 border-slate-800 bg-slate-900 px-4 py-10 md:px-8 md:py-20">
         <Heading as="h1">{page.data.title}</Heading>
-        <div className="flex gap-4 text-yellow-400 text-xl font-bold">
+        <div className="flex gap-4 text-yellow-400 text-sm font-bold">
           {page.tags.map((tag) => (
-            <span key={tag}>{tag}</span>
+            <span key={tag}>#{tag}</span>
           ))}
         </div>
         <p className="mt-8 border-b border-slate-600 text-xl font-medium text-slate-300">

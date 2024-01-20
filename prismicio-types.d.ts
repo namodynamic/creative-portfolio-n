@@ -251,6 +251,28 @@ interface ProjectDocumentData {
   title: prismic.KeyTextField;
 
   /**
+   * Source Code field in *Project*
+   *
+   * - **Field Type**: Link
+   * - **Placeholder**: *None*
+   * - **API ID Path**: project.source_code
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#link-content-relationship
+   */
+  source_code: prismic.LinkField;
+
+  /**
+   * View Live field in *Project*
+   *
+   * - **Field Type**: Link
+   * - **Placeholder**: *None*
+   * - **API ID Path**: project.view_live
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#link-content-relationship
+   */
+  view_live: prismic.LinkField;
+
+  /**
    * Date field in *Project*
    *
    * - **Field Type**: Date
