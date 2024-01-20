@@ -13,7 +13,8 @@ export default async function Page() {
 
 export async function generateMetadata(): Promise<Metadata> {
   const client = createClient();
-  const page = await client.getSingle("contact");
+  const page = await client.getByUID("page", "contact");
+  // const page = await client.getSingle("contact");
 
   return {
     title: page.data.meta_title,
