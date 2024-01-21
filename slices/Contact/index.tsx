@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import emailjs from "@emailjs/browser";
 
 import Bounded from "@/components/Bounded";
@@ -9,6 +9,7 @@ import { Content } from "@prismicio/client";
 import { SliceComponentProps } from "@prismicio/react";
 import StarsCanvas from "@/components/Stars";
 import EarthCanvas from "@/components/Earth";
+import { gsap } from "gsap";
 
 /**
  * Props for `Contact`.
@@ -22,6 +23,34 @@ const Contact = ({ slice }: ContactProps): JSX.Element => {
   const formRef = useRef<HTMLFormElement>(null);
   const [form, setForm] = useState({ name: "", email: "", message: "" });
   const [isLoading, setIsLoading] = useState(false);
+  const component = useRef(null);
+
+  useEffect(() => {
+    let ctx = gsap.context(() => {
+      const tl = gsap.timeline();
+
+      tl.fromTo(
+        ".heading",
+        {
+          y: 20,
+          opacity: 0,
+          scale: 1.2,
+        },
+        {
+          y: 0,
+          opacity: 1,
+          scale: 1,
+          ease: "elastic.out(1,0.3)",
+          duration: 2,
+        },
+      );
+
+      tl.from(".form-animation", { opacity: 0, x: -100, duration: 2 });
+      tl.from(".canvas-animation", { opacity: 0, x: 100, duration: 3 });
+  
+    }, component);
+    return () => ctx.revert();
+  }, []);
 
   const emailjsServiceId = process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID as string;
 
@@ -70,12 +99,13 @@ const Contact = ({ slice }: ContactProps): JSX.Element => {
       <Bounded
         data-slice-type={slice.slice_type}
         data-slice-variation={slice.variation}
+        ref={component}
       >
-        <Heading as="h2" size="lg" className="max-md:text-5xl">
+        <Heading as="h2" size="lg" className="max-md:text-5xl heading">
           {slice.primary.heading}
         </Heading>
         <div className="mt-10 flex flex-col-reverse justify-between gap-10 overflow-hidden xl:mt-12 xl:flex-row">
-          <div className="w-full flex-1 rounded-2xl bg-[#100d25] p-8">
+          <div className="form-animation w-full flex-1 rounded-2xl bg-[#100d25] p-8">
             <p className=" text-[14px] uppercase tracking-wider text-[#aaa6c3] sm:text-[18px]">
               {slice.primary.sub_heading}
             </p>
@@ -127,7 +157,7 @@ const Contact = ({ slice }: ContactProps): JSX.Element => {
               </button>
             </form>
           </div>
-          <div className="z-0 h-[350px] w-full md:h-[550px] lg:h-auto  lg:w-1/2">
+          <div className="z-0 canvas-animation h-[350px] w-full md:h-[550px] lg:h-auto  lg:w-1/2">
             <EarthCanvas />
           </div>
         </div>
