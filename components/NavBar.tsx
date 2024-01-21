@@ -81,7 +81,7 @@ export default function NavBar({
               )}
             </React.Fragment>
           ))}
-          <li>
+          <li onClick={() => setOpen(false)}>
             <Button
               linkField={settings.data.cta_link}
               label={settings.data.cta_label}
@@ -102,8 +102,7 @@ function NameLogo({ name }: { name: KeyTextField }) {
       aria-label="Home page"
       className="rounded-2xl border-2 border-[#0e0b38]  bg-[#0e0b38]/80 shadow-xl"
     >
-      <p className=" rounded-2xl border-2 border-yellow-300 p-1 text-2xl font-extrabold tracking-tighter text-white">
-        {/* {name} */}
+      <p className=" rounded-2xl border-2 border-yellow-300 p-1 text-2xl font-extrabold tracking-tighter text-white transition-all hover:scale-125 duration-150">
         NE
       </p>
     </Link>

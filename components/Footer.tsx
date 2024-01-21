@@ -17,18 +17,20 @@ export default async function Footer() {
         <div className="name flex flex-col items-center justify-center gap-x-2 gap-y-2 sm:flex-row sm:justify-self-start">
           <Link
             href="/"
-            className="text-xl font-extrabold tracking-tighter text-slate-100 transition-colors duration-150 hover:text-yellow-400"
+            aria-label="Logo"
+            className="rounded-xl border-2  border-yellow-300 bg-white shadow-xl"
           >
-            <Image src="/logo.svg" width={50} height={50} alt="logo" className="object-contain bg-transparent"/>
+            <p className=" rounded-xl border-2 border-[#0e0b38] p-1 text-sm font-extrabold tracking-tighter text-[#0e0b38]/80 transition-all duration-150 hover:scale-125">
+              NE
+            </p>
           </Link>
           <span
             className="hidden text-5xl font-extralight leading-[0] text-slate-400 sm:inline"
             aria-hidden={true}
-          >
-            
-          </span>
+          ></span>
           <p className=" text-sm text-slate-300 ">
-            © {new Date().getFullYear()} <strong>{settings.data.name}</strong> All rights reserved.
+            © {new Date().getFullYear()} <strong>{settings.data.name}</strong>{" "}
+            All rights reserved.
           </p>
         </div>
         <nav className="navigation" aria-label="Footer Navigation">
