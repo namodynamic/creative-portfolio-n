@@ -7,6 +7,7 @@ import Bounded from "@/components/Bounded";
 import Heading from "@/components/Heading";
 import { Content } from "@prismicio/client";
 import { SliceComponentProps } from "@prismicio/react";
+import StarsCanvas from "@/components/Stars";
 
 /**
  * Props for `Contact`.
@@ -64,6 +65,7 @@ const Contact = ({ slice }: ContactProps): JSX.Element => {
       });
   };
   return (
+    <>
     <Bounded
       data-slice-type={slice.slice_type}
       data-slice-variation={slice.variation}
@@ -125,7 +127,9 @@ const Contact = ({ slice }: ContactProps): JSX.Element => {
           </form>
         </div>
       </div>
-    </Bounded>
+      </Bounded>
+      <StarsCanvas />
+      </>
   );
 };
 

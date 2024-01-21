@@ -22,7 +22,7 @@ export default async function Page({ params }: { params: Params }) {
     <Bounded as="article">
       <div className="rounded-2xl border-2 border-slate-800 bg-slate-900 px-4 py-10 md:px-8 md:py-20">
         <Heading as="h1">{page.data.title}</Heading>
-        <div className="flex gap-4 text-yellow-400 text-sm font-bold">
+        <div className="flex gap-4 text-sm font-bold text-yellow-400">
           {page.tags.map((tag) => (
             <span key={tag}>#{tag}</span>
           ))}
@@ -34,6 +34,7 @@ export default async function Page({ params }: { params: Params }) {
           <SliceZone slices={page.data.slices} components={components} />
         </div>
       </div>
+      <div className="pointer-events-none absolute inset-0 -z-40 h-full bg-[url('/noisetexture.jpg')] opacity-40 mix-blend-soft-light"></div>
     </Bounded>
   );
 }

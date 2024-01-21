@@ -37,6 +37,8 @@ const Biography = ({ slice }: BiographyProps): JSX.Element => {
           className="row-start-1 max-w-sm md:col-start-2 md:row-end-3"
         />
       </div>
+      
+      <div className="pointer-events-none absolute inset-0 -z-40 h-full bg-[url('/noisetexture.jpg')] opacity-40 mix-blend-soft-light"></div>
     </Bounded>
   );
 };

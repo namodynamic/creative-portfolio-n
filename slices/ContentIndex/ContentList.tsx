@@ -178,6 +178,7 @@ export default function ContentList({
           ref={revealRef}
         ></div>
       </ul>
+      <div className="pointer-events-none absolute inset-0 -z-40 h-full bg-[url('/noisetexture.jpg')] opacity-40 mix-blend-soft-light"></div>
     </>
   );
 }
