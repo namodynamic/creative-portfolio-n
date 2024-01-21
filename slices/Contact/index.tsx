@@ -8,6 +8,7 @@ import Heading from "@/components/Heading";
 import { Content } from "@prismicio/client";
 import { SliceComponentProps } from "@prismicio/react";
 import StarsCanvas from "@/components/Stars";
+import EarthCanvas from "@/components/Earth";
 
 /**
  * Props for `Contact`.
@@ -66,70 +67,73 @@ const Contact = ({ slice }: ContactProps): JSX.Element => {
   };
   return (
     <>
-    <Bounded
-      data-slice-type={slice.slice_type}
-      data-slice-variation={slice.variation}
-    >
-      <Heading as="h2" size="lg" className="max-md:text-5xl">
-        {slice.primary.heading}
-      </Heading>
-      <div className="mt-10 flex flex-col-reverse gap-10 overflow-hidden xl:mt-12 xl:flex-row">
-        <div className="flex-[0.5] rounded-2xl bg-[#100d25] p-8">
-          <p className=" text-[14px] uppercase tracking-wider text-[#aaa6c3] sm:text-[18px]">
-            {slice.primary.sub_heading}
-          </p>
+      <Bounded
+        data-slice-type={slice.slice_type}
+        data-slice-variation={slice.variation}
+      >
+        <Heading as="h2" size="lg" className="max-md:text-5xl">
+          {slice.primary.heading}
+        </Heading>
+        <div className="mt-10 flex flex-col-reverse justify-between gap-10 overflow-hidden xl:mt-12 xl:flex-row">
+          <div className="w-full flex-1 rounded-2xl bg-[#100d25] p-8">
+            <p className=" text-[14px] uppercase tracking-wider text-[#aaa6c3] sm:text-[18px]">
+              {slice.primary.sub_heading}
+            </p>
 
-          <form
-            onSubmit={handleSubmit}
-            ref={formRef}
-            className="mt-12 flex flex-col gap-8"
-          >
-            <label className="flex flex-col">
-              <span className="mb-4 font-medium text-white">Name</span>
-              <input
-                type="text"
-                name="name"
-                value={form.name}
-                onChange={handleChange}
-                placeholder="Your Name"
-                className="rounded-lg border-none bg-[#151030] px-6 py-4 font-medium text-white outline-none placeholder:text-[#aaa6c3]"
-              />
-            </label>
-            <label className="flex flex-col">
-              <span className="mb-4 font-medium text-white">Name</span>
-              <input
-                type="email"
-                name="email"
-                value={form.email}
-                onChange={handleChange}
-                placeholder="Your Email"
-                className="rounded-lg border-none bg-[#151030] px-6 py-4 font-medium text-white outline-none placeholder:text-[#aaa6c3]"
-              />
-            </label>
-            <label className="flex flex-col">
-              <span className="mb-4 font-medium text-white">Message</span>
-              <textarea
-                rows={7}
-                name="message"
-                value={form.message}
-                onChange={handleChange}
-                placeholder="Drop me a message here and i'll get back to you."
-                className="rounded-lg border-none bg-[#151030] px-6 py-4 font-medium text-white outline-none placeholder:text-[#aaa6c3]"
-              />
-            </label>
-
-            <button
-              type="submit"
-              className="w-fit rounded-xl border-none bg-[#151030]  px-8 py-3 font-bold text-white shadow-md shadow-white outline-none"
+            <form
+              onSubmit={handleSubmit}
+              ref={formRef}
+              className="mt-12 flex flex-col gap-8"
             >
-              {isLoading ? "Sending..." : "Send"}
-            </button>
-          </form>
+              <label className="flex flex-col">
+                <span className="mb-4 font-medium text-white">Name</span>
+                <input
+                  type="text"
+                  name="name"
+                  value={form.name}
+                  onChange={handleChange}
+                  placeholder="Your Name"
+                  className="rounded-lg border-none bg-[#151030] px-6 py-4 font-medium text-white outline-none placeholder:text-[#aaa6c3]"
+                />
+              </label>
+              <label className="flex flex-col">
+                <span className="mb-4 font-medium text-white">Name</span>
+                <input
+                  type="email"
+                  name="email"
+                  value={form.email}
+                  onChange={handleChange}
+                  placeholder="Your Email"
+                  className="rounded-lg border-none bg-[#151030] px-6 py-4 font-medium text-white outline-none placeholder:text-[#aaa6c3]"
+                />
+              </label>
+              <label className="flex flex-col">
+                <span className="mb-4 font-medium text-white">Message</span>
+                <textarea
+                  rows={7}
+                  name="message"
+                  value={form.message}
+                  onChange={handleChange}
+                  placeholder="Drop me a message here and i'll get back to you."
+                  className="rounded-lg border-none bg-[#151030] px-6 py-4 font-medium text-white outline-none placeholder:text-[#aaa6c3]"
+                />
+              </label>
+
+              <button
+                type="submit"
+                className="w-fit rounded-xl border-none bg-[#151030]  px-8 py-3 font-bold text-white shadow-md shadow-white outline-none"
+              >
+                {isLoading ? "Sending..." : "Send"}
+              </button>
+            </form>
+          </div>
+          <div className="z-0 h-[350px] w-full md:h-[550px] lg:h-auto  lg:w-1/2">
+            <EarthCanvas />
+          </div>
         </div>
-      </div>
       </Bounded>
       <StarsCanvas />
-      </>
+    </>
   );
 };
 

@@ -29,7 +29,7 @@ export default async function Footer() {
             aria-hidden={true}
           ></span>
           <p className=" text-sm text-slate-300 ">
-            © {new Date().getFullYear()} <strong>{settings.data.name}</strong>{" "}
+            © {new Date().getFullYear()} <strong>{settings.data.name}.</strong>{" "}
             All rights reserved.
           </p>
         </div>

@@ -5,6 +5,7 @@ import { Canvas } from "@react-three/fiber";
 import { ContactShadows, Float, Environment } from "@react-three/drei";
 import { Suspense, useEffect, useRef, useState } from "react";
 import { gsap } from "gsap";
+import Loader from "@/components/Loader";
 
 export default function Shapes() {
   return (
@@ -16,7 +17,7 @@ export default function Shapes() {
         dpr={[1, 1.5]}
         camera={{ position: [0, 0, 25], fov: 30, near: 1, far: 40 }}
       >
-        <Suspense fallback={null}>
+        <Suspense fallback={<Loader />}>
           <Geometries />
           <ContactShadows
             position={[0, -3.5, 0]}
