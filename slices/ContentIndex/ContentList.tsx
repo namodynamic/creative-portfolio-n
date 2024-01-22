@@ -7,6 +7,8 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { MdArrowOutward } from "react-icons/md";
 import { Content } from "@prismicio/client";
 import Link from "next/link";
+import { formatDate } from "@/utils/FormatDate";
+
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -25,6 +27,16 @@ export default function ContentList({
 }: ContentListProps) {
   const component = useRef(null);
   const itemsRef = useRef<Array<HTMLLIElement | null>>([]);
+
+  const date = formatDate(items[0].data.date);
+
+  // Sort the items by date in descending order
+  const sortedItems = items.sort((a, b) => {
+    const dateA = new Date(a.data.date || "").getTime();
+    const dateB = new Date(b.data.date || "").getTime();
+    return dateB - dateA;
+  });
+
 
   const revealRef = useRef(null);
   const [currentItem, setCurrentItem] = useState<null | number>(null);
@@ -117,9 +129,9 @@ export default function ContentList({
       : fallbackItemImage;
     return asImageSrc(image, {
       fit: "crop",
-      w: 220,
+      w: 320,
       h: 320,
-      exp: -10,
+      exp: -5,
     });
   });
 
@@ -139,7 +151,7 @@ export default function ContentList({
         className="grid border-b border-b-slate-100"
         onMouseLeave={onMouseLeave}
       >
-        {items.map((item, index) => (
+        {sortedItems.map((item, index) => (
           <li
             key={index}
             ref={(el) => (itemsRef.current[index] = el)}
@@ -170,7 +182,7 @@ export default function ContentList({
 
         {/* Hover element */}
         <div
-          className="hover-reveal pointer-events-none absolute left-0 top-0 -z-10 h-[320px] w-[220px] rounded-lg bg-cover bg-center opacity-0 transition-[background] duration-300"
+          className="hover-reveal pointer-events-none absolute left-0 top-0 -z-10 h-[320px] w-[320px] rounded-lg bg-cover bg-center opacity-0 transition-[background] duration-300"
           style={{
             backgroundImage:
               currentItem !== null ? `url(${contentImages[currentItem]})` : "",
