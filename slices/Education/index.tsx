@@ -31,7 +31,7 @@ const Education = ({ slice }: EducationProps): JSX.Element => {
             <span className="text-3xl font-extralight">/</span>{" "}
             <span>{item.institution}</span>
           </div>
-          <div className="prose prose-lg prose-invert mt-4">
+          <div className="prose prose-sm prose-slate prose-invert col-start-1  mt-4 sm:prose-lg">
             <PrismicRichText field={item.description} />
           </div>
         </div>
