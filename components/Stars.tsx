@@ -6,7 +6,7 @@ import * as random from "maath/random";
 const Stars = (props: any) => {
   const ref = useRef<THREE.Points>(null!);
   const [sphere] = useState(() =>
-    random.inSphere(new Float32Array(5000), { radius: 0.75 }),
+    random.inSphere(new Float32Array(3000), { radius: 0.75 }),
   );
 
   useFrame((state, delta) => {
