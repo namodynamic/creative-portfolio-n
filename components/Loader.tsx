@@ -1,7 +1,9 @@
 import { Html, useProgress } from "@react-three/drei";
+import { Vortex } from "react-loader-spinner";
 
 const CanvasLoader = () => {
   const { progress } = useProgress();
+
   return (
     <Html
       as="div"
@@ -11,20 +13,19 @@ const CanvasLoader = () => {
         justifyContent: "center",
         alignItems: "center",
         flexDirection: "column",
+        color: "#64748B",
       }}
     >
-      <span className="canvas-loader"></span>
-      <p
-        style={{
-          fontSize: 14,
-          color: "#F1F1F1",
-          fontWeight: 800,
-          marginTop: 60,
-          paddingTop: 40,
-        }}
-      >
-        {progress.toFixed(2)}%
-      </p>
+      <Vortex
+        visible={true}
+        height="100"
+        width="100"
+        ariaLabel="vortex-loading"
+        wrapperStyle={{}}
+        wrapperClass="vortex-wrapper"
+        colors={["red", "green", "blue", "yellow", "orange", "purple"]}
+      />
+      {progress.toFixed(2)}%
     </Html>
   );
 };

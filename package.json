@@ -26,11 +26,12 @@
     "react": "^18",
     "react-dom": "^18",
     "react-icons": "^5.0.1",
+    "react-loader-spinner": "^6.1.6",
     "react-vertical-timeline-component": "^3.6.0",
     "three": "^0.160.0"
   },
   "devDependencies": {
-    "@slicemachine/adapter-next": "^0.3.32",
+    "@slicemachine/adapter-next": "^0.3.35",
     "@tailwindcss/typography": "^0.5.10",
     "@types/node": "^20",
     "@types/react": "^18",
@@ -42,7 +43,7 @@
     "postcss": "^8",
     "prettier": "^3.2.4",
     "prettier-plugin-tailwindcss": "^0.5.11",
-    "slice-machine-ui": "^1.22.2",
+    "slice-machine-ui": "^1.24.0",
     "tailwindcss": "^3.3.0",
     "typescript": "^5"
   }
