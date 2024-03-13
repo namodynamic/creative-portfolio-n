@@ -1,31 +1,21 @@
-import { Html, useProgress } from "@react-three/drei";
-import { Vortex } from "react-loader-spinner";
+import { Html } from "@react-three/drei";
+import { CirclesWithBar } from "react-loader-spinner";
 
 const CanvasLoader = () => {
-  const { progress } = useProgress();
-
   return (
-    <Html
-      as="div"
-      center
-      style={{
-        display: "flex",
-        justifyContent: "center",
-        alignItems: "center",
-        flexDirection: "column",
-        color: "#64748B",
-      }}
-    >
-      <Vortex
-        visible={true}
+    <Html as="div" center>
+      <CirclesWithBar
         height="100"
         width="100"
-        ariaLabel="vortex-loading"
+        color="#4fa94d"
+        outerCircleColor="#43505C"
+        innerCircleColor="#f1c40f"
+        barColor="white"
+        ariaLabel="circles-with-bar-loading"
         wrapperStyle={{}}
-        wrapperClass="vortex-wrapper"
-        colors={["red", "green", "blue", "yellow", "orange", "purple"]}
+        wrapperClass=""
+        visible={true}
       />
-      {progress.toFixed(2)}%
     </Html>
   );
 };
