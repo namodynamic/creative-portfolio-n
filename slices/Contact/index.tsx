@@ -11,6 +11,9 @@ import StarsCanvas from "@/components/Stars";
 import EarthCanvas from "@/components/Earth";
 import { gsap } from "gsap";
 
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
 /**
  * Props for `Contact`.
  */
@@ -45,9 +48,8 @@ const Contact = ({ slice }: ContactProps): JSX.Element => {
         },
       );
 
-      tl.from(".form-animation", { opacity: 0, x: -100, duration: 2 });
-      tl.from(".canvas-animation", { opacity: 0, x: 100, duration: 3 });
-  
+      tl.from(".form-animation", { opacity: 0, x: -100, duration: 1 });
+      tl.from(".canvas-animation", { opacity: 0, x: 100, duration: 1 });
     }, component);
     return () => ctx.revert();
   }, []);
@@ -84,14 +86,27 @@ const Contact = ({ slice }: ContactProps): JSX.Element => {
       )
       .then(() => {
         setIsLoading(false);
-        alert("Thank you. I will get  back to you as soon as possible.");
+        toast.success("Thank you, I will get back to you shortly.", {
+          position: "bottom-center",
+          autoClose: 3000,
+          hideProgressBar: true,
+          closeOnClick: true,
+          theme: "dark",
+        });
 
         setForm({ name: "", email: "", message: "" });
       })
       .catch((error) => {
         setIsLoading(false);
         console.log(error);
-        alert("Something went wrong. Please try again.");
+        toast.error("Something went wrong. Please try again", {
+          position: "bottom-right",
+          autoClose: 3000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          progress: 1,
+          theme: "dark",
+        });
       });
   };
   return (
@@ -101,7 +116,7 @@ const Contact = ({ slice }: ContactProps): JSX.Element => {
         data-slice-variation={slice.variation}
         ref={component}
       >
-        <Heading as="h2" size="lg" className="max-md:text-5xl heading">
+        <Heading as="h2" size="lg" className="heading max-md:text-5xl">
           {slice.primary.heading}
         </Heading>
         <div className="mt-10 flex flex-col-reverse justify-between gap-10 overflow-hidden xl:mt-12 xl:flex-row">
@@ -127,7 +142,7 @@ const Contact = ({ slice }: ContactProps): JSX.Element => {
                 />
               </label>
               <label className="flex flex-col">
-                <span className="mb-4 font-medium text-white">Name</span>
+                <span className="mb-4 font-medium text-white">Email</span>
                 <input
                   type="email"
                   name="email"
@@ -157,9 +172,10 @@ const Contact = ({ slice }: ContactProps): JSX.Element => {
               </button>
             </form>
           </div>
-          <div className="z-0 canvas-animation h-[350px] w-full md:h-[550px] lg:h-auto  lg:w-1/2">
+          <div className="canvas-animation z-0 h-[350px] w-full md:h-[550px] lg:h-auto  lg:w-1/2">
             <EarthCanvas />
           </div>
+          <ToastContainer />
         </div>
       </Bounded>
       <StarsCanvas />
