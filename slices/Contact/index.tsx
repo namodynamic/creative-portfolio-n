@@ -87,7 +87,7 @@ const Contact = ({ slice }: ContactProps): JSX.Element => {
       .then(() => {
         setIsLoading(false);
         toast.success("Thank you, I will get back to you shortly.", {
-          position: "bottom-center",
+          position: "bottom-right",
           autoClose: 3000,
           hideProgressBar: true,
           closeOnClick: true,
@@ -139,6 +139,7 @@ const Contact = ({ slice }: ContactProps): JSX.Element => {
                   onChange={handleChange}
                   placeholder="Your Name"
                   className="rounded-lg border-none bg-[#151030] px-6 py-4 font-medium text-white outline-none placeholder:text-[#aaa6c3]"
+                  required
                 />
               </label>
               <label className="flex flex-col">
@@ -150,6 +151,7 @@ const Contact = ({ slice }: ContactProps): JSX.Element => {
                   onChange={handleChange}
                   placeholder="Your Email"
                   className="rounded-lg border-none bg-[#151030] px-6 py-4 font-medium text-white outline-none placeholder:text-[#aaa6c3]"
+                  required
                 />
               </label>
               <label className="flex flex-col">
@@ -166,7 +168,7 @@ const Contact = ({ slice }: ContactProps): JSX.Element => {
 
               <button
                 type="submit"
-                className="w-fit rounded-xl border-none bg-[#151030]  px-8 py-3 font-bold text-white shadow-md shadow-white outline-none"
+                className="w-fit rounded-xl border-none bg-[#151030]  px-8 py-3 font-bold text-white shadow-md shadow-white outline-none hover:shadow-yellow-200"
               >
                 {isLoading ? "Sending..." : "Send"}
               </button>
