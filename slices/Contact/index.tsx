@@ -13,6 +13,8 @@ import { gsap } from "gsap";
 
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import GridGlobe from "@/components/ui/GridGlobe";
+import { ContactGlobe } from "@/components/ContactGlobe";
 
 /**
  * Props for `Contact`.
@@ -49,7 +51,6 @@ const Contact = ({ slice }: ContactProps): JSX.Element => {
       );
 
       tl.from(".form-animation", { opacity: 0, x: -100, duration: 1 });
-      tl.from(".canvas-animation", { opacity: 0, x: 100, duration: 1 });
     }, component);
     return () => ctx.revert();
   }, []);
@@ -119,8 +120,8 @@ const Contact = ({ slice }: ContactProps): JSX.Element => {
         <Heading as="h2" size="lg" className="heading max-md:text-5xl">
           {slice.primary.heading}
         </Heading>
-        <div className="mt-10 flex flex-col-reverse justify-between gap-10 overflow-hidden xl:mt-12 xl:flex-row">
-          <div className="form-animation w-full flex-1 rounded-2xl bg-[#100d25] p-8">
+        <div className="mt-10 flex flex-col-reverse justify-between gap-10 overflow-hidden md:py-20 xl:mt-12 xl:flex-row">
+          <div className="form-animation w-full flex-1 bg-black-100/75 p-8  text-white">
             <p className=" text-[14px] uppercase tracking-wider text-[#aaa6c3] sm:text-[18px]">
               {slice.primary.sub_heading}
             </p>
@@ -138,7 +139,7 @@ const Contact = ({ slice }: ContactProps): JSX.Element => {
                   value={form.name}
                   onChange={handleChange}
                   placeholder="Your Name"
-                  className="rounded-lg border-none bg-[#151030] px-6 py-4 font-medium text-white outline-none placeholder:text-[#aaa6c3]"
+                  className="rounded-lg border-none bg-black-300 px-6 py-4 font-medium text-white outline-none placeholder:text-[#aaa6c3]"
                   required
                 />
               </label>
@@ -150,7 +151,7 @@ const Contact = ({ slice }: ContactProps): JSX.Element => {
                   value={form.email}
                   onChange={handleChange}
                   placeholder="Your Email"
-                  className="rounded-lg border-none bg-[#151030] px-6 py-4 font-medium text-white outline-none placeholder:text-[#aaa6c3]"
+                  className="rounded-lg border-none bg-black-300  px-6 py-4 font-medium text-white outline-none placeholder:text-[#aaa6c3]"
                   required
                 />
               </label>
@@ -162,20 +163,20 @@ const Contact = ({ slice }: ContactProps): JSX.Element => {
                   value={form.message}
                   onChange={handleChange}
                   placeholder="Drop me a message here and i'll get back to you."
-                  className="rounded-lg border-none bg-[#151030] px-6 py-4 font-medium text-white outline-none placeholder:text-[#aaa6c3]"
+                  className="rounded-lg border-none bg-black-300 px-6 py-4 font-medium text-white outline-none placeholder:text-[#aaa6c3]"
                 />
               </label>
 
               <button
                 type="submit"
-                className="w-fit rounded-xl border-none bg-[#151030]  px-8 py-3 font-bold text-white shadow-md shadow-white outline-none hover:shadow-yellow-200"
+                className="w-fit rounded-xl border-none bg-black-200  px-8 py-3 font-bold text-white shadow-md shadow-white outline-none hover:shadow-purple"
               >
                 {isLoading ? "Sending..." : "Send"}
               </button>
             </form>
           </div>
-          <div className="canvas-animation z-0 h-[350px] w-full md:h-[550px] lg:h-auto  lg:w-1/2">
-            <EarthCanvas />
+          <div className="z-0 h-[350px] w-full md:h-[550px] lg:h-auto  lg:w-1/2">
+            <ContactGlobe />
           </div>
           <ToastContainer />
         </div>

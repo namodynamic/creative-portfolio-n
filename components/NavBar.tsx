@@ -1,7 +1,7 @@
 "use client";
 
 import clsx from "clsx";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Content, KeyTextField, asLink } from "@prismicio/client";
 import { PrismicNextLink } from "@prismicio/next";
 import Link from "next/link";
@@ -15,42 +15,72 @@ export default function NavBar({
   settings: Content.SettingsDocument;
 }) {
   const [open, setOpen] = useState(false);
+  const [isDesktop, setIsDesktop] = useState(false);
+  useEffect(() => {
+    const handleResize = () => {
+      setIsDesktop(window.innerWidth >= 768);
+    };
+
+    handleResize(); // Check the initial size
+    window.addEventListener("resize", handleResize);
+
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
+
   const pathname = usePathname();
 
   return (
-    <nav aria-label="Main navigation">
-      <ul className="flex flex-col justify-between rounded-b-lg bg-slate-50 px-4 py-2 md:m-4 md:flex-row md:items-center md:rounded-xl">
+    <nav aria-label="Main navigation" className="">
+      <ul
+        className={clsx(
+          "flex flex-col justify-between  rounded-b-lg bg-gray-900/75 px-4  py-2 md:m-4 md:flex-row md:items-center md:rounded-xl",
+        )}
+        style={
+          isDesktop
+            ? {
+                backdropFilter: "blur(16px) saturate(180%)",
+                backgroundColor: "rgba(17, 25, 40, 0.75)",
+                borderRadius: "12px",
+                border: "1px solid rgba(255, 255, 255, 0.125)",
+              }
+            : {}
+        }
+      >
         <div className="flex items-center justify-between">
           <NameLogo name={settings.data.name} />
           <button
             aria-expanded={open}
             aria-label="Open menu"
-            className="block p-2 text-2xl text-slate-800 md:hidden"
+            className="block p-2 text-2xl text-slate-300 md:hidden"
             onClick={() => setOpen(true)}
           >
             <MdMenu />
           </button>
         </div>
+
         <div
           className={clsx(
-            "fixed bottom-0 left-0 right-0 top-0 z-50 flex flex-col items-end gap-4 bg-slate-50 pr-4 pt-14 transition-transform duration-300 ease-in-out md:hidden",
+            "fixed bottom-0 left-0 right-0 top-0 z-50 flex flex-col items-end gap-4 bg-black-100  pr-4 pt-14 transition-transform duration-300 ease-in-out md:hidden",
             open ? "translate-x-0" : "translate-x-[100%]",
           )}
         >
           <button
             aria-label="Close menu"
             aria-expanded={open}
-            className="fixed right-4 top-3 block p-2 text-2xl text-slate-800 md:hidden "
+            className="fixed right-4 top-3 block p-2 text-2xl text-slate-300 md:hidden "
             onClick={() => setOpen(false)}
           >
             <MdClose />
           </button>
+
           {settings.data.nav_item.map(({ link, label }, index) => (
             <React.Fragment key={label}>
               <li className="first:mt-8">
                 <PrismicNextLink
                   className={clsx(
-                    "group relative block overflow-hidden rounded px-3 text-3xl font-bold text-slate-900 ",
+                    "group relative block overflow-hidden rounded px-3 text-3xl font-bold text-slate-300 ",
                   )}
                   field={link}
                   onClick={() => setOpen(false)}
@@ -62,7 +92,7 @@ export default function NavBar({
                 >
                   <span
                     className={clsx(
-                      "absolute inset-0 z-0 h-full translate-y-12 rounded bg-yellow-300 transition-transform duration-300 ease-in-out group-hover:translate-y-0",
+                      "absolute inset-0 z-0 h-full translate-y-12 rounded bg-purple/10 transition-transform duration-300 ease-in-out group-hover:translate-y-0",
                       pathname.includes(asLink(link) as string)
                         ? "translate-y-6"
                         : "translate-y-18",
@@ -102,7 +132,7 @@ function NameLogo({ name }: { name: KeyTextField }) {
       aria-label="Home page"
       className="rounded-2xl border-2 border-[#0e0b38]  bg-[#0e0b38]/80 shadow-xl"
     >
-      <p className=" rounded-2xl border-2 border-yellow-300 p-1 text-2xl font-extrabold tracking-tighter text-white transition-all hover:scale-125 duration-150">
+      <p className=" rounded-2xl border-2 border-[#B43DF2] p-1 text-2xl font-extrabold tracking-tighter text-slate-300">
         NE
       </p>
     </Link>
@@ -117,13 +147,13 @@ function DesktopMenu({
   pathname: string;
 }) {
   return (
-    <div className="relative z-50 hidden flex-row items-center gap-1 bg-transparent py-0 md:flex">
+    <div className="relative z-50 hidden flex-row items-center gap-1 py-0 md:flex">
       {settings.data.nav_item.map(({ link, label }, index) => (
         <React.Fragment key={label}>
           <li>
             <PrismicNextLink
               className={clsx(
-                "group relative block overflow-hidden rounded px-3 py-1 text-base font-bold text-slate-900",
+                "group relative block overflow-hidden rounded px-3 py-1 text-base font-bold text-slate-300 hover:text-white",
               )}
               field={link}
               aria-current={
@@ -132,7 +162,7 @@ function DesktopMenu({
             >
               <span
                 className={clsx(
-                  "absolute inset-0 z-0 h-full rounded bg-yellow-300 transition-transform  duration-300 ease-in-out group-hover:translate-y-0",
+                  "absolute inset-0 z-0 h-full rounded bg-[#B43DF2] transition-transform  duration-300 ease-in-out group-hover:translate-y-0",
                   pathname.includes(asLink(link) as string)
                     ? "translate-y-6"
                     : "translate-y-8",

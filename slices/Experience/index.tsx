@@ -54,8 +54,14 @@ const Experience = ({ slice }: ExperienceProps): JSX.Element => {
               iconStyle={{
                 background: item.icon_bg ? item.icon_bg : "#1d1836",
               }}
-              contentStyle={{ background: "#1d1836", color: "#fff" }}
-              contentArrowStyle={{ borderRight: "7px solid  #232631" }}
+              contentStyle={{
+                background:
+                  "rgba(17,25, 40, 0.11)",
+                color: "#fff",
+                border: "1px solid rgba(255, 255, 255, 0.11)",
+              }}
+              contentArrowStyle={{ borderRight: "7px solid  #B43DF2" }}
+              className="vertical-timeline-element--work"
             >
               <div>
                 <h3 className="text-[24px] font-bold text-white ">

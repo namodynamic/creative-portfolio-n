@@ -6,8 +6,78 @@ import { Content, KeyTextField } from "@prismicio/client";
 import { SliceComponentProps } from "@prismicio/react";
 import { gsap } from "gsap";
 import Bounded from "@/components/Bounded";
-import Shapes from "./Shapes";
-import StarsCanvas from "@/components/Stars";
+import { TextGenerateEffect } from "@/components/ui/TextGenerateEffect";
+import MagicButton from "@/components/ui/MagicButton";
+import { FaLocationArrow } from "react-icons/fa6";
+import Link from "next/link";
+
+import { BentoGrid, BentoGridItem } from "@/components/ui/BentoGrid";
+import Approach from "@/components/Approach";
+import Cta from "@/components/Cta";
+
+const gridItems = [
+  {
+    id: 1,
+    title: "I prioritize client collaboration, fostering open communication ",
+    description: "",
+    className: "lg:col-span-3 md:col-span-6 md:row-span-4 lg:min-h-[60vh]",
+    imgClassName: "w-full h-full",
+    titleClassName: "justify-end",
+    img: "/b1.svg",
+    spareImg: "",
+  },
+  {
+    id: 2,
+    title: "I'm very flexible with time zone communications",
+    description: "",
+    className: "lg:col-span-2 md:col-span-3 md:row-span-2",
+    imgClassName: "",
+    titleClassName: "justify-start",
+    img: "",
+    spareImg: "",
+  },
+  {
+    id: 3,
+    title: "My tech stack",
+    description: "I constantly try to improve",
+    className: "lg:col-span-2 md:col-span-3 md:row-span-2",
+    imgClassName: "",
+    titleClassName: "justify-center",
+    img: "",
+    spareImg: "",
+  },
+  {
+    id: 4,
+    title: "Tech enthusiast with a passion for development.",
+    description: "",
+    className: "lg:col-span-2 md:col-span-3 md:row-span-1",
+    imgClassName: "",
+    titleClassName: "justify-start",
+    img: "/grid.svg",
+    spareImg: "/b4.svg",
+  },
+
+  {
+    id: 5,
+    title: "Currently honing my skills through real-life projects",
+    description: "The Inside Scoop",
+    className: "md:col-span-3 md:row-span-2",
+    imgClassName: "absolute right-0 bottom-0 md:w-96 w-60",
+    titleClassName: "justify-center md:justify-start lg:justify-center",
+    img: "/b5.svg",
+    spareImg: "/grid.svg",
+  },
+  {
+    id: 6,
+    title: "Do you want to start a project together?",
+    description: "",
+    className: "lg:col-span-2 md:col-span-3 md:row-span-1",
+    imgClassName: "",
+    titleClassName: "justify-center md:max-w-full max-w-60 text-center",
+    img: "",
+    spareImg: "",
+  },
+];
 
 /**
  * Props for `Hero`.
@@ -25,7 +95,7 @@ const Hero = ({ slice }: HeroProps): JSX.Element => {
       const tl = gsap.timeline();
 
       tl.fromTo(
-        ".name-animation",
+        ".intro-animation",
         {
           x: -100,
           opacity: 0,
@@ -64,49 +134,59 @@ const Hero = ({ slice }: HeroProps): JSX.Element => {
     return () => ctx.revert();
   }, []);
 
-  const renderLetters = (name: KeyTextField, key: string) => {
-    if (!name) return;
-    return name.split("").map((letter, index) => (
-      <span
-        key={index}
-        className={`name-animation name-animation-${key} inline-block opacity-0`}
-      >
-        {letter}
-      </span>
-    ));
-  };
-
   return (
     <>
-    <Bounded
-      data-slice-type={slice.slice_type}
-      data-slice-variation={slice.variation}
-      ref={component}
-    >
-      <div className="grid min-h-[70vh] grid-cols-1 items-center md:grid-cols-2">
-        <Shapes />
-        <div className="col-start-1  md:row-start-1" data-speed=".2">
-          <h1
-            className="mb-8 text-[clamp(3rem,20vmin,20rem)] font-extrabold whitespace-nowrap leading-none tracking-tighter"
-            aria-label={
-              slice.primary.first_name + " " + slice.primary.last_name
-            }
-          >
-            <span className="block text-slate-300 ">
-              {renderLetters(slice.primary.first_name, "first")}
-            </span>
-            <span className="-mt-[.2em] text-slate-500">
-                {renderLetters(slice.primary.last_name, "last")}
-            </span>
-          </h1>
-          <span className="job-title block bg-gradient-to-tr from-yellow-500 via-yellow-200 to-yellow-500 bg-clip-text text-2xl font-bold uppercase tracking-[.2em] text-transparent opacity-0 md:text-4xl">
-            {slice.primary.tag_line}
-          </span>
+      <Bounded
+        data-slice-type={slice.slice_type}
+        data-slice-variation={slice.variation}
+        ref={component}
+      >
+        <div className="relative w-full overflow-hidden">
+          <div className="relative z-10 my-20 flex justify-center">
+            <div className="flex max-w-full flex-col items-center justify-center md:max-w-2xl lg:max-w-[60vw]">
+              <p className="job-title max-w-80 text-center text-xs uppercase tracking-widest text-blue-100">
+                {slice.primary.intro_text}
+              </p>
+
+              <TextGenerateEffect
+                words={slice.primary.text_generate || ""}
+                className="text-center text-[40px] md:text-5xl lg:text-6xl"
+              />
+
+              <p className="intro-animation mb-4 text-center text-sm text-blue-100 md:text-lg md:tracking-wider lg:text-2xl">
+                {slice.primary.introduction}
+              </p>
+
+              <Link href="/projects">
+                <MagicButton
+                  title="Show my work"
+                  icon={<FaLocationArrow />}
+                  position="right"
+                />
+              </Link>
+            </div>
+          </div>
         </div>
-      </div>
+        <BentoGrid className="w-full py-10">
+          {gridItems.map((item, i) => (
+            <BentoGridItem
+              id={item.id}
+              key={i}
+              title={item.title}
+              description={item.description}
+              className={item.className}
+              img={item.img}
+              imgClassName={item.imgClassName}
+              titleClassName={item.titleClassName}
+              spareImg={item.spareImg}
+            />
+          ))}
+        </BentoGrid>
+
+        <Approach />
+        <Cta />
       </Bounded>
-      <StarsCanvas/>
-      </>
+    </>
   );
 };
 

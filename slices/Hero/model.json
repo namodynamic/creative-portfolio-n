@@ -12,24 +12,24 @@
       "description": "Default",
       "imageUrl": "",
       "primary": {
-        "first_name": {
+        "intro_text": {
           "type": "Text",
           "config": {
-            "label": "First Name",
+            "label": "Intro Text",
             "placeholder": ""
           }
         },
-        "last_name": {
+        "text_generate": {
           "type": "Text",
           "config": {
-            "label": "Last name",
+            "label": "Text Generate",
             "placeholder": ""
           }
         },
-        "tag_line": {
+        "introduction": {
           "type": "Text",
           "config": {
-            "label": "Tag Line",
+            "label": "Introduction",
             "placeholder": ""
           }
         }

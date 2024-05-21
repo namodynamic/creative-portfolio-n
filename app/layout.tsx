@@ -31,11 +31,12 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className="bg-[#050816]">
+    <html lang="en" className="bg-black-100">
       <body className={clsx(urbanist.className, "relative min-h-screen")}>
         <Header />
         {children}
         <div className="background-gradient absolute inset-0 -z-50 max-h-screen" />
+        <div className="pointer-events-none absolute inset-0 -z-40 h-full bg-[url('/noisetexture.jpg')] opacity-40 mix-blend-soft-light" />
         <Footer />
 
         <Analytics />

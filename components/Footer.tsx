@@ -13,14 +13,14 @@ export default async function Footer() {
   const settings = await client.getSingle("settings");
   return (
     <Bounded as="footer" className="text-slate-600">
-      <div className="container mx-auto mt-20 flex flex-col items-center justify-between gap-6 py-8 sm:flex-row ">
+      <div className="container mx-auto mt-10 flex flex-col items-center justify-between gap-6 py-8 sm:flex-row ">
         <div className="name flex flex-col items-center justify-center gap-x-2 gap-y-2 sm:flex-row sm:justify-self-start">
           <Link
             href="/"
             aria-label="Logo"
-            className="rounded-xl border-2  border-yellow-300 bg-white shadow-xl"
+            className="rounded-xl border  border-[#B43DF2] bg-white shadow-xl"
           >
-            <p className=" rounded-xl border-2 border-[#0e0b38] p-1 text-sm font-extrabold tracking-tighter text-[#0e0b38]/80 transition-all duration-150 hover:scale-125">
+            <p className=" rounded-xl border-2 border-[#3D2699] p-1 text-sm font-extrabold tracking-tighter text-[#0e0b38]/80 transition-all duration-150 hover:scale-125">
               NE
             </p>
           </Link>
@@ -40,7 +40,7 @@ export default async function Footer() {
                 <li>
                   <PrismicNextLink
                     className={clsx(
-                      "group relative block overflow-hidden  rounded px-3 py-1 text-base font-bold text-slate-100 transition-colors duration-150 hover:hover:text-yellow-400",
+                      "group relative block overflow-hidden  rounded px-3 py-1 text-base font-bold text-slate-100 transition-colors duration-150 hover:text-slate-300",
                     )}
                     field={link}
                   >
@@ -63,7 +63,7 @@ export default async function Footer() {
           {isFilled.link(settings.data.github_link) && (
             <PrismicNextLink
               field={settings.data.github_link}
-              className="p-2 text-2xl text-slate-300 transition-all duration-150 hover:scale-125 hover:text-yellow-400"
+              className="p-2 text-2xl text-slate-300 transition-all duration-150 hover:scale-125 "
               aria-label={settings.data.name + " on GitHub"}
             >
               <FaGithub />
@@ -72,7 +72,7 @@ export default async function Footer() {
           {isFilled.link(settings.data.twitter_link) && (
             <PrismicNextLink
               field={settings.data.twitter_link}
-              className="p-2 text-2xl text-slate-300 transition-all duration-150 hover:scale-125 hover:text-yellow-400"
+              className="p-2 text-2xl text-slate-300 transition-all duration-150 hover:scale-125"
               aria-label={settings.data.name + " on Twitter"}
             >
               <FaXTwitter />
@@ -81,7 +81,7 @@ export default async function Footer() {
           {isFilled.link(settings.data.linkedin_link) && (
             <PrismicNextLink
               field={settings.data.linkedin_link}
-              className="p-2 text-2xl text-slate-300 transition-all duration-150 hover:scale-125 hover:text-yellow-400"
+              className="p-2 text-2xl text-slate-300 transition-all duration-150 hover:scale-125 "
               aria-label={settings.data.name + " on LinkedIn"}
             >
               <FaLinkedin />

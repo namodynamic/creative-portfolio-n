@@ -4,7 +4,7 @@ import { Content } from "@prismicio/client";
 import Avatar from "@/components/Avatar";
 import Bounded from "@/components/Bounded";
 import Heading from "@/components/Heading";
-import { MdArrowOutward } from "react-icons/md";
+import { FaLocationArrow } from "react-icons/fa6";
 import clsx from "clsx";
 
 /**
@@ -39,12 +39,12 @@ const Biography = ({ slice }: BiographyProps): JSX.Element => {
         >
           <span
             className={clsx(
-              "absolute inset-0 z-0 h-full translate-y-9 bg-yellow-300 transition-transform  duration-300 ease-in-out group-hover:translate-y-0",
+              "absolute inset-0 z-0 h-full translate-y-9 bg-purple transition-transform  duration-300 ease-in-out group-hover:translate-y-0",
             )}
           />
-          <span className="relative flex items-center justify-center gap-2">
+          <span className="relative flex items-center hover:text-white justify-center gap-2">
             {slice.primary.button_text}{" "}
-            <MdArrowOutward className="inline-block" />
+            <FaLocationArrow className="inline-block" />
           </span>
         </PrismicNextLink>
 
@@ -54,7 +54,6 @@ const Biography = ({ slice }: BiographyProps): JSX.Element => {
         />
       </div>
 
-      <div className="pointer-events-none absolute inset-0 -z-40 h-full bg-[url('/noisetexture.jpg')] opacity-40 mix-blend-soft-light"></div>
     </Bounded>
   );
 };
