@@ -44,7 +44,7 @@ const Contact = ({ slice }: ContactProps): JSX.Element => {
           opacity: 1,
           scale: 1,
           ease: "elastic.out(1,0.3)",
-          duration: 2,
+          duration: 1,
         },
       );
 
@@ -119,8 +119,8 @@ const Contact = ({ slice }: ContactProps): JSX.Element => {
           {slice.primary.heading}
         </Heading>
         <div className="mt-10 flex flex-col-reverse justify-between gap-10 overflow-hidden md:py-20 xl:mt-12 xl:flex-row">
-          <div className="form-animation w-full flex-1 bg-black-100/75 p-8  text-white">
-            <p className=" text-[14px] uppercase tracking-wider text-[#aaa6c3] sm:text-[18px]">
+          <div className="form-animation w-full flex-1 border border-black-200 bg-black-100/75 p-8  text-white">
+            <p className=" text-[14px] uppercase tracking-wider text-slate-300 sm:text-[18px]">
               {slice.primary.sub_heading}
             </p>
 
@@ -137,7 +137,7 @@ const Contact = ({ slice }: ContactProps): JSX.Element => {
                   value={form.name}
                   onChange={handleChange}
                   placeholder="Your Name"
-                  className="rounded-lg border-none bg-black-300 px-6 py-4 font-medium text-white outline-none placeholder:text-[#aaa6c3]"
+                  className="rounded-lg border-none bg-black-300 px-6 py-4 font-medium text-white outline-none placeholder:text-black-300"
                   required
                 />
               </label>
@@ -149,7 +149,7 @@ const Contact = ({ slice }: ContactProps): JSX.Element => {
                   value={form.email}
                   onChange={handleChange}
                   placeholder="Your Email"
-                  className="rounded-lg border-none bg-black-300  px-6 py-4 font-medium text-white outline-none placeholder:text-[#aaa6c3]"
+                  className="rounded-lg border-none bg-black-300  px-6 py-4 font-medium text-white outline-none placeholder:text-black-300"
                   required
                 />
               </label>
@@ -161,7 +161,7 @@ const Contact = ({ slice }: ContactProps): JSX.Element => {
                   value={form.message}
                   onChange={handleChange}
                   placeholder="Drop me a message here and i'll get back to you."
-                  className="rounded-lg border-none bg-black-300 px-6 py-4 font-medium text-white outline-none placeholder:text-[#aaa6c3]"
+                  className="rounded-lg border-none bg-black-300 px-6 py-4 font-medium text-white outline-none placeholder:text-black-300"
                 />
               </label>
 

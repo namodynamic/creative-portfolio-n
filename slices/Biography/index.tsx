@@ -53,7 +53,6 @@ const Biography = ({ slice }: BiographyProps): JSX.Element => {
           className="row-start-1 max-w-sm md:col-start-2 md:row-end-3"
         />
       </div>
-
     </Bounded>
   );
 };

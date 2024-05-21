@@ -95,28 +95,7 @@ const Hero = ({ slice }: HeroProps): JSX.Element => {
       const tl = gsap.timeline();
 
       tl.fromTo(
-        ".intro-animation",
-        {
-          x: -100,
-          opacity: 0,
-          rotate: -10,
-        },
-        {
-          x: 0,
-          opacity: 1,
-          rotate: 0,
-          ease: "elastic.out(1,0.3)",
-          duration: 1,
-          transformOrigin: "left top",
-          stagger: {
-            each: 0.1,
-            from: "random",
-          },
-        },
-      );
-
-      tl.fromTo(
-        ".job-title",
+        ".intro",
         {
           y: 20,
           opacity: 0,
@@ -144,7 +123,7 @@ const Hero = ({ slice }: HeroProps): JSX.Element => {
         <div className="relative w-full overflow-hidden">
           <div className="relative z-10 my-20 flex justify-center">
             <div className="flex max-w-full flex-col items-center justify-center md:max-w-2xl lg:max-w-[60vw]">
-              <p className="job-title max-w-80 text-center text-xs uppercase tracking-widest text-blue-100">
+              <p className="intro max-w-80 text-center text-xs uppercase tracking-widest text-blue-100">
                 {slice.primary.intro_text}
               </p>
 
@@ -153,7 +132,7 @@ const Hero = ({ slice }: HeroProps): JSX.Element => {
                 className="text-center text-[40px] md:text-5xl lg:text-6xl"
               />
 
-              <p className="intro-animation mb-4 text-center text-sm text-blue-100 md:text-lg md:tracking-wider lg:text-2xl">
+              <p className="mb-4 text-center text-sm text-blue-100 md:text-lg md:tracking-wider lg:text-2xl">
                 {slice.primary.introduction}
               </p>
 

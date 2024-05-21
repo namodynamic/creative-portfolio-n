@@ -164,8 +164,8 @@ export default function ContentList({
               aria-label={item.data.title || ""}
             >
               <div className="flex flex-col">
-                <span className="text-3xl font-bold">{item.data.title}</span>
-                <div className="flex gap-3 text-yellow-400">
+                <span className="text-3xl flex flex-wrap font-bold">{item.data.title}</span>
+                <div className="flex flex-wrap gap-2 text-yellow-400">
                   {item.tags.map((tag, index) => (
                     <span key={index} className="text-sm font-bold">
                       #{tag}
@@ -173,7 +173,7 @@ export default function ContentList({
                   ))}
                 </div>
               </div>
-              <span className="ml-auto flex items-center gap-2  text-xl font-medium md:ml-0">
+              <span className="ml-auto flex items-center gap-2  md:text-xl text-md font-medium md:ml-0">
                 {viewMoreText} <MdArrowOutward />
               </span>
             </Link>
@@ -190,7 +190,6 @@ export default function ContentList({
           ref={revealRef}
         ></div>
       </ul>
-      <div className="pointer-events-none absolute inset-0 -z-40 h-full bg-[url('/noisetexture.jpg')] opacity-40 mix-blend-soft-light"></div>
     </>
   );
 }

@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
-import { SpeedInsights } from '@vercel/speed-insights/next';
-import { Analytics } from '@vercel/analytics/react';
+import { SpeedInsights } from "@vercel/speed-insights/next";
+import { Analytics } from "@vercel/analytics/react";
 import { Urbanist } from "next/font/google";
 import "./globals.css";
 import clsx from "clsx";
@@ -36,7 +36,6 @@ export default function RootLayout({
         <Header />
         {children}
         <div className="background-gradient absolute inset-0 -z-50 max-h-screen" />
-        <div className="pointer-events-none absolute inset-0 -z-40 h-full bg-[url('/noisetexture.jpg')] opacity-40 mix-blend-soft-light" />
         <Footer />
 
         <Analytics />
