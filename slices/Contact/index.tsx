@@ -8,12 +8,10 @@ import Heading from "@/components/Heading";
 import { Content } from "@prismicio/client";
 import { SliceComponentProps } from "@prismicio/react";
 import StarsCanvas from "@/components/Stars";
-import EarthCanvas from "@/components/Earth";
 import { gsap } from "gsap";
 
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import GridGlobe from "@/components/ui/GridGlobe";
 import { ContactGlobe } from "@/components/ContactGlobe";
 
 /**
