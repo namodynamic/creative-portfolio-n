@@ -119,7 +119,7 @@ const Contact = ({ slice }: ContactProps): JSX.Element => {
           {slice.primary.heading}
         </Heading>
         <div className="mt-10 flex flex-col-reverse justify-between gap-10 overflow-hidden md:py-20 xl:mt-12 xl:flex-row">
-          <div className="form-animation w-full flex-1 border border-black-200 bg-black-100/75 p-8  text-white">
+          <div className="form-animation w-full flex-1 border-2 border-black-300 bg-black-100/75 p-8  text-white">
             <p className=" text-[14px] uppercase tracking-wider text-slate-300 sm:text-[18px]">
               {slice.primary.sub_heading}
             </p>
