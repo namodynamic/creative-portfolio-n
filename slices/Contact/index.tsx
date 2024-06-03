@@ -118,7 +118,7 @@ const Contact = ({ slice }: ContactProps): JSX.Element => {
         <Heading as="h2" size="lg" className="heading max-md:text-5xl">
           {slice.primary.heading}
         </Heading>
-        <div className="mt-10 flex flex-col-reverse justify-between gap-10 overflow-hidden md:py-20 xl:mt-12 xl:flex-row">
+        <div className="flex flex-col-reverse justify-between gap-10 overflow-hidden md:py-20 xl:mt-12 xl:flex-row">
           <div className="form-animation w-full flex-1 border-2 border-black-300 bg-black-100/75 p-8  text-white">
             <p className=" text-[14px] uppercase tracking-wider text-slate-300 sm:text-[18px]">
               {slice.primary.sub_heading}
@@ -173,7 +173,7 @@ const Contact = ({ slice }: ContactProps): JSX.Element => {
               </button>
             </form>
           </div>
-          <div className="z-0 h-[350px] w-full md:h-[550px] lg:h-auto  lg:w-1/2">
+          <div className="z-0 h-[350px] mb-40 w-full md:h-[550px] lg:h-auto lg:w-1/2">
             <ContactGlobe />
           </div>
           <ToastContainer />

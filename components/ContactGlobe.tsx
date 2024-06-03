@@ -420,7 +420,7 @@ export function ContactGlobe() {
             ensure smooth communication and collaboration.
           </p>
         </motion.div>
-        <div className="absolute  z-10 h-36 w-full md:h-full">
+        <div className="absolute  z-10 h-[24rem] w-full md:h-full">
           <World data={sampleArcs} globeConfig={globeConfig} />;
         </div>
       </div>
