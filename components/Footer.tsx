@@ -2,35 +2,38 @@ import clsx from "clsx";
 import React from "react";
 import { createClient } from "@/prismicio";
 import { PrismicNextLink } from "@prismicio/next";
-import Link from "next/link";
 import Bounded from "@/components/Bounded";
 import { isFilled } from "@prismicio/client";
 import { FaGithub, FaXTwitter, FaLinkedin } from "react-icons/fa6";
-import Image from "next/image";
+import Link from "next/link";
+import { KeyTextField } from "@prismicio/client";
+
+function NameLogo({ name }: { name: KeyTextField }) {
+  return (
+    <Link
+      href="/"
+      aria-label="Home page"
+      className="rounded-2xl border-2 border-[#0e0b38] bg-[#0e0b38]/80  shadow-xl md:hidden"
+    >
+      <p className=" rounded-xl border-2 border-white p-1 text-xl font-extrabold tracking-tighter text-slate-300">
+        NE
+      </p>
+    </Link>
+  );
+}
 
 export default async function Footer() {
   const client = createClient();
   const settings = await client.getSingle("settings");
   return (
     <Bounded as="footer" className="text-slate-600">
-      <div className="container mx-auto mt-10 flex flex-col items-center justify-between gap-6 py-8 sm:flex-row ">
+      <div className="container mx-auto flex flex-col items-center justify-between gap-6 sm:mt-10 sm:flex-row ">
         <div className="name flex flex-col items-center justify-center gap-x-2 gap-y-2 sm:flex-row sm:justify-self-start">
-          <Link
-            href="/"
-            aria-label="Logo"
-            className="rounded-xl border  border-[#B43DF2] bg-white shadow-xl"
-          >
-            <p className=" rounded-xl border-2 border-[#3D2699] p-1 text-sm font-extrabold tracking-tighter text-[#0e0b38]/80 transition-all duration-150 hover:scale-125">
-              NE
-            </p>
-          </Link>
-          <span
-            className="hidden text-5xl font-extralight leading-[0] text-slate-400 sm:inline"
-            aria-hidden={true}
-          ></span>
+          <NameLogo name={settings.data.name} />
+
           <p className=" text-sm text-slate-300 ">
-            © {new Date().getFullYear()} <strong>{settings.data.name}.</strong>{" "}
-            All rights reserved.
+            Copyright © {new Date().getFullYear()}{" "}
+            <strong>{settings.data.name}</strong>{" "}
           </p>
         </div>
         <nav className="navigation" aria-label="Footer Navigation">
