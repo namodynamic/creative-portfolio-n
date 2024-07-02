@@ -30,7 +30,7 @@ export default async function Page({ params }: { params: Params }) {
         <p className="mt-5 border-b border-slate-600 text-sm font-medium text-slate-300">
           {formattedDate}
         </p>
-        <div className="prose prose-sm prose-invert mt-12 w-full max-w-none md:mt-20">
+        <div className="prose prose-sm sm:prose-lg prose-invert mt-12 w-full max-w-none md:mt-20">
           <SliceZone slices={page.data.slices} components={components} />
         </div>
       </div>
