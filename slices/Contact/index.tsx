@@ -86,7 +86,7 @@ const Contact = ({ slice }: ContactProps): JSX.Element => {
       .then(() => {
         setIsLoading(false);
         toast.success("Thank you, I will get back to you shortly.", {
-          position: "bottom-right",
+          position: "bottom-left",
           autoClose: 3000,
           hideProgressBar: true,
           closeOnClick: true,
@@ -115,12 +115,12 @@ const Contact = ({ slice }: ContactProps): JSX.Element => {
         data-slice-variation={slice.variation}
         ref={component}
       >
-        <Heading as="h2" size="lg" className="heading max-md:text-5xl">
+        <Heading as="h2" size="md" className="heading uppercase max-md:text-4xl">
           {slice.primary.heading}
         </Heading>
         <div className="flex flex-col-reverse justify-between gap-10 overflow-hidden md:py-20 xl:mt-12 xl:flex-row">
           <div className="form-animation w-full flex-1 border-2 border-black-300 bg-black-100/75 p-8  text-white">
-            <p className=" text-[14px] uppercase tracking-wider text-slate-300 sm:text-[18px]">
+            <p className=" text-[14px] tracking-wider text-slate-300 sm:text-[18px]">
               {slice.primary.sub_heading}
             </p>
 
@@ -160,14 +160,14 @@ const Contact = ({ slice }: ContactProps): JSX.Element => {
                   name="message"
                   value={form.message}
                   onChange={handleChange}
-                  placeholder="Drop me a message here and i'll get back to you."
+                  placeholder="Drop me a message, and i'll get back to you as soon as possible."
                   className="rounded-lg border-none bg-black-300 px-6 py-4 font-medium text-white outline-none placeholder:text-black-300"
                 />
               </label>
 
               <button
                 type="submit"
-                className="w-fit rounded-xl border-none bg-black-200  px-8 py-3 font-bold text-white shadow-md shadow-white outline-none hover:shadow-purple"
+                className="w-fit rounded-xl border-none bg-black-200  px-8 py-3 font-bold text-white shadow-md shadow-white outline-none hover:shadow-slate-400"
               >
                 {isLoading ? "Sending..." : "Send"}
               </button>

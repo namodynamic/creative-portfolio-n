@@ -10,12 +10,12 @@ const Cta = () => {
           presence to the next level?
         </h1>
         <p className="my-5 text-center text-white-200 md:mt-10">
-          Reach out to me today and let&apos;s discuss how I can help you
-          achieve your goals.
+          I’m excited to discuss how we can work together to bring your ideas to
+          life.
         </p>
         <a href="/contact">
           <MagicButton
-            title="Let's get in touch"
+            title="Get in touch"
             icon={<FaLocationArrow />}
             position="right"
           />

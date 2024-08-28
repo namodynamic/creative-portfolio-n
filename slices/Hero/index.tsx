@@ -138,7 +138,7 @@ const Hero = ({ slice }: HeroProps): JSX.Element => {
 
               <Link href="/projects">
                 <MagicButton
-                  title="Show my work"
+                  title="View my work"
                   icon={<FaLocationArrow />}
                   position="right"
                 />

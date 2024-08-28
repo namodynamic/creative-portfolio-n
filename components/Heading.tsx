@@ -19,7 +19,7 @@ export default function Heading({
         "font-bold leading-tight tracking-tight  text-slate-300",
         size === "xl" && "text-7xl md:text-9xl",
         size === "lg" && "text-6xl md:text-8xl",
-        size === "md" && "text-5xl md:text-6xl",
+        size === "md" && "text-5xl md:text-7xl",
         size === "sm" && "text-3xl md:text-4xl",
         className,
       )}

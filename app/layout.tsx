@@ -19,9 +19,9 @@ export async function generateMetadata(): Promise<Metadata> {
   return {
     title: settings.data.meta_title,
     description: settings.data.meta_description,
-    // openGraph: {
-    //   images: [settings.data.og_image?.url || ""],
-    // },
+    openGraph: {
+      images: [settings.data.og_image?.url || ""],
+    },
   };
 }
 
@@ -32,9 +32,9 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" className="bg-black-100">
-      <body className={clsx(urbanist.className, "relative min-h-screen")}>
+      <body className={clsx(urbanist.className, "relative")}>
         <Header />
-        {children}
+        <main className="min-h-screen">{children}</main>
         <div className="background-gradient absolute inset-0 -z-50 max-h-screen" />
         <Footer />
 
