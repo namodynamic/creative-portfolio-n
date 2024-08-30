@@ -13,7 +13,6 @@ import Link from "next/link";
 
 import { BentoGrid, BentoGridItem } from "@/components/ui/BentoGrid";
 import Approach from "@/components/Approach";
-import Cta from "@/components/Cta";
 
 const gridItems = [
   {
@@ -163,7 +162,6 @@ const Hero = ({ slice }: HeroProps): JSX.Element => {
         </BentoGrid>
 
         <Approach />
-        <Cta />
       </Bounded>
     </>
   );
