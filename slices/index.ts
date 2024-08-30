@@ -11,5 +11,6 @@ export const components = {
   hero: dynamic(() => import("./Hero")),
   image_block: dynamic(() => import("./ImageBlock")),
   tech_list: dynamic(() => import("./TechList")),
+  testimonial: dynamic(() => import("./Testimonial")),
   text_block: dynamic(() => import("./TextBlock")),
 };
