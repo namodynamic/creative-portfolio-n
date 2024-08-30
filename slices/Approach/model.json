@@ -1,0 +1,68 @@
+{
+  "id": "approach",
+  "type": "SharedSlice",
+  "name": "Approach",
+  "description": "Approach",
+  "variations": [
+    {
+      "id": "default",
+      "name": "Default",
+      "docURL": "...",
+      "version": "initial",
+      "description": "Default",
+      "imageUrl": "",
+      "primary": {
+        "heading": {
+          "type": "Text",
+          "config": {
+            "label": "Heading",
+            "placeholder": ""
+          }
+        },
+        "phase_1_title": {
+          "type": "Text",
+          "config": {
+            "label": "Phase 1 Title",
+            "placeholder": ""
+          }
+        },
+        "phase_1_desc": {
+          "type": "Text",
+          "config": {
+            "label": "Phase 1 Desc",
+            "placeholder": ""
+          }
+        },
+        "phase_2_title": {
+          "type": "Text",
+          "config": {
+            "label": "Phase 2 Title",
+            "placeholder": ""
+          }
+        },
+        "phase_2_desc": {
+          "type": "Text",
+          "config": {
+            "label": "Phase 2 Desc",
+            "placeholder": ""
+          }
+        },
+        "phase_3_title": {
+          "type": "Text",
+          "config": {
+            "label": "Phase 3 Title",
+            "placeholder": ""
+          }
+        },
+        "phase_3_desc": {
+          "type": "Text",
+          "config": {
+            "label": "Phase 3 Desc",
+            "placeholder": ""
+          }
+        }
+      },
+      "items": {}
+    }
+  ]
+}

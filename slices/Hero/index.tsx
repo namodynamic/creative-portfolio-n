@@ -2,7 +2,7 @@
 
 import { useEffect, useRef } from "react";
 
-import { Content, KeyTextField } from "@prismicio/client";
+import { Content } from "@prismicio/client";
 import { SliceComponentProps } from "@prismicio/react";
 import { gsap } from "gsap";
 import Bounded from "@/components/Bounded";
@@ -10,9 +10,7 @@ import { TextGenerateEffect } from "@/components/ui/TextGenerateEffect";
 import MagicButton from "@/components/ui/MagicButton";
 import { FaLocationArrow } from "react-icons/fa6";
 import Link from "next/link";
-
 import { BentoGrid, BentoGridItem } from "@/components/ui/BentoGrid";
-import Approach from "@/components/Approach";
 
 const gridItems = [
   {
@@ -131,7 +129,7 @@ const Hero = ({ slice }: HeroProps): JSX.Element => {
                 className="text-center text-[40px] md:text-5xl lg:text-6xl"
               />
 
-              <p className="mb-4 text-center text-sm text-blue-100 md:text-lg md:tracking-wider tracking-tight lg:text-2xl">
+              <p className="mb-4 text-center text-sm tracking-tight text-blue-100 md:text-lg md:tracking-wider lg:text-2xl">
                 {slice.primary.introduction}
               </p>
 
@@ -160,8 +158,6 @@ const Hero = ({ slice }: HeroProps): JSX.Element => {
             />
           ))}
         </BentoGrid>
-
-        <Approach />
       </Bounded>
     </>
   );

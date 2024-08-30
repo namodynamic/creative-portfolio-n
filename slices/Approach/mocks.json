@@ -1,0 +1,44 @@
+[
+	{
+		"__TYPE__": "SharedSliceContent",
+		"variation": "default",
+		"primary": {
+			"heading": {
+				"__TYPE__": "FieldContent",
+				"value": "either",
+				"type": "Text"
+			},
+			"phase_1_title": {
+				"__TYPE__": "FieldContent",
+				"value": "effect",
+				"type": "Text"
+			},
+			"phase_2_title": {
+				"__TYPE__": "FieldContent",
+				"value": "hospital",
+				"type": "Text"
+			},
+			"phase_3_title": {
+				"__TYPE__": "FieldContent",
+				"value": "angry",
+				"type": "Text"
+			},
+			"phase_1_desc": {
+				"__TYPE__": "FieldContent",
+				"value": "information",
+				"type": "Text"
+			},
+			"phase_2_desc": {
+				"__TYPE__": "FieldContent",
+				"value": "wonder",
+				"type": "Text"
+			},
+			"phase_3_desc": {
+				"__TYPE__": "FieldContent",
+				"value": "bell",
+				"type": "Text"
+			}
+		},
+		"items": []
+	}
+]

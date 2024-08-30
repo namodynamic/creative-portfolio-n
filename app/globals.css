@@ -15,7 +15,7 @@
 
 @layer utilities {
   .heading {
-    @apply font-bold text-4xl md:text-6xl text-slate-300 text-center;
+    @apply font-bold text-5xl md:text-6xl text-slate-300 text-center;
   }
 
   .black-gradient {

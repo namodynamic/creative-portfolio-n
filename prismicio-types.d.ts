@@ -167,7 +167,11 @@ export type ContactDocument<Lang extends string = string> =
     Lang
   >;
 
-type HomepageDocumentDataSlicesSlice = CtaSlice | TestimonialSlice | HeroSlice;
+type HomepageDocumentDataSlicesSlice =
+  | ApproachSlice
+  | CtaSlice
+  | TestimonialSlice
+  | HeroSlice;
 
 /**
  * Content for Homepage documents
@@ -581,6 +585,111 @@ export type AllDocumentTypes =
   | PageDocument
   | ProjectDocument
   | SettingsDocument;
+
+/**
+ * Primary content in *Approach → Primary*
+ */
+export interface ApproachSliceDefaultPrimary {
+  /**
+   * Heading field in *Approach → Primary*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: approach.primary.heading
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  heading: prismic.KeyTextField;
+
+  /**
+   * Phase 1 Title field in *Approach → Primary*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: approach.primary.phase_1_title
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  phase_1_title: prismic.KeyTextField;
+
+  /**
+   * Phase 1 Desc field in *Approach → Primary*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: approach.primary.phase_1_desc
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  phase_1_desc: prismic.KeyTextField;
+
+  /**
+   * Phase 2 Title field in *Approach → Primary*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: approach.primary.phase_2_title
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  phase_2_title: prismic.KeyTextField;
+
+  /**
+   * Phase 2 Desc field in *Approach → Primary*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: approach.primary.phase_2_desc
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  phase_2_desc: prismic.KeyTextField;
+
+  /**
+   * Phase 3 Title field in *Approach → Primary*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: approach.primary.phase_3_title
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  phase_3_title: prismic.KeyTextField;
+
+  /**
+   * Phase 3 Desc field in *Approach → Primary*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: approach.primary.phase_3_desc
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  phase_3_desc: prismic.KeyTextField;
+}
+
+/**
+ * Default variation for Approach Slice
+ *
+ * - **API ID**: `default`
+ * - **Description**: Default
+ * - **Documentation**: https://prismic.io/docs/slice
+ */
+export type ApproachSliceDefault = prismic.SharedSliceVariation<
+  "default",
+  Simplify<ApproachSliceDefaultPrimary>,
+  never
+>;
+
+/**
+ * Slice variation for *Approach*
+ */
+type ApproachSliceVariation = ApproachSliceDefault;
+
+/**
+ * Approach Shared Slice
+ *
+ * - **API ID**: `approach`
+ * - **Description**: Approach
+ * - **Documentation**: https://prismic.io/docs/slice
+ */
+export type ApproachSlice = prismic.SharedSlice<
+  "approach",
+  ApproachSliceVariation
+>;
 
 /**
  * Primary content in *Biography → Primary*
@@ -1420,6 +1529,10 @@ declare module "@prismicio/client" {
       SettingsDocumentData,
       SettingsDocumentDataNavItemItem,
       AllDocumentTypes,
+      ApproachSlice,
+      ApproachSliceDefaultPrimary,
+      ApproachSliceVariation,
+      ApproachSliceDefault,
       BiographySlice,
       BiographySliceDefaultPrimary,
       BiographySliceVariation,

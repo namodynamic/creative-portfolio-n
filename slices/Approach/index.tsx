@@ -1,21 +1,38 @@
+"use client";
+
 import React from "react";
+import Bounded from "@/components/Bounded";
+import { Content, RichTextField } from "@prismicio/client";
+import { SliceComponentProps } from "@prismicio/react";
 import { AnimatePresence, motion } from "framer-motion";
+import { CanvasRevealEffect } from "@/components/ui/CanvasRevealEffect";
 
-import { CanvasRevealEffect } from "./ui/CanvasRevealEffect";
+/**
+ * Props for `Approach`.
+ */
+export type ApproachProps = SliceComponentProps<Content.ApproachSlice>;
 
-const Approach = () => {
+/**
+ * Component for "Approach" Slices.
+ */
+const Approach = ({ slice }: ApproachProps): JSX.Element => {
   return (
-    <section className="w-full py-20">
+    <Bounded
+      data-slice-type={slice.slice_type}
+      data-slice-variation={slice.variation}
+      className="w-full"
+    >
       <h1 className="heading">
-        My <span className="text-purple">approach</span>
+        {slice.primary.heading?.split(" ").slice(0, -1).join(" ")}{" "}
+        <span className="text-purple">
+          {slice.primary.heading?.split(" ").slice(-1).join(" ")}{" "}
+        </span>
       </h1>
-      <div className="my-20 flex w-full flex-col items-center justify-center gap-4 lg:flex-row">
+      <div className="mt-20 flex w-full flex-col items-center justify-center gap-4 lg:flex-row">
         <Card
-          title="Planning & Strategy"
+          title={slice.primary.phase_1_title ?? ""}
           icon={<AceternityIcon order="Phase 1" />}
-          des="We'll collaborate to map out your website's goals, target audience, 
-          and key functionalities. We'll discuss things like site structure, 
-          navigation, and content requirements."
+          des={slice.primary.phase_1_desc ?? ""}
         >
           <CanvasRevealEffect
             animationSpeed={5.1}
@@ -23,11 +40,9 @@ const Approach = () => {
           />
         </Card>
         <Card
-          title="Development & Progress Update"
+          title={slice.primary.phase_2_title ?? ""}
           icon={<AceternityIcon order="Phase 2" />}
-          des="Once we agree on the plan, I get to work and dive into
-          coding. From initial sketches to polished code, I keep you updated
-          every step of the way."
+          des={slice.primary.phase_2_desc ?? ""}
         >
           <CanvasRevealEffect
             animationSpeed={3}
@@ -40,11 +55,9 @@ const Approach = () => {
           />
         </Card>
         <Card
-          title="Development & Launch"
+          title={slice.primary.phase_3_title ?? ""}
           icon={<AceternityIcon order="Phase 3" />}
-          des="This is where the magic happens! Based on the approved design, 
-          I'll translate everything into functional code, building your website
-          from the ground up."
+          des={slice.primary.phase_3_desc ?? ""}
         >
           <CanvasRevealEffect
             animationSpeed={3}
@@ -53,7 +66,7 @@ const Approach = () => {
           />
         </Card>
       </div>
-    </section>
+    </Bounded>
   );
 };
 
@@ -109,8 +122,8 @@ const Card = ({
         </div>
         <h2
           className="relative z-10 mt-4 text-center text-3xl
-         font-bold opacity-0 transition  duration-200 group-hover/canvas-card:-translate-y-2 
-         group-hover/canvas-card:text-white group-hover/canvas-card:opacity-100 text-white"
+         font-bold text-white opacity-0  transition duration-200 
+         group-hover/canvas-card:-translate-y-2 group-hover/canvas-card:text-white group-hover/canvas-card:opacity-100"
         >
           {title}
         </h2>

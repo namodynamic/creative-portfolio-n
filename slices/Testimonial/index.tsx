@@ -8,7 +8,6 @@ import { PrismicRichText, SliceComponentProps } from "@prismicio/react";
 import { companies} from "@/data";
 import Bounded from "@/components/Bounded";
 import { PrismicNextImage } from "@prismicio/next";
-// import { InfiniteMovingCards } from "./InfiniteCards";
 
 /**
  * Props for `Testimonial`.
