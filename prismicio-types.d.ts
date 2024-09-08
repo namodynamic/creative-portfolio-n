@@ -528,7 +528,18 @@ interface SettingsDocumentData {
    * - **Tab**: Main
    * - **Documentation**: https://prismic.io/docs/field#link-content-relationship
    */
-  linkedin_link: prismic.LinkField /**
+  linkedin_link: prismic.LinkField;
+
+  /**
+   * Whatsapp Link field in *Settings*
+   *
+   * - **Field Type**: Link
+   * - **Placeholder**: *None*
+   * - **API ID Path**: settings.whatsapp_link
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#link-content-relationship
+   */
+  whatsapp_link: prismic.LinkField /**
    * Meta Title field in *Settings*
    *
    * - **Field Type**: Text

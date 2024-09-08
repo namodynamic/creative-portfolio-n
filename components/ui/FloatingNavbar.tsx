@@ -102,7 +102,7 @@ export const FloatingNav = ({
               "absolute inset-0 z-0 h-full translate-y-12 rounded bg-purple transition-transform duration-300 ease-in-out",
               pathname.includes("/contact")
                 ? "translate-y-6"
-                : "translate-y-18",
+                : "translate-y-12",
             )}
           />
         </Link>

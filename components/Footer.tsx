@@ -5,6 +5,7 @@ import { PrismicNextLink } from "@prismicio/next";
 import Bounded from "@/components/Bounded";
 import { isFilled } from "@prismicio/client";
 import { FaGithub, FaXTwitter, FaLinkedin } from "react-icons/fa6";
+import { FaWhatsapp, } from "react-icons/fa";
 import Link from "next/link";
 import { KeyTextField } from "@prismicio/client";
 
@@ -81,6 +82,15 @@ export default async function Footer() {
               <FaXTwitter />
             </PrismicNextLink>
           )}
+            {isFilled.link(settings.data.linkedin_link) && (
+              <PrismicNextLink
+                field={settings.data.whatsapp_link}
+                className="p-2 text-2xl text-slate-300 transition-all duration-150 hover:scale-125 "
+                aria-label={settings.data.name + " on WhatsApp"}
+              >
+                <FaWhatsapp />
+              </PrismicNextLink>
+            )}
           {isFilled.link(settings.data.linkedin_link) && (
             <PrismicNextLink
               field={settings.data.linkedin_link}

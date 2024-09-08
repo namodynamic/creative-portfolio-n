@@ -74,6 +74,14 @@
           "placeholder": "",
           "select": null
         }
+      },
+      "whatsapp_link": {
+        "type": "Link",
+        "config": {
+          "label": "Whatsapp Link",
+          "placeholder": "",
+          "select": null
+        }
       }
     },
     "SEO and Metadata": {
