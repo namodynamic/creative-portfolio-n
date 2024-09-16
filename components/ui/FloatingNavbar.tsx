@@ -6,7 +6,6 @@ import {
   useScroll,
   useMotionValueEvent,
 } from "framer-motion";
-import Link from "next/link";
 import { PrismicNextLink } from "@prismicio/next";
 import { asLink, Content } from "@prismicio/client";
 import clsx from "clsx";
@@ -66,7 +65,7 @@ export const FloatingNav = ({
           border: "1px solid rgba(255, 255, 255, 0.125)",
         }}
       >
-        {settings.data.nav_item.map(({ link, label }, index) => (
+        {settings.data.mobile_nav_item.map(({ link, label }, index) => (
           <React.Fragment key={label}>
             <PrismicNextLink
               className={clsx(
@@ -80,32 +79,16 @@ export const FloatingNav = ({
               <span
                 className={clsx(
                   "absolute inset-0 z-0 h-full translate-y-12 rounded bg-purple transition-transform duration-300 ease-in-out",
-                  pathname.includes(asLink(link) as string)
+                  pathname === asLink(link)
                     ? "translate-y-6"
                     : "translate-y-18",
                 )}
               />
+
               <span className="!cursor-pointer text-sm">{label}</span>
             </PrismicNextLink>
           </React.Fragment>
         ))}
-
-        <Link
-          href="/contact"
-          className={clsx(
-            "group relative  items-center space-x-1 overflow-hidden rounded px-3 py-1  text-base font-bold text-neutral-400 hover:text-neutral-300",
-          )}
-        >
-          Contact
-          <span
-            className={clsx(
-              "absolute inset-0 z-0 h-full translate-y-12 rounded bg-purple transition-transform duration-300 ease-in-out",
-              pathname.includes("/contact")
-                ? "translate-y-6"
-                : "translate-y-12",
-            )}
-          />
-        </Link>
       </motion.div>
     </AnimatePresence>
   );

@@ -450,6 +450,31 @@ export interface SettingsDocumentDataNavItemItem {
 }
 
 /**
+ * Item in *Settings → Mobile Nav Item*
+ */
+export interface SettingsDocumentDataMobileNavItemItem {
+  /**
+   * Label field in *Settings → Mobile Nav Item*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: settings.mobile_nav_item[].label
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  label: prismic.KeyTextField;
+
+  /**
+   * Link field in *Settings → Mobile Nav Item*
+   *
+   * - **Field Type**: Link
+   * - **Placeholder**: *None*
+   * - **API ID Path**: settings.mobile_nav_item[].link
+   * - **Documentation**: https://prismic.io/docs/field#link-content-relationship
+   */
+  link: prismic.LinkField;
+}
+
+/**
  * Content for Settings documents
  */
 interface SettingsDocumentData {
@@ -474,6 +499,19 @@ interface SettingsDocumentData {
    * - **Documentation**: https://prismic.io/docs/field#group
    */
   nav_item: prismic.GroupField<Simplify<SettingsDocumentDataNavItemItem>>;
+
+  /**
+   * Mobile Nav Item field in *Settings*
+   *
+   * - **Field Type**: Group
+   * - **Placeholder**: *None*
+   * - **API ID Path**: settings.mobile_nav_item[]
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#group
+   */
+  mobile_nav_item: prismic.GroupField<
+    Simplify<SettingsDocumentDataMobileNavItemItem>
+  >;
 
   /**
    * CTA link field in *Settings*
@@ -1539,6 +1577,7 @@ declare module "@prismicio/client" {
       SettingsDocument,
       SettingsDocumentData,
       SettingsDocumentDataNavItemItem,
+      SettingsDocumentDataMobileNavItemItem,
       AllDocumentTypes,
       ApproachSlice,
       ApproachSliceDefaultPrimary,

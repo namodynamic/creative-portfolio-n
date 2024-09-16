@@ -36,6 +36,30 @@
           }
         }
       },
+      "mobile_nav_item": {
+        "type": "Group",
+        "config": {
+          "label": "Mobile Nav Item",
+          "repeat": true,
+          "fields": {
+            "label": {
+              "type": "Text",
+              "config": {
+                "label": "Label",
+                "placeholder": ""
+              }
+            },
+            "link": {
+              "type": "Link",
+              "config": {
+                "label": "Link",
+                "placeholder": "",
+                "select": null
+              }
+            }
+          }
+        }
+      },
       "cta_link": {
         "type": "Link",
         "config": {
