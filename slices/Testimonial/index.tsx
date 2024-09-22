@@ -5,7 +5,7 @@ import React, { useEffect, useState } from "react";
 
 import { Content } from "@prismicio/client";
 import { PrismicRichText, SliceComponentProps } from "@prismicio/react";
-import { companies} from "@/data";
+import { companies } from "@/data";
 import Bounded from "@/components/Bounded";
 import { PrismicNextImage } from "@prismicio/next";
 
@@ -113,18 +113,34 @@ const Testimonial = ({ slice }: TestimonialProps): JSX.Element => {
                 <span className=" relative z-20 text-sm font-normal leading-[1.6] text-white md:text-lg">
                   <PrismicRichText field={item.feedback} />
                 </span>
-                <div className="relative z-20 mt-6 flex flex-row items-center">
-                  <div className="me-3">
-                    <PrismicNextImage field={item.avatar} className="md:w-10 w-5 rounded-full"/>
+                <div className="flex justify-between">
+                  <div className="relative z-20 mt-6 flex flex-row items-center">
+                    <div className="me-3">
+                      <PrismicNextImage
+                        field={item.avatar}
+                        className="w-10 rounded-full md:w-[50px]"
+                      />
+                    </div>
+                    <span className="flex flex-col gap-1">
+                      <span className="text-md font-bold leading-[1.6] text-white sm:text-xl">
+                        {item.name}
+                      </span>
+                      <span className=" text-sm font-normal leading-[1.6] text-white-200">
+                        {item.occupation}
+                      </span>
+                    </span>
                   </div>
-                  <span className="flex flex-col gap-1">
-                    <span className="text-xl font-bold leading-[1.6] text-white">
-                      {item.name}
-                    </span>
-                    <span className=" text-sm font-normal leading-[1.6] text-white-200">
-                      {item.occupation}
-                    </span>
-                  </span>
+
+                  <div className="flex items-center gap-2 self-end">
+                    {Array.from({ length: 5 }).map((_, i) => (
+                      <img
+                        key={i}
+                        src="/star.png"
+                        alt="star"
+                        className="h-4 w-4"
+                      />
+                    ))}
+                  </div>
                 </div>
               </blockquote>
             </li>

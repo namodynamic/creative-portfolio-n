@@ -138,6 +138,7 @@ const Hero = ({ slice }: HeroProps): JSX.Element => {
                   title="Explore my projects"
                   icon={<FaLocationArrow />}
                   position="right"
+                  isBeam
                 />
               </Link>
             </div>
