@@ -32,9 +32,10 @@ const Cta = ({ slice }: CtaProps): JSX.Element => {
         </p>
         <Link href="/contact">
           <MagicButton
-            title="Get in touch"
+            title="Contact Me"
             icon={<FaLocationArrow />}
             position="right"
+            isBeam
           />
         </Link>
       </div>
