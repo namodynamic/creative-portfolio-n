@@ -23,16 +23,18 @@ const Education = ({ slice }: EducationProps): JSX.Element => {
 
       {slice.items.map((item, index) => (
         <div key={index} className="ml-6 mt-8 border-b md:ml-12 md:mt-16">
-          <Heading as="h3" size="sm" className="max-md:text-2xl">
+          <Heading as="h3" size="sm" className="text-white-600 max-md:text-2xl">
             {item.title}
           </Heading>
 
-          <div className="mt-1 flex w-fit items-center gap-1 text-2xl font-semibold tracking-tight text-slate-400 max-md:text-lg">
-            <span>{item.time_period}</span>{" "}
-            <span className="text-3xl font-extralight max-md:text-xl">/</span>{" "}
+          <div className="mt-1 flex w-fit items-center gap-1 text-2xl font-semibold tracking-tight text-white-500 max-md:text-lg">
             <span>{item.institution}</span>
+            <span className="text-3xl font-extralight max-md:text-xl">
+              -
+            </span>{" "}
+            <span>{item.time_period}</span>{" "}
           </div>
-          <div className="prose prose-sm prose-slate prose-invert col-start-1 mb-5 sm:prose-lg">
+          <div className="prose prose-sm prose-slate prose-invert col-start-1 mb-5 text-white-500 sm:prose-lg">
             <PrismicRichText field={item.description} />
           </div>
         </div>

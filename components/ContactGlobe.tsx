@@ -411,10 +411,7 @@ export function ContactGlobe() {
           }}
           className="div"
         >
-          <h2 className="text-center text-xl  font-bold text-white md:text-4xl">
-            Global collaboration
-          </h2>
-          <p className="mx-auto mt-2 max-w-md text-center text-base font-normal  text-neutral-200 md:text-lg">
+          <p className="mx-auto mt-2 max-w-md text-center text-base font-normal  text-white-600 md:text-lg">
             I am open to work and collaborate with clients worldwide. I work
             with clients across the globe and am flexible with time zones to
             ensure smooth communication and collaboration.

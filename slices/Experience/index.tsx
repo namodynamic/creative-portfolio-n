@@ -55,8 +55,7 @@ const Experience = ({ slice }: ExperienceProps): JSX.Element => {
                 background: item.icon_bg ? item.icon_bg : "#1d1836",
               }}
               contentStyle={{
-                background:
-                  "rgba(17,25, 40, 0.11)",
+                background: "rgba(17,25, 40, 0.11)",
                 color: "#fff",
                 border: "1px solid rgba(255, 255, 255, 0.11)",
               }}
@@ -74,7 +73,7 @@ const Experience = ({ slice }: ExperienceProps): JSX.Element => {
                   {item.company}
                 </p>
               </div>
-              <div className="prose prose-sm prose-slate prose-invert col-start-1 sm:prose-lg">
+              <div className="prose prose-sm prose-slate prose-invert col-start-1 text-white-500 sm:prose-lg">
                 <PrismicRichText field={item.description} />
               </div>
             </VerticalTimelineElement>

@@ -4,7 +4,6 @@ import { useEffect, useRef, useState } from "react";
 import emailjs from "@emailjs/browser";
 
 import Bounded from "@/components/Bounded";
-import Heading from "@/components/Heading";
 import { Content } from "@prismicio/client";
 import { SliceComponentProps } from "@prismicio/react";
 import StarsCanvas from "@/components/Stars";
@@ -13,6 +12,8 @@ import { gsap } from "gsap";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { ContactGlobe } from "@/components/ContactGlobe";
+import { FaLocationArrow } from "react-icons/fa6";
+import { Icon } from "@/slices/Approach";
 
 /**
  * Props for `Contact`.
@@ -33,7 +34,7 @@ const Contact = ({ slice }: ContactProps): JSX.Element => {
       const tl = gsap.timeline();
 
       tl.fromTo(
-        ".heading",
+        ".heading-anim",
         {
           y: 20,
           opacity: 0,
@@ -47,8 +48,6 @@ const Contact = ({ slice }: ContactProps): JSX.Element => {
           duration: 1,
         },
       );
-
-      tl.from(".form-animation", { opacity: 0, x: -100, duration: 1 });
     }, component);
     return () => ctx.revert();
   }, []);
@@ -98,7 +97,7 @@ const Contact = ({ slice }: ContactProps): JSX.Element => {
       .catch((error) => {
         setIsLoading(false);
         console.log(error);
-        toast.error("Something went wrong. Please try again", {
+        toast.error("I didn't get your message 😢. Please try again", {
           position: "bottom-right",
           autoClose: 3000,
           hideProgressBar: false,
@@ -115,68 +114,85 @@ const Contact = ({ slice }: ContactProps): JSX.Element => {
         data-slice-variation={slice.variation}
         ref={component}
       >
-        <Heading as="h2" size="md" className="heading uppercase max-md:text-4xl">
-          {slice.primary.heading}
-        </Heading>
-        <div className="flex flex-col-reverse justify-between gap-10 overflow-hidden md:py-20 xl:mt-12 xl:flex-row">
-          <div className="form-animation w-full flex-1 border-2 border-black-300 bg-black-100/75 p-8  text-white">
-            <p className=" text-[14px] tracking-wider text-slate-300 sm:text-[18px]">
-              {slice.primary.sub_heading}
-            </p>
+        <div className=" min-h-screen rounded-2xl border border-slate-800   bg-gray-950/90">
+          <div className="w-full overflow-hidden rounded-xl shadow-lg">
+            <div className="flex items-center justify-between space-x-2 bg-[#818BA6]/75 px-4 py-4">
+              <div className="flex space-x-3">
+                <div className="h-3 w-3 rounded-full bg-red-500"></div>
+                <div className="h-3 w-3 rounded-full bg-yellow-500"></div>
+                <div className="h-3 w-3 rounded-full bg-green-500"></div>
+              </div>
+              <div className="flex text-center text-sm text-gray-400">
+                https://nnamdiekechi.com/contact
+              </div>
+              <Icon className="h-6 w-6 text-gray-400" />
+            </div>
 
-            <form
-              onSubmit={handleSubmit}
-              ref={formRef}
-              className="mt-12 flex flex-col gap-8"
-            >
-              <label className="flex flex-col">
-                <span className="mb-4 font-medium text-white">Name</span>
-                <input
-                  type="text"
-                  name="name"
-                  value={form.name}
-                  onChange={handleChange}
-                  placeholder="Your Name"
-                  className="rounded-lg border-none bg-black-300 px-6 py-4 font-medium text-white outline-none placeholder:text-black-300"
-                  required
-                />
-              </label>
-              <label className="flex flex-col">
-                <span className="mb-4 font-medium text-white">Email</span>
-                <input
-                  type="email"
-                  name="email"
-                  value={form.email}
-                  onChange={handleChange}
-                  placeholder="Your Email"
-                  className="rounded-lg border-none bg-black-300  px-6 py-4 font-medium text-white outline-none placeholder:text-black-300"
-                  required
-                />
-              </label>
-              <label className="flex flex-col">
-                <span className="mb-4 font-medium text-white">Message</span>
-                <textarea
-                  rows={7}
-                  name="message"
-                  value={form.message}
-                  onChange={handleChange}
-                  placeholder="Drop me a message, and i'll get back to you as soon as possible."
-                  className="rounded-lg border-none bg-black-300 px-6 py-4 font-medium text-white outline-none placeholder:text-black-300"
-                />
-              </label>
+            <div className="flex items-center  justify-center py-4">
+              <div className=" contact-container">
+                <h3 className="head-text"> {slice.primary.heading}</h3>
+                <p className="mt-2 text-lg  text-white-600">
+                  {slice.primary.sub_heading}
+                </p>
 
-              <button
-                type="submit"
-                className="w-fit rounded-xl border-none bg-black-200  px-8 py-3 font-bold text-white shadow-md shadow-white outline-none hover:shadow-slate-400"
-              >
-                {isLoading ? "Sending..." : "Send"}
-              </button>
-            </form>
+                <form
+                  onSubmit={handleSubmit}
+                  ref={formRef}
+                  className="mt-12 flex flex-col space-y-7"
+                >
+                  <label className="space-y-3">
+                    <span className="field-label">Full Name</span>
+                    <input
+                      type="text"
+                      name="name"
+                      value={form.name}
+                      onChange={handleChange}
+                      placeholder="Your Name"
+                      className="field-input"
+                      required
+                    />
+                  </label>
+                  <label className="space-y-3">
+                    <span className="field-label">Email Address</span>
+                    <input
+                      type="email"
+                      name="email"
+                      value={form.email}
+                      onChange={handleChange}
+                      placeholder="Your Email"
+                      className="field-input"
+                      required
+                    />
+                  </label>
+                  <label className="space-y-3">
+                    <span className="field-label">Your Message</span>
+                    <textarea
+                      rows={7}
+                      name="message"
+                      value={form.message}
+                      onChange={handleChange}
+                      placeholder="Drop me a message, and i'll get back to you as soon as possible."
+                      className="field-input"
+                    />
+                  </label>
+
+                  <button
+                    type="submit"
+                    disabled={isLoading}
+                    className="field-btn"
+                  >
+                    {isLoading ? "Sending..." : "Send Message"}
+                    <FaLocationArrow className="inline-block" />
+                  </button>
+                </form>
+              </div>
+            </div>
+            <ToastContainer />
           </div>
-          <div className="z-0 h-[350px] mb-40 w-full md:h-[550px] lg:h-auto lg:w-1/2">
-            <ContactGlobe />
-          </div>
-          <ToastContainer />
+        </div>
+
+        <div className="lg-w-[500px] z-0 mb-40 mt-20 flex h-[350px] w-full items-center justify-center md:h-[550px] lg:h-auto ">
+          <ContactGlobe />
         </div>
       </Bounded>
       <StarsCanvas />
