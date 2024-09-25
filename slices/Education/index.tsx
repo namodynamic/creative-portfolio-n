@@ -17,7 +17,7 @@ const Education = ({ slice }: EducationProps): JSX.Element => {
       data-slice-type={slice.slice_type}
       data-slice-variation={slice.variation}
     >
-      <Heading as="h2" size="lg" className="max-md:text-3xl">
+      <Heading as="h2" size="xl">
         {slice.primary.heading}
       </Heading>
 
@@ -34,6 +34,7 @@ const Education = ({ slice }: EducationProps): JSX.Element => {
             </span>{" "}
             <span>{item.time_period}</span>{" "}
           </div>
+
           <div className="prose prose-sm prose-slate prose-invert col-start-1 mb-5 text-white-500 sm:prose-lg">
             <PrismicRichText field={item.description} />
           </div>

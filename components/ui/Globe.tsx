@@ -140,9 +140,9 @@ export function Globe({ globeConfig, data }: WorldProps) {
       (v, i, a) =>
         a.findIndex((v2) =>
           ["lat", "lng"].every(
-            (k) => v2[k as "lat" | "lng"] === v[k as "lat" | "lng"]
-          )
-        ) === i
+            (k) => v2[k as "lat" | "lng"] === v[k as "lat" | "lng"],
+          ),
+        ) === i,
     );
 
     setGlobeData(filteredPoints);
@@ -198,7 +198,7 @@ export function Globe({ globeConfig, data }: WorldProps) {
       .ringMaxRadius(defaultProps.maxRings)
       .ringPropagationSpeed(RING_PROPAGATION_SPEED)
       .ringRepeatPeriod(
-        (defaultProps.arcTime * defaultProps.arcLength) / defaultProps.rings
+        (defaultProps.arcTime * defaultProps.arcLength) / defaultProps.rings,
       );
   };
 
@@ -210,11 +210,11 @@ export function Globe({ globeConfig, data }: WorldProps) {
       numbersOfRings = genRandomNumbers(
         0,
         data.length,
-        Math.floor((data.length * 4) / 5)
+        Math.floor((data.length * 4) / 5),
       );
 
       globeRef.current.ringsData(
-        globeData.filter((d, i) => numbersOfRings.includes(i))
+        globeData.filter((d, i) => numbersOfRings.includes(i)),
       );
     }, 2000);
 
@@ -249,7 +249,7 @@ export function World(props: WorldProps) {
   return (
     <Canvas scene={scene} camera={new PerspectiveCamera(50, aspect, 180, 1800)}>
       <WebGLRendererConfig />
-      <ambientLight color={globeConfig.ambientLight} intensity={0.6} />
+      <ambientLight color={globeConfig.ambientLight} intensity={1} />
       <directionalLight
         color={globeConfig.directionalLeftLight}
         position={new Vector3(-400, 100, 400)}
@@ -269,7 +269,7 @@ export function World(props: WorldProps) {
         enableZoom={false}
         minDistance={cameraZ}
         maxDistance={cameraZ}
-        autoRotateSpeed={1}
+        autoRotateSpeed={2}
         autoRotate={true}
         minPolarAngle={Math.PI / 3.5}
         maxPolarAngle={Math.PI - Math.PI / 3}

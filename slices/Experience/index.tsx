@@ -34,20 +34,16 @@ const Experience = ({ slice }: ExperienceProps): JSX.Element => {
       </div>
 
       <div className="mt-8 flex sm:mt-16">
-        <VerticalTimeline
-          animate={false}
-          lineColor="white"
-          className="vertical-timeline--red"
-        >
+        <VerticalTimeline animate={false} layout="1-column-left">
           {slice.items.map((item, index) => (
             <VerticalTimelineElement
               key={index}
               date={item.time_period ? item.time_period : ""}
               icon={
-                <div className="flex h-full w-full items-center justify-center">
+                <div className="flex h-full w-full items-center justify-center ">
                   <PrismicNextImage
                     field={item.icon}
-                    className="h-[60%] w-[60%] object-contain"
+                    className="h-[80%] w-[80%] rounded-full object-contain"
                   />
                 </div>
               }
@@ -57,9 +53,15 @@ const Experience = ({ slice }: ExperienceProps): JSX.Element => {
               contentStyle={{
                 background: "rgba(17,25, 40, 0.11)",
                 color: "#fff",
-                border: "1px solid rgba(255, 255, 255, 0.11)",
+                borderTop: "1px solid rgba(255, 255, 255, 0.11)",
+                borderRight: "1px solid rgba(255, 255, 255, 0.11)",
+                borderLeft: "1px solid rgba(255, 255, 255, 0.11)",
+                borderBottom: "8px",
+                borderBottomStyle: "solid",
+                borderBottomColor: item.icon_bg ? item.icon_bg : "#1d1836",
+                boxShadow: "none",
               }}
-              contentArrowStyle={{ borderRight: "7px solid  #B43DF2" }}
+              contentArrowStyle={{ borderRight: "7px solid  #FFF" }}
               className="vertical-timeline-element--work"
             >
               <div>
