@@ -26,7 +26,7 @@ const Biography = ({ slice }: BiographyProps): JSX.Element => {
           {slice.primary.heading}
         </Heading>
 
-        <div className="prose prose-base sm:prose-xl prose-slate prose-invert col-start-1">
+        <div className="prose prose-base prose-slate prose-invert col-start-1 sm:prose-xl">
           <PrismicRichText field={slice.primary.description} />
         </div>
 
@@ -42,7 +42,7 @@ const Biography = ({ slice }: BiographyProps): JSX.Element => {
               "absolute inset-0 z-0 h-full translate-y-9 bg-purple transition-transform  duration-300 ease-in-out group-hover:translate-y-0",
             )}
           />
-          <span className="relative flex items-center hover:text-white justify-center gap-2">
+          <span className="relative flex items-center justify-center gap-2 hover:text-white">
             {slice.primary.button_text}{" "}
             <FaLocationArrow className="inline-block" />
           </span>

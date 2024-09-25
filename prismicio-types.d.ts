@@ -237,6 +237,7 @@ export type HomepageDocument<Lang extends string = string> =
   >;
 
 type PageDocumentDataSlicesSlice =
+  | CertificationsSlice
   | TestimonialSlice
   | ContactSlice
   | EducationSlice
@@ -823,6 +824,106 @@ type BiographySliceVariation = BiographySliceDefault;
 export type BiographySlice = prismic.SharedSlice<
   "biography",
   BiographySliceVariation
+>;
+
+/**
+ * Primary content in *Certifications → Primary*
+ */
+export interface CertificationsSliceDefaultPrimary {
+  /**
+   * Heading field in *Certifications → Primary*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: certifications.primary.heading
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  heading: prismic.KeyTextField;
+}
+
+/**
+ * Primary content in *Certifications → Items*
+ */
+export interface CertificationsSliceDefaultItem {
+  /**
+   * Title field in *Certifications → Items*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: certifications.items[].title
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  title: prismic.KeyTextField;
+
+  /**
+   * Time Period field in *Certifications → Items*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: certifications.items[].time_period
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  time_period: prismic.KeyTextField;
+
+  /**
+   * Credential Url field in *Certifications → Items*
+   *
+   * - **Field Type**: Link
+   * - **Placeholder**: *None*
+   * - **API ID Path**: certifications.items[].credential_url
+   * - **Documentation**: https://prismic.io/docs/field#link-content-relationship
+   */
+  credential_url: prismic.LinkField;
+
+  /**
+   * Issuer field in *Certifications → Items*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: certifications.items[].issuer
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  issuer: prismic.KeyTextField;
+
+  /**
+   * Description field in *Certifications → Items*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: certifications.items[].description
+   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+   */
+  description: prismic.RichTextField;
+}
+
+/**
+ * Default variation for Certifications Slice
+ *
+ * - **API ID**: `default`
+ * - **Description**: Default
+ * - **Documentation**: https://prismic.io/docs/slice
+ */
+export type CertificationsSliceDefault = prismic.SharedSliceVariation<
+  "default",
+  Simplify<CertificationsSliceDefaultPrimary>,
+  Simplify<CertificationsSliceDefaultItem>
+>;
+
+/**
+ * Slice variation for *Certifications*
+ */
+type CertificationsSliceVariation = CertificationsSliceDefault;
+
+/**
+ * Certifications Shared Slice
+ *
+ * - **API ID**: `certifications`
+ * - **Description**: Certifications
+ * - **Documentation**: https://prismic.io/docs/slice
+ */
+export type CertificationsSlice = prismic.SharedSlice<
+  "certifications",
+  CertificationsSliceVariation
 >;
 
 /**
@@ -1587,6 +1688,11 @@ declare module "@prismicio/client" {
       BiographySliceDefaultPrimary,
       BiographySliceVariation,
       BiographySliceDefault,
+      CertificationsSlice,
+      CertificationsSliceDefaultPrimary,
+      CertificationsSliceDefaultItem,
+      CertificationsSliceVariation,
+      CertificationsSliceDefault,
       ContactSlice,
       ContactSliceDefaultPrimary,
       ContactSliceVariation,

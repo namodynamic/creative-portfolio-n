@@ -1,23 +1,26 @@
-import Bounded from "@/components/Bounded";
-import Heading from "@/components/Heading";
 import { Content } from "@prismicio/client";
 import { PrismicRichText, SliceComponentProps } from "@prismicio/react";
+import Bounded from "@/components/Bounded";
+import Heading from "@/components/Heading";
+import { PrismicNextLink } from "@prismicio/next";
+import { FaExternalLinkAlt } from "react-icons/fa";
 
 /**
- * Props for `Experience`.
+ * Props for `Certifications`.
  */
-export type EducationProps = SliceComponentProps<Content.EducationSlice>;
+export type CertificationsProps =
+  SliceComponentProps<Content.CertificationsSlice>;
 
 /**
- * Component for "Experience" Slices.
+ * Component for "Certifications" Slices.
  */
-const Education = ({ slice }: EducationProps): JSX.Element => {
+const Certifications = ({ slice }: CertificationsProps): JSX.Element => {
   return (
     <Bounded
       data-slice-type={slice.slice_type}
       data-slice-variation={slice.variation}
     >
-      <Heading as="h2" size="xl">
+      <Heading as="h2" size="lg" className="max-md:text-3xl">
         {slice.primary.heading}
       </Heading>
 
@@ -28,13 +31,18 @@ const Education = ({ slice }: EducationProps): JSX.Element => {
           </Heading>
 
           <div className="mt-1 flex w-fit items-center gap-1 text-2xl font-semibold tracking-tight text-white-500 max-md:text-lg">
-            <span>{item.institution}</span>
+            <span>{item.issuer}</span>
             <span className="text-3xl font-extralight max-md:text-xl">
               -
             </span>{" "}
             <span>{item.time_period}</span>{" "}
           </div>
-
+          <PrismicNextLink
+            field={item.credential_url}
+            className="flex w-fit items-center justify-start rounded-xl  px-4 py-2 text-sm font-medium text-gray-500 transition-colors duration-300  hover:text-white"
+          >
+            Show Credential <FaExternalLinkAlt className=" ml-2 inline-flex" />
+          </PrismicNextLink>
           <div className="prose prose-sm prose-slate prose-invert col-start-1 mb-5 text-white-500 sm:prose-lg">
             <PrismicRichText field={item.description} />
           </div>
@@ -44,4 +52,4 @@ const Education = ({ slice }: EducationProps): JSX.Element => {
   );
 };
 
-export default Education;
+export default Certifications;

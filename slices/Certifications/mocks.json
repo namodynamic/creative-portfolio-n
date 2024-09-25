@@ -1,0 +1,68 @@
+[
+	{
+		"__TYPE__": "SharedSliceContent",
+		"variation": "default",
+		"primary": {
+			"heading": {
+				"__TYPE__": "FieldContent",
+				"value": "shelf",
+				"type": "Text"
+			}
+		},
+		"items": [
+			{
+				"__TYPE__": "GroupItemContent",
+				"value": [
+					[
+						"title",
+						{
+							"__TYPE__": "FieldContent",
+							"value": "syllable",
+							"type": "Text"
+						}
+					],
+					[
+						"time_period",
+						{
+							"__TYPE__": "FieldContent",
+							"value": "social",
+							"type": "Text"
+						}
+					],
+					[
+						"issuer",
+						{
+							"__TYPE__": "FieldContent",
+							"value": "common",
+							"type": "Text"
+						}
+					],
+					[
+						"credential_url",
+						{
+							"__TYPE__": "LinkContent",
+							"value": {
+								"__TYPE__": "ExternalLink",
+								"url": "http://google.com"
+							}
+						}
+					],
+					[
+						"description",
+						{
+							"__TYPE__": "StructuredTextContent",
+							"value": [
+								{
+									"type": "paragraph",
+									"content": {
+										"text": "In laboris non pariatur commodo sit non ullamco laborum sunt aliqua eiusmod duis eu esse nostrud. Adipisicing veniam aliqua exercitation labore cillum minim nulla nostrud nisi aliquip ut."
+									}
+								}
+							]
+						}
+					]
+				]
+			}
+		]
+	}
+]
