@@ -47,7 +47,7 @@
   }
 
   .field-btn {
-    @apply bg-black-500 px-5 py-2 min-h-12 rounded-xl shadow-black-200 shadow-2xl hover:bg-black-500/80 flex justify-center items-center text-lg text-white gap-3;
+    @apply bg-black-500 px-5 py-2 min-h-12 rounded-xl shadow-black-200 shadow-2xl hover:bg-black-500/80 hover:text-white-200 transition-colors duration-500 flex justify-center items-center text-lg text-white gap-3;
   }
 
   .text-gray_gradient {

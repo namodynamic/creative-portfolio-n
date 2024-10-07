@@ -48,7 +48,7 @@ export default function NavBar({
             : {}
         }
       >
-          <NameLogo name={settings.data.name} />
+        <NameLogo name={settings.data.name} />
 
         <FloatingNav settings={settings} />
         <DesktopMenu settings={settings} pathname={pathname} />
@@ -62,7 +62,7 @@ function NameLogo({ name }: { name: KeyTextField }) {
     <Link
       href="/"
       aria-label="Home page"
-      className="rounded-2xl md:block hidden border-2 border-[#0e0b38]  bg-[#0e0b38]/80 shadow-xl"
+      className="hidden rounded-2xl border-2 border-[#0e0b38] bg-[#0e0b38]/80  shadow-xl md:block"
     >
       <p className=" rounded-xl border-2 border-white p-1 text-2xl font-extrabold tracking-tighter text-slate-300">
         NE
@@ -94,7 +94,7 @@ function DesktopMenu({
             >
               <span
                 className={clsx(
-                  "absolute inset-0 z-0 h-full rounded bg-[#B43DF2] transition-transform  duration-300 ease-in-out group-hover:translate-y-0",
+                  "absolute inset-0 z-0 h-full rounded bg-purple transition-transform  duration-300 ease-in-out group-hover:translate-y-0",
                   pathname.includes(asLink(link) as string)
                     ? "translate-y-6"
                     : "translate-y-8",

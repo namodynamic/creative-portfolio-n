@@ -22,7 +22,10 @@ const Education = ({ slice }: EducationProps): JSX.Element => {
       </Heading>
 
       {slice.items.map((item, index) => (
-        <div key={index} className="ml-6 mt-8 border-b md:ml-12 md:mt-16">
+        <div
+          key={index}
+          className="ml-6 mt-8 border-b-2 border-black-200 md:ml-12 md:mt-16"
+        >
           <Heading as="h3" size="sm" className="text-white-600 max-md:text-2xl">
             {item.title}
           </Heading>

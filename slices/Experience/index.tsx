@@ -34,7 +34,7 @@ const Experience = ({ slice }: ExperienceProps): JSX.Element => {
       </div>
 
       <div className="mt-8 flex sm:mt-16">
-        <VerticalTimeline animate={false} layout="1-column-left">
+        <VerticalTimeline layout="1-column-left">
           {slice.items.map((item, index) => (
             <VerticalTimelineElement
               key={index}
@@ -51,17 +51,21 @@ const Experience = ({ slice }: ExperienceProps): JSX.Element => {
                 background: item.icon_bg ? item.icon_bg : "#1d1836",
               }}
               contentStyle={{
-                background: "rgba(17,25, 40, 0.11)",
+                background: "rgba(17,25, 40, 0.125)",
                 color: "#fff",
                 borderTop: "1px solid rgba(255, 255, 255, 0.11)",
-                borderRight: "1px solid rgba(255, 255, 255, 0.11)",
-                borderLeft: "1px solid rgba(255, 255, 255, 0.11)",
-                borderBottom: "8px",
-                borderBottomStyle: "solid",
-                borderBottomColor: item.icon_bg ? item.icon_bg : "#1d1836",
+                borderRadius: "32px",
+                borderBottom: "1px",
+                borderStyle: "solid",
+                borderBottomColor: item.icon_bg
+                  ? item.icon_bg
+                  : "rgba(255, 255, 255, 0.11)",
                 boxShadow: "none",
               }}
-              contentArrowStyle={{ borderRight: "7px solid  #FFF" }}
+              contentArrowStyle={{
+                borderRight: "10px solid  rgba(255, 255, 255, 0.40)",
+              }}
+              visible={true}
               className="vertical-timeline-element--work"
             >
               <div>

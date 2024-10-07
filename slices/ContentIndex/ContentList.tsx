@@ -9,7 +9,6 @@ import { Content } from "@prismicio/client";
 import Link from "next/link";
 import { formatDate } from "@/utils/FormatDate";
 
-
 gsap.registerPlugin(ScrollTrigger);
 
 type ContentListProps = {
@@ -36,7 +35,6 @@ export default function ContentList({
     const dateB = new Date(b.data.date || "").getTime();
     return dateB - dateA;
   });
-
 
   const revealRef = useRef(null);
   const [currentItem, setCurrentItem] = useState<null | number>(null);
@@ -128,10 +126,10 @@ export default function ContentList({
       ? item.data.hover_image
       : fallbackItemImage;
     return asImageSrc(image, {
-      fit: "crop",
+      fit: "scale",
       w: 320,
       h: 320,
-      exp: -5,
+      exp: -10,
     });
   });
 
@@ -164,8 +162,10 @@ export default function ContentList({
               aria-label={item.data.title || ""}
             >
               <div className="flex flex-col">
-                <span className="text-3xl flex flex-wrap font-bold">{item.data.title}</span>
-                <div className="flex flex-wrap gap-2 text-yellow-400">
+                <span className="flex flex-wrap text-3xl font-bold">
+                  {item.data.title}
+                </span>
+                <div className="flex flex-wrap gap-2 text-violet-300">
                   {item.tags.map((tag, index) => (
                     <span key={index} className="text-sm font-bold">
                       #{tag}
@@ -173,7 +173,7 @@ export default function ContentList({
                   ))}
                 </div>
               </div>
-              <span className="ml-auto flex items-center gap-2  md:text-xl text-md font-medium md:ml-0">
+              <span className="text-md ml-auto flex items-center  gap-2 font-medium md:ml-0 md:text-xl">
                 {viewMoreText} <MdArrowOutward />
               </span>
             </Link>
@@ -182,7 +182,7 @@ export default function ContentList({
 
         {/* Hover element */}
         <div
-          className="hover-reveal pointer-events-none absolute left-0 top-0 -z-10 h-[320px] w-[320px] rounded-lg bg-cover bg-center opacity-0 transition-[background] duration-300"
+          className="hover-reveal pointer-events-none absolute left-0 top-0 -z-10 h-[320px] w-[320px] rounded-2xl bg-cover bg-center opacity-0 transition-[background] duration-300"
           style={{
             backgroundImage:
               currentItem !== null ? `url(${contentImages[currentItem]})` : "",
