@@ -35,55 +35,58 @@ const Experience = ({ slice }: ExperienceProps): JSX.Element => {
 
       <div className="mt-8 flex sm:mt-16">
         <VerticalTimeline layout="1-column-left">
-          {slice.items.map((item, index) => (
-            <VerticalTimelineElement
-              key={index}
-              date={item.time_period ? item.time_period : ""}
-              icon={
-                <div className="flex h-full w-full items-center justify-center ">
-                  <PrismicNextImage
-                    field={item.icon}
-                    className="h-[80%] w-[80%] rounded-full object-contain"
-                  />
+          {slice.items
+            .slice()
+            .reverse()
+            .map((item, index) => (
+              <VerticalTimelineElement
+                key={index}
+                date={item.time_period ? item.time_period : ""}
+                icon={
+                  <div className="flex h-full w-full items-center justify-center ">
+                    <PrismicNextImage
+                      field={item.icon}
+                      className="h-[80%] w-[80%] rounded-full object-contain"
+                    />
+                  </div>
+                }
+                iconStyle={{
+                  background: item.icon_bg ? item.icon_bg : "#1d1836",
+                }}
+                contentStyle={{
+                  background: "rgba(17,25, 40, 0.125)",
+                  color: "#fff",
+                  borderTop: "1px solid rgba(255, 255, 255, 0.11)",
+                  borderRadius: "32px",
+                  borderBottom: "1px",
+                  borderStyle: "solid",
+                  borderBottomColor: item.icon_bg
+                    ? item.icon_bg
+                    : "rgba(255, 255, 255, 0.11)",
+                  boxShadow: "none",
+                }}
+                contentArrowStyle={{
+                  borderRight: "10px solid  rgba(255, 255, 255, 0.40)",
+                }}
+                visible={true}
+                className="vertical-timeline-element--work"
+              >
+                <div>
+                  <h3 className="text-[24px] font-bold text-white ">
+                    {item.title}
+                  </h3>
+                  <p
+                    className="text-[16px] font-semibold text-slate-400"
+                    style={{ margin: 0 }}
+                  >
+                    {item.company}
+                  </p>
                 </div>
-              }
-              iconStyle={{
-                background: item.icon_bg ? item.icon_bg : "#1d1836",
-              }}
-              contentStyle={{
-                background: "rgba(17,25, 40, 0.125)",
-                color: "#fff",
-                borderTop: "1px solid rgba(255, 255, 255, 0.11)",
-                borderRadius: "32px",
-                borderBottom: "1px",
-                borderStyle: "solid",
-                borderBottomColor: item.icon_bg
-                  ? item.icon_bg
-                  : "rgba(255, 255, 255, 0.11)",
-                boxShadow: "none",
-              }}
-              contentArrowStyle={{
-                borderRight: "10px solid  rgba(255, 255, 255, 0.40)",
-              }}
-              visible={true}
-              className="vertical-timeline-element--work"
-            >
-              <div>
-                <h3 className="text-[24px] font-bold text-white ">
-                  {item.title}
-                </h3>
-                <p
-                  className="text-[16px] font-semibold text-slate-400"
-                  style={{ margin: 0 }}
-                >
-                  {item.company}
-                </p>
-              </div>
-              <div className="prose prose-sm prose-slate prose-invert col-start-1 text-white-500 sm:prose-lg">
-                <PrismicRichText field={item.description} />
-              </div>
-            </VerticalTimelineElement>
-          ))}
+                <div className="prose prose-sm prose-slate prose-invert col-start-1 text-white-500 sm:prose-lg">
+                  <PrismicRichText field={item.description} />
+                </div>
+              </VerticalTimelineElement>
+            ))}
         </VerticalTimeline>
       </div>
     </Bounded>
