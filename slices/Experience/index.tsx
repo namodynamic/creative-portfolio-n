@@ -56,13 +56,10 @@ const Experience = ({ slice }: ExperienceProps): JSX.Element => {
                 contentStyle={{
                   background: "rgba(17,25, 40, 0.125)",
                   color: "#fff",
-                  borderTop: "1px solid rgba(255, 255, 255, 0.11)",
-                  borderRadius: "32px",
+                  border: "1px solid rgba(255, 255, 255, 0.11)",
+                  borderRadius: "16px",
                   borderBottom: "1px",
                   borderStyle: "solid",
-                  borderBottomColor: item.icon_bg
-                    ? item.icon_bg
-                    : "rgba(255, 255, 255, 0.11)",
                   boxShadow: "none",
                 }}
                 contentArrowStyle={{
