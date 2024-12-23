@@ -56,9 +56,8 @@ const Experience = ({ slice }: ExperienceProps): JSX.Element => {
                 contentStyle={{
                   background: "rgba(17,25, 40, 0.125)",
                   color: "#fff",
-                  border: "1px solid rgba(255, 255, 255, 0.11)",
+                  border: "0.5px solid rgba(255, 255, 255, 0.11)",
                   borderRadius: "16px",
-                  borderBottom: "1px",
                   borderStyle: "solid",
                   boxShadow: "none",
                 }}
