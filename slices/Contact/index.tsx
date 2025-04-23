@@ -11,7 +11,6 @@ import { gsap } from "gsap";
 
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { ContactGlobe } from "@/components/ContactGlobe";
 import { FaLocationArrow } from "react-icons/fa6";
 import { Icon } from "@/slices/Approach";
 
@@ -189,10 +188,6 @@ const Contact = ({ slice }: ContactProps): JSX.Element => {
             </div>
             <ToastContainer />
           </div>
-        </div>
-
-        <div className="lg-w-[500px] z-0 mb-40 mt-20 flex h-[350px] w-full items-center justify-center md:h-[550px] lg:h-auto ">
-          <ContactGlobe />
         </div>
       </Bounded>
       <StarsCanvas />

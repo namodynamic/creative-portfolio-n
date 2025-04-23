@@ -8,14 +8,14 @@ import { gsap } from "gsap";
 import Bounded from "@/components/Bounded";
 import { TextGenerateEffect } from "@/components/ui/TextGenerateEffect";
 import MagicButton from "@/components/ui/MagicButton";
-import { FaLocationArrow } from "react-icons/fa6";
+import { FaArrowDown } from "react-icons/fa6";
 import Link from "next/link";
 import { BentoGrid, BentoGridItem } from "@/components/ui/BentoGrid";
 
-const gridItems = [
+export const gridItems = [
   {
     id: 1,
-    title: "I prioritize client collaboration, fostering open communication ",
+    title: "Clear communication, shared goals, better outcomes.",
     description: "",
     className: "lg:col-span-3 md:col-span-6 md:row-span-4 lg:min-h-[60vh]",
     imgClassName: "w-full h-full",
@@ -36,7 +36,7 @@ const gridItems = [
   {
     id: 3,
     title: "My tech stack",
-    description: "I constantly try to improve",
+    description: "Refining skills, refining code",
     className: "lg:col-span-2 md:col-span-3 md:row-span-2",
     imgClassName: "",
     titleClassName: "justify-center",
@@ -56,8 +56,8 @@ const gridItems = [
 
   {
     id: 5,
-    title: "Currently honing my skills through real-life projects",
-    description: "The Inside Scoop",
+    title: "Real projects, Real challenges, Real growth.",
+    description: "Behind the Build",
     className: "md:col-span-3 md:row-span-2",
     imgClassName: "absolute right-0 bottom-0 md:w-96 w-60",
     titleClassName: "justify-center md:justify-start lg:justify-center",
@@ -66,7 +66,7 @@ const gridItems = [
   },
   {
     id: 6,
-    title: "Do you want to start a project together?",
+    title: "Have an idea? Let’s bring it to life together.",
     description: "",
     className: "lg:col-span-2 md:col-span-3 md:row-span-1",
     imgClassName: "",
@@ -75,6 +75,7 @@ const gridItems = [
     spareImg: "",
   },
 ];
+
 
 /**
  * Props for `Hero`.
@@ -133,12 +134,12 @@ const Hero = ({ slice }: HeroProps): JSX.Element => {
                 {slice.primary.introduction}
               </p>
 
-              <Link href="/projects">
+              <Link href="/projects" className="group">
                 <MagicButton
                   title="Explore my projects"
-                  icon={<FaLocationArrow />}
+                  icon={<FaArrowDown className="group-hover:animate-bounce duration-500" />}
                   position="right"
-                  isBeam
+                  otherClasses=""
                 />
               </Link>
             </div>

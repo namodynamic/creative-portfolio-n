@@ -4,7 +4,7 @@ import React from "react";
 import Bounded from "@/components/Bounded";
 import { Content, RichTextField } from "@prismicio/client";
 import { SliceComponentProps } from "@prismicio/react";
-import { AnimatePresence, motion } from "framer-motion";
+import { AnimatePresence, motion } from "motion/react";
 import { CanvasRevealEffect } from "@/components/ui/CanvasRevealEffect";
 
 /**

@@ -5,7 +5,7 @@ import {
   AnimatePresence,
   useScroll,
   useMotionValueEvent,
-} from "framer-motion";
+} from "motion/react";
 import { PrismicNextLink } from "@prismicio/next";
 import { asLink, Content } from "@prismicio/client";
 import clsx from "clsx";

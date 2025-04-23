@@ -9,6 +9,7 @@ import { createClient, repositoryName } from "@/prismicio";
 
 import Header from "../components/Header";
 import Footer from "@/components/Footer";
+import Image from "next/image";
 
 const urbanist = Urbanist({ subsets: ["latin"] });
 
@@ -33,7 +34,11 @@ export default function RootLayout({
   return (
     <html lang="en" className="bg-black-100">
       <body className={clsx(urbanist.className, "relative")}>
+        <div className="absolute right-0 top-0 z-10">
+          <img src="/bg.png" alt="background" />
+        </div>
         <Header />
+
         <main className="min-h-screen">{children}</main>
         <div className="background-gradient absolute inset-0 -z-50 max-h-screen" />
         <Footer />

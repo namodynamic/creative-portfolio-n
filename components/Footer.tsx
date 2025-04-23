@@ -92,6 +92,10 @@ export default async function Footer() {
           )}
         </div>
       </div>
+
+      <div className="absolute bottom-0 left-0 z-10">
+        <img src="/bg.png" alt="background" />
+      </div>
     </Bounded>
   );
 }
