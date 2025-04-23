@@ -152,7 +152,9 @@ export default function ContentList({
         {sortedItems.map((item, index) => (
           <li
             key={index}
-            ref={(el) => (itemsRef.current[index] = el)}
+            ref={(el) => {
+              itemsRef.current[index] = el;
+            }}
             onMouseEnter={() => onMouseEnter(index)}
             className="list-item opacity-0"
           >
