@@ -1,27 +1,26 @@
-import React from "react";
+import React, { ElementType, ReactNode, forwardRef } from "react";
 import clsx from "clsx";
 
-type BoundedProps = {
-  as?: React.ElementType;
+type BoundedProps<T extends ElementType = "section"> = {
+  as?: T;
   className?: string;
-  children: React.ReactNode;
-};
+  children: ReactNode;
+} & React.ComponentPropsWithoutRef<T>;
 
-const Bounded = React.forwardRef<HTMLDivElement, BoundedProps>(
-  ({ as: Comp = "section", className, children, ...restProps }, ref) => {
+const Bounded = forwardRef<HTMLElement, BoundedProps>(
+  ({ as: Component = "section", className, children, ...rest }, ref) => {
     return (
-      <Comp
+      <Component
         ref={ref}
-        className={clsx("px-4 md:px-6 md:py-14 py-20 lg:py-16", className)}
-        {...restProps}
+        className={clsx("px-4 py-8 md:px-6 md:py-14 lg:py-16", className)}
+        {...rest}
       >
         <div className="mx-auto w-full max-w-7xl">{children}</div>
-      </Comp>
+      </Component>
     );
-  },
+  }
 );
 
-// Set a display name for the component
 Bounded.displayName = "Bounded";
 
 export default Bounded;

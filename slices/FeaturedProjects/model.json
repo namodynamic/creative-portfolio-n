@@ -1,0 +1,79 @@
+{
+  "id": "featured_projects",
+  "type": "SharedSlice",
+  "name": "FeaturedProjects",
+  "description": "FeaturedProjects",
+  "variations": [
+    {
+      "id": "default",
+      "name": "Default",
+      "docURL": "...",
+      "version": "initial",
+      "description": "Default",
+      "imageUrl": "",
+      "primary": {
+        "heading": {
+          "type": "Text",
+          "config": {
+            "label": "Heading",
+            "placeholder": ""
+          }
+        },
+        "intro_text": {
+          "type": "Text",
+          "config": {
+            "label": "Intro Text",
+            "placeholder": ""
+          }
+        },
+        "view_all_projects": {
+          "type": "Link",
+          "config": {
+            "label": "View All Projects",
+            "select": "document"
+          }
+        }
+      },
+      "items": {
+        "title": {
+          "type": "Text",
+          "config": {
+            "label": "Title",
+            "placeholder": ""
+          }
+        },
+        "description": {
+          "type": "StructuredText",
+          "config": {
+            "label": "Description",
+            "placeholder": "",
+            "allowTargetBlank": true,
+            "multi": "paragraph,preformatted,heading1,heading2,heading3,heading4,heading5,heading6,strong,em,hyperlink,image,embed,list-item,o-list-item,rtl"
+          }
+        },
+        "featured_project_image": {
+          "type": "Image",
+          "config": {
+            "label": "Featured Project Image",
+            "constraint": {},
+            "thumbnails": []
+          }
+        },
+        "tags": {
+          "type": "Text",
+          "config": {
+            "label": "Tags",
+            "placeholder": ""
+          }
+        },
+        "project_slug": {
+          "type": "Link",
+          "config": {
+            "label": "Project Slug",
+            "select": "document"
+          }
+        }
+      }
+    }
+  ]
+}

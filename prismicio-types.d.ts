@@ -168,6 +168,7 @@ export type ContactDocument<Lang extends string = string> =
   >;
 
 type HomepageDocumentDataSlicesSlice =
+  | FeaturedProjectsSlice
   | ApproachSlice
   | CtaSlice
   | TestimonialSlice
@@ -1383,6 +1384,126 @@ export type ExperienceSlice = prismic.SharedSlice<
 >;
 
 /**
+ * Primary content in *FeaturedProjects → Default → Primary*
+ */
+export interface FeaturedProjectsSliceDefaultPrimary {
+  /**
+   * Heading field in *FeaturedProjects → Default → Primary*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: featured_projects.default.primary.heading
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  heading: prismic.KeyTextField;
+
+  /**
+   * Intro Text field in *FeaturedProjects → Default → Primary*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: featured_projects.default.primary.intro_text
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  intro_text: prismic.KeyTextField;
+
+  /**
+   * View All Projects field in *FeaturedProjects → Default → Primary*
+   *
+   * - **Field Type**: Content Relationship
+   * - **Placeholder**: *None*
+   * - **API ID Path**: featured_projects.default.primary.view_all_projects
+   * - **Documentation**: https://prismic.io/docs/field#link-content-relationship
+   */
+  view_all_projects: prismic.ContentRelationshipField;
+}
+
+/**
+ * Primary content in *FeaturedProjects → Items*
+ */
+export interface FeaturedProjectsSliceDefaultItem {
+  /**
+   * Title field in *FeaturedProjects → Items*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: featured_projects.items[].title
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  title: prismic.KeyTextField;
+
+  /**
+   * Description field in *FeaturedProjects → Items*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: featured_projects.items[].description
+   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+   */
+  description: prismic.RichTextField;
+
+  /**
+   * Featured Project Image field in *FeaturedProjects → Items*
+   *
+   * - **Field Type**: Image
+   * - **Placeholder**: *None*
+   * - **API ID Path**: featured_projects.items[].featured_project_image
+   * - **Documentation**: https://prismic.io/docs/field#image
+   */
+  featured_project_image: prismic.ImageField<never>;
+
+  /**
+   * Tags field in *FeaturedProjects → Items*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: featured_projects.items[].tags
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  tags: prismic.KeyTextField;
+
+  /**
+   * Project Slug field in *FeaturedProjects → Items*
+   *
+   * - **Field Type**: Content Relationship
+   * - **Placeholder**: *None*
+   * - **API ID Path**: featured_projects.items[].project_slug
+   * - **Documentation**: https://prismic.io/docs/field#link-content-relationship
+   */
+  project_slug: prismic.ContentRelationshipField;
+}
+
+/**
+ * Default variation for FeaturedProjects Slice
+ *
+ * - **API ID**: `default`
+ * - **Description**: Default
+ * - **Documentation**: https://prismic.io/docs/slice
+ */
+export type FeaturedProjectsSliceDefault = prismic.SharedSliceVariation<
+  "default",
+  Simplify<FeaturedProjectsSliceDefaultPrimary>,
+  Simplify<FeaturedProjectsSliceDefaultItem>
+>;
+
+/**
+ * Slice variation for *FeaturedProjects*
+ */
+type FeaturedProjectsSliceVariation = FeaturedProjectsSliceDefault;
+
+/**
+ * FeaturedProjects Shared Slice
+ *
+ * - **API ID**: `featured_projects`
+ * - **Description**: FeaturedProjects
+ * - **Documentation**: https://prismic.io/docs/slice
+ */
+export type FeaturedProjectsSlice = prismic.SharedSlice<
+  "featured_projects",
+  FeaturedProjectsSliceVariation
+>;
+
+/**
  * Primary content in *Hero → Default → Primary*
  */
 export interface HeroSliceDefaultPrimary {
@@ -1780,6 +1901,11 @@ declare module "@prismicio/client" {
       ExperienceSliceDefaultItem,
       ExperienceSliceVariation,
       ExperienceSliceDefault,
+      FeaturedProjectsSlice,
+      FeaturedProjectsSliceDefaultPrimary,
+      FeaturedProjectsSliceDefaultItem,
+      FeaturedProjectsSliceVariation,
+      FeaturedProjectsSliceDefault,
       HeroSlice,
       HeroSliceDefaultPrimary,
       HeroSliceVariation,

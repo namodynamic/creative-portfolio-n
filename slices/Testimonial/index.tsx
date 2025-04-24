@@ -151,11 +151,12 @@ const Testimonial = ({ slice }: TestimonialProps): JSX.Element => {
   };
 
   return (
-    <section
-      data-slice-type={slice.slice_type}
-      data-slice-variation={slice.variation}
-    >
-      <Bounded as="div">
+    <>
+      <Bounded
+        as="section"
+        data-slice-type={slice.slice_type}
+        data-slice-variation={slice.variation}
+      >
         <h1 className="heading">
           {slice.primary.title?.split(" ").slice(0, -2).join(" ")}{" "}
           <span className="text-purple">
@@ -164,7 +165,7 @@ const Testimonial = ({ slice }: TestimonialProps): JSX.Element => {
         </h1>
       </Bounded>
 
-      <div className="flex flex-col items-center max-lg:mt-10">
+      <div className="mb-5 flex flex-col items-center -mt-10 max-lg:mt-10">
         <div className="relative flex h-[50vh] flex-col items-center justify-center  overflow-hidden rounded-md antialiased md:h-[30rem]">
           <InfiniteMovingCards />
         </div>
@@ -189,7 +190,7 @@ const Testimonial = ({ slice }: TestimonialProps): JSX.Element => {
           ))}
         </div>
       </div>
-    </section>
+    </>
   );
 };
 

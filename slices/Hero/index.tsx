@@ -134,7 +134,7 @@ const Hero = ({ slice }: HeroProps): JSX.Element => {
                 {slice.primary.introduction}
               </p>
 
-              <Link href="/projects" className="group">
+              <Link href="/#featured-projects" className="group">
                 <MagicButton
                   title="Explore my projects"
                   icon={<FaArrowDown className="group-hover:animate-bounce duration-500" />}
