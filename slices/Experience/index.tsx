@@ -1,4 +1,4 @@
-"use client";
+"use client";;
 import Bounded from "@/components/Bounded";
 import Heading from "@/components/Heading";
 import { Content } from "@prismicio/client";
@@ -10,6 +10,8 @@ import {
   VerticalTimelineElement,
 } from "react-vertical-timeline-component";
 import "react-vertical-timeline-component/style.min.css";
+
+import type { JSX } from "react";
 
 /**
  * Props for `Experience`.

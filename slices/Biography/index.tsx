@@ -7,6 +7,8 @@ import Heading from "@/components/Heading";
 import { FaLocationArrow } from "react-icons/fa6";
 import clsx from "clsx";
 
+import type { JSX } from "react";
+
 /**
  * Props for `Biography`.
  */

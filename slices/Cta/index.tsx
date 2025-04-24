@@ -5,6 +5,8 @@ import { SliceComponentProps } from "@prismicio/react";
 import Link from "next/link";
 import { FaLocationArrow } from "react-icons/fa6";
 
+import type { JSX } from "react";
+
 /**
  * Props for `Cta`.
  */

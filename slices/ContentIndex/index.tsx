@@ -4,6 +4,7 @@ import { createClient } from "@/prismicio";
 import ContentList from "./ContentList";
 import Bounded from "@/components/Bounded";
 import Heading from "@/components/Heading";
+import type { JSX } from "react";
 /**
  * Props for `ContentIndex`.
  */

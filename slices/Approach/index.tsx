@@ -1,11 +1,12 @@
 "use client";
 
-import React from "react";
+import React, { type JSX } from "react";
 import Bounded from "@/components/Bounded";
 import { Content, RichTextField } from "@prismicio/client";
 import { SliceComponentProps } from "@prismicio/react";
 import { AnimatePresence, motion } from "motion/react";
 import { CanvasRevealEffect } from "@/components/ui/CanvasRevealEffect";
+import { SimplifiedCanvasReveal } from "@/components/ui/simplified-reveal-effect";
 
 /**
  * Props for `Approach`.
@@ -34,7 +35,7 @@ const Approach = ({ slice }: ApproachProps): JSX.Element => {
           icon={<AceternityIcon order="Phase 1" />}
           des={slice.primary.phase_1_desc ?? ""}
         >
-          <CanvasRevealEffect
+          <SimplifiedCanvasReveal
             animationSpeed={5.1}
             containerClassName="bg-emerald-900 rounded-3xl overflow-hidden"
           />
@@ -44,7 +45,7 @@ const Approach = ({ slice }: ApproachProps): JSX.Element => {
           icon={<AceternityIcon order="Phase 2" />}
           des={slice.primary.phase_2_desc ?? ""}
         >
-          <CanvasRevealEffect
+          <SimplifiedCanvasReveal
             animationSpeed={3}
             containerClassName="bg-pink-900 rounded-3xl overflow-hidden"
             colors={[
@@ -59,7 +60,7 @@ const Approach = ({ slice }: ApproachProps): JSX.Element => {
           icon={<AceternityIcon order="Phase 3" />}
           des={slice.primary.phase_3_desc ?? ""}
         >
-          <CanvasRevealEffect
+          <SimplifiedCanvasReveal
             animationSpeed={3}
             containerClassName="bg-sky-600 rounded-3xl overflow-hidden"
             colors={[[125, 211, 252]]}

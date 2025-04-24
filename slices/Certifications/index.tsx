@@ -5,6 +5,8 @@ import Heading from "@/components/Heading";
 import { PrismicNextLink } from "@prismicio/next";
 import { FaExternalLinkAlt } from "react-icons/fa";
 
+import type { JSX } from "react";
+
 /**
  * Props for `Certifications`.
  */

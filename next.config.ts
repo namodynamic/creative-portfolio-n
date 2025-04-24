@@ -1,7 +1,15 @@
-/** @type {import('next').NextConfig} */
-const nextConfig = {}
+import type { NextConfig } from "next";
 
-module.exports = nextConfig
+
+const nextConfig: NextConfig = {
+  turbopack: {
+    // ...
+    resolveExtensions: ['.mdx', '.tsx', '.ts', '.jsx', '.js', '.mjs', '.json'],
+
+  },
+};
+
+module.exports = nextConfig;
 
 
 // Injected content via Sentry wizard below

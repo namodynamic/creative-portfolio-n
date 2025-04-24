@@ -1,12 +1,12 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState, type JSX } from "react";
 import emailjs from "@emailjs/browser";
 
 import Bounded from "@/components/Bounded";
 import { Content } from "@prismicio/client";
 import { SliceComponentProps } from "@prismicio/react";
-import StarsCanvas from "@/components/Stars";
+// import StarsCanvas from "@/components/Stars";
 import { gsap } from "gsap";
 
 import { ToastContainer, toast } from "react-toastify";
@@ -190,7 +190,7 @@ const Contact = ({ slice }: ContactProps): JSX.Element => {
           </div>
         </div>
       </Bounded>
-      <StarsCanvas />
+      {/* <StarsCanvas /> */}
     </>
   );
 };

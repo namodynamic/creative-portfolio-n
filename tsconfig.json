@@ -1,6 +1,6 @@
 {
   "compilerOptions": {
-    "types": ["@types/react-vertical-timeline-component"],
+    "types": [],
     "target": "es5",
     "lib": ["dom", "dom.iterable", "esnext"],
     "allowJs": true,
@@ -21,7 +21,8 @@
     ],
     "paths": {
       "@/*": ["./*"]
-    }
+    },
+    "typeRoots": ["./node_modules/@types", "./types"]
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "slices/Experience/index.tsx"],
   "exclude": ["node_modules"]

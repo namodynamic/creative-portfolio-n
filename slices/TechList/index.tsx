@@ -2,7 +2,7 @@
 
 import { Content } from "@prismicio/client";
 import { SliceComponentProps } from "@prismicio/react";
-import React, { useLayoutEffect, useRef } from "react";
+import React, { useLayoutEffect, useRef, type JSX } from "react";
 import { MdCircle } from "react-icons/md";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
