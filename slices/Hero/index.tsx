@@ -76,7 +76,6 @@ export const gridItems = [
   },
 ];
 
-
 /**
  * Props for `Hero`.
  */
@@ -130,14 +129,16 @@ const Hero = ({ slice }: HeroProps): JSX.Element => {
                 className="text-center text-[40px] md:text-5xl lg:text-6xl"
               />
 
-              <p className="mb-4 text-center text-sm tracking-tight text-blue-100 md:text-lg md:tracking-wider lg:text-2xl">
+              <p className="mb-8 text-center text-sm tracking-tight text-blue-100 md:text-lg md:tracking-wider lg:text-2xl">
                 {slice.primary.introduction}
               </p>
 
               <Link href="/#featured-projects" className="group">
                 <MagicButton
                   title="Explore my projects"
-                  icon={<FaArrowDown className="group-hover:animate-bounce duration-500" />}
+                  icon={
+                    <FaArrowDown className="ml-2 transition-transform duration-500 group-hover:animate-bounce " />
+                  }
                   position="right"
                   otherClasses=""
                 />

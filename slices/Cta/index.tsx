@@ -3,7 +3,7 @@ import MagicButton from "@/components/ui/MagicButton";
 import { Content } from "@prismicio/client";
 import { SliceComponentProps } from "@prismicio/react";
 import Link from "next/link";
-import { FaLocationArrow } from "react-icons/fa6";
+import { ArrowRight } from "lucide-react";
 
 import type { JSX } from "react";
 
@@ -29,14 +29,17 @@ const Cta = ({ slice }: CtaProps): JSX.Element => {
           </span>
           {slice.primary.heading?.split(" ").slice(4).join(" ")}
         </h1>
-        <p className="my-5 text-center text-white-200 md:mt-10">
+        <p className="mb-8 mt-5 text-center text-white-200 md:mt-10">
           {slice.primary.sub_heading}
         </p>
         <Link href="/contact">
           <MagicButton
             title="Contact Me"
-            icon={<FaLocationArrow />}
+            icon={
+              <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
+            }
             position="right"
+            otherClasses="group"
             isBeam
           />
         </Link>
