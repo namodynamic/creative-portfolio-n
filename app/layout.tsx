@@ -40,7 +40,7 @@ export default function RootLayout({
         <Header />
 
         <main className="min-h-screen">{children}</main>
-        <div className="background-gradient absolute inset-0 -z-50 max-h-screen" />
+        {/* <div className="background-gradient absolute inset-0 -z-50 max-h-screen" /> */}
         <Footer />
 
         <Analytics />

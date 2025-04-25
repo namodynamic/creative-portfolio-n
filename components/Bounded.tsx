@@ -12,7 +12,7 @@ const Bounded = forwardRef<HTMLElement, BoundedProps>(
     return (
       <Component
         ref={ref}
-        className={clsx("px-4 py-8 md:px-6 md:py-14 lg:py-16", className)}
+        className={clsx("px-4 py-20 md:px-6 md:py-14 lg:py-16", className)}
         {...rest}
       >
         <div className="mx-auto w-full max-w-7xl">{children}</div>

@@ -29,7 +29,7 @@ const ContentIndex = async ({
       data-slice-type={slice.slice_type}
       data-slice-variation={slice.variation}
     >
-      <Heading size="xl" className="mb-8">
+      <Heading size="xl" className="mb-8 md:my-10">
         {slice.primary.heading}
       </Heading>
       {isFilled.richText(slice.primary.description) && (

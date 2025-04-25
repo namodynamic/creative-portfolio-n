@@ -113,16 +113,13 @@ const Contact = ({ slice }: ContactProps): JSX.Element => {
         data-slice-variation={slice.variation}
         ref={component}
       >
-        <div className=" min-h-screen rounded-2xl border border-slate-800   bg-gray-950/90">
+        <div className=" min-h-screen rounded-2xl border border-slate-800 my-10 md:my-20  bg-gray-950/90">
           <div className="w-full overflow-hidden rounded-xl shadow-lg">
             <div className="flex items-center justify-between space-x-2 bg-[#818BA6]/75 px-4 py-4">
               <div className="flex space-x-3">
                 <div className="h-3 w-3 rounded-full bg-red-500"></div>
                 <div className="h-3 w-3 rounded-full bg-yellow-500"></div>
                 <div className="h-3 w-3 rounded-full bg-green-500"></div>
-              </div>
-              <div className="flex text-center text-sm text-gray-400">
-                https://nnamdiekechi.com/contact
               </div>
               <Icon className="h-6 w-6 text-gray-400" />
             </div>

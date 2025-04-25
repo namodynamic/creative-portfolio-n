@@ -37,7 +37,7 @@ const Approach = ({ slice }: ApproachProps): JSX.Element => {
         >
           <SimplifiedCanvasReveal
             animationSpeed={5.1}
-            containerClassName="bg-emerald-900 rounded-3xl overflow-hidden"
+            containerClassName="bg-emerald-900 rounded-xl overflow-hidden"
           />
         </Card>
         <Card
@@ -47,7 +47,7 @@ const Approach = ({ slice }: ApproachProps): JSX.Element => {
         >
           <SimplifiedCanvasReveal
             animationSpeed={3}
-            containerClassName="bg-pink-900 rounded-3xl overflow-hidden"
+            containerClassName="bg-pink-900 rounded-xl overflow-hidden"
             colors={[
               [255, 166, 158],
               [221, 255, 247],
@@ -62,7 +62,7 @@ const Approach = ({ slice }: ApproachProps): JSX.Element => {
         >
           <SimplifiedCanvasReveal
             animationSpeed={3}
-            containerClassName="bg-sky-600 rounded-3xl overflow-hidden"
+            containerClassName="bg-sky-600 rounded-xl overflow-hidden"
             colors={[[125, 211, 252]]}
           />
         </Card>
@@ -90,17 +90,17 @@ const Card = ({
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
       className="group/canvas-card relative mx-auto flex w-full
-       max-w-sm  items-center justify-center rounded-3xl border border-white/[0.2] p-4 lg:h-[35rem] "
+       max-w-sm  items-center justify-center rounded-xl border border-white/[0.2] p-4 lg:h-[35rem] "
       style={{
         background: "rgb(4,7,29)",
         backgroundColor:
           "linear-gradient(90deg, rgba(4,7,29,1) 0%, rgba(12,14,35,1) 100%)",
       }}
     >
-      <Icon className="absolute -left-3 -top-3 h-10 w-10 text-white opacity-30" />
-      <Icon className="absolute -bottom-3 -left-3 h-10 w-10 text-white opacity-30" />
-      <Icon className="absolute -right-3 -top-3 h-10 w-10 text-white opacity-30" />
-      <Icon className="absolute -bottom-3 -right-3 h-10 w-10 text-white opacity-30" />
+      <Icon className="absolute -left-2 -top-2.5 h-6 w-6 text-white opacity-30" />
+      <Icon className="absolute -bottom-2 -left-2.5 h-6 w-6 text-white opacity-30" />
+      <Icon className="absolute -right-2 -top-2.5 h-6 w-6 text-white opacity-30" />
+      <Icon className="absolute -bottom-2 -right-2.5 h-6 w-6 text-white opacity-30" />
 
       <AnimatePresence>
         {hovered && (

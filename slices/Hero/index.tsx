@@ -117,8 +117,8 @@ const Hero = ({ slice }: HeroProps): JSX.Element => {
         data-slice-variation={slice.variation}
         ref={component}
       >
-        <div className="relative w-full overflow-hidden">
-          <div className="relative z-10 my-20 flex justify-center">
+        <div className="relative my-10 w-full overflow-hidden md:my-20">
+          <div className="relative z-10 flex justify-center">
             <div className="flex max-w-full flex-col items-center justify-center md:max-w-2xl lg:max-w-[60vw]">
               <p className="intro max-w-80 text-center text-xs uppercase tracking-tight text-blue-100">
                 {slice.primary.intro_text}
@@ -133,7 +133,7 @@ const Hero = ({ slice }: HeroProps): JSX.Element => {
                 {slice.primary.introduction}
               </p>
 
-              <Link href="/#featured-projects" className="group">
+              <Link href="/#featured-projects" className="group mb-2">
                 <MagicButton
                   title="Explore my projects"
                   icon={

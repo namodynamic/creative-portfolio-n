@@ -25,7 +25,7 @@ export default async function Page(props: { params: Promise<Params> }) {
 
   return (
     <Bounded as="section">
-      <div className="rounded-2xl border-2 border-slate-800 bg-slate-900 px-4 py-10 md:px-8 md:py-20">
+      <div className="rounded-2xl border border-slate-800 bg-slate-900 px-4 my-10 md:my-20 py-5 md:py-10 md:px-8">
         <Heading size="md" as="h1">
           {page.data.title}
         </Heading>
