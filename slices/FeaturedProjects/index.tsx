@@ -29,6 +29,7 @@ const FeaturedProjects: FC<FeaturedProjectsProps> = ({ slice }) => {
       data-slice-type={slice.slice_type}
       data-slice-variation={slice.variation}
       id="featured-projects"
+      className="max-md:-my-20"
     >
       <motion.div
         initial={{ opacity: 0, y: 20 }}

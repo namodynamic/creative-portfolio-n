@@ -29,6 +29,7 @@ const config: Config = {
   				'200': 'rgba(17, 25, 40, 0.75)',
   				'300': 'rgba(255, 255, 255, 0.125)',
   				'500': '#3A3A49',
+  				'600': '#1E293B',
   				DEFAULT: '#000'
   			},
   			white: {
@@ -41,9 +42,11 @@ const config: Config = {
   				DEFAULT: '#FFF'
   			},
   			blue: {
-  				'100': '#E4ECFF'
+  				'100': '#E4ECFF',
+				'200': '#1E293B',
   			},
-  			purple: '#5F3DC4',
+  			purple: '#7C3AED',
+			purple2: '#6D28D9',
   			border: 'hsl(var(--border))',
   			input: 'hsl(var(--input))',
   			ring: 'hsl(var(--ring))',

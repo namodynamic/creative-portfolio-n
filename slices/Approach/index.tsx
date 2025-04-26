@@ -7,6 +7,7 @@ import { SliceComponentProps } from "@prismicio/react";
 import { AnimatePresence, motion } from "motion/react";
 import { CanvasRevealEffect } from "@/components/ui/CanvasRevealEffect";
 import { SimplifiedCanvasReveal } from "@/components/ui/simplified-reveal-effect";
+import Heading from "@/components/Heading";
 
 /**
  * Props for `Approach`.
@@ -21,18 +22,14 @@ const Approach = ({ slice }: ApproachProps): JSX.Element => {
     <Bounded
       data-slice-type={slice.slice_type}
       data-slice-variation={slice.variation}
-      className="w-full"
     >
-      <h1 className="heading">
-        {slice.primary.heading?.split(" ").slice(0, -1).join(" ")}{" "}
-        <span className="text-purple">
-          {slice.primary.heading?.split(" ").slice(-1).join(" ")}{" "}
-        </span>
-      </h1>
+      <Heading as="h2" size="lg" className="max-md:text-5xl">
+        {slice.primary.heading}
+      </Heading>
       <div className="mt-20 flex w-full flex-col items-center justify-center gap-4 lg:flex-row">
         <Card
           title={slice.primary.phase_1_title ?? ""}
-          icon={<AceternityIcon order="Phase 1" />}
+          icon={<AceternityIcon order="Phase 01" />}
           des={slice.primary.phase_1_desc ?? ""}
         >
           <SimplifiedCanvasReveal
@@ -42,7 +39,7 @@ const Approach = ({ slice }: ApproachProps): JSX.Element => {
         </Card>
         <Card
           title={slice.primary.phase_2_title ?? ""}
-          icon={<AceternityIcon order="Phase 2" />}
+          icon={<AceternityIcon order="Phase 02" />}
           des={slice.primary.phase_2_desc ?? ""}
         >
           <SimplifiedCanvasReveal
@@ -57,7 +54,7 @@ const Approach = ({ slice }: ApproachProps): JSX.Element => {
         </Card>
         <Card
           title={slice.primary.phase_3_title ?? ""}
-          icon={<AceternityIcon order="Phase 3" />}
+          icon={<AceternityIcon order="Phase 03" />}
           des={slice.primary.phase_3_desc ?? ""}
         >
           <SimplifiedCanvasReveal
@@ -150,7 +147,7 @@ const AceternityIcon = ({ order }: { order: string }) => {
         />
         <span
           className="inline-flex h-full w-full cursor-pointer items-center 
-        justify-center rounded-full bg-slate-950 px-5 py-2 text-2xl font-bold text-purple backdrop-blur-3xl"
+        justify-center rounded-full bg-black-100 px-5 py-2 text-sm font-bold text-purple2 backdrop-blur-3xl"
         >
           {order}
         </span>

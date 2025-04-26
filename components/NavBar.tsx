@@ -6,9 +6,8 @@ import { PrismicNextLink } from "@prismicio/next";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { motion } from "framer-motion";
-import { Send } from "lucide-react";
+import { SendHorizonal, Send } from "lucide-react";
 import { cn } from "@/lib/utils";
-import clsx from "clsx";
 
 export default function NavBar({
   settings,
@@ -102,7 +101,7 @@ export default function NavBar({
                 <PrismicNextLink
                   field={link}
                   className={cn(
-                    "text-md relative px-4 py-2 font-medium text-white/90 transition-colors hover:text-white",
+                    "text-md relative px-4 py-2 font-medium text-white/70 transition-colors hover:text-white",
                     pathname.includes(asLink(link) as string)
                       ? "text-white"
                       : "",
@@ -114,10 +113,7 @@ export default function NavBar({
                   }
                 >
                   {label}
-                  {/* <span className={cn("absolute bottom-0 left-0 w-0 h-0.5 bg-white transition-all duration-300 group-hover:w-full",
-                    pathname.includes(asLink(link) as string) ? "w-full" : "w-0",
-                  )}/> */}
-
+                  <span className="bg-purple2 absolute bottom-0 left-0 right-0 mx-auto h-0.5 w-0 transition-all duration-300 group-hover:w-1/2" />
                   {pathname.includes(asLink(link) as string) && (
                     <motion.span
                       layoutId="navbar-active"
@@ -139,10 +135,17 @@ export default function NavBar({
 
           <PrismicNextLink
             field={settings.data.cta_link}
-            className="ml-4 flex items-center gap-1 rounded-lg bg-white px-4 py-2 text-sm font-medium text-navy-900 transition-all hover:bg-opacity-90"
+            className="group relative ml-4 flex w-fit items-center justify-center overflow-hidden rounded-md bg-slate-50 px-4 py-2 text-sm  font-bold text-slate-800 transition-transform ease-out  hover:text-white"
           >
-            {settings.data.cta_label}
-            <Send className="ml-1 h-3 w-3" />
+            <span
+              className={cn(
+                "bg-purple2 absolute inset-0 z-0 h-full translate-y-8 transition-transform  duration-300 ease-in-out group-hover:translate-y-0",
+              )}
+            />
+            <span className="relative flex items-center justify-center gap-2">
+              {settings.data.cta_label}
+              <SendHorizonal className="ml h-3 w-3" />
+            </span>
           </PrismicNextLink>
         </nav>
       )}

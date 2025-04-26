@@ -11,6 +11,9 @@
         "fieldset": "Slice Zone",
         "config": {
           "choices": {
+            "experience": {
+              "type": "SharedSlice"
+            },
             "featured_projects": {
               "type": "SharedSlice"
             },

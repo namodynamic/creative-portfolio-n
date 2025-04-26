@@ -167,7 +167,7 @@ export default function ContentList({
                 <span className="flex flex-wrap text-3xl font-bold">
                   {item.data.title}
                 </span>
-                <div className="flex flex-wrap gap-2 text-muted-foreground capitalize">
+                <div className="flex flex-wrap gap-2 -text-muted-foreground text-black-600 capitalize">
                   {item.tags.map((tag, index) => (
                     <span key={index} className="text-sm font-bold">
                       #{tag}

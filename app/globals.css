@@ -139,6 +139,11 @@ body {
       hsla(222, 0%, 0%, 0) 100%
     );
   }
+
+.border-gradient {
+  background: linear-gradient(135deg, #7C3AED 0%, #3B82F6 100%);
+
+}  
   
 
   @keyframes mulShdSpin {

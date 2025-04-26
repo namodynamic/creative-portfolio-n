@@ -13,6 +13,27 @@
           "placeholder": ""
         }
       },
+      "role": {
+        "type": "Text",
+        "config": {
+          "label": "Role",
+          "placeholder": ""
+        }
+      },
+      "footer_text": {
+        "type": "Text",
+        "config": {
+          "label": "Footer Text",
+          "placeholder": ""
+        }
+      },
+      "footer_cta_text": {
+        "type": "Text",
+        "config": {
+          "label": "Footer CTA text",
+          "placeholder": ""
+        }
+      },
       "nav_item": {
         "type": "Group",
         "config": {

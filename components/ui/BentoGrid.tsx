@@ -127,7 +127,7 @@ export const BentoGridItem = ({
           </div>
 
           <div
-            className={`z-10 max-w-96 font-sans text-lg font-bold lg:text-3xl`}
+            className={`z-10 max-w-96 font-sans text-md font-bold lg:text-2xl`}
           >
             {title}
           </div>
@@ -174,10 +174,10 @@ export const BentoGridItem = ({
 
               <MagicButton
                 title={copied ? "Email is Copied!" : "Copy my email address"}
-                icon={<IoCopyOutline />}
+                icon={<IoCopyOutline className="mr-1" />}
                 position="left"
-                handleClick={handleCopy}
-                otherClasses="!bg-[#161A31]"
+                onClick={handleCopy}
+                otherClasses="!bg-[#161A31] text-xs"
               />
             </div>
           )}

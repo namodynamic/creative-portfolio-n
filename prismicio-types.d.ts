@@ -168,6 +168,7 @@ export type ContactDocument<Lang extends string = string> =
   >;
 
 type HomepageDocumentDataSlicesSlice =
+  | ExperienceSlice
   | FeaturedProjectsSlice
   | ApproachSlice
   | CtaSlice
@@ -502,6 +503,39 @@ interface SettingsDocumentData {
    * - **Documentation**: https://prismic.io/docs/field#key-text
    */
   name: prismic.KeyTextField;
+
+  /**
+   * Role field in *Settings*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: settings.role
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  role: prismic.KeyTextField;
+
+  /**
+   * Footer Text field in *Settings*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: settings.footer_text
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  footer_text: prismic.KeyTextField;
+
+  /**
+   * Footer CTA text field in *Settings*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: settings.footer_cta_text
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  footer_cta_text: prismic.KeyTextField;
 
   /**
    * Nav Item field in *Settings*
