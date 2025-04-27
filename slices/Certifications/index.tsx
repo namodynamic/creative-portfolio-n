@@ -21,6 +21,7 @@ const Certifications = ({ slice }: CertificationsProps): JSX.Element => {
     <Bounded
       data-slice-type={slice.slice_type}
       data-slice-variation={slice.variation}
+      className="max-md:-mt-20"
     >
       <Heading as="h2" size="lg" className="max-md:text-3xl">
         {slice.primary.heading}

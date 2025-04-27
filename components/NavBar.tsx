@@ -49,9 +49,9 @@ export default function NavBar({
       animate={{ y: 0, opacity: 1 }}
       transition={{ duration: 0.5 }}
       className={cn(
-        "fixed left-0 right-0 top-0 z-50 mx-auto my-4 flex max-w-7xl items-center justify-between py-2  transition-all duration-300 max-md:px-4 md:rounded-xl",
+        "fixed left-0 right-0 top-0 z-50 mx-auto px-2 my-4 flex max-w-7xl items-center justify-between py-2  transition-all duration-300 max-md:px-4 md:rounded-xl",
         scrolled
-          ? "bg-black-100/50 bg-opacity-80 backdrop-blur-md md:px-2 md:shadow-lg"
+          ? "bg-black-100/50 bg-opacity-80 backdrop-blur-md md:shadow-lg"
           : "bg-transparent md:bg-black-100 md:backdrop-blur-sm",
       )}
     >

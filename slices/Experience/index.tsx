@@ -1,4 +1,5 @@
-"use client";;
+"use client";
+
 import Bounded from "@/components/Bounded";
 import Heading from "@/components/Heading";
 import { Content } from "@prismicio/client";
@@ -26,6 +27,7 @@ const Experience = ({ slice }: ExperienceProps): JSX.Element => {
     <Bounded
       data-slice-type={slice.slice_type}
       data-slice-variation={slice.variation}
+      className="max-md:-mt-20"
     >
       <Heading as="h2" size="lg" className="max-md:text-5xl">
         {slice.primary.heading}
@@ -66,7 +68,6 @@ const Experience = ({ slice }: ExperienceProps): JSX.Element => {
                 contentArrowStyle={{
                   borderRight: "10px solid  rgba(255, 255, 255, 0.40)",
                 }}
-                visible={true}
                 className="vertical-timeline-element--work"
               >
                 <div>
@@ -80,7 +81,7 @@ const Experience = ({ slice }: ExperienceProps): JSX.Element => {
                     {item.company}
                   </p>
                 </div>
-                <div className="prose prose-sm prose-slate prose-invert col-start-1 text-white-500 sm:prose-lg">
+                <div className="prose prose-md prose-slate prose-invert col-start-1 text-white-500 sm:prose-lg">
                   <PrismicRichText field={item.description} />
                 </div>
               </VerticalTimelineElement>

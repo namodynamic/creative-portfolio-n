@@ -164,7 +164,7 @@ export default function ContentList({
               aria-label={item.data.title || ""}
             >
               <div className="flex flex-col">
-                <span className="flex flex-wrap text-3xl font-bold">
+                <span className="flex flex-wrap text-xl md:text-3xl font-bold">
                   {item.data.title}
                 </span>
                 <div className="flex flex-wrap gap-2 -text-muted-foreground text-black-600 capitalize">
@@ -175,7 +175,7 @@ export default function ContentList({
                   ))}
                 </div>
               </div>
-              <span className="text-md ml-auto flex items-center  gap-2 font-medium md:ml-0 md:text-xl">
+              <span className="text-sm ml-auto flex items-center  gap-2 font-medium md:ml-0 md:text-base">
                 {viewMoreText} <MdArrowOutward />
               </span>
             </Link>
@@ -184,7 +184,7 @@ export default function ContentList({
 
         {/* Hover element */}
         <div
-          className="hover-reveal pointer-events-none absolute left-0 top-0 -z-10 h-[320px] w-[320px] rounded-2xl bg-cover bg-center opacity-0 transition-[background] duration-300"
+          className="hover-reveal pointer-events-none absolute left-0 top-0 -z-10 h-[220px] lg:h-[320px] w-[220px] lg:w-[320px] rounded-2xl bg-cover bg-center opacity-0 transition-[background] duration-300"
           style={{
             backgroundImage:
               currentItem !== null ? `url(${contentImages[currentItem]})` : "",

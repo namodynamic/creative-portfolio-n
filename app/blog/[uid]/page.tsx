@@ -21,17 +21,17 @@ export default async function Page(props: { params: Promise<Params> }) {
 
   return (
     <Bounded as="section">
-      <div className="rounded-2xl border-2 border-slate-800 bg-slate-900 justify-center items-center px-4 md:py-10 py-5 my-10 md:px-8 md:my-20">
-        <Heading size="md" as="h1">{page.data.title}</Heading>
-        <div className="flex gap-2 flex-wrap mt-2 text-sm font-bold text-yellow-400">
+      <div className="rounded-lg border border-slate-800 bg-black/20 justify-center items-center px-4 md:py-10 py-5 my-10 md:px-8 md:my-20">
+        <Heading size="sm" as="h1">{page.data.title}</Heading>
+        <div className="flex gap-2 flex-wrap mt-2 text-sm font-bold text-slate-500">
           {page.tags.map((tag) => (
             <span key={tag}>#{tag}</span>
           ))}
         </div>
-        <p className="mt-5 border-b border-slate-600 text-sm font-medium text-slate-300">
+        <p className="mt-5 border-b border-slate-800 text-sm font-medium text-slate-300">
           {formattedDate}
         </p>
-        <div className="prose prose-sm sm:prose-lg prose-invert mt-12 w-full max-w-none md:mt-20">
+        <div className="prose prose-base sm:prose-lg prose-invert mt-12  max-w-prose mx-auto md:mt-20">
           <SliceZone slices={page.data.slices} components={components} />
         </div>
       </div>

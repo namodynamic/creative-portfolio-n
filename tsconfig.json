@@ -24,6 +24,13 @@
     },
     "typeRoots": ["./node_modules/@types", "./types"]
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "slices/Experience/index.tsx"],
+  "include": [
+    "next-env.d.ts",
+    "**/*.ts",
+    "**/*.tsx",
+    ".next/types/**/*.ts",
+    "slices/Experience/index.tsx",
+    "components/GlowCard.tsx"
+, "components/ExperienceSection.tsx"  ],
   "exclude": ["node_modules"]
 }

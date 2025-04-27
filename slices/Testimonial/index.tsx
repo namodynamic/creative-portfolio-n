@@ -135,7 +135,7 @@ const Testimonial = ({ slice }: TestimonialProps): JSX.Element => {
                     {Array.from({ length: 5 }).map((_, i) => (
                       <img
                         key={i}
-                        src="/star.png"
+                        src="/star2.png"
                         alt="star"
                         className="h-4 w-4"
                       />

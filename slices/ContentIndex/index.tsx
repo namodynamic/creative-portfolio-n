@@ -26,6 +26,7 @@ const ContentIndex = async ({
 
   return (
     <Bounded
+    as="section"
       data-slice-type={slice.slice_type}
       data-slice-variation={slice.variation}
     >
@@ -33,7 +34,7 @@ const ContentIndex = async ({
         {slice.primary.heading}
       </Heading>
       {isFilled.richText(slice.primary.description) && (
-        <div className="prose sm:prose-xl prose-sm prose-invert mb-10">
+        <div className="prose sm:prose-xl prose-base prose-invert mb-10">
           <PrismicRichText field={slice.primary.description} />
         </div>
       )}

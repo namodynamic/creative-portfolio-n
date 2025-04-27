@@ -37,7 +37,7 @@
     "react-loader-spinner": "^6.1.6",
     "react-lottie": "^1.2.10",
     "react-toastify": "^10.0.4",
-    "react-vertical-timeline-component": "^3.6.0",
+    "react-vertical-timeline-component": "^3.5.3",
     "tailwind-merge": "^2.6.0",
     "tailwindcss-animate": "^1.0.7",
     "three": "^0.175.0",

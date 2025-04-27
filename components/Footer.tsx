@@ -19,7 +19,7 @@ export default async function Footer() {
             {/* Left Column - About */}
             <div className="z-20 space-y-6">
               <div className="items-center border-l-4 border-purple2 pl-3">
-                <h2 className="text-2xl font-bold text-white">
+                <h2 className="text-2xl font-bold text-slate-300">
                   {settings.data.name}
                 </h2>
                 <p className="text-gray-400">{settings.data.role}</p>

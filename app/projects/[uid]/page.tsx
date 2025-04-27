@@ -25,29 +25,29 @@ export default async function Page(props: { params: Promise<Params> }) {
 
   return (
     <Bounded as="section">
-      <div className="rounded-2xl border border-slate-800 bg-slate-900 px-4 my-10 md:my-20 py-5 md:py-10 md:px-8">
-        <Heading size="md" as="h1">
+      <div className="my-10 rounded-lg border border-slate-800 bg-black/20 px-4 py-5 md:my-20 md:px-8 md:py-10">
+        <Heading size="sm" as="h1">
           {page.data.title}
         </Heading>
         <div className="mt-2 flex flex-wrap gap-2">
           {page.tags.map((tag) => (
-            <span className="text-[14px] font-bold text-white-600" key={tag}>
+            <span className="text-sm font-bold text-slate-600" key={tag}>
               #{tag}
             </span>
           ))}
         </div>
 
-        <div className="mt-2 flex justify-between">
+        <div className="relative z-20 mt-2 flex justify-between">
           <PrismicNextLink
             field={page.data.source_code}
             className={clsx(
-              "group relative flex w-fit items-center justify-center overflow-hidden rounded-md border-2 border-slate-900 bg-slate-50 px-4  py-2 font-bold text-slate-800 transition-transform ease-out  hover:scale-105",
+              "group relative flex w-fit items-center justify-center overflow-hidden rounded-full border-2 border-slate-900 bg-slate-50 px-2 py-2  text-sm font-medium text-slate-800 transition-transform ease-out",
             )}
             aria-label="View source code"
           >
             <span
               className={clsx(
-                "absolute inset-0 z-0 h-full translate-y-9 bg-purple transition-transform  duration-300 ease-in-out group-hover:translate-y-0",
+                "absolute inset-0 z-0 h-full translate-y-8 bg-purple transition-transform  duration-300 ease-in-out group-hover:translate-y-0",
               )}
             />
             <span className="relative flex items-center justify-center gap-2 hover:text-white">
@@ -57,13 +57,13 @@ export default async function Page(props: { params: Promise<Params> }) {
           <PrismicNextLink
             field={page.data.view_live}
             className={clsx(
-              "group relative flex w-fit items-center justify-center overflow-hidden rounded-md border-2 border-slate-900 bg-slate-50 px-4  py-2 font-bold text-slate-800 transition-transform ease-out  hover:scale-105",
+              "group relative flex w-fit items-center justify-center overflow-hidden rounded-full border-2 border-slate-900 bg-slate-50 px-2 py-2  text-sm font-medium text-slate-800 transition-transform ease-out",
             )}
             aria-label="View source code"
           >
             <span
               className={clsx(
-                "absolute inset-0 z-0 h-full translate-y-9 bg-purple transition-transform  duration-300 ease-in-out group-hover:translate-y-0",
+                "absolute inset-0 z-0 h-full translate-y-8 bg-purple transition-transform  duration-300 ease-in-out group-hover:translate-y-0",
               )}
             />
             <span className="relative flex items-center justify-center gap-2 hover:text-white">
@@ -71,10 +71,10 @@ export default async function Page(props: { params: Promise<Params> }) {
             </span>
           </PrismicNextLink>
         </div>
-        <p className="mt-5 border-b border-slate-600 text-sm font-medium text-slate-300">
+        <p className="mt-5 border-b border-slate-800 text-sm font-medium text-slate-300">
           {formattedDate}
         </p>
-        <div className="prose prose-lg prose-invert mt-12 w-full max-w-none md:mt-20">
+        <div className="prose prose-lg prose-invert mt-12 max-w-none md:mt-20">
           <SliceZone slices={page.data.slices} components={components} />
         </div>
       </div>
@@ -82,11 +82,9 @@ export default async function Page(props: { params: Promise<Params> }) {
   );
 }
 
-export async function generateMetadata(
-  props: {
-    params: Promise<Params>;
-  }
-): Promise<Metadata> {
+export async function generateMetadata(props: {
+  params: Promise<Params>;
+}): Promise<Metadata> {
   const params = await props.params;
   const client = createClient();
   const page = await client

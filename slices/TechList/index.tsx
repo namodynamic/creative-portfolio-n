@@ -63,7 +63,7 @@ const TechList = ({ slice }: TechListProps): JSX.Element => {
       className="overflow-hidden"
       ref={component}
     >
-      <Bounded as="div">
+      <Bounded as="section" className="max-md:-mt-20">
         <Heading size="xl" className="mb-8" as="h2">
           {slice.primary.heading}
         </Heading>

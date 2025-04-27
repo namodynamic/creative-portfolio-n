@@ -113,7 +113,7 @@ const Contact = ({ slice }: ContactProps): JSX.Element => {
         data-slice-variation={slice.variation}
         ref={component}
       >
-        <div className=" min-h-screen rounded-2xl border border-slate-800 my-10 md:my-20  bg-gray-950/90">
+        <div className=" min-h-screen rounded-2xl border border-slate-800 my-10 md:my-20 bg-black/20">
           <div className="w-full overflow-hidden rounded-xl shadow-lg">
             <div className="flex items-center justify-between space-x-2 bg-[#818BA6]/75 px-4 py-4">
               <div className="flex space-x-3">
