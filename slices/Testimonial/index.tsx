@@ -125,7 +125,7 @@ const Testimonial = ({ slice }: TestimonialProps): JSX.Element => {
                       <span className="text-md font-bold leading-[1.6] text-white sm:text-xl">
                         {item.name}
                       </span>
-                      <span className=" text-sm font-normal leading-[1.6] text-white-200">
+                      <span className=" text-sm font-normal text-white-200">
                         {item.occupation}
                       </span>
                     </span>

@@ -6,12 +6,12 @@ import emailjs from "@emailjs/browser";
 import Bounded from "@/components/Bounded";
 import { Content } from "@prismicio/client";
 import { SliceComponentProps } from "@prismicio/react";
-// import StarsCanvas from "@/components/Stars";
+import StarsCanvas from "@/components/Stars";
 import { gsap } from "gsap";
 
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { FaLocationArrow } from "react-icons/fa6";
+import { SendHorizonal, Send } from "lucide-react";
 import { Icon } from "@/slices/Approach";
 
 /**
@@ -74,17 +74,15 @@ const Contact = ({ slice }: ContactProps): JSX.Element => {
         emailjsTemplateId,
         {
           from_name: form.name,
-          to_name: "Nnamdi",
           from_email: form.email,
-          to_email: "nnamdi4u09@gamil.com",
           message: form.message,
         },
         emailjsPublicKey,
       )
       .then(() => {
         setIsLoading(false);
-        toast.success("Thank you, I will get back to you shortly.", {
-          position: "bottom-left",
+        toast.success("Thank you for contacting me, I will get back to you shortly.", {
+          position: "bottom-right",
           autoClose: 3000,
           hideProgressBar: true,
           closeOnClick: true,
@@ -137,7 +135,7 @@ const Contact = ({ slice }: ContactProps): JSX.Element => {
                   className="mt-12 flex flex-col space-y-7"
                 >
                   <label className="space-y-3">
-                    <span className="field-label">Full Name</span>
+                    <span className="field-label">Name</span>
                     <input
                       type="text"
                       name="name"
@@ -178,7 +176,7 @@ const Contact = ({ slice }: ContactProps): JSX.Element => {
                     className="field-btn"
                   >
                     {isLoading ? "Sending..." : "Send Message"}
-                    <FaLocationArrow className="inline-block" />
+                    <Send className="h-4 w-3" />
                   </button>
                 </form>
               </div>
@@ -187,7 +185,7 @@ const Contact = ({ slice }: ContactProps): JSX.Element => {
           </div>
         </div>
       </Bounded>
-      {/* <StarsCanvas /> */}
+      <StarsCanvas />
     </>
   );
 };
