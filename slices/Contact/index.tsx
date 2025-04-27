@@ -6,12 +6,12 @@ import emailjs from "@emailjs/browser";
 import Bounded from "@/components/Bounded";
 import { Content } from "@prismicio/client";
 import { SliceComponentProps } from "@prismicio/react";
-import StarsCanvas from "@/components/Stars";
+// import StarsCanvas from "@/components/Stars";
 import { gsap } from "gsap";
 
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { SendHorizonal, Send } from "lucide-react";
+import { Send } from "lucide-react";
 import { Icon } from "@/slices/Approach";
 
 /**
@@ -185,7 +185,7 @@ const Contact = ({ slice }: ContactProps): JSX.Element => {
           </div>
         </div>
       </Bounded>
-      <StarsCanvas />
+      {/* <StarsCanvas /> */}
     </>
   );
 };
