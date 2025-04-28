@@ -154,10 +154,10 @@ export default async function Footer() {
             reserved.
           </p>
         </div>
-        <div className="absolute bottom-0 left-0 z-10">
+        <div className="absolute bottom-0 left-0 z-10 hidden md:block">
           <img src="/bg.png" alt="background" />
         </div>
-        <div className="absolute bottom-0 right-0 z-10 max-md:hidden">
+        <div className="absolute bottom-0 right-0 z-10 hidden md:block">
           <img src="/bg.png" alt="background" />
         </div>
       </Bounded>

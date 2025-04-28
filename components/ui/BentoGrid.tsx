@@ -74,7 +74,7 @@ export const BentoGridItem = ({
   return (
     <div
       className={cn(
-        "group/bento relative row-span-1 flex flex-col justify-between space-y-4 overflow-hidden rounded-3xl border border-white/[0.1] shadow-none shadow-input transition duration-200 hover:shadow-xl",
+        "group/bento relative row-span-1 flex flex-col justify-between space-y-4 overflow-hidden rounded-xl md:rounded-3xl border border-white/[0.1] shadow-none shadow-input transition duration-200 hover:shadow-xl",
         className,
       )}
       style={{
@@ -96,7 +96,7 @@ export const BentoGridItem = ({
           )}
         </div>
         <div
-          className={`absolute -bottom-5 right-0 ${
+          className={`absolute bottom-0 right-0 ${
             id === 5 && "w-full opacity-80"
           } `}
         >
