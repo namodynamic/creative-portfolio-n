@@ -20,7 +20,7 @@ export type TestimonialProps = SliceComponentProps<Content.TestimonialSlice>;
 const Testimonial = ({ slice }: TestimonialProps): JSX.Element => {
   const InfiniteMovingCards = ({
     direction = "left",
-    speed = "fast",
+    speed = "normal",
     pauseOnHover = true,
     className,
   }: {
@@ -89,15 +89,14 @@ const Testimonial = ({ slice }: TestimonialProps): JSX.Element => {
         <ul
           ref={scrollerRef}
           className={cn(
-            " flex w-max min-w-full shrink-0 flex-nowrap gap-16 py-4",
+            " flex w-max min-w-full shrink-0 flex-nowrap gap-10 py-4",
             start && "animate-scroll ",
             pauseOnHover && "hover:[animation-play-state:paused]",
           )}
         >
           {slice.items.map((item, idx) => (
             <li
-              className="relative w-[90vw] max-w-full flex-shrink-0 rounded-2xl border
-               border-b-0 border-slate-800 p-5 md:w-[60vw] md:p-16"
+              className="relative w-[90vw] max-w-full shrink-0 rounded-2xl border border-b-0 border-slate-800 p-5 md:p-16 md:w-[60vw]"
               style={{
                 background: "rgb(4,7,29)",
                 backgroundColor:
@@ -118,7 +117,7 @@ const Testimonial = ({ slice }: TestimonialProps): JSX.Element => {
                     <div className="me-3">
                       <PrismicNextImage
                         field={item.avatar}
-                        className="w-10 rounded-full md:w-[50px]"
+                        className="w-10 rounded-full h-10 object-cover sm:w-12 sm:h-12"
                       />
                     </div>
                     <span className="flex flex-col gap-1">
