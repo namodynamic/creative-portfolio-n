@@ -33,7 +33,7 @@ const Certifications = ({ slice, index }: CertificationsProps): JSX.Element => {
         {slice.primary.heading}
       </Heading>
 
-      <div className="grid grid-cols-2 items-center justify-center gap-5 pt-12 max-sm:grid-cols-1 lg:grid-cols-3">
+      <div className="grid grid-cols-2 gap-5 pt-12 max-sm:grid-cols-1 lg:grid-cols-3">
         {slice.items.map((item, index) => {
           const backgroundUrl = isFilled.image(item.background_image)
             ? asImageSrc(item.background_image, { w: 800, q: 80 })
@@ -47,9 +47,8 @@ const Certifications = ({ slice, index }: CertificationsProps): JSX.Element => {
             <div
               key={index}
               className={cn(
-                "card group relative mx-auto flex w-full cursor-pointer flex-col justify-end overflow-hidden rounded-xl border border-neutral-800 p-4 shadow-xl sm:h-72",
-                "hover:after:absolute hover:after:inset-0 hover:after:bg-black hover:after:opacity-50 hover:after:content-['']",
-                "transition-all duration-500",
+                "card group relative aspect-[16/11] w-full cursor-pointer overflow-hidden rounded-2xl border border-neutral-800 shadow-md shadow-white/20 transition-all duration-500",
+                "hover:after:absolute hover:after:inset-0 hover:after:rounded-2xl hover:after:bg-black/60 hover:after:transition-all hover:after:duration-500 hover:after:content-['']",
               )}
               style={{
                 backgroundImage: backgroundUrl
@@ -70,34 +69,48 @@ const Certifications = ({ slice, index }: CertificationsProps): JSX.Element => {
                 }
               }}
             >
-              <div className="relative z-50 space-y-4 p-6">
-                <div className="flex items-center justify-between transition-opacity duration-300 group-hover:opacity-0">
-                  <h3 className="relative text-lg font-semibold leading-tight text-white">
-                    {item.title}
-                  </h3>
-                  <Badge variant="secondary" className="px-2 py-1 text-xs">
+              <div className="absolute inset-0 z-0 bg-black/60  transition duration-500 group-hover:bg-black/10" />
+
+              <div className="relative z-10 flex h-full flex-col justify-between p-5 text-white">
+                <div className="flex items-center justify-between transition-opacity duration-500 group-hover:opacity-0">
+                  <img
+                    src="/ribbon.png"
+                    alt="Certification Icon"
+                    className="h-10 w-10 rounded-sm object-contain p-1"
+                  />
+                  <Badge
+                    variant="secondary"
+                    className="bg-black/40 px-2 py-1 text-xs text-white backdrop-blur hover:bg-black/50"
+                  >
                     {item.time_period}
                   </Badge>
                 </div>
-                <div className="line-clamp-3 text-sm text-slate-300 transition-opacity duration-300 group-hover:opacity-0">
-                  <PrismicRichText field={item.description} />
+
+                <div className="mt-6 space-y-2 transition-opacity duration-500 group-hover:opacity-0">
+                  <h3 className="text-xl font-semibold leading-tight tracking-wide">
+                    {item.title}
+                  </h3>
+                  <div className="line-clamp-3 text-sm opacity-80">
+                    <PrismicRichText field={item.description} />
+                  </div>
                 </div>
 
-                <div className="flex items-center justify-between pt-2">
-                  <span className="text-xs text-muted-foreground transition-opacity duration-300 group-hover:opacity-0">
+                <div className="mt-4 flex items-center justify-between text-xs">
+                  <span className="opacity-70 transition-opacity duration-500 group-hover:opacity-0">
                     Issued by {item.issuer}
                   </span>
                   <Button
                     size="sm"
                     asChild
-                    className="bg-transparent text-gray-400 hover:border-gray-800 hover:bg-black/20 hover:text-white"
+                    variant="ghost"
+                    className="text-gray-300 hover:bg-black/20 hover:text-white"
                   >
                     <PrismicNextLink
                       field={item.credential_url}
-                      className="flex items-center justify-center gap-2"
+                      className="flex items-center gap-2"
                     >
                       View Credential
-                      <ExternalLink className="inline h-4 w-4" />
+                      <ExternalLink className="h-4 w-4" />
                     </PrismicNextLink>
                   </Button>
                 </div>
