@@ -44,7 +44,7 @@
     "three-globe": "^2.42.4"
   },
   "devDependencies": {
-    "@slicemachine/adapter-next": "^0.3.35",
+    "@slicemachine/adapter-next": "^0.3.75",
     "@tailwindcss/typography": "^0.5.10",
     "@types/node": "^20",
     "@types/react": "19.1.2",
@@ -56,7 +56,7 @@
     "postcss": "^8",
     "prettier": "^3.2.4",
     "prettier-plugin-tailwindcss": "^0.5.11",
-    "slice-machine-ui": "^1.24.0",
+    "slice-machine-ui": "^2.15.2",
     "tailwindcss": "^3.3.0",
     "typescript": "^5"
   },
