@@ -25,7 +25,7 @@ const config: Config = {
   	extend: {
   		colors: {
   			black: {
-				'50': '#1c1c21',
+  				'50': '#1c1c21',
   				'100': '#000319',
   				'200': 'rgba(17, 25, 40, 0.75)',
   				'300': 'rgba(255, 255, 255, 0.125)',
@@ -44,10 +44,11 @@ const config: Config = {
   			},
   			blue: {
   				'100': '#E4ECFF',
-				'200': '#1E293B',
+  				'200': '#1E293B',
+  				'850': '#0a0e29'
   			},
   			purple: '#7C3AED',
-			purple2: '#6D28D9',
+  			purple2: '#6D28D9',
   			border: 'hsl(var(--border))',
   			input: 'hsl(var(--input))',
   			ring: 'hsl(var(--ring))',
@@ -81,10 +82,10 @@ const config: Config = {
   				DEFAULT: 'hsl(var(--card))',
   				foreground: 'hsl(var(--card-foreground))'
   			},
-			navy: {
-				900: '#020b1c',
-				800: '#051736',
-			  },
+  			navy: {
+  				'800': '#051736',
+  				'900': '#020b1c'
+  			}
   		},
   		borderRadius: {
   			lg: 'var(--radius)',
@@ -164,10 +165,14 @@ const config: Config = {
   					transform: 'translate(calc(-50% - 0.5rem))'
   				}
   			},
-			move: {
-				"0%": { transform: "translateX(-200px)" },
-				"100%": { transform: "translateX(200px)" },
-			  },
+  			move: {
+  				'0%': {
+  					transform: 'translateX(-200px)'
+  				},
+  				'100%': {
+  					transform: 'translateX(200px)'
+  				}
+  			}
   		},
   		animation: {
   			'accordion-down': 'accordion-down 0.2s ease-out',

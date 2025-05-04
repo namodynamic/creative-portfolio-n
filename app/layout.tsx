@@ -31,7 +31,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className="bg-black-100">
+    <html lang="en" className="bg-black-100" suppressHydrationWarning data-lt-installed="true">
       <body className={clsx(urbanist.className, "relative")}>
         <div className="absolute right-0 top-0 z-10">
           <img src="/bg.png" alt="background" />

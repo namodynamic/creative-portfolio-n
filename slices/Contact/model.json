@@ -25,9 +25,38 @@
             "label": "Sub Heading",
             "placeholder": ""
           }
+        },
+        "description": {
+          "type": "Text",
+          "config": {
+            "label": "Description",
+            "placeholder": ""
+          }
+        },
+        "location": {
+          "type": "Text",
+          "config": {
+            "label": "Location",
+            "placeholder": ""
+          }
+        },
+        "contact_email": {
+          "type": "Text",
+          "config": {
+            "label": "Contact Email",
+            "placeholder": ""
+          }
         }
       },
-      "items": {}
+      "items": {
+        "services": {
+          "type": "Text",
+          "config": {
+            "label": "Services",
+            "placeholder": ""
+          }
+        }
+      }
     }
   ]
 }

@@ -1058,6 +1058,51 @@ export interface ContactSliceDefaultPrimary {
    * - **Documentation**: https://prismic.io/docs/field#key-text
    */
   sub_heading: prismic.KeyTextField;
+
+  /**
+   * Description field in *Contact → Default → Primary*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: contact.default.primary.description
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  description: prismic.KeyTextField;
+
+  /**
+   * Location field in *Contact → Default → Primary*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: contact.default.primary.location
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  location: prismic.KeyTextField;
+
+  /**
+   * Contact Email field in *Contact → Default → Primary*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: contact.default.primary.contact_email
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  contact_email: prismic.KeyTextField;
+}
+
+/**
+ * Primary content in *Contact → Items*
+ */
+export interface ContactSliceDefaultItem {
+  /**
+   * Services field in *Contact → Items*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: contact.items[].services
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  services: prismic.KeyTextField;
 }
 
 /**
@@ -1070,7 +1115,7 @@ export interface ContactSliceDefaultPrimary {
 export type ContactSliceDefault = prismic.SharedSliceVariation<
   "default",
   Simplify<ContactSliceDefaultPrimary>,
-  never
+  Simplify<ContactSliceDefaultItem>
 >;
 
 /**
@@ -1935,6 +1980,7 @@ declare module "@prismicio/client" {
       CertificationsSliceDefault,
       ContactSlice,
       ContactSliceDefaultPrimary,
+      ContactSliceDefaultItem,
       ContactSliceVariation,
       ContactSliceDefault,
       ContentIndexSlice,

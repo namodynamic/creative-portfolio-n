@@ -12,8 +12,37 @@
 				"__TYPE__": "FieldContent",
 				"value": "back",
 				"type": "Text"
+			},
+			"description": {
+				"__TYPE__": "FieldContent",
+				"value": "purple",
+				"type": "Text"
+			},
+			"location": {
+				"__TYPE__": "FieldContent",
+				"value": "attempt",
+				"type": "Text"
+			},
+			"contact_email": {
+				"__TYPE__": "FieldContent",
+				"value": "someone",
+				"type": "Text"
 			}
 		},
-		"items": []
+		"items": [
+			{
+				"__TYPE__": "GroupItemContent",
+				"value": [
+					[
+						"services",
+						{
+							"__TYPE__": "FieldContent",
+							"value": "took",
+							"type": "Text"
+						}
+					]
+				]
+			}
+		]
 	}
 ]
