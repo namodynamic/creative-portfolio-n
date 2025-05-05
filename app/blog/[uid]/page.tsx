@@ -21,7 +21,7 @@ export default async function Page(props: { params: Promise<Params> }) {
 
   return (
     <Bounded as="section">
-      <div className="rounded-lg border border-slate-800 bg-black/20 justify-center items-center px-4 md:py-10 py-5 my-10 md:px-8 md:my-20">
+      <div className="rounded-lg border-[0.5px] border-slate-800 bg-blue-850/50 justify-center items-center px-4 md:py-10 py-5 my-10 md:px-8 md:my-20">
         <Heading size="sm" as="h1">{page.data.title}</Heading>
         <div className="flex gap-2 flex-wrap mt-2 text-sm font-bold text-slate-500">
           {page.tags.map((tag) => (

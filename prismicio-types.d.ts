@@ -239,6 +239,7 @@ export type HomepageDocument<Lang extends string = string> =
   >;
 
 type PageDocumentDataSlicesSlice =
+  | FaqSlice
   | CertificationsSlice
   | TestimonialSlice
   | ContactSlice
@@ -1036,6 +1037,31 @@ export type CertificationsSlice = prismic.SharedSlice<
 >;
 
 /**
+ * Item in *Contact → Default → Primary → Faq*
+ */
+export interface ContactSliceDefaultPrimaryFaqItem {
+  /**
+   * Question field in *Contact → Default → Primary → Faq*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: contact.default.primary.faq[].question
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  question: prismic.KeyTextField;
+
+  /**
+   * Answer field in *Contact → Default → Primary → Faq*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: contact.default.primary.faq[].answer
+   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+   */
+  answer: prismic.RichTextField;
+}
+
+/**
  * Primary content in *Contact → Default → Primary*
  */
 export interface ContactSliceDefaultPrimary {
@@ -1088,6 +1114,56 @@ export interface ContactSliceDefaultPrimary {
    * - **Documentation**: https://prismic.io/docs/field#key-text
    */
   contact_email: prismic.KeyTextField;
+
+  /**
+   * CTA Title field in *Contact → Default → Primary*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: contact.default.primary.cta_title
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  cta_title: prismic.KeyTextField;
+
+  /**
+   * CTA Intro field in *Contact → Default → Primary*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: contact.default.primary.cta_intro
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  cta_intro: prismic.KeyTextField;
+
+  /**
+   * Faq Title field in *Contact → Default → Primary*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: contact.default.primary.faq_title
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  faq_title: prismic.KeyTextField;
+
+  /**
+   * Faq Intro field in *Contact → Default → Primary*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: contact.default.primary.faq_intro
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  faq_intro: prismic.KeyTextField;
+
+  /**
+   * Faq field in *Contact → Default → Primary*
+   *
+   * - **Field Type**: Group
+   * - **Placeholder**: *None*
+   * - **API ID Path**: contact.default.primary.faq[]
+   * - **Documentation**: https://prismic.io/docs/field#group
+   */
+  faq: prismic.GroupField<Simplify<ContactSliceDefaultPrimaryFaqItem>>;
 }
 
 /**
@@ -1481,6 +1557,245 @@ export type ExperienceSlice = prismic.SharedSlice<
   "experience",
   ExperienceSliceVariation
 >;
+
+/**
+ * Item in *Faq → Default → Primary → Faq Categories*
+ */
+export interface FaqSliceDefaultPrimaryFaqCategoriesItem {
+  /**
+   * Category ID field in *Faq → Default → Primary → Faq Categories*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: e.g. services, process, pricing, support
+   * - **API ID Path**: faq.default.primary.faq_categories[].category_id
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  category_id: prismic.KeyTextField;
+
+  /**
+   * Category Label field in *Faq → Default → Primary → Faq Categories*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: e.g. Services, Process, Pricing, Support
+   * - **API ID Path**: faq.default.primary.faq_categories[].category_label
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  category_label: prismic.KeyTextField;
+}
+
+/**
+ * Item in *Faq → Default → Primary → Services*
+ */
+export interface FaqSliceDefaultPrimaryServicesItem {
+  /**
+   * Question field in *Faq → Default → Primary → Services*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: faq.default.primary.services[].question
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  question: prismic.KeyTextField;
+
+  /**
+   * Answer field in *Faq → Default → Primary → Services*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: faq.default.primary.services[].answer
+   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+   */
+  answer: prismic.RichTextField;
+}
+
+/**
+ * Item in *Faq → Default → Primary → Process*
+ */
+export interface FaqSliceDefaultPrimaryProcessItem {
+  /**
+   * Question field in *Faq → Default → Primary → Process*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: faq.default.primary.process[].question
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  question: prismic.KeyTextField;
+
+  /**
+   * Answer field in *Faq → Default → Primary → Process*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: faq.default.primary.process[].answer
+   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+   */
+  answer: prismic.RichTextField;
+}
+
+/**
+ * Item in *Faq → Default → Primary → Pricing*
+ */
+export interface FaqSliceDefaultPrimaryPricingItem {
+  /**
+   * Question field in *Faq → Default → Primary → Pricing*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: faq.default.primary.pricing[].question
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  question: prismic.KeyTextField;
+
+  /**
+   * Answer field in *Faq → Default → Primary → Pricing*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: faq.default.primary.pricing[].answer
+   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+   */
+  answer: prismic.RichTextField;
+}
+
+/**
+ * Item in *Faq → Default → Primary → Support*
+ */
+export interface FaqSliceDefaultPrimarySupportItem {
+  /**
+   * Question field in *Faq → Default → Primary → Support*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: faq.default.primary.support[].question
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  question: prismic.KeyTextField;
+
+  /**
+   * Answer field in *Faq → Default → Primary → Support*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: faq.default.primary.support[].answer
+   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+   */
+  answer: prismic.RichTextField;
+}
+
+/**
+ * Primary content in *Faq → Default → Primary*
+ */
+export interface FaqSliceDefaultPrimary {
+  /**
+   * Heading field in *Faq → Default → Primary*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: faq.default.primary.heading
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  heading: prismic.KeyTextField;
+
+  /**
+   * Sub Heading field in *Faq → Default → Primary*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: faq.default.primary.sub_heading
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  sub_heading: prismic.KeyTextField;
+
+  /**
+   * Intro field in *Faq → Default → Primary*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: faq.default.primary.intro
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  intro: prismic.KeyTextField;
+
+  /**
+   * Faq Categories field in *Faq → Default → Primary*
+   *
+   * - **Field Type**: Group
+   * - **Placeholder**: *None*
+   * - **API ID Path**: faq.default.primary.faq_categories[]
+   * - **Documentation**: https://prismic.io/docs/field#group
+   */
+  faq_categories: prismic.GroupField<
+    Simplify<FaqSliceDefaultPrimaryFaqCategoriesItem>
+  >;
+
+  /**
+   * Services field in *Faq → Default → Primary*
+   *
+   * - **Field Type**: Group
+   * - **Placeholder**: *None*
+   * - **API ID Path**: faq.default.primary.services[]
+   * - **Documentation**: https://prismic.io/docs/field#group
+   */
+  services: prismic.GroupField<Simplify<FaqSliceDefaultPrimaryServicesItem>>;
+
+  /**
+   * Process field in *Faq → Default → Primary*
+   *
+   * - **Field Type**: Group
+   * - **Placeholder**: *None*
+   * - **API ID Path**: faq.default.primary.process[]
+   * - **Documentation**: https://prismic.io/docs/field#group
+   */
+  process: prismic.GroupField<Simplify<FaqSliceDefaultPrimaryProcessItem>>;
+
+  /**
+   * Pricing field in *Faq → Default → Primary*
+   *
+   * - **Field Type**: Group
+   * - **Placeholder**: *None*
+   * - **API ID Path**: faq.default.primary.pricing[]
+   * - **Documentation**: https://prismic.io/docs/field#group
+   */
+  pricing: prismic.GroupField<Simplify<FaqSliceDefaultPrimaryPricingItem>>;
+
+  /**
+   * Support field in *Faq → Default → Primary*
+   *
+   * - **Field Type**: Group
+   * - **Placeholder**: *None*
+   * - **API ID Path**: faq.default.primary.support[]
+   * - **Documentation**: https://prismic.io/docs/field#group
+   */
+  support: prismic.GroupField<Simplify<FaqSliceDefaultPrimarySupportItem>>;
+}
+
+/**
+ * Default variation for Faq Slice
+ *
+ * - **API ID**: `default`
+ * - **Description**: Default
+ * - **Documentation**: https://prismic.io/docs/slice
+ */
+export type FaqSliceDefault = prismic.SharedSliceVariation<
+  "default",
+  Simplify<FaqSliceDefaultPrimary>,
+  never
+>;
+
+/**
+ * Slice variation for *Faq*
+ */
+type FaqSliceVariation = FaqSliceDefault;
+
+/**
+ * Faq Shared Slice
+ *
+ * - **API ID**: `faq`
+ * - **Description**: Faq
+ * - **Documentation**: https://prismic.io/docs/slice
+ */
+export type FaqSlice = prismic.SharedSlice<"faq", FaqSliceVariation>;
 
 /**
  * Primary content in *FeaturedProjects → Default → Primary*
@@ -1979,6 +2294,7 @@ declare module "@prismicio/client" {
       CertificationsSliceVariation,
       CertificationsSliceDefault,
       ContactSlice,
+      ContactSliceDefaultPrimaryFaqItem,
       ContactSliceDefaultPrimary,
       ContactSliceDefaultItem,
       ContactSliceVariation,
@@ -2001,6 +2317,15 @@ declare module "@prismicio/client" {
       ExperienceSliceDefaultItem,
       ExperienceSliceVariation,
       ExperienceSliceDefault,
+      FaqSlice,
+      FaqSliceDefaultPrimaryFaqCategoriesItem,
+      FaqSliceDefaultPrimaryServicesItem,
+      FaqSliceDefaultPrimaryProcessItem,
+      FaqSliceDefaultPrimaryPricingItem,
+      FaqSliceDefaultPrimarySupportItem,
+      FaqSliceDefaultPrimary,
+      FaqSliceVariation,
+      FaqSliceDefault,
       FeaturedProjectsSlice,
       FeaturedProjectsSliceDefaultPrimary,
       FeaturedProjectsSliceDefaultItem,

@@ -11,6 +11,7 @@ export const components = {
   cta: dynamic(() => import("./Cta")),
   education: dynamic(() => import("./Education")),
   experience: dynamic(() => import("./Experience")),
+  faq: dynamic(() => import("./Faq")),
   featured_projects: dynamic(() => import("./FeaturedProjects")),
   hero: dynamic(() => import("./Hero")),
   image_block: dynamic(() => import("./ImageBlock")),

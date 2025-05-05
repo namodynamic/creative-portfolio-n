@@ -1,0 +1,178 @@
+[
+	{
+		"__TYPE__": "SharedSliceContent",
+		"variation": "default",
+		"primary": {
+			"faq_categories": {
+				"__TYPE__": "GroupContentType",
+				"value": [
+					{
+						"__TYPE__": "GroupItemContent",
+						"value": [
+							[
+								"category_id",
+								{
+									"__TYPE__": "FieldContent",
+									"value": "center",
+									"type": "Text"
+								}
+							],
+							[
+								"category_label",
+								{
+									"__TYPE__": "FieldContent",
+									"value": "from",
+									"type": "Text"
+								}
+							]
+						]
+					}
+				]
+			},
+			"services": {
+				"__TYPE__": "GroupContentType",
+				"value": [
+					{
+						"__TYPE__": "GroupItemContent",
+						"value": [
+							[
+								"question",
+								{
+									"__TYPE__": "FieldContent",
+									"value": "sides",
+									"type": "Text"
+								}
+							],
+							[
+								"answer",
+								{
+									"__TYPE__": "StructuredTextContent",
+									"value": [
+										{
+											"type": "paragraph",
+											"content": {
+												"text": "Culpa irure sit do ipsum nostrud."
+											}
+										}
+									]
+								}
+							]
+						]
+					}
+				]
+			},
+			"process": {
+				"__TYPE__": "GroupContentType",
+				"value": [
+					{
+						"__TYPE__": "GroupItemContent",
+						"value": [
+							[
+								"question",
+								{
+									"__TYPE__": "FieldContent",
+									"value": "arrange",
+									"type": "Text"
+								}
+							],
+							[
+								"answer",
+								{
+									"__TYPE__": "StructuredTextContent",
+									"value": [
+										{
+											"type": "paragraph",
+											"content": {
+												"text": "Id id excepteur anim occaecat dolore Lorem do ullamco pariatur ullamco cupidatat cupidatat. Aute aliquip eu excepteur aute velit anim irure. Tempor ad mollit dolore."
+											}
+										}
+									]
+								}
+							]
+						]
+					}
+				]
+			},
+			"support": {
+				"__TYPE__": "GroupContentType",
+				"value": [
+					{
+						"__TYPE__": "GroupItemContent",
+						"value": [
+							[
+								"question",
+								{
+									"__TYPE__": "FieldContent",
+									"value": "cage",
+									"type": "Text"
+								}
+							],
+							[
+								"answer",
+								{
+									"__TYPE__": "StructuredTextContent",
+									"value": [
+										{
+											"type": "paragraph",
+											"content": {
+												"text": "Officia aute enim proident amet voluptate quis velit anim quis culpa incididunt consequat occaecat."
+											}
+										}
+									]
+								}
+							]
+						]
+					}
+				]
+			},
+			"pricing": {
+				"__TYPE__": "GroupContentType",
+				"value": [
+					{
+						"__TYPE__": "GroupItemContent",
+						"value": [
+							[
+								"question",
+								{
+									"__TYPE__": "FieldContent",
+									"value": "continent",
+									"type": "Text"
+								}
+							],
+							[
+								"answer",
+								{
+									"__TYPE__": "StructuredTextContent",
+									"value": [
+										{
+											"type": "paragraph",
+											"content": {
+												"text": "Proident irure incididunt laboris excepteur occaecat do laboris et ullamco pariatur anim. Anim eu irure sint cupidatat laboris reprehenderit culpa exercitation nostrud."
+											}
+										}
+									]
+								}
+							]
+						]
+					}
+				]
+			},
+			"heading": {
+				"__TYPE__": "FieldContent",
+				"value": "belt",
+				"type": "Text"
+			},
+			"sub_heading": {
+				"__TYPE__": "FieldContent",
+				"value": "him",
+				"type": "Text"
+			},
+			"intro": {
+				"__TYPE__": "FieldContent",
+				"value": "anyone",
+				"type": "Text"
+			}
+		},
+		"items": []
+	}
+]
