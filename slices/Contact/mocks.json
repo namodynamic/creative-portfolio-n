@@ -27,6 +27,58 @@
 				"__TYPE__": "FieldContent",
 				"value": "someone",
 				"type": "Text"
+			},
+			"faq": {
+				"__TYPE__": "GroupContentType",
+				"value": [
+					{
+						"__TYPE__": "GroupItemContent",
+						"value": [
+							[
+								"question",
+								{
+									"__TYPE__": "FieldContent",
+									"value": "dollar",
+									"type": "Text"
+								}
+							],
+							[
+								"answer",
+								{
+									"__TYPE__": "StructuredTextContent",
+									"value": [
+										{
+											"type": "paragraph",
+											"content": {
+												"text": "Eu adipisicing tempor excepteur eiusmod esse duis cillum est velit eiusmod pariatur."
+											}
+										}
+									]
+								}
+							]
+						]
+					}
+				]
+			},
+			"cta_title": {
+				"__TYPE__": "FieldContent",
+				"value": "stopped",
+				"type": "Text"
+			},
+			"cta_intro": {
+				"__TYPE__": "FieldContent",
+				"value": "thirty",
+				"type": "Text"
+			},
+			"faq_title": {
+				"__TYPE__": "FieldContent",
+				"value": "happened",
+				"type": "Text"
+			},
+			"faq_intro": {
+				"__TYPE__": "FieldContent",
+				"value": "sense",
+				"type": "Text"
 			}
 		},
 		"items": [

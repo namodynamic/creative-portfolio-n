@@ -22,6 +22,7 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
+import { PrismicRichText } from "@prismicio/react";
 
 /**
  * Props for `Contact`.
@@ -287,7 +288,7 @@ const Contact = ({ slice }: ContactProps): JSX.Element => {
                         <Mail className="h-5 w-5" />
                       </div>
                     </div>
-                    <div className="ml-3 -mt-1">
+                    <div className="-mt-1 ml-3">
                       <h3 className="text-sm font-medium text-gray-300">
                         Email
                       </h3>
@@ -308,11 +309,13 @@ const Contact = ({ slice }: ContactProps): JSX.Element => {
                         <MapPin className="h-5 w-5" />
                       </div>
                     </div>
-                    <div className="ml-3 -mt-1">
+                    <div className="-mt-1 ml-3">
                       <h3 className="text-sm font-medium text-gray-300">
                         Location
                       </h3>
-                      <p className="mt-1 text-gray-400">{slice.primary.location}</p>
+                      <p className="mt-1 text-gray-400">
+                        {slice.primary.location}
+                      </p>
                     </div>
                   </div>
 
@@ -322,7 +325,7 @@ const Contact = ({ slice }: ContactProps): JSX.Element => {
                         <Clock className="h-5 w-5" />
                       </div>
                     </div>
-                    <div className="ml-3 -mt-1">
+                    <div className="-mt-1 ml-3">
                       <h3 className="text-sm font-medium text-gray-300">
                         Response Time
                       </h3>
@@ -373,15 +376,12 @@ const Contact = ({ slice }: ContactProps): JSX.Element => {
               <div className="contact-card rounded-lg border-[0.5px] border-gray-800 bg-blue-850/50 p-6 shadow-lg backdrop-blur-sm">
                 <h2 className="mb-4 text-xl font-bold text-white">Services</h2>
                 <ul className="space-y-3">
-                 {slice.items.map((item, index) => (
-                   <li key={index} className="flex items-center">
-                   <span className="mr-2 h-2 w-2 rounded-full bg-indigo-500"></span>
-                   <span className="text-gray-300">
-                    {item.services}
-                   </span>
+                  {slice.items.map((item, index) => (
+                    <li key={index} className="flex items-center">
+                      <span className="mr-2 h-2 w-2 rounded-full bg-indigo-500"></span>
+                      <span className="text-gray-300">{item.services}</span>
                     </li>
-                 ))}
-
+                  ))}
                 </ul>
               </div>
             </div>
@@ -391,11 +391,10 @@ const Contact = ({ slice }: ContactProps): JSX.Element => {
           <div className="contact-card mt-20">
             <div className="mb-10 text-center">
               <h2 className="text-3xl font-bold text-white">
-                Frequently Asked Questions
+                {slice.primary.faq_title}
               </h2>
               <p className="mt-4 text-gray-300">
-                Find quick answers to common questions about my services,
-                process, and terms.
+                {slice.primary.faq_intro}
               </p>
             </div>
 
@@ -404,43 +403,20 @@ const Contact = ({ slice }: ContactProps): JSX.Element => {
               collapsible
               className="mx-auto max-w-3xl space-y-4"
             >
-              <AccordionItem
-                value="item-1"
-                className="rounded-lg border border-gray-800 bg-blue-850/50 px-6 py-2 text-white shadow-lg backdrop-blur-sm"
-              >
-                <AccordionTrigger className="text-lg font-medium">
-                  Response Times & Availability
-                </AccordionTrigger>
-                <AccordionContent>
-                  Yes. It adheres to the WAI-ARIA design pattern.
-                </AccordionContent>
-              </AccordionItem>
-
-              <AccordionItem
-                value="item-2"
-                className="rounded-lg border border-gray-800 bg-blue-850/50 px-6 py-2 text-white shadow-lg backdrop-blur-sm"
-              >
-                <AccordionTrigger className="text-lg font-medium">
-                  Pricing & Payment Terms
-                </AccordionTrigger>
-                <AccordionContent>
-                  Yes. It comes with default styles that matches the other
-                  components&apos; aesthetic.
-                </AccordionContent>
-              </AccordionItem>
-
-              <AccordionItem
-                value="item-3"
-                className="rounded-lg border border-gray-800 bg-blue-850/50 px-6 py-2 text-white shadow-lg backdrop-blur-sm"
-              >
-                <AccordionTrigger className="text-lg font-medium">
-                  Technology Stack & Services
-                </AccordionTrigger>
-                <AccordionContent>
-                  Yes. It&apos;s animated by default, but you can disable it if
-                  you prefer.
-                </AccordionContent>
-              </AccordionItem>
+              {slice.primary.faq.map((item, index) => (
+                <AccordionItem
+                  value={`item-${index + 1}`}
+                  key={index}
+                  className="rounded-lg border border-gray-800 bg-blue-850/50 px-6 py-2 text-white shadow-lg backdrop-blur-sm"
+                >
+                  <AccordionTrigger className="text-lg font-medium">
+                    {item.question}
+                  </AccordionTrigger>
+                  <AccordionContent className="prose prose-base prose-invert">
+                    <PrismicRichText field={item.answer} />
+                  </AccordionContent>
+                </AccordionItem>
+              ))}
             </Accordion>
 
             <div className="mt-8 text-center">
@@ -458,11 +434,10 @@ const Contact = ({ slice }: ContactProps): JSX.Element => {
           <div className="contact-card mt-20 rounded-lg border border-gray-800 bg-blue-850/70 p-6 shadow-lg backdrop-blur-sm sm:p-12">
             <div className="text-center">
               <h2 className="mb-4 text-3xl font-bold text-white">
-                Ready to Get Started?
+                {slice.primary.cta_title}
               </h2>
               <p className="mx-auto mb-8 max-w-2xl text-gray-300">
-                Let&apos;s discuss how I can help bring your project to life
-                with clean, efficient, and scalable code.
+               {slice.primary.cta_intro}
               </p>
               <Link href="#">
                 <MagicButton

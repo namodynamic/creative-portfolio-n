@@ -34,8 +34,6 @@ export default async function Footer() {
                     field={settings.data.github_link || ""}
                     className="text-gray-400 transition-colors hover:text-white "
                     aria-label={settings.data.name + " on GitHub"}
-                    target="_blank"
-                    rel="noopener noreferrer"
                   >
                     <FaGithub size={20} />
                     <span className="sr-only">GitHub</span>
@@ -117,7 +115,7 @@ export default async function Footer() {
                   </li>
                   <li>
                     <Link
-                      href="#"
+                      href="faq"
                       className="text-gray-400 transition-colors hover:text-white"
                     >
                       FAQ

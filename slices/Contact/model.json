@@ -46,6 +46,59 @@
             "label": "Contact Email",
             "placeholder": ""
           }
+        },
+        "cta_title": {
+          "type": "Text",
+          "config": {
+            "label": "CTA Title",
+            "placeholder": ""
+          }
+        },
+        "cta_intro": {
+          "type": "Text",
+          "config": {
+            "label": "CTA Intro",
+            "placeholder": ""
+          }
+        },
+        "faq_title": {
+          "type": "Text",
+          "config": {
+            "label": "Faq Title",
+            "placeholder": ""
+          }
+        },
+        "faq_intro": {
+          "type": "Text",
+          "config": {
+            "label": "Faq Intro",
+            "placeholder": ""
+          }
+        },
+        "faq": {
+          "type": "Group",
+          "config": {
+            "label": "Faq",
+            "repeat": true,
+            "fields": {
+              "question": {
+                "type": "Text",
+                "config": {
+                  "label": "Question",
+                  "placeholder": ""
+                }
+              },
+              "answer": {
+                "type": "StructuredText",
+                "config": {
+                  "label": "Answer",
+                  "placeholder": "",
+                  "allowTargetBlank": true,
+                  "multi": "paragraph,preformatted,heading1,heading2,heading3,heading4,heading5,heading6,strong,em,hyperlink,image,embed,list-item,o-list-item,rtl"
+                }
+              }
+            }
+          }
         }
       },
       "items": {
