@@ -48,7 +48,7 @@ const Certifications = ({ slice, index }: CertificationsProps): JSX.Element => {
               key={index}
               className={cn(
                 "card group relative aspect-[16/11] w-full cursor-pointer overflow-hidden rounded-2xl border border-neutral-800 shadow-md shadow-white/20 transition-all duration-500",
-                "hover:after:absolute hover:after:inset-0 hover:after:rounded-2xl hover:after:bg-black/60 hover:after:transition-all hover:after:duration-500 hover:after:content-['']",
+                "hover:after:absolute hover:after:inset-0 hover:after:rounded-2xl hover:after:transition-all hover:after:duration-500 hover:after:content-[''] md:hover:after:bg-black/60",
               )}
               style={{
                 backgroundImage: backgroundUrl
@@ -57,22 +57,22 @@ const Certifications = ({ slice, index }: CertificationsProps): JSX.Element => {
                 backgroundSize: "cover",
               }}
               onMouseEnter={(e) => {
-                if (hoverUrl) {
+                if (hoverUrl && window.innerWidth >= 768) {
                   (e.currentTarget as HTMLElement).style.backgroundImage =
                     `url(${hoverUrl})`;
                 }
               }}
               onMouseLeave={(e) => {
-                if (backgroundUrl) {
+                if (backgroundUrl && window.innerWidth >= 768) {
                   (e.currentTarget as HTMLElement).style.backgroundImage =
                     `url(${backgroundUrl})`;
                 }
               }}
             >
-              <div className="absolute inset-0 z-0 bg-black/60  transition duration-500 group-hover:bg-black/10" />
+              <div className="absolute inset-0 z-0 bg-black/60  transition duration-500 md:group-hover:bg-black/10" />
 
               <div className="relative z-10 flex h-full flex-col justify-between p-5 text-white">
-                <div className="flex items-center justify-between transition-opacity duration-500 group-hover:opacity-0">
+                <div className="flex items-center justify-between transition-opacity duration-500 md:group-hover:opacity-0">
                   <img
                     src="/ribbon.png"
                     alt="Certification Icon"
@@ -86,7 +86,7 @@ const Certifications = ({ slice, index }: CertificationsProps): JSX.Element => {
                   </Badge>
                 </div>
 
-                <div className="mt-6 space-y-2 transition-opacity duration-500 group-hover:opacity-0">
+                <div className="mt-6 space-y-2 transition-opacity duration-500 md:group-hover:opacity-0">
                   <h3 className="text-xl font-semibold leading-tight tracking-wide">
                     {item.title}
                   </h3>
@@ -96,7 +96,7 @@ const Certifications = ({ slice, index }: CertificationsProps): JSX.Element => {
                 </div>
 
                 <div className="mt-4 flex items-center justify-between text-xs">
-                  <span className="opacity-70 transition-opacity duration-500 group-hover:opacity-0">
+                  <span className="opacity-70 transition-opacity duration-500 md:group-hover:opacity-0">
                     Issued by {item.issuer}
                   </span>
                   <Button
