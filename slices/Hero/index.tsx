@@ -126,7 +126,7 @@ const Hero = ({ slice }: HeroProps): JSX.Element => {
 
               <TextGenerateEffect
                 words={slice.primary.text_generate || ""}
-                className="text-center text-[40px] md:text-5xl lg:text-6xl"
+                className="text-center text-3xl md:text-5xl lg:text-6xl"
               />
 
               <p className="mb-8 text-center text-sm tracking-tight text-blue-100 md:text-lg md:tracking-wider lg:text-2xl">
