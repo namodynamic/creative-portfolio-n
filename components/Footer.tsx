@@ -107,7 +107,7 @@ export default async function Footer() {
                   </li>
                   <li>
                     <Link
-                      href="#"
+                      href="/services"
                       className="text-gray-400 transition-colors hover:text-white"
                     >
                       Services

@@ -1,0 +1,257 @@
+{
+  "id": "services",
+  "type": "SharedSlice",
+  "name": "ServicesPage",
+  "description": "Services",
+  "variations": [
+    {
+      "id": "default",
+      "name": "Default",
+      "docURL": "...",
+      "version": "initial",
+      "description": "Default",
+      "imageUrl": "",
+      "primary": {
+        "heading": {
+          "type": "Text",
+          "config": {
+            "label": "Heading",
+            "placeholder": ""
+          }
+        },
+        "sub_heading": {
+          "type": "Text",
+          "config": {
+            "label": "Sub Heading",
+            "placeholder": ""
+          }
+        },
+        "intro": {
+          "type": "Text",
+          "config": {
+            "label": "Intro",
+            "placeholder": ""
+          }
+        },
+        "services": {
+          "type": "Group",
+          "config": {
+            "label": "Services",
+            "repeat": true,
+            "fields": {
+              "title": {
+                "type": "Text",
+                "config": {
+                  "label": "title",
+                  "placeholder": "service title"
+                }
+              },
+              "description": {
+                "type": "Text",
+                "config": {
+                  "label": "Description",
+                  "placeholder": "service description"
+                }
+              },
+              "features": {
+                "type": "StructuredText",
+                "config": {
+                  "label": "features",
+                  "placeholder": "group of key points",
+                  "allowTargetBlank": true,
+                  "single": "list-item"
+                }
+              },
+              "icons": {
+                "type": "Select",
+                "config": {
+                  "label": "Icons",
+                  "placeholder": "e.g. code, server, database, rocket",
+                  "options": [
+                    "code",
+                    "server",
+                    "database",
+                    "rocket"
+                  ],
+                  "default_value": "code"
+                }
+              },
+              "link_text": {
+                "type": "Text",
+                "config": {
+                  "label": "Link text",
+                  "placeholder": "e.g. Discus your project"
+                }
+              },
+              "link_url": {
+                "type": "Link",
+                "config": {
+                  "label": "Link URL",
+                  "select": "document",
+                  "repeat": false,
+                  "customtypes": []
+                }
+              }
+            }
+          }
+        },
+        "package_heading": {
+          "type": "Text",
+          "config": {
+            "label": "Package heading",
+            "placeholder": "e.g. Tailored solution"
+          }
+        },
+        "package_sub_heading": {
+          "type": "Text",
+          "config": {
+            "label": "Package sub heading",
+            "placeholder": "e.g. Solutions for Entrepreneurs & Personal Brands"
+          }
+        },
+        "package_intro": {
+          "type": "Text",
+          "config": {
+            "label": "Package Intro",
+            "placeholder": ""
+          }
+        },
+        "packages": {
+          "type": "Group",
+          "config": {
+            "label": "Packages",
+            "repeat": true,
+            "fields": {
+              "title": {
+                "type": "Text",
+                "config": {
+                  "label": "Title",
+                  "placeholder": "e.g. Basic landing page"
+                }
+              },
+              "description": {
+                "type": "Text",
+                "config": {
+                  "label": "Description",
+                  "placeholder": ""
+                }
+              },
+              "icons": {
+                "type": "Select",
+                "config": {
+                  "label": "Icons",
+                  "placeholder": "e.g. file, globe, rocket",
+                  "options": [
+                    "file",
+                    "globe",
+                    "rocket"
+                  ]
+                }
+              },
+              "tag": {
+                "type": "Text",
+                "config": {
+                  "label": "Tag",
+                  "placeholder": "e.g. Quick Start, Most Popular, Best Value"
+                }
+              },
+              "package_features": {
+                "type": "StructuredText",
+                "config": {
+                  "label": "Package Features",
+                  "placeholder": "",
+                  "allowTargetBlank": true,
+                  "single": "list-item"
+                }
+              },
+              "link_url": {
+                "type": "Link",
+                "config": {
+                  "label": "Link URL",
+                  "select": "document",
+                  "repeat": false
+                }
+              },
+              "link_text": {
+                "type": "Text",
+                "config": {
+                  "label": "Link text",
+                  "placeholder": "e.g. Get started"
+                }
+              }
+            }
+          }
+        },
+        "development_process": {
+          "type": "Text",
+          "config": {
+            "label": "Development Process",
+            "placeholder": "My Development Process"
+          }
+        },
+        "dev_process": {
+          "type": "Group",
+          "config": {
+            "label": "Dev Process",
+            "repeat": true,
+            "fields": {
+              "icons": {
+                "type": "Select",
+                "config": {
+                  "label": "Icons",
+                  "placeholder": "e.g. lock, code, refresh, rocket",
+                  "options": [
+                    "lock",
+                    "code",
+                    "refresh",
+                    "rocket"
+                  ]
+                }
+              },
+              "process": {
+                "type": "Text",
+                "config": {
+                  "label": "Process",
+                  "placeholder": "e.g. Planning, Development, Testing, Deployment"
+                }
+              },
+              "description": {
+                "type": "Text",
+                "config": {
+                  "label": "Description",
+                  "placeholder": ""
+                }
+              }
+            }
+          }
+        },
+        "services_faq": {
+          "type": "Group",
+          "config": {
+            "label": "Services Faq",
+            "repeat": true,
+            "fields": {
+              "question": {
+                "type": "Text",
+                "config": {
+                  "label": "Question",
+                  "placeholder": ""
+                }
+              },
+              "answer": {
+                "type": "StructuredText",
+                "config": {
+                  "label": "Answer",
+                  "placeholder": "",
+                  "allowTargetBlank": true,
+                  "multi": "paragraph,preformatted,heading1,heading2,heading3,heading4,heading5,heading6,strong,em,hyperlink,image,embed,list-item,o-list-item,rtl"
+                }
+              }
+            }
+          }
+        }
+      },
+      "items": {}
+    }
+  ]
+}

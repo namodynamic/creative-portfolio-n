@@ -1,0 +1,252 @@
+[
+	{
+		"__TYPE__": "SharedSliceContent",
+		"variation": "default",
+		"primary": {
+			"heading": {
+				"__TYPE__": "FieldContent",
+				"value": "environment",
+				"type": "Text"
+			},
+			"sub_heading": {
+				"__TYPE__": "FieldContent",
+				"value": "take",
+				"type": "Text"
+			},
+			"intro": {
+				"__TYPE__": "FieldContent",
+				"value": "shells",
+				"type": "Text"
+			},
+			"services": {
+				"__TYPE__": "GroupContentType",
+				"value": [
+					{
+						"__TYPE__": "GroupItemContent",
+						"value": [
+							[
+								"title",
+								{
+									"__TYPE__": "FieldContent",
+									"value": "slightly",
+									"type": "Text"
+								}
+							],
+							[
+								"description",
+								{
+									"__TYPE__": "FieldContent",
+									"value": "dug",
+									"type": "Text"
+								}
+							],
+							[
+								"features",
+								{
+									"__TYPE__": "StructuredTextContent",
+									"value": [
+										{
+											"type": "paragraph",
+											"content": {
+												"text": "Non ipsum culpa et proident aute dolor fugiat laborum commodo minim consequat laborum ad occaecat."
+											}
+										}
+									]
+								}
+							],
+							[
+								"icons",
+								{
+									"__TYPE__": "FieldContent",
+									"value": "code",
+									"type": "Select"
+								}
+							],
+							[
+								"link_text",
+								{
+									"__TYPE__": "FieldContent",
+									"value": "twice",
+									"type": "Text"
+								}
+							],
+							[
+								"link_url",
+								{
+									"key": "fa12b9ba-6ce0-438a-bc8b-2679e0366ca1",
+									"__TYPE__": "LinkContent",
+									"value": {
+										"__TYPE__": "DocumentLink",
+										"id": "mock_document_id"
+									}
+								}
+							]
+						]
+					}
+				]
+			},
+			"package_heading": {
+				"__TYPE__": "FieldContent",
+				"value": "tree",
+				"type": "Text"
+			},
+			"package_sub_heading": {
+				"__TYPE__": "FieldContent",
+				"value": "bit",
+				"type": "Text"
+			},
+			"package_intro": {
+				"__TYPE__": "FieldContent",
+				"value": "could",
+				"type": "Text"
+			},
+			"packages": {
+				"__TYPE__": "GroupContentType",
+				"value": [
+					{
+						"__TYPE__": "GroupItemContent",
+						"value": [
+							[
+								"title",
+								{
+									"__TYPE__": "FieldContent",
+									"value": "bell",
+									"type": "Text"
+								}
+							],
+							[
+								"description",
+								{
+									"__TYPE__": "FieldContent",
+									"value": "sad",
+									"type": "Text"
+								}
+							],
+							[
+								"icons",
+								{
+									"__TYPE__": "FieldContent",
+									"value": "globe",
+									"type": "Select"
+								}
+							],
+							[
+								"package_features",
+								{
+									"__TYPE__": "StructuredTextContent",
+									"value": [
+										{
+											"type": "paragraph",
+											"content": {
+												"text": "Anim magna nulla Lorem pariatur quis fugiat excepteur ullamco cupidatat laborum. Ex magna sit cillum dolore ea nulla."
+											}
+										}
+									]
+								}
+							],
+							[
+								"link_url",
+								{
+									"key": "216cddfc-4911-4abe-8236-50f18bdf8a85",
+									"__TYPE__": "LinkContent",
+									"value": {
+										"__TYPE__": "DocumentLink",
+										"id": "mock_document_id"
+									}
+								}
+							],
+							[
+								"link_text",
+								{
+									"__TYPE__": "FieldContent",
+									"value": "again",
+									"type": "Text"
+								}
+							],
+							[
+								"tag",
+								{
+									"__TYPE__": "FieldContent",
+									"value": "possible",
+									"type": "Text"
+								}
+							]
+						]
+					}
+				]
+			},
+			"development_process": {
+				"__TYPE__": "FieldContent",
+				"value": "look",
+				"type": "Text"
+			},
+			"dev_process": {
+				"__TYPE__": "GroupContentType",
+				"value": [
+					{
+						"__TYPE__": "GroupItemContent",
+						"value": [
+							[
+								"icons",
+								{
+									"__TYPE__": "FieldContent",
+									"value": "refresh",
+									"type": "Select"
+								}
+							],
+							[
+								"process",
+								{
+									"__TYPE__": "FieldContent",
+									"value": "week",
+									"type": "Text"
+								}
+							],
+							[
+								"description",
+								{
+									"__TYPE__": "FieldContent",
+									"value": "customs",
+									"type": "Text"
+								}
+							]
+						]
+					}
+				]
+			},
+			"services_faq": {
+				"__TYPE__": "GroupContentType",
+				"value": [
+					{
+						"__TYPE__": "GroupItemContent",
+						"value": [
+							[
+								"question",
+								{
+									"__TYPE__": "FieldContent",
+									"value": "brass",
+									"type": "Text"
+								}
+							],
+							[
+								"answer",
+								{
+									"__TYPE__": "StructuredTextContent",
+									"value": [
+										{
+											"type": "paragraph",
+											"content": {
+												"text": "Aliquip in reprehenderit dolor."
+											}
+										}
+									]
+								}
+							]
+						]
+					}
+				]
+			}
+		},
+		"items": []
+	}
+]

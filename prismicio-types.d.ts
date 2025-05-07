@@ -300,6 +300,7 @@ export type HomepageDocument<Lang extends string = string> =
   >;
 
 type PageDocumentDataSlicesSlice =
+  | ServicesSlice
   | FaqSlice
   | CertificationsSlice
   | TestimonialSlice
@@ -2087,6 +2088,363 @@ export type ImageBlockSlice = prismic.SharedSlice<
 >;
 
 /**
+ * Item in *ServicesPage → Default → Primary → Services*
+ */
+export interface ServicesSliceDefaultPrimaryServicesItem {
+  /**
+   * title field in *ServicesPage → Default → Primary → Services*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: service title
+   * - **API ID Path**: services.default.primary.services[].title
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  title: prismic.KeyTextField;
+
+  /**
+   * Description field in *ServicesPage → Default → Primary → Services*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: service description
+   * - **API ID Path**: services.default.primary.services[].description
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  description: prismic.KeyTextField;
+
+  /**
+   * features field in *ServicesPage → Default → Primary → Services*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: group of key points
+   * - **API ID Path**: services.default.primary.services[].features
+   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+   */
+  features: prismic.RichTextField;
+
+  /**
+   * Icons field in *ServicesPage → Default → Primary → Services*
+   *
+   * - **Field Type**: Select
+   * - **Placeholder**: e.g. code, server, database, rocket
+   * - **Default Value**: code
+   * - **API ID Path**: services.default.primary.services[].icons
+   * - **Documentation**: https://prismic.io/docs/field#select
+   */
+  icons: prismic.SelectField<
+    "code" | "server" | "database" | "rocket",
+    "filled"
+  >;
+
+  /**
+   * Link text field in *ServicesPage → Default → Primary → Services*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: e.g. Discus your project
+   * - **API ID Path**: services.default.primary.services[].link_text
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  link_text: prismic.KeyTextField;
+
+  /**
+   * Link URL field in *ServicesPage → Default → Primary → Services*
+   *
+   * - **Field Type**: Content Relationship
+   * - **Placeholder**: *None*
+   * - **API ID Path**: services.default.primary.services[].link_url
+   * - **Documentation**: https://prismic.io/docs/field#link-content-relationship
+   */
+  link_url: prismic.ContentRelationshipField;
+}
+
+/**
+ * Item in *ServicesPage → Default → Primary → Packages*
+ */
+export interface ServicesSliceDefaultPrimaryPackagesItem {
+  /**
+   * Title field in *ServicesPage → Default → Primary → Packages*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: e.g. Basic landing page
+   * - **API ID Path**: services.default.primary.packages[].title
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  title: prismic.KeyTextField;
+
+  /**
+   * Description field in *ServicesPage → Default → Primary → Packages*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: services.default.primary.packages[].description
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  description: prismic.KeyTextField;
+
+  /**
+   * Icons field in *ServicesPage → Default → Primary → Packages*
+   *
+   * - **Field Type**: Select
+   * - **Placeholder**: e.g. file, globe, rocket
+   * - **API ID Path**: services.default.primary.packages[].icons
+   * - **Documentation**: https://prismic.io/docs/field#select
+   */
+  icons: prismic.SelectField<"file" | "globe" | "rocket">;
+
+  /**
+   * Tag field in *ServicesPage → Default → Primary → Packages*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: e.g. Quick Start, Most Popular, Best Value
+   * - **API ID Path**: services.default.primary.packages[].tag
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  tag: prismic.KeyTextField;
+
+  /**
+   * Package Features field in *ServicesPage → Default → Primary → Packages*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: services.default.primary.packages[].package_features
+   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+   */
+  package_features: prismic.RichTextField;
+
+  /**
+   * Link URL field in *ServicesPage → Default → Primary → Packages*
+   *
+   * - **Field Type**: Content Relationship
+   * - **Placeholder**: *None*
+   * - **API ID Path**: services.default.primary.packages[].link_url
+   * - **Documentation**: https://prismic.io/docs/field#link-content-relationship
+   */
+  link_url: prismic.ContentRelationshipField;
+
+  /**
+   * Link text field in *ServicesPage → Default → Primary → Packages*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: e.g. Get started
+   * - **API ID Path**: services.default.primary.packages[].link_text
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  link_text: prismic.KeyTextField;
+}
+
+/**
+ * Item in *ServicesPage → Default → Primary → Dev Process*
+ */
+export interface ServicesSliceDefaultPrimaryDevProcessItem {
+  /**
+   * Icons field in *ServicesPage → Default → Primary → Dev Process*
+   *
+   * - **Field Type**: Select
+   * - **Placeholder**: e.g. lock, code, refresh, rocket
+   * - **API ID Path**: services.default.primary.dev_process[].icons
+   * - **Documentation**: https://prismic.io/docs/field#select
+   */
+  icons: prismic.SelectField<"lock" | "code" | "refresh" | "rocket">;
+
+  /**
+   * Process field in *ServicesPage → Default → Primary → Dev Process*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: e.g. Planning, Development, Testing, Deployment
+   * - **API ID Path**: services.default.primary.dev_process[].process
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  process: prismic.KeyTextField;
+
+  /**
+   * Description field in *ServicesPage → Default → Primary → Dev Process*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: services.default.primary.dev_process[].description
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  description: prismic.KeyTextField;
+}
+
+/**
+ * Item in *ServicesPage → Default → Primary → Services Faq*
+ */
+export interface ServicesSliceDefaultPrimaryServicesFaqItem {
+  /**
+   * Question field in *ServicesPage → Default → Primary → Services Faq*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: services.default.primary.services_faq[].question
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  question: prismic.KeyTextField;
+
+  /**
+   * Answer field in *ServicesPage → Default → Primary → Services Faq*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: services.default.primary.services_faq[].answer
+   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+   */
+  answer: prismic.RichTextField;
+}
+
+/**
+ * Primary content in *ServicesPage → Default → Primary*
+ */
+export interface ServicesSliceDefaultPrimary {
+  /**
+   * Heading field in *ServicesPage → Default → Primary*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: services.default.primary.heading
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  heading: prismic.KeyTextField;
+
+  /**
+   * Sub Heading field in *ServicesPage → Default → Primary*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: services.default.primary.sub_heading
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  sub_heading: prismic.KeyTextField;
+
+  /**
+   * Intro field in *ServicesPage → Default → Primary*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: services.default.primary.intro
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  intro: prismic.KeyTextField;
+
+  /**
+   * Services field in *ServicesPage → Default → Primary*
+   *
+   * - **Field Type**: Group
+   * - **Placeholder**: *None*
+   * - **API ID Path**: services.default.primary.services[]
+   * - **Documentation**: https://prismic.io/docs/field#group
+   */
+  services: prismic.GroupField<
+    Simplify<ServicesSliceDefaultPrimaryServicesItem>
+  >;
+
+  /**
+   * Package heading field in *ServicesPage → Default → Primary*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: e.g. Tailored solution
+   * - **API ID Path**: services.default.primary.package_heading
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  package_heading: prismic.KeyTextField;
+
+  /**
+   * Package sub heading field in *ServicesPage → Default → Primary*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: e.g. Solutions for Entrepreneurs & Personal Brands
+   * - **API ID Path**: services.default.primary.package_sub_heading
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  package_sub_heading: prismic.KeyTextField;
+
+  /**
+   * Package Intro field in *ServicesPage → Default → Primary*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: services.default.primary.package_intro
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  package_intro: prismic.KeyTextField;
+
+  /**
+   * Packages field in *ServicesPage → Default → Primary*
+   *
+   * - **Field Type**: Group
+   * - **Placeholder**: *None*
+   * - **API ID Path**: services.default.primary.packages[]
+   * - **Documentation**: https://prismic.io/docs/field#group
+   */
+  packages: prismic.GroupField<
+    Simplify<ServicesSliceDefaultPrimaryPackagesItem>
+  >;
+
+  /**
+   * Development Process field in *ServicesPage → Default → Primary*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: My Development Process
+   * - **API ID Path**: services.default.primary.development_process
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  development_process: prismic.KeyTextField;
+
+  /**
+   * Dev Process field in *ServicesPage → Default → Primary*
+   *
+   * - **Field Type**: Group
+   * - **Placeholder**: *None*
+   * - **API ID Path**: services.default.primary.dev_process[]
+   * - **Documentation**: https://prismic.io/docs/field#group
+   */
+  dev_process: prismic.GroupField<
+    Simplify<ServicesSliceDefaultPrimaryDevProcessItem>
+  >;
+
+  /**
+   * Services Faq field in *ServicesPage → Default → Primary*
+   *
+   * - **Field Type**: Group
+   * - **Placeholder**: *None*
+   * - **API ID Path**: services.default.primary.services_faq[]
+   * - **Documentation**: https://prismic.io/docs/field#group
+   */
+  services_faq: prismic.GroupField<
+    Simplify<ServicesSliceDefaultPrimaryServicesFaqItem>
+  >;
+}
+
+/**
+ * Default variation for ServicesPage Slice
+ *
+ * - **API ID**: `default`
+ * - **Description**: Default
+ * - **Documentation**: https://prismic.io/docs/slice
+ */
+export type ServicesSliceDefault = prismic.SharedSliceVariation<
+  "default",
+  Simplify<ServicesSliceDefaultPrimary>,
+  never
+>;
+
+/**
+ * Slice variation for *ServicesPage*
+ */
+type ServicesSliceVariation = ServicesSliceDefault;
+
+/**
+ * ServicesPage Shared Slice
+ *
+ * - **API ID**: `services`
+ * - **Description**: Services
+ * - **Documentation**: https://prismic.io/docs/slice
+ */
+export type ServicesSlice = prismic.SharedSlice<
+  "services",
+  ServicesSliceVariation
+>;
+
+/**
  * Primary content in *TechList → Default → Primary*
  */
 export interface TechListSliceDefaultPrimary {
@@ -2404,6 +2762,14 @@ declare module "@prismicio/client" {
       ImageBlockSliceDefaultPrimary,
       ImageBlockSliceVariation,
       ImageBlockSliceDefault,
+      ServicesSlice,
+      ServicesSliceDefaultPrimaryServicesItem,
+      ServicesSliceDefaultPrimaryPackagesItem,
+      ServicesSliceDefaultPrimaryDevProcessItem,
+      ServicesSliceDefaultPrimaryServicesFaqItem,
+      ServicesSliceDefaultPrimary,
+      ServicesSliceVariation,
+      ServicesSliceDefault,
       TechListSlice,
       TechListSliceDefaultPrimary,
       TechListSliceDefaultItem,
