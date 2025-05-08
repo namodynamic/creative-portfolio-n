@@ -1,0 +1,124 @@
+{
+  "type": "SharedSlice",
+  "id": "feature_grid",
+  "name": "FeatureGrid",
+  "variations": [
+    {
+      "id": "grid_mixed_content",
+      "name": "Grid with Mixed Content",
+      "description": "A feature grid with support for images, structured text, and tag lists per cell. Allows content creators to display a collection of feature blocks, each with customizable content types.",
+      "version": "initial",
+      "imageUrl": "",
+      "docURL": "...",
+      "primary": {
+        "items": {
+          "type": "Group",
+          "config": {
+            "label": "Grid Items",
+            "fields": {
+              "gridId": {
+                "type": "Number",
+                "config": {
+                  "label": "ID",
+                  "placeholder": "e.g. 1"
+                }
+              },
+              "title": {
+                "type": "Text",
+                "config": {
+                  "label": "Title",
+                  "placeholder": ""
+                }
+              },
+              "description": {
+                "type": "Text",
+                "config": {
+                  "label": "Description",
+                  "placeholder": "optional short text"
+                }
+              },
+              "className": {
+                "type": "Text",
+                "config": {
+                  "label": "Class Name",
+                  "placeholder": "Tailwind classes for wrapper div"
+                }
+              },
+              "imgClassName": {
+                "type": "Text",
+                "config": {
+                  "label": "Image Class name",
+                  "placeholder": "image className (tailwindcss)"
+                }
+              },
+              "titleClassName": {
+                "type": "Text",
+                "config": {
+                  "label": "Title Class Name",
+                  "placeholder": "title className"
+                }
+              },
+              "img": {
+                "type": "Image",
+                "config": {
+                  "label": "Image",
+                  "constraint": {
+                    "width": null
+                  }
+                }
+              },
+              "spareImg": {
+                "type": "Image",
+                "config": {
+                  "label": "Optional secondary image",
+                  "constraint": {},
+                  "thumbnails": []
+                }
+              }
+            }
+          }
+        },
+        "copy_email": {
+          "type": "Text",
+          "config": {
+            "label": "Copy Email",
+            "placeholder": "contact@nnamdiekechi.com"
+          }
+        },
+        "left_tech_list": {
+          "type": "Group",
+          "config": {
+            "label": "Left tech list",
+            "repeat": true,
+            "fields": {
+              "technology": {
+                "type": "Text",
+                "config": {
+                  "label": "Technology",
+                  "placeholder": "e.g. ReactJS, JavaScript, Django"
+                }
+              }
+            }
+          }
+        },
+        "right_tech_list": {
+          "type": "Group",
+          "config": {
+            "label": "Right Tech List",
+            "repeat": true,
+            "fields": {
+              "technology": {
+                "type": "Text",
+                "config": {
+                  "label": "Technology",
+                  "placeholder": "e.g. NextJS, Python, NodeJS"
+                }
+              }
+            }
+          }
+        }
+      },
+      "items": {}
+    }
+  ]
+}

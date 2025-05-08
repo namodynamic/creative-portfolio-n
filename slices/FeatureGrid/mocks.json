@@ -1,0 +1,159 @@
+[
+	{
+		"__TYPE__": "SharedSliceContent",
+		"variation": "grid_mixed_content",
+		"primary": {
+			"items": {
+				"__TYPE__": "GroupContentType",
+				"value": [
+					{
+						"__TYPE__": "GroupItemContent",
+						"value": [
+							[
+								"img",
+								{
+									"origin": {
+										"id": "main",
+										"url": "https://images.unsplash.com/photo-1547082299-de196ea013d6",
+										"width": 4272,
+										"height": 2848
+									},
+									"url": "https://images.unsplash.com/photo-1547082299-de196ea013d6",
+									"width": 4272,
+									"height": 2848,
+									"edit": {
+										"zoom": 1,
+										"crop": {
+											"x": 0,
+											"y": 0
+										},
+										"background": "transparent"
+									},
+									"alt": "same",
+									"credits": null,
+									"__TYPE__": "ImageContent"
+								}
+							],
+							[
+								"imgClassName",
+								{
+									"__TYPE__": "FieldContent",
+									"value": "folks",
+									"type": "Text"
+								}
+							],
+							[
+								"className",
+								{
+									"__TYPE__": "FieldContent",
+									"value": "wait",
+									"type": "Text"
+								}
+							],
+							[
+								"spareImg",
+								{
+									"origin": {
+										"id": "main",
+										"url": "https://images.unsplash.com/photo-1586952518485-11b180e92764",
+										"width": 4172,
+										"height": 4000
+									},
+									"url": "https://images.unsplash.com/photo-1586952518485-11b180e92764",
+									"width": 4172,
+									"height": 4000,
+									"edit": {
+										"zoom": 1,
+										"crop": {
+											"x": 0,
+											"y": 0
+										},
+										"background": "transparent"
+									},
+									"alt": "eye",
+									"credits": null,
+									"__TYPE__": "ImageContent",
+									"thumbnails": {}
+								}
+							],
+							[
+								"titleClassName",
+								{
+									"__TYPE__": "FieldContent",
+									"value": "cover",
+									"type": "Text"
+								}
+							],
+							[
+								"title",
+								{
+									"__TYPE__": "FieldContent",
+									"value": "lose",
+									"type": "Text"
+								}
+							],
+							[
+								"description",
+								{
+									"__TYPE__": "FieldContent",
+									"value": "race",
+									"type": "Text"
+								}
+							],
+							[
+								"gridId",
+								{
+									"__TYPE__": "FieldContent",
+									"value": "19",
+									"type": "Number"
+								}
+							]
+						]
+					}
+				]
+			},
+			"copy_email": {
+				"__TYPE__": "FieldContent",
+				"value": "danger",
+				"type": "Text"
+			},
+			"left_tech_list": {
+				"__TYPE__": "GroupContentType",
+				"value": [
+					{
+						"__TYPE__": "GroupItemContent",
+						"value": [
+							[
+								"technology",
+								{
+									"__TYPE__": "FieldContent",
+									"value": "rush",
+									"type": "Text"
+								}
+							]
+						]
+					}
+				]
+			},
+			"right_tech_list": {
+				"__TYPE__": "GroupContentType",
+				"value": [
+					{
+						"__TYPE__": "GroupItemContent",
+						"value": [
+							[
+								"technology",
+								{
+									"__TYPE__": "FieldContent",
+									"value": "taste",
+									"type": "Text"
+								}
+							]
+						]
+					}
+				]
+			}
+		},
+		"items": []
+	}
+]

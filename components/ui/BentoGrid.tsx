@@ -12,6 +12,7 @@ import GridGlobe from "./GridGlobe";
 import animationData from "@/data/confetti.json";
 import MagicButton from "./MagicButton";
 import Image from "next/image";
+import type { KeyTextField } from "@prismicio/client";
 
 export const BentoGrid = ({
   className,
@@ -41,6 +42,9 @@ export const BentoGridItem = ({
   imgClassName,
   titleClassName,
   spareImg,
+  leftLists,
+  rightLists,
+  copyEmail,
 }: {
   className?: string;
   id: number;
@@ -50,10 +54,10 @@ export const BentoGridItem = ({
   imgClassName?: string;
   titleClassName?: string;
   spareImg?: string;
+  leftLists?: KeyTextField[];
+  rightLists?: KeyTextField[];
+  copyEmail?: KeyTextField;
 }) => {
-  const leftLists = ["ReactJS", "JavaScript", "Django"];
-  const rightLists = ["NextJS", "Python", "NodeJS"];
-
   const [copied, setCopied] = useState(false);
 
   const defaultOptions = {
@@ -66,7 +70,7 @@ export const BentoGridItem = ({
   };
 
   const handleCopy = () => {
-    const text = "ekechinnamdi@gmail.com";
+    const text = copyEmail || "";
     navigator.clipboard.writeText(text);
     setCopied(true);
   };
@@ -142,7 +146,7 @@ export const BentoGridItem = ({
           {id === 3 && (
             <div className="absolute -right-3 flex w-fit gap-1 lg:-right-2 lg:gap-5">
               <div className="flex flex-col gap-3 md:gap-3 lg:gap-8">
-                {leftLists.map((item, i) => (
+                {leftLists?.map((item, i) => (
                   <span
                     key={i}
                     className="rounded-lg bg-[#10132E] px-3 py-2 text-center text-xs opacity-50 
@@ -155,7 +159,7 @@ export const BentoGridItem = ({
               </div>
               <div className="flex flex-col gap-3 md:gap-3 lg:gap-8">
                 <span className="rounded-lg bg-[#10132E] px-3 py-4  text-center lg:px-3 lg:py-4"></span>
-                {rightLists.map((item, i) => (
+                {rightLists?.map((item, i) => (
                   <span
                     key={i}
                     className="rounded-lg bg-[#10132E] px-3 py-2 text-center text-xs opacity-50 

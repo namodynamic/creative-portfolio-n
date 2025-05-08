@@ -1,7 +1,6 @@
 "use client";
 
 import { useEffect, useRef, type JSX } from "react";
-
 import { Content } from "@prismicio/client";
 import { SliceComponentProps } from "@prismicio/react";
 import { gsap } from "gsap";
@@ -10,71 +9,7 @@ import { TextGenerateEffect } from "@/components/ui/TextGenerateEffect";
 import MagicButton from "@/components/ui/MagicButton";
 import { FaArrowDown } from "react-icons/fa6";
 import Link from "next/link";
-import { BentoGrid, BentoGridItem } from "@/components/ui/BentoGrid";
 
-export const gridItems = [
-  {
-    id: 1,
-    title: "Clear communication, shared goals, better outcomes.",
-    description: "",
-    className: "lg:col-span-3 md:col-span-6 md:row-span-4 lg:min-h-[60vh]",
-    imgClassName: "w-full h-full",
-    titleClassName: "justify-end",
-    img: "/b1.svg",
-    spareImg: "",
-  },
-  {
-    id: 2,
-    title: "I'm very flexible with time zone communications",
-    description: "",
-    className: "lg:col-span-2 md:col-span-3 md:row-span-2",
-    imgClassName: "",
-    titleClassName: "justify-start",
-    img: "",
-    spareImg: "",
-  },
-  {
-    id: 3,
-    title: "My tech stack",
-    description: "Refining skills, refining code",
-    className: "lg:col-span-2 md:col-span-3 md:row-span-2",
-    imgClassName: "",
-    titleClassName: "justify-center",
-    img: "",
-    spareImg: "",
-  },
-  {
-    id: 4,
-    title: "Tech enthusiast with a passion for development.",
-    description: "",
-    className: "lg:col-span-2 md:col-span-3 md:row-span-1",
-    imgClassName: "absolute right-0 bottom-0 md:w-96 w-60",
-    titleClassName: "justify-start",
-    img: "/grid.svg",
-    spareImg: "/b4.svg",
-  },
-
-  {
-    id: 5,
-    title: "Real projects, Real challenges, Real growth.",
-    description: "Behind the Build",
-    className: "md:col-span-3 md:row-span-2",
-    imgClassName: "absolute right-0 bottom-0 md:w-96 w-60",
-    titleClassName: "justify-center md:justify-start lg:justify-center",
-    img: "/b5.svg",
-    spareImg: "/grid.svg",
-  },
-  {
-    id: 6,
-    title: "Have an idea? Let’s bring it to life together.",
-    description: "",
-    className: "lg:col-span-2 md:col-span-3 md:row-span-1",
-    imgClassName: "",
-    titleClassName: "justify-center md:max-w-full max-w-60 text-center",
-    img: "",
-    spareImg: "",
-  },
-];
 
 /**
  * Props for `Hero`.
@@ -117,7 +52,7 @@ const Hero = ({ slice }: HeroProps): JSX.Element => {
         data-slice-variation={slice.variation}
         ref={component}
       >
-        <div className="relative my-10 w-full overflow-hidden md:my-20">
+        <div className="relative mt-10 w-full overflow-hidden md:mt-20">
           <div className="relative z-10 flex justify-center">
             <div className="flex max-w-full flex-col items-center justify-center md:max-w-2xl lg:max-w-[60vw]">
               <p className="intro max-w-80 text-center text-xs uppercase tracking-tight text-blue-100">
@@ -146,21 +81,6 @@ const Hero = ({ slice }: HeroProps): JSX.Element => {
             </div>
           </div>
         </div>
-        <BentoGrid className="w-full py-10">
-          {gridItems.map((item, i) => (
-            <BentoGridItem
-              id={item.id}
-              key={i}
-              title={item.title}
-              description={item.description}
-              className={item.className}
-              img={item.img}
-              imgClassName={item.imgClassName}
-              titleClassName={item.titleClassName}
-              spareImg={item.spareImg}
-            />
-          ))}
-        </BentoGrid>
       </Bounded>
     </>
   );

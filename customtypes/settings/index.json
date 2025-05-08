@@ -127,6 +127,37 @@
           "placeholder": "",
           "select": null
         }
+      },
+      "tech_list": {
+        "type": "Group",
+        "config": {
+          "label": "Bento Grid Tech List",
+          "repeat": true,
+          "fields": {
+            "list_side": {
+              "type": "Select",
+              "config": {
+                "label": "List Side",
+                "placeholder": "e.g. left, right",
+                "options": ["left", "right"]
+              }
+            },
+            "technology": {
+              "type": "Text",
+              "config": {
+                "label": "Technology",
+                "placeholder": "e.g. Python, JS, React, Django"
+              }
+            }
+          }
+        }
+      },
+      "copy_email": {
+        "type": "Text",
+        "config": {
+          "label": "Copy Email",
+          "placeholder": "contact@nnamdiekechi.com"
+        }
       }
     },
     "SEO and Metadata": {

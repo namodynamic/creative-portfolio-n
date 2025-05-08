@@ -12,6 +12,7 @@ export const components = {
   education: dynamic(() => import("./Education")),
   experience: dynamic(() => import("./Experience")),
   faq: dynamic(() => import("./Faq")),
+  feature_grid: dynamic(() => import("./FeatureGrid")),
   featured_projects: dynamic(() => import("./FeaturedProjects")),
   hero: dynamic(() => import("./Hero")),
   image_block: dynamic(() => import("./ImageBlock")),

@@ -229,6 +229,7 @@ export type FaqDocument<Lang extends string = string> =
   prismic.PrismicDocumentWithoutUID<Simplify<FaqDocumentData>, "faq", Lang>;
 
 type HomepageDocumentDataSlicesSlice =
+  | FeatureGridSlice
   | ExperienceSlice
   | FeaturedProjectsSlice
   | ApproachSlice
@@ -553,6 +554,31 @@ export interface SettingsDocumentDataMobileNavItemItem {
 }
 
 /**
+ * Item in *Settings → Bento Grid Tech List*
+ */
+export interface SettingsDocumentDataTechListItem {
+  /**
+   * List Side field in *Settings → Bento Grid Tech List*
+   *
+   * - **Field Type**: Select
+   * - **Placeholder**: e.g. left, right
+   * - **API ID Path**: settings.tech_list[].list_side
+   * - **Documentation**: https://prismic.io/docs/field#select
+   */
+  list_side: prismic.SelectField<"left" | "right">;
+
+  /**
+   * Technology field in *Settings → Bento Grid Tech List*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: e.g. Python, JS, React, Django
+   * - **API ID Path**: settings.tech_list[].technology
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  technology: prismic.KeyTextField;
+}
+
+/**
  * Content for Settings documents
  */
 interface SettingsDocumentData {
@@ -718,7 +744,29 @@ interface SettingsDocumentData {
     unknown,
     prismic.FieldState,
     never
-  > /**
+  >;
+
+  /**
+   * Bento Grid Tech List field in *Settings*
+   *
+   * - **Field Type**: Group
+   * - **Placeholder**: *None*
+   * - **API ID Path**: settings.tech_list[]
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#group
+   */
+  tech_list: prismic.GroupField<Simplify<SettingsDocumentDataTechListItem>>;
+
+  /**
+   * Copy Email field in *Settings*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: contact@nnamdiekechi.com
+   * - **API ID Path**: settings.copy_email
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  copy_email: prismic.KeyTextField /**
    * Meta Title field in *Settings*
    *
    * - **Field Type**: Text
@@ -1861,6 +1909,202 @@ type FaqSliceVariation = FaqSliceDefault;
 export type FaqSlice = prismic.SharedSlice<"faq", FaqSliceVariation>;
 
 /**
+ * Item in *FeatureGrid → Grid with Mixed Content → Primary → Grid Items*
+ */
+export interface FeatureGridSliceGridMixedContentPrimaryItemsItem {
+  /**
+   * ID field in *FeatureGrid → Grid with Mixed Content → Primary → Grid Items*
+   *
+   * - **Field Type**: Number
+   * - **Placeholder**: e.g. 1
+   * - **API ID Path**: feature_grid.grid_mixed_content.primary.items[].gridId
+   * - **Documentation**: https://prismic.io/docs/field#number
+   */
+  gridId: prismic.NumberField;
+
+  /**
+   * Title field in *FeatureGrid → Grid with Mixed Content → Primary → Grid Items*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: feature_grid.grid_mixed_content.primary.items[].title
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  title: prismic.KeyTextField;
+
+  /**
+   * Description field in *FeatureGrid → Grid with Mixed Content → Primary → Grid Items*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: optional short text
+   * - **API ID Path**: feature_grid.grid_mixed_content.primary.items[].description
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  description: prismic.KeyTextField;
+
+  /**
+   * Class Name field in *FeatureGrid → Grid with Mixed Content → Primary → Grid Items*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: Tailwind classes for wrapper div
+   * - **API ID Path**: feature_grid.grid_mixed_content.primary.items[].className
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  className: prismic.KeyTextField;
+
+  /**
+   * Image Class name field in *FeatureGrid → Grid with Mixed Content → Primary → Grid Items*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: image className (tailwindcss)
+   * - **API ID Path**: feature_grid.grid_mixed_content.primary.items[].imgClassName
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  imgClassName: prismic.KeyTextField;
+
+  /**
+   * Title Class Name field in *FeatureGrid → Grid with Mixed Content → Primary → Grid Items*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: title className
+   * - **API ID Path**: feature_grid.grid_mixed_content.primary.items[].titleClassName
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  titleClassName: prismic.KeyTextField;
+
+  /**
+   * Image field in *FeatureGrid → Grid with Mixed Content → Primary → Grid Items*
+   *
+   * - **Field Type**: Image
+   * - **Placeholder**: *None*
+   * - **API ID Path**: feature_grid.grid_mixed_content.primary.items[].img
+   * - **Documentation**: https://prismic.io/docs/field#image
+   */
+  img: prismic.ImageField<never>;
+
+  /**
+   * Optional secondary image field in *FeatureGrid → Grid with Mixed Content → Primary → Grid Items*
+   *
+   * - **Field Type**: Image
+   * - **Placeholder**: *None*
+   * - **API ID Path**: feature_grid.grid_mixed_content.primary.items[].spareImg
+   * - **Documentation**: https://prismic.io/docs/field#image
+   */
+  spareImg: prismic.ImageField<never>;
+}
+
+/**
+ * Item in *FeatureGrid → Grid with Mixed Content → Primary → Left tech list*
+ */
+export interface FeatureGridSliceGridMixedContentPrimaryLeftTechListItem {
+  /**
+   * Technology field in *FeatureGrid → Grid with Mixed Content → Primary → Left tech list*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: e.g. ReactJS, JavaScript, Django
+   * - **API ID Path**: feature_grid.grid_mixed_content.primary.left_tech_list[].technology
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  technology: prismic.KeyTextField;
+}
+
+/**
+ * Item in *FeatureGrid → Grid with Mixed Content → Primary → Right Tech List*
+ */
+export interface FeatureGridSliceGridMixedContentPrimaryRightTechListItem {
+  /**
+   * Technology field in *FeatureGrid → Grid with Mixed Content → Primary → Right Tech List*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: e.g. NextJS, Python, NodeJS
+   * - **API ID Path**: feature_grid.grid_mixed_content.primary.right_tech_list[].technology
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  technology: prismic.KeyTextField;
+}
+
+/**
+ * Primary content in *FeatureGrid → Grid with Mixed Content → Primary*
+ */
+export interface FeatureGridSliceGridMixedContentPrimary {
+  /**
+   * Grid Items field in *FeatureGrid → Grid with Mixed Content → Primary*
+   *
+   * - **Field Type**: Group
+   * - **Placeholder**: *None*
+   * - **API ID Path**: feature_grid.grid_mixed_content.primary.items[]
+   * - **Documentation**: https://prismic.io/docs/field#group
+   */
+  items: prismic.GroupField<
+    Simplify<FeatureGridSliceGridMixedContentPrimaryItemsItem>
+  >;
+
+  /**
+   * Copy Email field in *FeatureGrid → Grid with Mixed Content → Primary*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: contact@nnamdiekechi.com
+   * - **API ID Path**: feature_grid.grid_mixed_content.primary.copy_email
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  copy_email: prismic.KeyTextField;
+
+  /**
+   * Left tech list field in *FeatureGrid → Grid with Mixed Content → Primary*
+   *
+   * - **Field Type**: Group
+   * - **Placeholder**: *None*
+   * - **API ID Path**: feature_grid.grid_mixed_content.primary.left_tech_list[]
+   * - **Documentation**: https://prismic.io/docs/field#group
+   */
+  left_tech_list: prismic.GroupField<
+    Simplify<FeatureGridSliceGridMixedContentPrimaryLeftTechListItem>
+  >;
+
+  /**
+   * Right Tech List field in *FeatureGrid → Grid with Mixed Content → Primary*
+   *
+   * - **Field Type**: Group
+   * - **Placeholder**: *None*
+   * - **API ID Path**: feature_grid.grid_mixed_content.primary.right_tech_list[]
+   * - **Documentation**: https://prismic.io/docs/field#group
+   */
+  right_tech_list: prismic.GroupField<
+    Simplify<FeatureGridSliceGridMixedContentPrimaryRightTechListItem>
+  >;
+}
+
+/**
+ * Grid with Mixed Content variation for FeatureGrid Slice
+ *
+ * - **API ID**: `grid_mixed_content`
+ * - **Description**: A feature grid with support for images, structured text, and tag lists per cell. Allows content creators to display a collection of feature blocks, each with customizable content types.
+ * - **Documentation**: https://prismic.io/docs/slice
+ */
+export type FeatureGridSliceGridMixedContent = prismic.SharedSliceVariation<
+  "grid_mixed_content",
+  Simplify<FeatureGridSliceGridMixedContentPrimary>,
+  never
+>;
+
+/**
+ * Slice variation for *FeatureGrid*
+ */
+type FeatureGridSliceVariation = FeatureGridSliceGridMixedContent;
+
+/**
+ * FeatureGrid Shared Slice
+ *
+ * - **API ID**: `feature_grid`
+ * - **Description**: *None*
+ * - **Documentation**: https://prismic.io/docs/slice
+ */
+export type FeatureGridSlice = prismic.SharedSlice<
+  "feature_grid",
+  FeatureGridSliceVariation
+>;
+
+/**
  * Primary content in *FeaturedProjects → Default → Primary*
  */
 export interface FeaturedProjectsSliceDefaultPrimary {
@@ -2702,6 +2946,7 @@ declare module "@prismicio/client" {
       SettingsDocumentData,
       SettingsDocumentDataNavItemItem,
       SettingsDocumentDataMobileNavItemItem,
+      SettingsDocumentDataTechListItem,
       AllDocumentTypes,
       ApproachSlice,
       ApproachSliceDefaultPrimary,
@@ -2749,6 +2994,13 @@ declare module "@prismicio/client" {
       FaqSliceDefaultPrimary,
       FaqSliceVariation,
       FaqSliceDefault,
+      FeatureGridSlice,
+      FeatureGridSliceGridMixedContentPrimaryItemsItem,
+      FeatureGridSliceGridMixedContentPrimaryLeftTechListItem,
+      FeatureGridSliceGridMixedContentPrimaryRightTechListItem,
+      FeatureGridSliceGridMixedContentPrimary,
+      FeatureGridSliceVariation,
+      FeatureGridSliceGridMixedContent,
       FeaturedProjectsSlice,
       FeaturedProjectsSliceDefaultPrimary,
       FeaturedProjectsSliceDefaultItem,
