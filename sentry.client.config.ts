@@ -29,10 +29,10 @@ Sentry.init({
       maskAllText: true,
       blockAllMedia: true,
     }),
-    Sentry.feedbackIntegration({
-      // Additional SDK configuration goes in here, for example:
-      colorScheme: "dark",
-    }),
+    // Sentry.feedbackIntegration({
+    //   // Additional SDK configuration goes in here, for example:
+    //   colorScheme: "dark",
+    // }),
     // Add browser profiling integration to the list of integrations
   ],
   profilesSampleRate: 1.0,

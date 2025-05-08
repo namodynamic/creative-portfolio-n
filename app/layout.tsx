@@ -39,11 +39,13 @@ export default function RootLayout({
         <div className="absolute left-0 max-md:hidden top-0 z-10">
           <img src="/bg.png" alt="background" />
         </div>
+        
         <script id="chatway" async src="https://cdn.chatway.app/widget.js?id=dEB2vdKKIwk1"></script>
+
         <Header />
 
         <main className="min-h-screen">{children}</main>
-        {/* <div className="background-gradient absolute inset-0 -z-50 max-h-screen" /> */}
+
         <Footer />
 
         <Analytics />
