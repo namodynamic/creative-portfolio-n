@@ -74,7 +74,7 @@ export const BentoGridItem = ({
   return (
     <div
       className={cn(
-        "group/bento relative row-span-1 flex flex-col justify-between space-y-4 overflow-hidden rounded-xl md:rounded-3xl border border-white/[0.1] shadow-none shadow-input transition duration-200 hover:shadow-xl",
+        "group/bento relative row-span-1 flex flex-col justify-between space-y-4 overflow-hidden rounded-xl border border-white/[0.1] shadow-none shadow-input transition duration-200 hover:shadow-xl md:rounded-3xl",
         className,
       )}
       style={{
@@ -92,6 +92,7 @@ export const BentoGridItem = ({
               height={220}
               alt={img}
               className={cn(imgClassName, "object-cover object-center ")}
+              priority
             />
           )}
         </div>
@@ -107,6 +108,7 @@ export const BentoGridItem = ({
               width={220}
               height={220}
               className="h-full w-full object-cover object-center"
+              priority
             />
           )}
         </div>
@@ -127,7 +129,10 @@ export const BentoGridItem = ({
           </div>
 
           <div
-            className={`z-10 max-w-96 font-sans text-md font-bold lg:text-2xl`}
+            className={cn(
+              id === 1 && "absolute flex flex-wrap",
+              "text-md z-10 max-w-96 font-sans font-bold lg:text-2xl",
+            )}
           >
             {title}
           </div>
@@ -181,6 +186,8 @@ export const BentoGridItem = ({
               />
             </div>
           )}
+
+          {id === 1 && <div className="h-[260px]"></div>}
         </div>
       </div>
     </div>
