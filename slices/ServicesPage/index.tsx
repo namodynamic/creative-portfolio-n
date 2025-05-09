@@ -79,7 +79,7 @@ const Services: FC<ServicesProps> = ({ slice }) => {
           {slice.primary.services.map((service, index) => (
             <div
               key={index}
-              className="rounded-lg border border-gray-800 bg-blue-850/50 p-6 shadow-lg backdrop-blur-sm"
+              className="rounded-xl border border-gray-800 bg-blue-850/50 p-6 shadow-lg backdrop-blur-sm"
             >
               <div className="mb-4 flex items-center">
                 <div className="mr-3 rounded-md bg-indigo-500/10 p-2">
@@ -97,8 +97,8 @@ const Services: FC<ServicesProps> = ({ slice }) => {
                     components={{
                       listItem: ({ children }) => (
                         <li className="flex items-start">
-                          <CheckCircle className="mr-2 mt-0.5 h-5 w-5 flex-shrink-0 text-indigo-500" />
-                          <span className="text-gray-300">{children}</span>
+                          <CheckCircle className="mr-2 mt-0.5 h-4 w-4 flex-shrink-0 text-indigo-500" />
+                          <span className="text-gray-300 text-sm">{children}</span>
                         </li>
                       ),
                     }}
@@ -136,7 +136,7 @@ const Services: FC<ServicesProps> = ({ slice }) => {
             {slice.primary.packages.map((item, index) => (
               <div
                 key={index}
-                className="group relative overflow-hidden rounded-lg border border-gray-800 bg-blue-850/50 p-6 shadow-lg backdrop-blur-sm"
+                className="group relative overflow-hidden rounded-xl border border-gray-800 bg-blue-850/50 p-6 shadow-lg backdrop-blur-sm"
               >
                 <div className="absolute -right-20 -top-20 h-40 w-40 rounded-full bg-indigo-500/10 transition-transform duration-500 group-hover:scale-150" />
                 <div className="relative">
@@ -148,17 +148,17 @@ const Services: FC<ServicesProps> = ({ slice }) => {
                   <h3 className="mb-3 text-center text-xl font-bold text-white">
                     {item.title}
                   </h3>
-                  <p className="mb-6 text-center text-gray-300">
+                  <p className="mb-6 text-center h-14 text-gray-300">
                     {item.description}
                   </p>
-                  <div className="mb-8 space-y-3">
+                  <div className="mb-8 justify-items-center space-y-3">
                     <PrismicRichText
                       field={item.package_features}
                       components={{
                         listItem: ({ children }) => (
                           <li className="flex items-start">
-                            <CheckCircle className="mr-2 mt-0.5 h-5 w-5 flex-shrink-0 text-indigo-500" />
-                            <span className="text-base text-gray-300">
+                            <CheckCircle className="mr-2 mt-0.5 h-4 w-4 flex-shrink-0 text-indigo-500" />
+                            <span className="text-sm text-gray-300">
                               {children}
                             </span>
                           </li>
@@ -175,7 +175,7 @@ const Services: FC<ServicesProps> = ({ slice }) => {
                   <div className="text-center">
                     <PrismicNextLink
                       field={item.link_url}
-                      className="inline-flex w-full items-center justify-center rounded-md bg-gradient-to-r from-indigo-600 to-purple px-6 py-3 font-medium text-white shadow-lg transition-all hover:bg-indigo-700 hover:from-indigo-700 hover:to-purple2"
+                      className="inline-flex w-full items-center justify-center rounded-2xl bg-gradient-to-r from-indigo-600 to-purple px-6 py-3 font-medium text-white shadow-lg transition-all hover:bg-indigo-700 hover:from-indigo-700 hover:to-purple2"
                     >
                       {item.link_text}
                       <ArrowRight className="ml-2 h-4 w-4" />

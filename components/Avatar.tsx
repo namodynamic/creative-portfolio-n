@@ -80,6 +80,7 @@ export default function Avatar({ image, className }: AvatarProps) {
           field={image}
           className="avatar-image h-full w-full object-fill"
           imgixParams={{ q: 90 }}
+          priority
         />
         <div className="highlight absolute inset-0 hidden w-full scale-110 bg-gradient-to-tr from-transparent via-white to-transparent opacity-0 md:block"></div>
       </div>

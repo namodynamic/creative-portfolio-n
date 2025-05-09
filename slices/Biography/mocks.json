@@ -14,7 +14,7 @@
 					{
 						"type": "paragraph",
 						"content": {
-							"text": "Officia tempor aliqua deserunt duis. Nisi reprehenderit ea sit irure tempor consequat. Aute eiusmod non consequat excepteur voluptate adipisicing enim esse est excepteur ut aliqua."
+							"text": "Nostrud labore enim dolor pariatur in est sit veniam dolor laborum. Est id cillum ut."
 						}
 					}
 				]
@@ -25,6 +25,7 @@
 				"type": "Text"
 			},
 			"button_link": {
+				"key": "74db9bfb-dd28-48bc-abee-54bed1b6341e",
 				"__TYPE__": "LinkContent",
 				"value": {
 					"__TYPE__": "ExternalLink",

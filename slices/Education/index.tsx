@@ -28,11 +28,11 @@ const Education = ({ slice }: EducationProps): JSX.Element => {
           key={index}
           className="ml-6 mt-8 border-b-2 border-black-200 md:ml-12 md:mt-16"
         >
-          <Heading as="h3" size="sm" className="text-white-600 max-md:text-2xl">
+          <Heading as="h3" size="sm" className="text-slate-400 max-md:text-2xl">
             {item.title}
           </Heading>
 
-          <div className="mt-1 flex w-fit items-center gap-1 text-2xl font-semibold tracking-tight text-white-500 max-md:text-lg">
+          <div className="mt-1 flex w-fit items-center gap-1 text-2xl font-semibold tracking-tight text-slate-500 max-md:text-lg">
             <span>{item.institution}</span>
             <span className="text-3xl font-extralight max-md:text-xl">
               -
@@ -40,7 +40,7 @@ const Education = ({ slice }: EducationProps): JSX.Element => {
             <span>{item.time_period}</span>{" "}
           </div>
 
-          <div className="prose prose-sm prose-slate prose-invert col-start-1 mb-5 text-white-500 sm:prose-lg">
+          <div className="prose prose-sm prose-slate prose-invert col-start-1 mb-5 text-slate-600 sm:prose-lg">
             <PrismicRichText field={item.description} />
           </div>
         </div>

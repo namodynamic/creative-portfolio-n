@@ -47,7 +47,7 @@ const Certifications = ({ slice, index }: CertificationsProps): JSX.Element => {
             <div
               key={index}
               className={cn(
-                "card group relative aspect-[16/11] w-full cursor-pointer overflow-hidden rounded-2xl border border-neutral-800 shadow-md shadow-white/20 transition-all duration-500",
+                "card group relative aspect-[16/11] w-full overflow-hidden rounded-2xl border border-neutral-800 shadow-md shadow-white/20 transition-all duration-500",
                 "hover:after:absolute hover:after:inset-0 hover:after:rounded-2xl hover:after:transition-all hover:after:duration-500 hover:after:content-[''] md:hover:after:bg-black/60",
               )}
               style={{
@@ -80,17 +80,17 @@ const Certifications = ({ slice, index }: CertificationsProps): JSX.Element => {
                   />
                   <Badge
                     variant="secondary"
-                    className="bg-black/40 px-2 py-1 text-xs text-white backdrop-blur hover:bg-black/50"
+                    className="bg-black/40 px-2 py-1 text-xs text-slate-400 backdrop-blur hover:bg-black/50"
                   >
                     {item.time_period}
                   </Badge>
                 </div>
 
-                <div className="mt-6 space-y-2 transition-opacity duration-500 md:group-hover:opacity-0">
+                <div className="mt-6 space-y-2 text-slate-300 transition-opacity duration-500 md:group-hover:opacity-0">
                   <h3 className="text-xl font-semibold leading-tight tracking-wide">
                     {item.title}
                   </h3>
-                  <div className="line-clamp-3 text-sm opacity-80">
+                  <div className="line-clamp-3 text-sm text-slate-300 opacity-80">
                     <PrismicRichText field={item.description} />
                   </div>
                 </div>
@@ -103,7 +103,7 @@ const Certifications = ({ slice, index }: CertificationsProps): JSX.Element => {
                     size="sm"
                     asChild
                     variant="ghost"
-                    className="text-gray-300 hover:bg-black/20 hover:text-white"
+                    className="text-slate-300 hover:bg-black/20 hover:text-white"
                   >
                     <PrismicNextLink
                       field={item.credential_url}

@@ -1,11 +1,8 @@
 import { PrismicRichText, SliceComponentProps } from "@prismicio/react";
-import { PrismicNextLink } from "@prismicio/next";
 import { Content } from "@prismicio/client";
 import Avatar from "@/components/Avatar";
 import Bounded from "@/components/Bounded";
 import Heading from "@/components/Heading";
-import { FaLocationArrow } from "react-icons/fa6";
-import clsx from "clsx";
 
 import type { JSX } from "react";
 
@@ -28,7 +25,7 @@ const Biography = ({ slice }: BiographyProps): JSX.Element => {
           {slice.primary.heading}
         </Heading>
 
-        <div className="prose prose-base prose-slate prose-invert col-start-1 sm:prose-xl">
+        <div className="prose prose-base text-slate-400 lg:prose-lg prose-invert col-start-1">
           <PrismicRichText field={slice.primary.description} />
         </div>
 

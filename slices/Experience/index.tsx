@@ -14,6 +14,9 @@ import "react-vertical-timeline-component/style.min.css";
 
 import type { JSX } from "react";
 
+// const LinearGradient =
+//   "linear-gradient(0deg, rgba(145, 40, 207, 0) 0%, #004384 30%, #00AEFF 57.51%, #20BBD9 96.91%)";
+
 /**
  * Props for `Experience`.
  */
@@ -23,6 +26,16 @@ export type ExperienceProps = SliceComponentProps<Content.ExperienceSlice>;
  * Component for "Experience" Slices.
  */
 const Experience = ({ slice }: ExperienceProps): JSX.Element => {
+  
+  const dynamicLinearGradient = slice.items
+    .map(
+      (item, index) =>
+        `${item.icon_bg || "#1d1d2f"} ${25 + (index / slice.items.length) * 75}%`,
+    )
+    .join(", ");
+
+  const linearGradient = `linear-gradient(0deg, rgba(145, 40, 207, 0) 0%, ${dynamicLinearGradient})`;
+
   return (
     <Bounded
       data-slice-type={slice.slice_type}
@@ -33,12 +46,12 @@ const Experience = ({ slice }: ExperienceProps): JSX.Element => {
         {slice.primary.heading}
       </Heading>
 
-      <div className="prose prose-sm prose-invert col-start-1 mt-5 text-slate-500  sm:prose-lg">
+      <div className="prose prose-base prose-invert col-start-1 mt-5 text-slate-500  lg:prose-lg">
         <p>{slice.primary.intro}</p>
       </div>
 
       <div className="mt-8 flex sm:mt-16">
-        <VerticalTimeline layout="1-column-left">
+        <VerticalTimeline layout="1-column-left" lineColor={linearGradient}>
           {slice.items
             .slice()
             .reverse()
@@ -50,23 +63,27 @@ const Experience = ({ slice }: ExperienceProps): JSX.Element => {
                   <div className="flex h-full w-full items-center justify-center ">
                     <PrismicNextImage
                       field={item.icon}
-                      className="h-[80%] w-[80%] rounded-full object-contain"
+                      className="h-[100%] w-[100%] rounded-full object-contain"
                     />
                   </div>
                 }
                 iconStyle={{
-                  background: item.icon_bg ? item.icon_bg : "#1d1836",
-                }}
-                contentStyle={{
-                  background: "rgba(17,25, 40, 0.125)",
-                  color: "#fff",
-                  border: "0.5px solid rgba(255, 255, 255, 0.11)",
-                  borderRadius: "16px",
+                  background: item.icon_bg ? item.icon_bg : "#1d1d2f",
+                  color: "#708090",
+                  border: `4px solid ${item.icon_bg}`,
                   borderStyle: "solid",
                   boxShadow: "none",
                 }}
+                contentStyle={{
+                  background: "rgba(17,25, 40, 0.125)",
+                  color: "#708090",
+                  border: "0.2px solid rgba(255, 255, 255, 0.11)",
+                  borderRadius: "12px",
+                  borderStyle: "solid",
+                  boxShadow: `${item.icon_bg} 0px 0.3px 0.3px 0px`,
+                }}
                 contentArrowStyle={{
-                  borderRight: "10px solid  rgba(255, 255, 255, 0.40)",
+                  borderRight: `10px solid  ${item.icon_bg}`,
                 }}
                 className="vertical-timeline-element--work"
               >
@@ -81,7 +98,7 @@ const Experience = ({ slice }: ExperienceProps): JSX.Element => {
                     {item.company}
                   </p>
                 </div>
-                <div className="prose prose-md prose-slate prose-invert col-start-1 text-white-500 sm:prose-lg">
+                <div className="prose prose-base prose-invert text-slate-500 lg:prose-lg">
                   <PrismicRichText field={item.description} />
                 </div>
               </VerticalTimelineElement>
