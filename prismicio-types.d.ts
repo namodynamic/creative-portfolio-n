@@ -766,7 +766,29 @@ interface SettingsDocumentData {
    * - **Tab**: Main
    * - **Documentation**: https://prismic.io/docs/field#key-text
    */
-  copy_email: prismic.KeyTextField /**
+  copy_email: prismic.KeyTextField;
+
+  /**
+   * Blog Author Image field in *Settings*
+   *
+   * - **Field Type**: Image
+   * - **Placeholder**: *None*
+   * - **API ID Path**: settings.blog_author_img
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#image
+   */
+  blog_author_img: prismic.ImageField<never>;
+
+  /**
+   * Blog Author Bio field in *Settings*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: My short bio
+   * - **API ID Path**: settings.author_bio
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  author_bio: prismic.KeyTextField /**
    * Meta Title field in *Settings*
    *
    * - **Field Type**: Text

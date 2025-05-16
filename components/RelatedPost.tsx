@@ -1,0 +1,72 @@
+import * as Prismic from "@prismicio/client";
+import { createClient } from "@/prismicio";
+import Image from "next/image";
+import Link from "next/link";
+import { formatDate } from "@/utils/FormatDate";
+
+type TagPageProps = {
+  params: { tag: string };
+};
+
+export default async function RelatedPosts({ params }: TagPageProps) {
+  const client = createClient();
+  const { tag } = params;
+
+  if (!tag) return null;
+
+  const relatedPosts = await client.getByType("blog_post", {
+    predicates: [Prismic.filter.at("document.tags", [tag])],
+    orderings: [
+      { field: "document.first_publication_date", direction: "desc" },
+    ],
+    pageSize: 3,
+  });
+
+  if (!relatedPosts.results.length) return null;
+
+  return (
+    <div className="mt-12">
+      <h2 className="mb-6 text-2xl font-bold text-white">Related Posts</h2>
+      <div className="grid grid-cols-1 gap-6 md:grid-cols-3">
+        {relatedPosts.results.map((post) => {
+          const formattedDate = formatDate(post.data.date);
+          
+          const firstParagraph =
+            post.data.slices.find(
+              (slice) =>
+                slice.slice_type === "text_block" &&
+                slice.primary?.text &&
+                slice.primary.text[0]?.type === "paragraph",
+            )?.primary?.text[0]?.text || "No description available.";
+
+          return (
+            <Link
+              key={post.id}
+              href={`/blog/${post.uid}`}
+              className="group overflow-hidden rounded-xl border border-slate-800 bg-blue-850/50 shadow-xl backdrop-blur-sm transition-transform hover:-translate-y-1"
+            >
+              <div className="relative h-40 w-full overflow-hidden">
+                <Image
+                  src={post.data.hover_image?.url || ""}
+                  alt={post.data.title || "Blog Post"}
+                  fill
+                  sizes=""
+                  className="object-cover transition-transform group-hover:scale-105"
+                />
+              </div>
+              <div className="p-4">
+                <p className="mb-2 text-xs text-gray-400">{formattedDate}</p>
+                <h3 className="mb-2 font-bold text-white transition-colors group-hover:text-indigo-400">
+                  {post.data.title}
+                </h3>
+                <p className="line-clamp-2 text-sm text-gray-400">
+                  {firstParagraph}
+                </p>
+              </div>
+            </Link>
+          );
+        })}
+      </div>
+    </div>
+  );
+}

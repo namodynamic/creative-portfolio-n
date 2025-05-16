@@ -14,10 +14,10 @@ export type ImageBlockProps = SliceComponentProps<Content.ImageBlockSlice>;
  */
 const ImageBlock = ({ slice }: ImageBlockProps): JSX.Element => {
   return (
-    // <PrismicNextImage field={slice.primary.image} imgixParams={{ w: 600 }} />
     <PrismicNextImage
       field={slice.primary.image}
       className="not-prose w-full h-full rounded-md  my-10 md:my-14 lg:my-16"
+      fallbackAlt=""
     />
   );
 };

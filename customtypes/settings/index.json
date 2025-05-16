@@ -158,6 +158,21 @@
           "label": "Copy Email",
           "placeholder": "contact@nnamdiekechi.com"
         }
+      },
+      "blog_author_img": {
+        "type": "Image",
+        "config": {
+          "label": "Blog Author Image",
+          "constraint": {},
+          "thumbnails": []
+        }
+      },
+      "author_bio": {
+        "type": "Text",
+        "config": {
+          "label": "Blog Author Bio",
+          "placeholder": "My short bio"
+        }
       }
     },
     "SEO and Metadata": {
