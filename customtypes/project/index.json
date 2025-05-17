@@ -6,11 +6,40 @@
   "status": true,
   "json": {
     "Main": {
+      "uid": {
+        "config": {
+          "label": "UID"
+        },
+        "type": "UID"
+      },
       "title": {
         "type": "Text",
         "config": {
           "label": "Title",
           "placeholder": ""
+        }
+      },
+      "tech_stack": {
+        "type": "Group",
+        "config": {
+          "label": "Tech Stack",
+          "repeat": true,
+          "fields": {
+            "name": {
+              "type": "Text",
+              "config": {
+                "label": "Name",
+                "placeholder": "e.g. React, Next.js, Python, Django"
+              }
+            },
+            "color": {
+              "type": "Color",
+              "config": {
+                "label": "Color",
+                "placeholder": "e.g. #fff"
+              }
+            }
+          }
         }
       },
       "source_code": {
@@ -29,12 +58,6 @@
           "select": null
         }
       },
-      "uid": {
-        "config": {
-          "label": "UID"
-        },
-        "type": "UID"
-      },
       "date": {
         "type": "Date",
         "config": {
@@ -48,6 +71,95 @@
           "label": "Hover Image",
           "constraint": {},
           "thumbnails": []
+        }
+      },
+      "key_features": {
+        "type": "Group",
+        "config": {
+          "label": "Key Features",
+          "repeat": true,
+          "fields": {
+            "features": {
+              "type": "Text",
+              "config": {
+                "label": "Features",
+                "placeholder": ""
+              }
+            }
+          }
+        }
+      },
+      "challenges": {
+        "type": "Group",
+        "config": {
+          "label": "Challenges",
+          "repeat": true,
+          "fields": {
+            "challenges": {
+              "type": "Text",
+              "config": {
+                "label": "Challenges",
+                "placeholder": ""
+              }
+            }
+          }
+        }
+      },
+      "role_contribution": {
+        "type": "StructuredText",
+        "config": {
+          "label": "Role & Contribution ",
+          "placeholder": "",
+          "allowTargetBlank": true,
+          "multi": "paragraph,strong"
+        }
+      },
+      "key_results": {
+        "type": "StructuredText",
+        "config": {
+          "label": "Key Results & Impacts",
+          "placeholder": "",
+          "allowTargetBlank": true,
+          "multi": "paragraph,list-item,o-list-item,embed,strong"
+        }
+      },
+      "development_time": {
+        "type": "Text",
+        "config": {
+          "label": "Development Time",
+          "placeholder": "e.g. 5 weeks"
+        }
+      },
+      "key_achievement": {
+        "type": "Text",
+        "config": {
+          "label": "Key Achievement",
+          "placeholder": ""
+        }
+      },
+      "current_status": {
+        "type": "Select",
+        "config": {
+          "label": "Current Status",
+          "placeholder": "e.g. Active Development, Completed",
+          "options": ["Active Development", "Completed"],
+          "default_value": "Active Development"
+        }
+      },
+      "accessibility": {
+        "type": "Select",
+        "config": {
+          "label": "Accessibility ",
+          "placeholder": "e.g. Open Source project, Private project",
+          "options": ["Open Source Project", "Private Project"],
+          "default_value": "Open Source Project"
+        }
+      },
+      "started_data": {
+        "type": "Text",
+        "config": {
+          "label": "Started Date",
+          "placeholder": "e.g. 2024, 2024"
         }
       },
       "slices": {

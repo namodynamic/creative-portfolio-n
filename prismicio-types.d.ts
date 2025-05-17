@@ -371,6 +371,61 @@ interface PageDocumentData {
 export type PageDocument<Lang extends string = string> =
   prismic.PrismicDocumentWithUID<Simplify<PageDocumentData>, "page", Lang>;
 
+/**
+ * Item in *Project → Tech Stack*
+ */
+export interface ProjectDocumentDataTechStackItem {
+  /**
+   * Name field in *Project → Tech Stack*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: e.g. React, Next.js, Python, Django
+   * - **API ID Path**: project.tech_stack[].name
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  name: prismic.KeyTextField;
+
+  /**
+   * Color field in *Project → Tech Stack*
+   *
+   * - **Field Type**: Color
+   * - **Placeholder**: e.g. #fff
+   * - **API ID Path**: project.tech_stack[].color
+   * - **Documentation**: https://prismic.io/docs/field#color
+   */
+  color: prismic.ColorField;
+}
+
+/**
+ * Item in *Project → Key Features*
+ */
+export interface ProjectDocumentDataKeyFeaturesItem {
+  /**
+   * Features field in *Project → Key Features*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: project.key_features[].features
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  features: prismic.KeyTextField;
+}
+
+/**
+ * Item in *Project → Challenges*
+ */
+export interface ProjectDocumentDataChallengesItem {
+  /**
+   * Challenges field in *Project → Challenges*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: project.challenges[].challenges
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  challenges: prismic.KeyTextField;
+}
+
 type ProjectDocumentDataSlicesSlice = ImageBlockSlice | TextBlockSlice;
 
 /**
@@ -387,6 +442,17 @@ interface ProjectDocumentData {
    * - **Documentation**: https://prismic.io/docs/field#key-text
    */
   title: prismic.KeyTextField;
+
+  /**
+   * Tech Stack field in *Project*
+   *
+   * - **Field Type**: Group
+   * - **Placeholder**: *None*
+   * - **API ID Path**: project.tech_stack[]
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#group
+   */
+  tech_stack: prismic.GroupField<Simplify<ProjectDocumentDataTechStackItem>>;
 
   /**
    * Source Code field in *Project*
@@ -443,6 +509,115 @@ interface ProjectDocumentData {
    * - **Documentation**: https://prismic.io/docs/field#image
    */
   hover_image: prismic.ImageField<never>;
+
+  /**
+   * Key Features field in *Project*
+   *
+   * - **Field Type**: Group
+   * - **Placeholder**: *None*
+   * - **API ID Path**: project.key_features[]
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#group
+   */
+  key_features: prismic.GroupField<
+    Simplify<ProjectDocumentDataKeyFeaturesItem>
+  >;
+
+  /**
+   * Challenges field in *Project*
+   *
+   * - **Field Type**: Group
+   * - **Placeholder**: *None*
+   * - **API ID Path**: project.challenges[]
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#group
+   */
+  challenges: prismic.GroupField<Simplify<ProjectDocumentDataChallengesItem>>;
+
+  /**
+   * Role & Contribution  field in *Project*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: project.role_contribution
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+   */
+  role_contribution: prismic.RichTextField;
+
+  /**
+   * Key Results & Impacts field in *Project*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: project.key_results
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+   */
+  key_results: prismic.RichTextField;
+
+  /**
+   * Development Time field in *Project*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: e.g. 5 weeks
+   * - **API ID Path**: project.development_time
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  development_time: prismic.KeyTextField;
+
+  /**
+   * Key Achievement field in *Project*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: project.key_achievement
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  key_achievement: prismic.KeyTextField;
+
+  /**
+   * Current Status field in *Project*
+   *
+   * - **Field Type**: Select
+   * - **Placeholder**: e.g. Active Development, Completed
+   * - **Default Value**: Active Development
+   * - **API ID Path**: project.current_status
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#select
+   */
+  current_status: prismic.SelectField<
+    "Active Development" | "Completed",
+    "filled"
+  >;
+
+  /**
+   * Accessibility  field in *Project*
+   *
+   * - **Field Type**: Select
+   * - **Placeholder**: e.g. Open Source project, Private project
+   * - **Default Value**: Open Source Project
+   * - **API ID Path**: project.accessibility
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#select
+   */
+  accessibility: prismic.SelectField<
+    "Open Source Project" | "Private Project",
+    "filled"
+  >;
+
+  /**
+   * Started Date field in *Project*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: e.g. 2024, 2024
+   * - **API ID Path**: project.started_data
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  started_data: prismic.KeyTextField;
 
   /**
    * Slice Zone field in *Project*
@@ -2963,6 +3138,9 @@ declare module "@prismicio/client" {
       PageDocumentDataSlicesSlice,
       ProjectDocument,
       ProjectDocumentData,
+      ProjectDocumentDataTechStackItem,
+      ProjectDocumentDataKeyFeaturesItem,
+      ProjectDocumentDataChallengesItem,
       ProjectDocumentDataSlicesSlice,
       SettingsDocument,
       SettingsDocumentData,

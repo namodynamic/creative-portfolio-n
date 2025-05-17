@@ -1,6 +1,7 @@
 import { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { SliceZone } from "@prismicio/react";
+import { asImageSrc } from "@prismicio/client";
 import Link from "next/link";
 import { createClient } from "@/prismicio";
 import { components } from "@/slices";
@@ -148,6 +149,9 @@ export async function generateMetadata(props: {
   return {
     title: page.data.meta_title,
     description: page.data.meta_description,
+    openGraph: {
+          images: [{ url: asImageSrc(page.data.meta_image) ?? "" }],
+        },
   };
 }
 
