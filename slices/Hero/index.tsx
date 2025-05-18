@@ -9,7 +9,7 @@ import { TextGenerateEffect } from "@/components/ui/TextGenerateEffect";
 import MagicButton from "@/components/ui/MagicButton";
 import { FaArrowDown } from "react-icons/fa6";
 import Link from "next/link";
-
+import Image from "next/image";
 
 /**
  * Props for `Hero`.
@@ -51,6 +51,7 @@ const Hero = ({ slice }: HeroProps): JSX.Element => {
         data-slice-type={slice.slice_type}
         data-slice-variation={slice.variation}
         ref={component}
+        className="mb-10 bg-cover bg-center bg-no-repeat max-sm:bg-hero-pattern"
       >
         <div className="relative mt-10 w-full overflow-hidden md:mt-20">
           <div className="relative z-10 flex justify-center">
@@ -64,7 +65,7 @@ const Hero = ({ slice }: HeroProps): JSX.Element => {
                 className="text-center text-3xl md:text-5xl lg:text-6xl"
               />
 
-              <p className="mb-8 text-center text-sm tracking-tight text-blue-100 md:text-lg md:tracking-wider lg:text-2xl">
+              <p className="mb-8 text-center text-base tracking-tight text-blue-100 md:text-lg md:tracking-wider lg:text-2xl">
                 {slice.primary.introduction}
               </p>
 
@@ -82,6 +83,16 @@ const Hero = ({ slice }: HeroProps): JSX.Element => {
           </div>
         </div>
       </Bounded>
+      <div className="absolute top-0 max-sm:hidden">
+        <Image
+          width={1920}
+          height={1080}
+          className="object-cover"
+          src="/herobg.png"
+          alt="background"
+          priority
+        />
+      </div>
     </>
   );
 };

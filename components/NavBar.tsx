@@ -8,6 +8,7 @@ import { usePathname } from "next/navigation";
 import { motion } from "framer-motion";
 import { SendHorizonal, Send } from "lucide-react";
 import { cn } from "@/lib/utils";
+import Image from "next/image";
 
 export default function NavBar({
   settings,
@@ -49,10 +50,10 @@ export default function NavBar({
       animate={{ y: 0, opacity: 1 }}
       transition={{ duration: 0.5 }}
       className={cn(
-        "fixed left-0 right-0 top-0 z-50 mx-auto px-2 my-4 flex max-w-7xl items-center justify-between py-2  transition-all duration-300 max-md:px-4 md:rounded-xl",
+        "fixed left-0 right-0 top-0 z-50 mx-auto my-4 flex max-w-7xl items-center justify-between px-2 py-2  transition-all duration-300 max-md:px-4 md:rounded-xl",
         scrolled
           ? "bg-black-100/50 bg-opacity-80 backdrop-blur-md md:shadow-lg"
-          : "bg-transparent md:bg-black-100 md:backdrop-blur-sm",
+          : "bg-transparent",
       )}
     >
       {/* Logo */}
@@ -113,7 +114,7 @@ export default function NavBar({
                   }
                 >
                   {label}
-                  <span className="bg-purple2 absolute bottom-0 left-0 right-0 mx-auto h-0.5 w-0 transition-all duration-300 group-hover:w-1/2" />
+                  <span className="absolute bottom-0 left-0 right-0 mx-auto h-0.5 w-0 bg-purple2 transition-all duration-300 group-hover:w-1/2" />
                   {pathname.includes(asLink(link) as string) && (
                     <motion.span
                       layoutId="navbar-active"
@@ -139,7 +140,7 @@ export default function NavBar({
           >
             <span
               className={cn(
-                "bg-purple2 absolute inset-0 z-0 h-full translate-y-8 transition-transform  duration-300 ease-in-out group-hover:translate-y-0",
+                "absolute inset-0 z-0 h-full translate-y-8 bg-violet-600 transition-transform  duration-300 ease-in-out group-hover:translate-y-0",
               )}
             />
             <span className="relative flex items-center justify-center gap-2">
@@ -159,12 +160,28 @@ export default function NavBar({
             height: mobileMenuOpen ? "auto" : 0,
           }}
           className={cn(
-            "absolute left-0 top-0 z-40 w-full overflow-hidden bg-black-100/90 backdrop-blur-md",
+            "absolute left-0 top-0 z-40 w-full overflow-hidden bg-black-100",
             mobileMenuOpen ? "flex" : "hidden",
           )}
         >
-          <div className="flex w-full flex-col items-center justify-center gap-6 p-8 pt-20">
-            <ul className="flex w-full flex-col items-center gap-4">
+          <div className="flex h-[80dvh] w-full flex-col items-center justify-center gap-6 p-8">
+            <div className="absolute left-0 top-1/2 block h-[380px] w-[960px] -translate-y-1/2 translate-x-[-290px] rotate-90">
+              <Image
+                src="/bg-outlines.svg"
+                width={900}
+                height={380}
+                alt="outline"
+                className="z-2 relative"
+              />
+              <Image
+                src="/bg-outlines-fill.png"
+                width={900}
+                height={380}
+                alt="outline"
+                className="absolute inset-0 opacity-5 mix-blend-soft-light"
+              />
+            </div>
+            <ul className="relative z-10 flex w-full flex-col items-center gap-4">
               {settings.data.nav_item.map(({ link, label }) => (
                 <motion.li
                   key={label}
@@ -196,7 +213,7 @@ export default function NavBar({
             >
               <PrismicNextLink
                 field={settings.data.cta_link}
-                className="flex items-center justify-center gap-1 rounded-lg bg-white px-6 py-2 text-navy-900"
+                className="relative z-10 flex items-center justify-center gap-1 rounded-lg bg-white px-6 py-2 text-navy-900"
                 onClick={() => setMobileMenuOpen(false)}
               >
                 {settings.data.cta_label}

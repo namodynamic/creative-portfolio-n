@@ -159,7 +159,7 @@ const Testimonial = ({ slice }: TestimonialProps): JSX.Element => {
       >
         <h1 className="heading">
           {slice.primary.title?.split(" ").slice(0, -2).join(" ")}{" "}
-          <span className="text-purple">
+          <span className="text-violet-500">
             {slice.primary.title?.split(" ").slice(-2).join(" ")}
           </span>
         </h1>

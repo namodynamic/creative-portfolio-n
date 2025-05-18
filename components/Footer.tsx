@@ -12,13 +12,13 @@ export default async function Footer() {
   const settings = await client.getSingle("settings");
 
   return (
-    <footer className="mt-12 w-full  border-t border-blue-200 bg-black/20 shadow-2xl shadow-white/70">
+    <footer className="mt-12 w-full border-t-[0.5px] border-blue-200">
       <Bounded as="section">
         <div className="mx-auto max-w-7xl px-6">
           <div className="relative grid grid-cols-1 gap-12 md:grid-cols-3">
             {/* Left Column - About */}
             <div className="z-20 space-y-6">
-              <div className="items-center border-l-4 border-purple2 pl-3">
+              <div className="items-center border-l-4 border-violet-800 pl-3">
                 <h2 className="text-2xl font-bold text-slate-300">
                   {settings.data.name}
                 </h2>
@@ -136,7 +136,7 @@ export default async function Footer() {
               <div className="relative z-20 flex items-center gap-4">
                 <Link
                   href="/contact"
-                  className="flex items-center gap-2 rounded bg-purple px-6 py-3 font-medium text-white transition-all hover:bg-purple2"
+                  className="flex items-center rounded-lg gap-2 bg-violet-800 px-6 py-3 font-medium text-white transition-all hover:bg-violet-900"
                 >
                   Start a Project
                   <ArrowRight size={16} />
@@ -146,17 +146,11 @@ export default async function Footer() {
           </div>
         </div>
 
-        <div className="mb-0 mt-12 border-t border-blue-200/80 pt-6 text-center">
+        <div className="mb-0 mt-12 border-t-[0.5px] border-blue-200/80 pt-6 text-center">
           <p className="text-sm text-gray-400">
             &copy; {new Date().getFullYear()} {settings.data.name}. All rights
             reserved.
           </p>
-        </div>
-        <div className="absolute bottom-0 left-0 z-10 hidden md:block">
-          <img src="/bg.png" alt="background" />
-        </div>
-        <div className="absolute bottom-0 right-0 z-10 hidden md:block">
-          <img src="/bg.png" alt="background" />
         </div>
       </Bounded>
     </footer>

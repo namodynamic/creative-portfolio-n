@@ -41,7 +41,8 @@ const config: Config = {
       colors: {
         black: {
           "50": "#1c1c21",
-          "100": "#000319",
+          "75": "#000319",
+          "100": "#050816",
           "200": "rgba(17, 25, 40, 0.75)",
           "300": "rgba(255, 255, 255, 0.125)",
           "500": "#3A3A49",
@@ -101,6 +102,9 @@ const config: Config = {
           "800": "#051736",
           "900": "#020b1c",
         },
+      },
+       backgroundImage: {
+        "hero-pattern": "url('/herobg.png')",
       },
       borderRadius: {
         lg: "var(--radius)",

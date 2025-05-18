@@ -186,8 +186,8 @@ const Services: FC<ServicesProps> = ({ slice }) => {
             ))}
           </div>
 
-          <div className="mt-8 flex items-center justify-center space-x-1 text-center">
-            <CheckCircle className="h-4 w-4 flex-shrink-0 text-indigo-500" />
+          <div className="mt-8 sm:flex items-center justify-center space-x-1 text-center">
+            <CheckCircle className="h-4 w-4 mr-1 inline-block text-indigo-500" />
             <p className="text-xs leading-relaxed text-gray-400">
               Flexible payment plans available for all packages. Ask about our
               50% upfront option.
@@ -197,7 +197,7 @@ const Services: FC<ServicesProps> = ({ slice }) => {
       </div>
 
       {/* Development Process */}
-      <div className="bg-[#050824] px-4 py-16 sm:px-6 lg:px-8">
+      <div className="bg-blue-850/50 px-4 py-16 sm:px-6 lg:px-8">
         <div className="mx-auto max-w-6xl">
           <h2 className="mb-12 text-center text-3xl font-bold text-white">
             {slice.primary.development_process}
@@ -240,7 +240,7 @@ const Services: FC<ServicesProps> = ({ slice }) => {
               <AccordionItem
                 key={index}
                 value={`item-${index}`}
-                className="rounded-lg border border-gray-800 bg-blue-850/50 px-6 shadow-lg backdrop-blur-sm"
+                className="rounded-lg border-[0.5px] border-gray-800 bg-blue-850/50 px-6 shadow-lg backdrop-blur-sm"
               >
                 <AccordionTrigger className="text-lg font-medium text-white">
                   {item.question}

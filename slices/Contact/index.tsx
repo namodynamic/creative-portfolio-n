@@ -407,7 +407,7 @@ const Contact = ({ slice }: ContactProps): JSX.Element => {
                 <AccordionItem
                   value={`item-${index + 1}`}
                   key={index}
-                  className="rounded-lg border border-gray-800 bg-blue-850/50 px-6 py-2 text-white shadow-lg backdrop-blur-sm"
+                  className="rounded-lg border-[0.5px] border-gray-800 bg-blue-850/50 px-6 py-2 text-white shadow-lg backdrop-blur-sm"
                 >
                   <AccordionTrigger className="text-lg font-medium">
                     {item.question}
@@ -431,7 +431,7 @@ const Contact = ({ slice }: ContactProps): JSX.Element => {
           </div>
 
           {/* CTA */}
-          <div className="contact-card mt-20 rounded-lg border border-gray-800 bg-blue-850/70 p-6 shadow-lg backdrop-blur-sm sm:p-12">
+          <div className="contact-card mt-20 rounded-xl border-[0.5px] border-gray-800 bg-blue-850/70 p-6 shadow-lg backdrop-blur-sm sm:p-12">
             <div className="text-center">
               <h2 className="mb-4 text-3xl font-bold text-white">
                 {slice.primary.cta_title}

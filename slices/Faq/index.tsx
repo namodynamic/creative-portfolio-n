@@ -147,7 +147,7 @@ const Faq: FC<FaqProps> = ({ slice }) => {
                   <AccordionItem
                     key={index}
                     value={`item-${index}`}
-                    className="rounded-lg border border-gray-800 bg-blue-850/50 px-6 shadow-lg backdrop-blur-sm"
+                    className="rounded-lg border-[0.5px] border-gray-800 bg-blue-850/50 px-6 shadow-lg backdrop-blur-sm"
                   >
                     <AccordionTrigger className="text-lg font-medium text-white">
                       {item.question}
@@ -163,7 +163,7 @@ const Faq: FC<FaqProps> = ({ slice }) => {
         </div>
 
         {/* cta */}
-        <div className="rounded-lg border border-gray-800 bg-blue-850/70 p-8 text-center shadow-lg backdrop-blur-sm md:p-12">
+        <div className="rounded-xl border-[0.5px] border-gray-800 bg-blue-850/70 p-8 text-center shadow-lg backdrop-blur-sm md:p-12">
           <h2 className="mb-4 text-2xl font-bold text-white md:text-3xl">
             Still Have Questions?
           </h2>

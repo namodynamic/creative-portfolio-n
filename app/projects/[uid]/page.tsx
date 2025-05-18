@@ -348,13 +348,12 @@ export default async function Page({ params }: { params: Promise<Params> }) {
                 <h3 className="mb-4 text-lg font-medium text-white">Tags</h3>
                 <div className="flex flex-wrap gap-2">
                   {page.tags.map((tag) => (
-                    <Link
+                    <div
                       key={tag}
-                      href={`/blog/tag/${tag}`}
-                      className="rounded-full bg-slate-800 px-3 py-1 text-sm text-slate-300 transition-colors hover:bg-slate-700"
+                      className="rounded-full bg-indigo-500/20 px-3 py-1 text-xs font-medium text-indigo-300 hover:text-indigo-200 transition-colors duration-300"
                     >
                       #{tag}
-                    </Link>
+                    </div>
                   ))}
                 </div>
               </div>
