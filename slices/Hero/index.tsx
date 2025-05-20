@@ -51,12 +51,12 @@ const Hero = ({ slice }: HeroProps): JSX.Element => {
         data-slice-type={slice.slice_type}
         data-slice-variation={slice.variation}
         ref={component}
-        className="mb-10 bg-cover bg-center bg-no-repeat max-sm:bg-hero-pattern"
+        className="mb-10"
       >
         <div className="relative mt-10 w-full overflow-hidden md:mt-20">
           <div className="relative z-10 flex justify-center">
             <div className="flex max-w-full flex-col items-center justify-center md:max-w-2xl lg:max-w-[60vw]">
-              <p className="intro max-w-80 text-center text-xs uppercase tracking-tight text-blue-100">
+              <p className="intro max-w-80 text-center text-xs uppercase tracking-tight dark:text-blue-100">
                 {slice.primary.intro_text}
               </p>
 
@@ -65,7 +65,7 @@ const Hero = ({ slice }: HeroProps): JSX.Element => {
                 className="text-center text-3xl md:text-5xl lg:text-6xl"
               />
 
-              <p className="mb-8 text-center text-base tracking-tight text-blue-100 md:text-lg md:tracking-wider lg:text-2xl">
+              <p className="mb-8 text-center text-base tracking-tight dark:text-blue-100 md:text-lg md:tracking-wider lg:text-2xl">
                 {slice.primary.introduction}
               </p>
 
@@ -83,11 +83,11 @@ const Hero = ({ slice }: HeroProps): JSX.Element => {
           </div>
         </div>
       </Bounded>
-      <div className="absolute top-0 max-sm:hidden">
+      <div className="absolute top-0">
         <Image
           width={1920}
           height={1080}
-          className="object-cover"
+          className="hidden object-cover dark:block"
           src="/herobg.png"
           alt="background"
           priority

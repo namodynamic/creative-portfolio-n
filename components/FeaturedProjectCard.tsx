@@ -22,8 +22,10 @@ export default async function FeaturedProjects({
 
   if (!projects.results.length)
     return (
-      <div className="rounded-xl border-[0.5px] border-slate-800 bg-blue-850/50 p-6 shadow-xl backdrop-blur-sm">
-        <h3 className="mb-4 text-lg font-bold text-white">Featured Projects</h3>
+      <div className="rounded-xl border-[0.5px] border-zinc-400 bg-white/20 p-6 shadow-xl backdrop-blur-sm dark:border-slate-800 dark:bg-blue-850/50">
+        <h3 className="mb-4 text-lg font-bold dark:text-white">
+          Featured Projects
+        </h3>
         <p className="text-xs text-muted-foreground">
           No featured projects found for this post.
         </p>
@@ -31,8 +33,10 @@ export default async function FeaturedProjects({
     );
 
   return (
-    <div className="rounded-xl border-[0.5px] border-slate-800 bg-blue-850/50 p-6 shadow-xl backdrop-blur-sm">
-      <h3 className="mb-4 text-lg font-bold text-white">Featured Projects</h3>
+    <div className="rounded-xl border-[0.5px] border-zinc-400 bg-white/20 p-6 shadow-xl backdrop-blur-sm dark:border-slate-800 dark:bg-blue-850/50">
+      <h3 className="mb-4 text-lg font-bold text-black-50 dark:text-white">
+        Featured Projects
+      </h3>
       <div className="space-y-4">
         {projects.results.map((project) => (
           <Link
@@ -48,10 +52,10 @@ export default async function FeaturedProjects({
                 className="object-cover transition-transform group-hover:scale-105"
               />
             </div>
-            <h4 className="font-medium text-white transition-colors group-hover:text-indigo-400">
+            <h4 className="font-medium text-black-50 transition-colors group-hover:text-black/50 dark:text-white dark:group-hover:text-violet-400">
               {project.data.title}
             </h4>
-            <p className="flex gap-2 text-sm text-gray-400">
+            <p className="flex gap-2 text-sm text-black/50 dark:text-gray-400">
               {project.tags.map((tag, index) => (
                 <span key={index} className="text-sm font-bold">
                   #{tag}

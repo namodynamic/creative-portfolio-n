@@ -77,16 +77,16 @@ export const BentoGridItem = ({
 
   return (
     <div
-      className={cn(
-        "group/bento relative row-span-1 flex flex-col justify-between space-y-4 overflow-hidden rounded-xl border border-white/[0.1] shadow-none shadow-input transition duration-200 hover:shadow-xl md:rounded-3xl",
-        className,
-      )}
-      style={{
-        background: "rgb(4,7,29)",
-        backgroundColor:
-          "linear-gradient(90deg, rgba(4,7,29,1) 0%, rgba(12,14,35,1) 100%)",
-      }}
-    >
+     className={cn(
+  "group/bento relative row-span-1 flex flex-col justify-between space-y-4 overflow-hidden rounded-xl transition duration-200 md:rounded-3xl",
+
+  "bg-dot-white-500 backdrop-blur-lg bg-opacity-80 border border-white/30 shadow-[0_4px_30px_rgba(0,0,0,0.1)] hover:shadow-[0_6px_40px_rgba(0,0,0,0.15)]",
+
+  "dark:bg-[linear-gradient(90deg,_rgba(4,7,29,1)_0%,_rgba(12,14,35,1)_100%)] dark:border-white/10 dark:shadow-none dark:hover:shadow-xl",
+
+  className,
+)}
+>
       <div className={`${id === 6 && "flex justify-center"} h-full`}>
         <div className="absolute h-full w-full">
           {img && (
@@ -125,17 +125,18 @@ export const BentoGridItem = ({
         <div
           className={cn(
             titleClassName,
-            "relative flex min-h-40 flex-col p-5 px-5 text-white transition duration-200 group-hover/bento:translate-x-2 md:h-full lg:p-10",
+            "relative flex min-h-40 flex-col p-5 px-5 transition duration-200 group-hover/bento:translate-x-2 md:h-full lg:p-10",
           )}
         >
-          <div className="z-10 font-sans text-sm font-extralight text-[#C1C2D3] md:max-w-32 md:text-xs lg:text-base">
+          <div className="z-10 font-sans text-sm font-extralight dark:text-[#C1C2D3] md:max-w-32 md:text-xs lg:text-base">
             {description}
           </div>
 
           <div
             className={cn(
-              id === 1 && "absolute flex flex-wrap",
+              id === 1 && "absolute flex text-white flex-wrap",
               "text-md z-10 max-w-96 font-sans font-bold lg:text-2xl",
+              id === 6 && "text-white",
             )}
           >
             {title}
@@ -144,25 +145,25 @@ export const BentoGridItem = ({
           {id === 2 && <GridGlobe />}
 
           {id === 3 && (
-            <div className="absolute -right-3 flex w-fit gap-1 lg:-right-2 lg:gap-5">
+            <div className="absolute -right-3 flex w-fit gap-1 lg:-right-2 text-white lg:gap-5">
               <div className="flex flex-col gap-3 md:gap-3 lg:gap-8">
                 {leftLists?.map((item, i) => (
                   <span
                     key={i}
-                    className="rounded-lg bg-[#10132E] px-3 py-2 text-center text-xs opacity-50 
+                    className="rounded-lg dark:bg-[#10132E] bg-violet-600 px-3 py-2 text-center text-xs opacity-50 
                     lg:px-3 lg:py-4 lg:text-base lg:opacity-100"
                   >
                     {item}
                   </span>
                 ))}
-                <span className="rounded-lg bg-[#10132E] px-3 py-4  text-center lg:px-3 lg:py-4"></span>
+                <span className="rounded-lg dark:bg-[#10132E] bg-[#3A2493] px-3 py-4  text-center lg:px-3 lg:py-4"></span>
               </div>
               <div className="flex flex-col gap-3 md:gap-3 lg:gap-8">
-                <span className="rounded-lg bg-[#10132E] px-3 py-4  text-center lg:px-3 lg:py-4"></span>
+                <span className="rounded-lg dark:bg-[#10132E] bg-violet-600 px-3 py-4  text-center lg:px-3 lg:py-4"></span>
                 {rightLists?.map((item, i) => (
                   <span
                     key={i}
-                    className="rounded-lg bg-[#10132E] px-3 py-2 text-center text-xs opacity-50 
+                    className="rounded-lg dark:bg-[#10132E] bg-[#3A2493] px-3 py-2 text-center text-xs opacity-50 
                     lg:px-3 lg:py-4 lg:text-base lg:opacity-100"
                   >
                     {item}
@@ -186,7 +187,7 @@ export const BentoGridItem = ({
                 icon={<IoCopyOutline className="mr-1" />}
                 position="left"
                 onClick={handleCopy}
-                otherClasses="!bg-[#161A31] text-xs"
+                otherClasses="!bg-black-50 text-xs text-white"
               />
             </div>
           )}

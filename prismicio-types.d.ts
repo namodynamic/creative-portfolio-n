@@ -2966,6 +2966,31 @@ export type TechListSlice = prismic.SharedSlice<
 >;
 
 /**
+ * Item in *Testimonial → Default → Primary → Companies*
+ */
+export interface TestimonialSliceDefaultPrimaryCompaniesItem {
+  /**
+   * Company Logo field in *Testimonial → Default → Primary → Companies*
+   *
+   * - **Field Type**: Image
+   * - **Placeholder**: *None*
+   * - **API ID Path**: testimonial.default.primary.companies[].company_logo
+   * - **Documentation**: https://prismic.io/docs/field#image
+   */
+  company_logo: prismic.ImageField<never>;
+
+  /**
+   * Company Name field in *Testimonial → Default → Primary → Companies*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: testimonial.default.primary.companies[].company_name
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  company_name: prismic.KeyTextField;
+}
+
+/**
  * Primary content in *Testimonial → Default → Primary*
  */
 export interface TestimonialSliceDefaultPrimary {
@@ -2978,6 +3003,18 @@ export interface TestimonialSliceDefaultPrimary {
    * - **Documentation**: https://prismic.io/docs/field#key-text
    */
   title: prismic.KeyTextField;
+
+  /**
+   * Companies field in *Testimonial → Default → Primary*
+   *
+   * - **Field Type**: Group
+   * - **Placeholder**: *None*
+   * - **API ID Path**: testimonial.default.primary.companies[]
+   * - **Documentation**: https://prismic.io/docs/field#group
+   */
+  companies: prismic.GroupField<
+    Simplify<TestimonialSliceDefaultPrimaryCompaniesItem>
+  >;
 }
 
 /**
@@ -3228,6 +3265,7 @@ declare module "@prismicio/client" {
       TechListSliceVariation,
       TechListSliceDefault,
       TestimonialSlice,
+      TestimonialSliceDefaultPrimaryCompaniesItem,
       TestimonialSliceDefaultPrimary,
       TestimonialSliceDefaultItem,
       TestimonialSliceVariation,

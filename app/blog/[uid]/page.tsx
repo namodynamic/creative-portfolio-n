@@ -26,7 +26,6 @@ export default async function BlogPostPage(props: { params: Promise<Params> }) {
     .getByUID("blog_post", params.uid)
     .catch(() => notFound());
 
-
   const allTags = await client.getAllByType("blog_post", { fetch: ["tags"] });
 
   const tagCounts: Record<string, number> = {};
@@ -51,12 +50,12 @@ export default async function BlogPostPage(props: { params: Promise<Params> }) {
         <div className="relative z-20 w-full py-6 md:py-10">
           <Link
             href="/blog"
-            className="mb-4 inline-flex items-center text-sm text-indigo-400 transition-colors hover:text-indigo-300"
+            className="mb-4 inline-flex items-center text-sm transition-colors hover:text-black/50 dark:text-violet-400 dark:hover:text-violet-300"
           >
             <ChevronLeft className="mr-1 h-4 w-4" />
             Back to all blogs
           </Link>
-          <h1 className="max-w-4xl text-3xl font-bold text-white md:text-4xl lg:text-5xl">
+          <h1 className="max-w-4xl text-3xl font-bold text-black-50 dark:text-white md:text-4xl lg:text-5xl">
             {page.data.title}
           </h1>
         </div>
@@ -64,15 +63,15 @@ export default async function BlogPostPage(props: { params: Promise<Params> }) {
         <div className="relative z-20 grid grid-cols-1 gap-8 lg:grid-cols-12">
           {/* Main Content */}
           <div className="lg:col-span-8">
-            <div className="overflow-hidden rounded-xl border-[0.5px] border-slate-800 bg-blue-850/50 shadow-xl backdrop-blur-sm">
-              <div className="border-b-[0.5px] border-slate-800 p-6 md:p-8">
-                <div className="flex flex-wrap items-center gap-4 text-sm text-gray-400">
+            <div className="overflow-hidden rounded-xl border-[0.5px] border-zinc-400 bg-white/20 shadow-xl backdrop-blur-sm dark:border-slate-800 dark:bg-blue-850/50">
+              <div className="border-b-[0.5px] border-zinc-400 p-6 dark:border-slate-800 md:p-8">
+                <div className="flex flex-wrap items-center gap-4 text-sm text-black/50  dark:text-gray-400">
                   <div className="flex items-center">
-                    <Calendar className="mr-2 h-4 w-4 text-indigo-500" />
+                    <Calendar className="mr-2 h-4 w-4 text-black-50 dark:text-violet-500" />
                     {formattedDate}
                   </div>
                   <div className="flex items-center">
-                    <Clock className="mr-2 h-4 w-4 text-indigo-500" />
+                    <Clock className="mr-2 h-4 w-4 text-black-50 dark:text-violet-500" />
                     {readTime.text}
                   </div>
                 </div>
@@ -81,7 +80,7 @@ export default async function BlogPostPage(props: { params: Promise<Params> }) {
                   {page.tags.map((tag) => (
                     <span
                       key={tag}
-                      className="rounded-full bg-indigo-500/10 px-3 py-1 text-xs font-medium text-indigo-400"
+                      className="rounded-full bg-black/80 px-3 py-1 text-xs font-medium text-white dark:bg-indigo-500/10 dark:text-violet-400"
                     >
                       #{tag}
                     </span>
@@ -91,7 +90,7 @@ export default async function BlogPostPage(props: { params: Promise<Params> }) {
 
               {/* Post Content */}
               <div className="p-4 ">
-                <div className="prose prose-base prose-invert mx-auto max-w-prose md:prose-lg">
+                <div className="prose prose-base mx-auto max-w-prose dark:prose-invert md:prose-lg">
                   <SliceZone
                     slices={page.data.slices}
                     components={components}
@@ -99,20 +98,23 @@ export default async function BlogPostPage(props: { params: Promise<Params> }) {
                 </div>
               </div>
 
-              <SharePost title={page.data.title} url={`https://nnamdiekechi.com/blog/${page.uid}`} />
+              <SharePost
+                title={page.data.title}
+                url={`https://nnamdiekechi.com/blog/${page.uid}`}
+              />
             </div>
 
             <AuthorCard className="mt-8" />
 
-            <RelatedPosts params={{ tag: page.tags[0] || "" }}  />
+            <RelatedPosts params={{ tag: page.tags[0] || "" }} />
           </div>
 
           {/* Sidebar */}
           <div className="lg:col-span-4">
             <div className="sticky top-24 space-y-8">
               {/* Popular Tags */}
-              <div className="rounded-xl border-[0.5px] border-slate-800 bg-blue-850/50 p-6 shadow-xl backdrop-blur-sm">
-                <h3 className="mb-4 text-lg font-bold text-white">
+              <div className="rounded-xl border-[0.5px] border-zinc-400 bg-white/20 p-6 shadow-xl backdrop-blur-sm dark:border-slate-800 dark:bg-blue-850/50">
+                <h3 className="mb-4 text-lg font-bold text-black-50 dark:text-white">
                   Popular Topics
                 </h3>
                 <div className="flex flex-wrap gap-2">
@@ -127,7 +129,7 @@ export default async function BlogPostPage(props: { params: Promise<Params> }) {
                   ))}
                 </div>
               </div>
-              <FeaturedProjects tags={page.tags}   />
+              <FeaturedProjects tags={page.tags} />
             </div>
           </div>
         </div>
@@ -150,8 +152,8 @@ export async function generateMetadata(props: {
     title: page.data.meta_title,
     description: page.data.meta_description,
     openGraph: {
-          images: [{ url: asImageSrc(page.data.meta_image) ?? "" }],
-        },
+      images: [{ url: asImageSrc(page.data.meta_image) ?? "" }],
+    },
   };
 }
 

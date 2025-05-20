@@ -12,7 +12,7 @@ export default async function AuthorCard({
 
   return (
     <div
-      className={`rounded-xl border-[0.5px] border-slate-800 bg-blue-850/50 p-6 shadow-xl backdrop-blur-sm ${className}`}
+      className={`rounded-xl border-[0.5px] border-zinc-400 bg-white/20 p-6 shadow-xl backdrop-blur-sm dark:border-slate-800 dark:bg-blue-850/50 ${className}`}
     >
       <div className="flex items-start gap-4">
         <div className="flex-shrink-0">
@@ -21,13 +21,15 @@ export default async function AuthorCard({
             alt={settings.data.name || "Author"}
             width={60}
             height={60}
-            className="rounded-full border-2 border-white"
+            className="rounded-full border-2 border-zinc-200 dark:border-white-50"
           />
         </div>
         <div>
-          <h3 className="text-lg font-bold text-white">{settings.data.name}</h3>
-          <p className="text-sm text-indigo-400">{settings.data.role}</p>
-          <p className="mt-2 text-sm text-gray-400">
+          <h3 className="text-lg font-bold text-black-50 dark:text-white">
+            {settings.data.name}
+          </h3>
+          <p className="text-sm dark:text-slate-300">{settings.data.role}</p>
+          <p className="mt-2 text-sm dark:text-gray-400">
             {settings.data.author_bio}
           </p>
           <Link

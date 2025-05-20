@@ -48,14 +48,14 @@ export default function SharePost({
   };
 
   return (
-    <div className="flex flex-wrap items-center justify-between gap-4 border-t-[0.5px] border-slate-800 p-6 md:p-8">
+    <div className="flex flex-wrap items-center justify-between gap-4 border-t-[0.5px] border-zinc-400 p-6 dark:border-slate-800 md:p-8">
       <div className="flex items-center gap-2">
         <span className="text-sm text-gray-400">Share:</span>
         <a
           href={twitterShareUrl}
           target="_blank"
           rel="noopener noreferrer"
-          className="rounded-full bg-[#1a1f3d] p-2 transition-colors hover:bg-[#252a4d]"
+          className="rounded-full bg-[#1a1f3d] p-2 transition-colors hover:bg-black/60 dark:hover:bg-[#252a4d]"
         >
           <FaXTwitter className="h-4 w-4 text-white" />
         </a>
@@ -63,7 +63,7 @@ export default function SharePost({
           href={facebookShareUrl}
           target="_blank"
           rel="noopener noreferrer"
-          className="rounded-full bg-[#1a1f3d] p-2 transition-colors hover:bg-[#252a4d]"
+          className="rounded-full bg-[#1a1f3d] p-2 transition-colors hover:bg-black/60 dark:hover:bg-[#252a4d]"
         >
           <FaSquareFacebook className="h-4 w-4 text-white" />
         </a>
@@ -71,7 +71,7 @@ export default function SharePost({
           href={linkedInShareUrl}
           target="_blank"
           rel="noopener noreferrer"
-          className="rounded-full bg-[#1a1f3d] p-2 transition-colors hover:bg-[#252a4d]"
+          className="rounded-full bg-[#1a1f3d] p-2 transition-colors hover:bg-black/60 dark:hover:bg-[#252a4d]"
         >
           <FaLinkedin className="h-4 w-4 text-white" />
         </a>

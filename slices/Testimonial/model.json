@@ -18,6 +18,30 @@
             "label": "Heading",
             "placeholder": ""
           }
+        },
+        "companies": {
+          "type": "Group",
+          "config": {
+            "label": "Companies",
+            "repeat": true,
+            "fields": {
+              "company_logo": {
+                "type": "Image",
+                "config": {
+                  "label": "Company Logo",
+                  "constraint": {},
+                  "thumbnails": []
+                }
+              },
+              "company_name": {
+                "type": "Text",
+                "config": {
+                  "label": "Company Name",
+                  "placeholder": ""
+                }
+              }
+            }
+          }
         }
       },
       "items": {

@@ -25,7 +25,7 @@ const Biography = ({ slice }: BiographyProps): JSX.Element => {
           {slice.primary.heading}
         </Heading>
 
-        <div className="prose prose-base text-slate-400 lg:prose-lg prose-invert col-start-1">
+        <div className="prose prose-base text-black dark:text-slate-400 lg:prose-lg prose-invert col-start-1">
           <PrismicRichText field={slice.primary.description} />
         </div>
 

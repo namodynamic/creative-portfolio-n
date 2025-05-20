@@ -50,6 +50,7 @@ const config: Config = {
           DEFAULT: "#000",
         },
         white: {
+          "50": "#CDD7E2",
           "100": "#BEC1DD",
           "200": "#C1C2D3",
           "500": "#62646C",
@@ -105,11 +106,6 @@ const config: Config = {
       },
        backgroundImage: {
         "hero-pattern": "url('/herobg.png')",
-      },
-      borderRadius: {
-        lg: "var(--radius)",
-        md: "calc(var(--radius) - 2px)",
-        sm: "calc(var(--radius) - 4px)",
       },
       keyframes: {
         "accordion-down": {

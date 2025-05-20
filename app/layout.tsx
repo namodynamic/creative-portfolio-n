@@ -9,6 +9,7 @@ import { createClient, repositoryName } from "@/prismicio";
 
 import Header from "../components/Header";
 import Footer from "@/components/Footer";
+import { ThemeProvider } from "@/components/ThemeProvider"
 
 const urbanist = Urbanist({ subsets: ["latin"] });
 
@@ -31,17 +32,21 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className="bg-black-100" suppressHydrationWarning data-lt-installed="true">
+    <html lang="en" suppressHydrationWarning data-lt-installed="true">
       <body className={clsx(urbanist.className, "relative")}>
         
-        <script id="chatway" async src="https://cdn.chatway.app/widget.js?id=dEB2vdKKIwk1"></script>
+        <ThemeProvider defaultTheme="dark">
+         <script id="chatway" async src="https://cdn.chatway.app/widget.js?id=dEB2vdKKIwk1"></script>
 
-        <Header />
+         <Header />
 
-        <main className="min-h-screen">{children}</main>
+         <main className="min-h-screen">
+          {children}
+         </main>
 
-        <Footer />
+         <Footer />
 
+        </ThemeProvider>
         <Analytics />
 
         <SpeedInsights />

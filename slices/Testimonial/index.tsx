@@ -5,9 +5,9 @@ import React, { useEffect, useState, type JSX } from "react";
 
 import { Content } from "@prismicio/client";
 import { PrismicRichText, SliceComponentProps } from "@prismicio/react";
-import { companies } from "@/data";
 import Bounded from "@/components/Bounded";
 import { PrismicNextImage } from "@prismicio/next";
+import { FaStar } from "react-icons/fa6";
 
 /**
  * Props for `Testimonial`.
@@ -96,12 +96,7 @@ const Testimonial = ({ slice }: TestimonialProps): JSX.Element => {
         >
           {slice.items.map((item, idx) => (
             <li
-              className="relative w-[90vw] max-w-full shrink-0 rounded-2xl border border-b-0 border-slate-800 p-5 md:p-16 md:w-[60vw]"
-              style={{
-                background: "rgb(4,7,29)",
-                backgroundColor:
-                  "linear-gradient(90deg, rgba(4,7,29,1) 0%, rgba(12,14,35,1) 100%)",
-              }}
+              className="relative w-[350px] max-w-full shrink-0 rounded-2xl border-[0.5px] border-b-0 border-zinc-100 bg-white/20 p-5 dark:border-slate-800 dark:bg-[linear-gradient(90deg,_rgba(4,7,29,1)_0%,_rgba(12,14,35,1)_100%)] md:w-[50vw] md:p-16"
               key={idx}
             >
               <blockquote>
@@ -109,7 +104,7 @@ const Testimonial = ({ slice }: TestimonialProps): JSX.Element => {
                   aria-hidden="true"
                   className="user-select-none -z-1 pointer-events-none absolute -left-0.5 -top-0.5 h-[calc(100%_+_4px)] w-[calc(100%_+_4px)]"
                 ></div>
-                <span className=" relative z-20 text-sm font-normal leading-[1.6] text-white md:text-lg">
+                <span className=" prose relative z-20 text-sm font-normal leading-[1.6] text-neutral-800 dark:text-gray-100">
                   <PrismicRichText field={item.feedback} />
                 </span>
                 <div className="flex justify-between">
@@ -117,14 +112,14 @@ const Testimonial = ({ slice }: TestimonialProps): JSX.Element => {
                     <div className="me-3">
                       <PrismicNextImage
                         field={item.avatar}
-                        className="w-10 rounded-full h-10 object-cover sm:w-12 sm:h-12"
+                        className="h-10 w-10 rounded-full object-cover sm:h-12 sm:w-12"
                       />
                     </div>
                     <span className="flex flex-col gap-1">
-                      <span className="text-md font-bold leading-[1.6] text-white sm:text-xl">
+                      <span className="text-md font-bold leading-[1.6] dark:text-white sm:text-xl">
                         {item.name}
                       </span>
-                      <span className=" text-sm font-normal text-white-200">
+                      <span className=" text-sm font-normal dark:text-white-200">
                         {item.occupation}
                       </span>
                     </span>
@@ -132,12 +127,7 @@ const Testimonial = ({ slice }: TestimonialProps): JSX.Element => {
 
                   <div className="flex items-center gap-2 self-end">
                     {Array.from({ length: 5 }).map((_, i) => (
-                      <img
-                        key={i}
-                        src="/star2.png"
-                        alt="star"
-                        className="h-4 w-4"
-                      />
+                      <FaStar key={i} className="h-4 w-4" />
                     ))}
                   </div>
                 </div>
@@ -165,28 +155,25 @@ const Testimonial = ({ slice }: TestimonialProps): JSX.Element => {
         </h1>
       </Bounded>
 
-      <div className="mb-5 flex flex-col items-center -mt-20 max-lg:mt-10">
+      <div className="-mt-20 mb-5 flex flex-col items-center max-lg:mt-10">
         <div className="relative flex h-[50vh] flex-col items-center justify-center  overflow-hidden rounded-md antialiased md:h-[30rem]">
           <InfiniteMovingCards />
         </div>
 
         <div className="flex flex-wrap items-center justify-center gap-4 max-lg:mt-10 md:gap-16">
-          {companies.map((company) => (
-            <React.Fragment key={company.id}>
-              <div className="flex max-w-32 gap-2 md:max-w-60">
-                <img
-                  src={company.img}
-                  alt={company.name}
-                  className="w-5 md:w-10"
+          {slice.primary.companies.map((item, index) => (
+            <div key={index} className="flex max-w-32 px-2 md:max-w-60">
+              <div className="flex flex-row items-center justify-center gap-2">
+                <PrismicNextImage
+                  field={item.company_logo}
+                  className="h-5 w-5 md:h-10 md:w-10"
                 />
-                <img
-                  src={company.nameImg}
-                  alt={company.name}
-                  width={company.id === 4 || company.id === 5 ? 100 : 150}
-                  className="w-20 md:w-24"
-                />
+
+                <h3 className="text-sm font-bold md:text-lg">
+                  {item.company_name}
+                </h3>
               </div>
-            </React.Fragment>
+            </div>
           ))}
         </div>
       </div>

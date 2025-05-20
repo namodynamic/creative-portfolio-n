@@ -12,19 +12,19 @@ export default async function Footer() {
   const settings = await client.getSingle("settings");
 
   return (
-    <footer className="mt-12 w-full border-t-[0.5px] border-blue-200">
+    <footer className="mt-12 w-full border-t-[0.5px] border-blue-200 bg-dot-white-500 dark:border-white/[0.2]">
       <Bounded as="section">
         <div className="mx-auto max-w-7xl px-6">
           <div className="relative grid grid-cols-1 gap-12 md:grid-cols-3">
-            {/* Left Column - About */}
+            {/* Left Column */}
             <div className="z-20 space-y-6">
               <div className="items-center border-l-4 border-violet-800 pl-3">
-                <h2 className="text-2xl font-bold text-slate-300">
+                <h2 className="text-2xl font-bold dark:text-slate-300">
                   {settings.data.name}
                 </h2>
-                <p className="text-gray-400">{settings.data.role}</p>
+                <p className="dark:text-gray-400">{settings.data.role}</p>
               </div>
-              <p className="text-sm text-gray-400">
+              <p className="text-sm dark:text-gray-400">
                 {settings.data.footer_text}
               </p>
 
@@ -32,7 +32,7 @@ export default async function Footer() {
                 {isFilled.link(settings.data.github_link) && (
                   <PrismicNextLink
                     field={settings.data.github_link || ""}
-                    className="text-gray-400 transition-colors hover:text-white "
+                    className="transition-colors hover:text-black/50 dark:text-gray-400 dark:hover:text-white "
                     aria-label={settings.data.name + " on GitHub"}
                   >
                     <FaGithub size={20} />
@@ -43,7 +43,7 @@ export default async function Footer() {
                 {isFilled.link(settings.data.linkedin_link) && (
                   <PrismicNextLink
                     field={settings.data.linkedin_link}
-                    className="text-gray-400 transition-colors hover:text-white "
+                    className="transition-colors hover:text-black/50 dark:text-gray-400 dark:hover:text-white "
                     aria-label={settings.data.name + " on LinkedIn"}
                   >
                     <FaLinkedin size={20} />
@@ -53,7 +53,7 @@ export default async function Footer() {
                 {isFilled.link(settings.data.twitter_link) && (
                   <PrismicNextLink
                     field={settings.data.twitter_link}
-                    className="text-gray-400 transition-colors hover:text-white"
+                    className="transition-colors hover:text-black/50 dark:text-gray-400 dark:hover:text-white"
                     aria-label={settings.data.name + " on Twitter"}
                   >
                     <FaXTwitter size={20} />
@@ -63,20 +63,20 @@ export default async function Footer() {
               </div>
             </div>
 
-            {/* Middle Column - Quick Links */}
+            {/* Quick Links */}
             <nav
               className="navigation grid grid-cols-2 gap-8"
               aria-label="Footer Navigation"
             >
               <div className="space-y-6">
-                <h3 className="text-lg font-semibold text-white">
+                <h3 className="text-lg font-semibold dark:text-white">
                   Quick Links
                 </h3>
                 <ul className="space-y-3">
                   <li>
                     <Link
                       href="/"
-                      className="text-gray-400 transition-colors hover:text-white"
+                      className="transition-colors hover:text-black/50 dark:text-gray-400 dark:hover:text-white"
                     >
                       Home
                     </Link>
@@ -85,7 +85,7 @@ export default async function Footer() {
                     <React.Fragment key={label}>
                       <li>
                         <PrismicNextLink
-                          className="text-gray-400 transition-colors hover:text-white"
+                          className="transition-colors hover:text-black/50 dark:text-gray-400 dark:hover:text-white"
                           field={link}
                         >
                           {label}
@@ -100,7 +100,7 @@ export default async function Footer() {
                   <li>
                     <Link
                       href="/contact"
-                      className="text-gray-400 transition-colors hover:text-white"
+                      className="transition-colors hover:text-black/50 dark:text-gray-400 dark:hover:text-white"
                     >
                       Contact
                     </Link>
@@ -108,7 +108,7 @@ export default async function Footer() {
                   <li>
                     <Link
                       href="/services"
-                      className="text-gray-400 transition-colors hover:text-white"
+                      className="transition-colors hover:text-black/50 dark:text-gray-400 dark:hover:text-white"
                     >
                       Services
                     </Link>
@@ -116,7 +116,7 @@ export default async function Footer() {
                   <li>
                     <Link
                       href="/faq"
-                      className="text-gray-400 transition-colors hover:text-white"
+                      className="transition-colors hover:text-black/50 dark:text-gray-400 dark:hover:text-white"
                     >
                       FAQ
                     </Link>
@@ -125,18 +125,18 @@ export default async function Footer() {
               </div>
             </nav>
 
-            {/* Right Column - CTA */}
+            {/* CTA */}
             <div className="relative space-y-6">
-              <h3 className="text-lg font-semibold text-white">
+              <h3 className="text-lg font-semibold dark:text-white">
                 Let&apos;s Work Together
               </h3>
-              <p className="text-sm text-gray-400">
+              <p className="text-sm dark:text-gray-400">
                 {settings.data.footer_cta_text}
               </p>
               <div className="relative z-20 flex items-center gap-4">
                 <Link
                   href="/contact"
-                  className="flex items-center rounded-lg gap-2 bg-violet-800 px-6 py-3 font-medium text-white transition-all hover:bg-violet-900"
+                  className="flex items-center gap-2 rounded-lg bg-violet-800 px-6 py-3 font-medium text-white transition-all hover:bg-violet-600"
                 >
                   Start a Project
                   <ArrowRight size={16} />
@@ -146,8 +146,8 @@ export default async function Footer() {
           </div>
         </div>
 
-        <div className="mb-0 mt-12 border-t-[0.5px] border-blue-200/80 pt-6 text-center">
-          <p className="text-sm text-gray-400">
+        <div className="mb-0 mt-12 border-t-[0.5px] border-blue-200/80 pt-6 text-center dark:border-white/[0.2]">
+          <p className="text-sm dark:text-gray-400">
             &copy; {new Date().getFullYear()} {settings.data.name}. All rights
             reserved.
           </p>

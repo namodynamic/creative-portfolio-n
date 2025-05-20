@@ -9,6 +9,7 @@ import { motion } from "framer-motion";
 import { SendHorizonal, Send } from "lucide-react";
 import { cn } from "@/lib/utils";
 import Image from "next/image";
+import { ThemeToggle } from "@/components/ThemeToggle"
 
 export default function NavBar({
   settings,
@@ -52,7 +53,7 @@ export default function NavBar({
       className={cn(
         "fixed left-0 right-0 top-0 z-50 mx-auto my-4 flex max-w-7xl items-center justify-between px-2 py-2  transition-all duration-300 max-md:px-4 md:rounded-xl",
         scrolled
-          ? "bg-black-100/50 bg-opacity-80 backdrop-blur-md md:shadow-lg"
+          ? "dark:bg-black-100/50 bg-white-50 bg-opacity-80 backdrop-blur-md md:shadow-lg"
           : "bg-transparent",
       )}
     >
@@ -61,7 +62,8 @@ export default function NavBar({
         <motion.div
           whileHover={{ scale: 1.05 }}
           whileTap={{ scale: 0.95 }}
-          className="flex h-10 w-10 items-center justify-center rounded-lg border-2 border-white bg-black-100 text-xl font-bold text-white"
+          className="flex h-10 w-10 items-center justify-center rounded-lg border-2 dark:border-white dark:bg-black-100 text-xl font-bold dark:text-white"
+          onClick={() => setMobileMenuOpen(false)}
         >
           NE
         </motion.div>
@@ -69,6 +71,8 @@ export default function NavBar({
 
       {/* Mobile menu button */}
       {isMobile && (
+        <div className="flex items-center gap-2">
+          <ThemeToggle />
         <button
           onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
           className="z-50 flex h-10 w-10 flex-col items-center justify-center gap-1.5 rounded-md"
@@ -78,19 +82,20 @@ export default function NavBar({
             animate={
               mobileMenuOpen ? { rotate: 45, y: 6 } : { rotate: 0, y: 0 }
             }
-            className="h-0.5 w-6 bg-white transition-all"
+            className="h-0.5 w-6 dark:bg-white bg-black-100 transition-all"
           />
           <motion.span
             animate={mobileMenuOpen ? { opacity: 0 } : { opacity: 1 }}
-            className="h-0.5 w-6 bg-white transition-all"
+            className="h-0.5 w-6 dark:bg-white bg-black-100 transition-all"
           />
           <motion.span
             animate={
               mobileMenuOpen ? { rotate: -45, y: -6 } : { rotate: 0, y: 0 }
             }
-            className="h-0.5 w-6 bg-white transition-all"
+            className="h-0.5 w-6 dark:bg-white bg-black-100 transition-all"
           />
         </button>
+        </div>
       )}
 
       {/* Desktop Navigation */}
@@ -102,9 +107,9 @@ export default function NavBar({
                 <PrismicNextLink
                   field={link}
                   className={cn(
-                    "text-md relative px-4 py-2 font-medium text-white/70 transition-colors hover:text-white",
+                    "text-md relative px-4 py-2 font-medium text-black-75 dark:text-white/70 transition-colors dark:hover:text-white",
                     pathname.includes(asLink(link) as string)
-                      ? "text-white"
+                      ? "dark:text-white text-black"
                       : "",
                   )}
                   aria-current={
@@ -118,13 +123,13 @@ export default function NavBar({
                   {pathname.includes(asLink(link) as string) && (
                     <motion.span
                       layoutId="navbar-active"
-                      className="absolute bottom-0 left-0 right-0 mx-auto h-0.5 w-1/2 bg-white"
+                      className="absolute bottom-0 left-0 right-0 mx-auto h-0.5 w-1/2 dark:bg-white bg-black-100"
                     />
                   )}
                 </PrismicNextLink>
                 {index < settings.data.nav_item.length - 1 && (
                   <span
-                    className="text-md font-thin text-white/50"
+                    className="text-md font-thin dark:text-white/50"
                     aria-hidden="true"
                   >
                     /
@@ -133,14 +138,16 @@ export default function NavBar({
               </li>
             ))}
           </ul>
-
+          
+          <div className="flex items-center gap-2">
+          <ThemeToggle />
           <PrismicNextLink
             field={settings.data.cta_link}
-            className="group relative ml-4 flex w-fit items-center justify-center overflow-hidden rounded-md bg-slate-50 px-4 py-2 text-sm  font-bold text-slate-800 transition-transform ease-out  hover:text-white"
+            className="group relative ml-4 flex w-fit items-center justify-center overflow-hidden rounded-lg bg-slate-50 px-4 py-2 text-sm  font-bold text-slate-800 transition-transform ease-out  hover:text-white"
           >
             <span
               className={cn(
-                "absolute inset-0 z-0 h-full translate-y-8 bg-violet-600 transition-transform  duration-300 ease-in-out group-hover:translate-y-0",
+                "absolute inset-0 z-0 h-full translate-y-8 bg-violet-500 transition-transform  duration-300 ease-in-out group-hover:translate-y-0",
               )}
             />
             <span className="relative flex items-center justify-center gap-2">
@@ -148,6 +155,7 @@ export default function NavBar({
               <SendHorizonal className="ml h-3 w-3" />
             </span>
           </PrismicNextLink>
+          </div>
         </nav>
       )}
 
@@ -160,11 +168,11 @@ export default function NavBar({
             height: mobileMenuOpen ? "auto" : 0,
           }}
           className={cn(
-            "absolute left-0 top-0 z-40 w-full overflow-hidden bg-black-100",
+            "absolute left-0 -top-4 z-40 w-full overflow-hidden dark:bg-black-100 bg-[#DDE4EB]",
             mobileMenuOpen ? "flex" : "hidden",
           )}
         >
-          <div className="flex h-[80dvh] w-full flex-col items-center justify-center gap-6 p-8">
+          <div className="flex h-[100vh] w-full flex-col items-center justify-center bg-dot-black-500 gap-6 p-8">
             <div className="absolute left-0 top-1/2 block h-[380px] w-[960px] -translate-y-1/2 translate-x-[-290px] rotate-90">
               <Image
                 src="/bg-outlines.svg"
@@ -178,7 +186,7 @@ export default function NavBar({
                 width={900}
                 height={380}
                 alt="outline"
-                className="absolute inset-0 opacity-5 mix-blend-soft-light"
+                className="absolute inset-0 invert dark:invert-0 opacity-5 mix-blend-soft-light"
               />
             </div>
             <ul className="relative z-10 flex w-full flex-col items-center gap-4">
@@ -193,7 +201,7 @@ export default function NavBar({
                   <PrismicNextLink
                     field={link}
                     className={cn(
-                      "block w-full py-2 text-lg font-medium text-white/90 transition-colors hover:text-white",
+                      "block w-full py-2 text-lg font-medium dark:text-white/90 transition-colors dark:hover:text-white",
                       pathname.includes(asLink(link) as string)
                         ? "text-white"
                         : "",

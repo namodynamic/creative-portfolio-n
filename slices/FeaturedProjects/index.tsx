@@ -11,8 +11,7 @@ import { Badge } from "@/components/ui/badge";
 import { PrismicNextLink } from "@prismicio/next";
 import { PrismicNextImage } from "@prismicio/next";
 import MagicButton from "@/components/ui/MagicButton";
-import { motion, useInView  } from "motion/react";
-
+import { motion, useInView } from "motion/react";
 
 /**
  * Props for `FeaturedProjects`.
@@ -29,7 +28,7 @@ const FeaturedProjects: FC<FeaturedProjectsProps> = ({ slice }) => {
       data-slice-type={slice.slice_type}
       data-slice-variation={slice.variation}
       id="featured-projects"
-      className="max-md:-my-20 overflow-hidden"
+      className="overflow-hidden max-md:-my-20"
     >
       <motion.div
         initial={{ opacity: 0, y: 20 }}
@@ -40,7 +39,7 @@ const FeaturedProjects: FC<FeaturedProjectsProps> = ({ slice }) => {
           {slice.primary.heading}
         </Heading>
 
-        <div className="prose prose-sm prose-invert col-start-1 mt-5 text-slate-500 sm:prose-lg">
+        <div className="prose prose-sm prose-invert col-start-1 mt-5 text-black sm:prose-lg dark:text-slate-500">
           <p>{slice.primary.intro_text}</p>
         </div>
       </motion.div>
@@ -160,13 +159,13 @@ const ProjectCard: FC<ProjectCardProps> = ({ item, index }) => {
         variants={contentVariants}
       >
         <motion.h2
-          className="text-2xl font-bold tracking-tight text-white md:text-3xl"
+          className="text-2xl font-bold tracking-tight dark:text-white md:text-3xl"
           variants={itemVariants}
         >
           {item.title}
         </motion.h2>
 
-        <motion.div className="text-slate-300" variants={itemVariants}>
+        <motion.div className="dark:text-slate-300" variants={itemVariants}>
           <PrismicRichText
             field={item.description}
             components={{
@@ -189,16 +188,21 @@ const ProjectCard: FC<ProjectCardProps> = ({ item, index }) => {
               transition={{ duration: 0.3, delay: 0.1 * tagIndex }}
               whileHover={{ scale: 1.1, transition: { duration: 0.2 } }}
             >
-              <Badge variant="secondary">{tag.trim()}</Badge>
+              <Badge
+                variant="outline"
+                className="hover:bg-white/20 dark:bg-white dark:text-black"
+              >
+                {tag.trim()}
+              </Badge>
             </motion.div>
           ))}
         </motion.div>
 
-        <motion.div
-          variants={itemVariants}
-          whileTap={{ scale: 0.95 }}
-        >
-          <Button asChild className="mt-4 text-white" variant={"outline"}>
+        <motion.div variants={itemVariants} whileTap={{ scale: 0.95 }}>
+          <Button
+            className="mt-4 border-black-100 bg-black-100 text-white dark:border-white dark:bg-white dark:text-black dark:hover:bg-black-100 dark:hover:text-white"
+            variant="outline"
+          >
             <PrismicNextLink field={item.project_slug}>
               View Project
             </PrismicNextLink>

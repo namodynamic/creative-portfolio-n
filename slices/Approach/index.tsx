@@ -86,17 +86,12 @@ const Card = ({
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
       className="group/canvas-card relative mx-auto flex w-full
-       max-w-sm  items-center justify-center rounded-xl border border-white/[0.2] p-4 lg:h-[35rem] "
-      style={{
-        background: "rgb(4,7,29)",
-        backgroundColor:
-          "linear-gradient(90deg, rgba(4,7,29,1) 0%, rgba(12,14,35,1) 100%)",
-      }}
+       max-w-sm  items-center justify-center rounded-xl border border-white-200 p-4 bg-dot-white-500 dark:border-white/[0.2] lg:h-[35rem] "
     >
-      <Icon className="absolute -left-2 -top-2.5 h-6 w-6 text-white opacity-30" />
-      <Icon className="absolute -bottom-2 -left-2.5 h-6 w-6 text-white opacity-30" />
-      <Icon className="absolute -right-2 -top-2.5 h-6 w-6 text-white opacity-30" />
-      <Icon className="absolute -bottom-2 -right-2.5 h-6 w-6 text-white opacity-30" />
+      <Icon className="absolute -left-2 -top-2.5 h-6 w-6 text-black opacity-30 dark:text-white" />
+      <Icon className="absolute -bottom-2 -left-2.5 h-6 w-6 text-black opacity-30 dark:text-white" />
+      <Icon className="absolute -right-2 -top-2.5 h-6 w-6 text-black opacity-30 dark:text-white" />
+      <Icon className="absolute -bottom-2 -right-2.5 h-6 w-6 text-black opacity-30 dark:text-white" />
 
       <AnimatePresence>
         {hovered && (
@@ -146,7 +141,7 @@ const AceternityIcon = ({ order }: { order: string }) => {
         />
         <span
           className="inline-flex h-full w-full cursor-pointer items-center 
-        justify-center rounded-full bg-black-100 px-5 py-2 text-sm font-bold text-purple2 backdrop-blur-3xl"
+        justify-center rounded-full bg-black-100 px-5 py-2 text-sm font-bold text-white backdrop-blur-3xl"
         >
           {order}
         </span>

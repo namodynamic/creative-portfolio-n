@@ -16,7 +16,7 @@ export default function Heading({
   return (
     <Comp
       className={clsx(
-        "font-bold leading-tight tracking-tight  text-slate-300",
+        "font-bold leading-tight tracking-tight text-black-100  dark:text-slate-300",
         size === "xl" && "text-7xl md:text-9xl",
         size === "lg" && "text-6xl md:text-8xl",
         size === "md" && "text-5xl md:text-7xl",

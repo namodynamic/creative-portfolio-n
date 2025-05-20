@@ -10,6 +10,7 @@ import { Button } from "@/components/ui/button";
 import { ExternalLink } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { asImageSrc, isFilled } from "@prismicio/client";
+import { LiaCertificateSolid } from "react-icons/lia";
 
 import type { JSX } from "react";
 
@@ -27,7 +28,7 @@ const Certifications = ({ slice, index }: CertificationsProps): JSX.Element => {
     <Bounded
       data-slice-type={slice.slice_type}
       data-slice-variation={slice.variation}
-      className="max-md:-mt-20"
+      className="max-md:-mt-20 bg-dot-white-500"
     >
       <Heading as="h2" size="lg" className="max-md:text-3xl">
         {slice.primary.heading}
@@ -73,11 +74,7 @@ const Certifications = ({ slice, index }: CertificationsProps): JSX.Element => {
 
               <div className="relative z-10 flex h-full flex-col justify-between p-5 text-white">
                 <div className="flex items-center justify-between transition-opacity duration-500 md:group-hover:opacity-0">
-                  <img
-                    src="/ribbon.png"
-                    alt="Certification Icon"
-                    className="h-10 w-10 rounded-sm object-contain p-1"
-                  />
+                  <LiaCertificateSolid className="h-8 w-8 text-amber-300" />
                   <Badge
                     variant="secondary"
                     className="bg-black/40 px-2 py-1 text-xs text-slate-400 backdrop-blur hover:bg-black/50"

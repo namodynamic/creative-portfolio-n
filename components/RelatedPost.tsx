@@ -26,11 +26,13 @@ export default async function RelatedPosts({ params }: TagPageProps) {
 
   return (
     <div className="mt-12">
-      <h2 className="mb-6 text-2xl font-bold text-white">Related Posts</h2>
+      <h2 className="mb-6 text-2xl font-bold text-black-50 dark:text-white">
+        Related Posts
+      </h2>
       <div className="grid grid-cols-1 gap-6 md:grid-cols-3">
         {relatedPosts.results.map((post) => {
           const formattedDate = formatDate(post.data.date);
-          
+
           const firstParagraph =
             post.data.slices.find(
               (slice) =>
@@ -43,7 +45,7 @@ export default async function RelatedPosts({ params }: TagPageProps) {
             <Link
               key={post.id}
               href={`/blog/${post.uid}`}
-              className="group overflow-hidden rounded-xl border border-slate-800 bg-blue-850/50 shadow-xl backdrop-blur-sm transition-transform hover:-translate-y-1"
+              className="group overflow-hidden rounded-xl border border-zinc-400 bg-white/20 shadow-xl backdrop-blur-sm transition-transform hover:-translate-y-1 dark:border-slate-800 dark:bg-blue-850/50"
             >
               <div className="relative h-40 w-full overflow-hidden">
                 <Image
@@ -55,11 +57,13 @@ export default async function RelatedPosts({ params }: TagPageProps) {
                 />
               </div>
               <div className="p-4">
-                <p className="mb-2 text-xs text-gray-400">{formattedDate}</p>
-                <h3 className="mb-2 font-bold text-white transition-colors group-hover:text-indigo-400">
+                <p className="mb-2 text-xs text-black/80 dark:text-gray-400">
+                  {formattedDate}
+                </p>
+                <h3 className="mb-2 font-bold transition-colors group-hover:text-black/50 dark:text-white dark:group-hover:text-violet-400">
                   {post.data.title}
                 </h3>
-                <p className="line-clamp-2 text-sm text-gray-400">
+                <p className="line-clamp-2 text-sm text-black/80 dark:text-gray-400">
                   {firstParagraph}
                 </p>
               </div>

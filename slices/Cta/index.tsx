@@ -29,7 +29,7 @@ const Cta = ({ slice }: CtaProps): JSX.Element => {
           </span>
           {slice.primary.heading?.split(" ").slice(4).join(" ")}
         </h1>
-        <p className="mb-8 mt-5 text-center text-white-200 md:mt-10">
+        <p className="mb-8 mt-5 text-center dark:text-white-200 md:mt-10">
           {slice.primary.sub_heading}
         </p>
         <Link href="/contact">

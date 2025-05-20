@@ -46,7 +46,7 @@ const Experience = ({ slice }: ExperienceProps): JSX.Element => {
         {slice.primary.heading}
       </Heading>
 
-      <div className="prose prose-base prose-invert col-start-1 mt-5 text-slate-500  lg:prose-lg">
+      <div className="prose prose-base prose-invert col-start-1 mt-5 dark:text-slate-500 text-black-100  lg:prose-lg">
         <p>{slice.primary.intro}</p>
       </div>
 
@@ -88,17 +88,17 @@ const Experience = ({ slice }: ExperienceProps): JSX.Element => {
                 className="vertical-timeline-element--work"
               >
                 <div>
-                  <h3 className="text-[24px] font-bold text-white ">
+                  <h3 className="text-[24px] font-bold dark:text-white text-black-100 ">
                     {item.title}
                   </h3>
                   <p
-                    className="text-[16px] font-semibold text-slate-400"
+                    className="text-base font-semibold dark:text-slate-400 text-black/80"
                     style={{ margin: 0 }}
                   >
                     {item.company}
                   </p>
                 </div>
-                <div className="prose prose-base prose-invert text-slate-500 lg:prose-lg">
+                <div className="prose prose-base prose-invert text-black dark:text-slate-500 lg:prose-lg">
                   <PrismicRichText field={item.description} />
                 </div>
               </VerticalTimelineElement>

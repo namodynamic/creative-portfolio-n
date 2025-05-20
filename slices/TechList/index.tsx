@@ -4,6 +4,7 @@ import { Content } from "@prismicio/client";
 import { SliceComponentProps } from "@prismicio/react";
 import React, { useLayoutEffect, useRef, type JSX } from "react";
 import { MdCircle } from "react-icons/md";
+import { CodeXml } from "lucide-react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
@@ -67,7 +68,7 @@ const TechList = ({ slice }: TechListProps): JSX.Element => {
         <Heading size="xl" className="mb-8" as="h2">
           {slice.primary.heading}
         </Heading>
-        <div className="prose prose-sm prose-invert col-start-1 mt-5 text-slate-500  sm:prose-lg">
+        <div className="prose prose-sm prose-invert col-start-1 mt-5 dark:text-slate-500 text-black-100  sm:prose-lg">
           <p>{slice.primary.intro}</p>
         </div>
       </Bounded>
@@ -75,7 +76,7 @@ const TechList = ({ slice }: TechListProps): JSX.Element => {
       {slice.items.map(({ tech_color, tech_name }, index) => (
         <div
           key={index}
-          className="tech-row mb-8 flex items-center justify-center gap-2 text-slate-700"
+          className="tech-row mb-4 md:mb-8 flex items-center justify-center gap-2 text-slate-400 dark:text-slate-700"
           aria-label={tech_name || ""}
         >
           {Array.from({ length: 15 }, (_, index) => (
@@ -87,11 +88,12 @@ const TechList = ({ slice }: TechListProps): JSX.Element => {
                 style={{
                   color: index === 7 && tech_color ? tech_color : "inherit",
                 }}
-              >
+                >
                 {tech_name}
               </span>
               <span className="text-3xl">
-                <MdCircle />
+                {/* <MdCircle /> */}
+                <CodeXml className="h-8 w-8" />
               </span>
             </React.Fragment>
           ))}

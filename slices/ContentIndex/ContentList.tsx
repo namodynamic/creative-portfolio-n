@@ -146,7 +146,7 @@ export default function ContentList({
     <>
       <ul
         ref={component}
-        className="grid border-b border-b-slate-100"
+        className="grid border-b dark:border-b-slate-100"
         onMouseLeave={onMouseLeave}
       >
         {sortedItems.map((item, index) => (
@@ -160,14 +160,14 @@ export default function ContentList({
           >
             <Link
               href={`${urlPrefix}/${item.uid}`}
-              className="flex flex-col justify-between border-t border-t-slate-100 py-10  text-slate-200 md:flex-row "
+              className="flex flex-col justify-between border-t dark:border-t-slate-100 py-10  dark:text-slate-200 md:flex-row "
               aria-label={item.data.title || ""}
             >
               <div className="flex flex-col">
                 <span className="flex flex-wrap text-xl md:text-3xl font-bold">
                   {item.data.title}
                 </span>
-                <div className="flex flex-wrap gap-2 -text-muted-foreground text-black-600 capitalize">
+                <div className="flex flex-wrap gap-2 text-black/50 dark:text-black-600 capitalize">
                   {item.tags.map((tag, index) => (
                     <span key={index} className="text-sm font-bold">
                       #{tag}

@@ -22,8 +22,10 @@ export default async function RelatedProjects({ tags }: RelatedProjectsProps) {
 
   if (!projects.results.length)
     return (
-      <div className="rounded-xl border-[0.5px] border-slate-800 bg-blue-850/50 p-6 shadow-xl backdrop-blur-sm">
-        <h3 className="mb-4 text-lg font-bold text-white">Featured Projects</h3>
+      <div className="rounded-xl border-[0.5px] border-slate-800 bg-white/20 p-6 shadow-xl backdrop-blur-sm dark:bg-blue-850/50">
+        <h3 className="mb-4 text-lg font-bold text-black-50 dark:text-white">
+          Featured Projects
+        </h3>
         <p className="text-xs text-muted-foreground">No related projects.</p>
       </div>
     );
@@ -31,7 +33,7 @@ export default async function RelatedProjects({ tags }: RelatedProjectsProps) {
   return (
     <section>
       <div className="mb-10">
-        <h2 className="mb-8 text-2xl font-bold text-white">
+        <h2 className="mb-8 text-2xl font-bold text-black-50 dark:text-white">
           Explore More Projects
         </h2>
         <div className="grid gap-8 md:grid-cols-3">
@@ -39,7 +41,7 @@ export default async function RelatedProjects({ tags }: RelatedProjectsProps) {
             <Link
               key={project.uid}
               href={`/projects/${project.uid}`}
-              className="group block overflow-hidden rounded-lg border-[0.5px] border-slate-800 bg-blue-850/50 transition-all hover:border-slate-700 hover:bg-slate-900/50"
+              className="group block overflow-hidden rounded-lg border-[0.5px] border-zinc-400 bg-white/20 transition-all hover:border-slate-700 hover:bg-white-50 dark:border-slate-800 dark:bg-blue-850/50 dark:hover:bg-slate-900/50"
             >
               <div className="aspect-video overflow-hidden">
                 <Image
@@ -51,7 +53,7 @@ export default async function RelatedProjects({ tags }: RelatedProjectsProps) {
                 />
               </div>
               <div className="p-5">
-                <h3 className="text-lg font-semibold text-white transition-colors group-hover:text-indigo-500">
+                <h3 className="text-lg font-semibold transition-colors group-hover:text-black/50 dark:text-white dark:group-hover:text-indigo-500">
                   {project.data.title}
                 </h3>
                 <div className="mt-2 flex gap-2">
@@ -59,13 +61,13 @@ export default async function RelatedProjects({ tags }: RelatedProjectsProps) {
                     <Badge
                       key={tag}
                       variant="outline"
-                      className="border-slate-700 bg-slate-800/50 text-xs text-slate-300"
+                      className="border-slate-700 bg-black/50 text-xs text-white dark:bg-slate-800/50 dark:text-slate-300"
                     >
                       #{tag}
                     </Badge>
                   ))}
                   {project.tags.length > 4 && (
-                    <span className="text-xs text-slate-500">
+                    <span className="text-xs dark:text-slate-500">
                       +{project.tags.length - 4}
                     </span>
                   )}
