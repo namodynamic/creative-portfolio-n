@@ -19,7 +19,7 @@ const FeatureGrid: FC<FeatureGridProps> = ({ slice }) => {
     as="section"
     data-slice-type={slice.slice_type}
     data-slice-variation={slice.variation}
-    className="max-md:-my-20 mt-20"
+    className="md:mt-20"
     >
       <BentoGrid className="w-full">
       {slice.primary.items.map((item, i) => (

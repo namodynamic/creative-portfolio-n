@@ -79,6 +79,9 @@ export const BentoGridItem = ({
     <div
      className={cn(
   "group/bento relative row-span-1 flex flex-col justify-between space-y-4 overflow-hidden rounded-xl transition duration-200 md:rounded-3xl",
+  
+  `${id === 2 && "dark:bg-dot-black-500"}`,
+  `${id === 3 && "dark:bg-dot-black-500"}`,
 
   "bg-dot-white-500 backdrop-blur-lg bg-opacity-80 border border-white/30 shadow-[0_4px_30px_rgba(0,0,0,0.1)] hover:shadow-[0_6px_40px_rgba(0,0,0,0.15)]",
 
@@ -102,7 +105,7 @@ export const BentoGridItem = ({
         </div>
         <div
           className={`absolute bottom-0 right-0 ${
-            id === 5 && "w-full opacity-80"
+            id === 5 && "w-full"
           } `}
         >
           {spareImg && (
@@ -150,21 +153,21 @@ export const BentoGridItem = ({
                 {leftLists?.map((item, i) => (
                   <span
                     key={i}
-                    className="rounded-lg dark:bg-[#10132E] bg-violet-600 px-3 py-2 text-center text-xs opacity-50 
-                    lg:px-3 lg:py-4 lg:text-base lg:opacity-100"
+                    className="rounded-lg  bg-violet-700 px-3 py-2 text-center text-xs 
+                    lg:px-3 lg:py-4 lg:text-base"
                   >
                     {item}
                   </span>
                 ))}
-                <span className="rounded-lg dark:bg-[#10132E] bg-[#3A2493] px-3 py-4  text-center lg:px-3 lg:py-4"></span>
+                <span className="rounded-lg  bg-[#3A2493] px-3 py-4  text-center lg:px-3 lg:py-4"></span>
               </div>
               <div className="flex flex-col gap-3 md:gap-3 lg:gap-8">
-                <span className="rounded-lg dark:bg-[#10132E] bg-violet-600 px-3 py-4  text-center lg:px-3 lg:py-4"></span>
+                <span className="rounded-lg  bg-violet-700 px-3 py-4  text-center lg:px-3 lg:py-4"></span>
                 {rightLists?.map((item, i) => (
                   <span
                     key={i}
-                    className="rounded-lg dark:bg-[#10132E] bg-[#3A2493] px-3 py-2 text-center text-xs opacity-50 
-                    lg:px-3 lg:py-4 lg:text-base lg:opacity-100"
+                    className="rounded-lg  bg-[#3A2493] px-3 py-2 text-center text-xs 
+                    lg:px-3 lg:py-4 lg:text-base"
                   >
                     {item}
                   </span>

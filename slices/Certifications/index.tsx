@@ -34,7 +34,7 @@ const Certifications = ({ slice, index }: CertificationsProps): JSX.Element => {
         {slice.primary.heading}
       </Heading>
 
-      <div className="grid grid-cols-2 gap-5 pt-12 max-sm:grid-cols-1 lg:grid-cols-3">
+      <div className="grid grid-cols-1 gap-5 pt-12 md:grid-cols-2 lg:grid-cols-3">
         {slice.items.map((item, index) => {
           const backgroundUrl = isFilled.image(item.background_image)
             ? asImageSrc(item.background_image, { w: 800, q: 80 })

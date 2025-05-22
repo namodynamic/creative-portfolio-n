@@ -39,7 +39,7 @@ const FeaturedProjects: FC<FeaturedProjectsProps> = ({ slice }) => {
           {slice.primary.heading}
         </Heading>
 
-        <div className="prose prose-sm prose-invert col-start-1 mt-5 text-black sm:prose-lg dark:text-slate-500">
+        <div className="prose prose-sm prose-invert col-start-1 mt-5 text-black sm:prose-lg dark:text-slate-300">
           <p>{slice.primary.intro_text}</p>
         </div>
       </motion.div>
@@ -151,7 +151,9 @@ const ProjectCard: FC<ProjectCardProps> = ({ item, index }) => {
         whileHover={{ scale: 1.03 }}
         transition={{ duration: 0.3 }}
       >
+        <PrismicNextLink field={item.project_slug}>
         <PrismicNextImage field={item.featured_project_image} />
+        </PrismicNextLink>
       </motion.div>
 
       <motion.div

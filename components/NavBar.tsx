@@ -5,11 +5,11 @@ import { type Content, asLink } from "@prismicio/client";
 import { PrismicNextLink } from "@prismicio/next";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { motion } from "framer-motion";
 import { SendHorizonal, Send } from "lucide-react";
 import { cn } from "@/lib/utils";
 import Image from "next/image";
-import { ThemeToggle } from "@/components/ThemeToggle"
+import { ThemeToggle } from "@/components/ThemeToggle";
+import { motion } from "motion/react";
 
 export default function NavBar({
   settings,
@@ -19,12 +19,33 @@ export default function NavBar({
   const [scrolled, setScrolled] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [showNav, setShowNav] = useState(true);
+  const [lastScrollY, setLastScrollY] = useState(0);
   const pathname = usePathname();
 
   // Handle scroll effect
   useEffect(() => {
+    let ticking = false;
+
     const handleScroll = () => {
-      setScrolled(window.scrollY > 20);
+      const currentScrollY = window.scrollY;
+
+      if (!ticking) {
+        window.requestAnimationFrame(() => {
+          setScrolled(currentScrollY > 20);
+
+          if (mobileMenuOpen) {
+            setShowNav(true);
+          } else if (currentScrollY > lastScrollY && currentScrollY > 60) {
+            setShowNav(false);
+          } else {
+            setShowNav(true);
+          }
+          setLastScrollY(currentScrollY);
+          ticking = false;
+        });
+        ticking = true;
+      }
     };
 
     // Check if mobile on mount and when window resizes
@@ -43,17 +64,17 @@ export default function NavBar({
       window.removeEventListener("resize", handleResize);
       window.removeEventListener("scroll", handleScroll);
     };
-  }, []);
+  }, [lastScrollY, mobileMenuOpen]);
 
   return (
     <motion.header
-      initial={{ y: -100, opacity: 0 }}
-      animate={{ y: 0, opacity: 1 }}
-      transition={{ duration: 0.5 }}
+      initial={{ y: 0, opacity: 1 }}
+      animate={{ y: showNav ? 0 : -100, opacity: showNav ? 1 : 0 }}
+      transition={{ duration: 0.2 }}
       className={cn(
-        "fixed left-0 right-0 top-0 z-50 mx-auto my-4 flex max-w-7xl items-center justify-between px-2 py-2  transition-all duration-300 max-md:px-4 md:rounded-xl",
+        "fixed left-0 right-0 top-0 z-50 mx-auto my-4 flex max-w-7xl items-center justify-between px-4 py-2  transition-all duration-300 max-md:px-4 md:rounded-xl",
         scrolled
-          ? "dark:bg-black-100/50 bg-white-50 bg-opacity-80 backdrop-blur-md md:shadow-lg"
+          ? "bg-white-50 bg-opacity-80 backdrop-blur-md dark:bg-black-100 md:shadow-lg"
           : "bg-transparent",
       )}
     >
@@ -62,7 +83,7 @@ export default function NavBar({
         <motion.div
           whileHover={{ scale: 1.05 }}
           whileTap={{ scale: 0.95 }}
-          className="flex h-10 w-10 items-center justify-center rounded-lg border-2 dark:border-white dark:bg-black-100 text-xl font-bold dark:text-white"
+          className="flex h-10 w-10 items-center justify-center rounded-lg border-2 text-xl font-bold dark:border-white dark:bg-black-100 dark:text-white"
           onClick={() => setMobileMenuOpen(false)}
         >
           NE
@@ -73,28 +94,28 @@ export default function NavBar({
       {isMobile && (
         <div className="flex items-center gap-2">
           <ThemeToggle />
-        <button
-          onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-          className="z-50 flex h-10 w-10 flex-col items-center justify-center gap-1.5 rounded-md"
-          aria-label={mobileMenuOpen ? "Close menu" : "Open menu"}
-        >
-          <motion.span
-            animate={
-              mobileMenuOpen ? { rotate: 45, y: 6 } : { rotate: 0, y: 0 }
-            }
-            className="h-0.5 w-6 dark:bg-white bg-black-100 transition-all"
-          />
-          <motion.span
-            animate={mobileMenuOpen ? { opacity: 0 } : { opacity: 1 }}
-            className="h-0.5 w-6 dark:bg-white bg-black-100 transition-all"
-          />
-          <motion.span
-            animate={
-              mobileMenuOpen ? { rotate: -45, y: -6 } : { rotate: 0, y: 0 }
-            }
-            className="h-0.5 w-6 dark:bg-white bg-black-100 transition-all"
-          />
-        </button>
+          <button
+            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+            className="z-50 flex h-10 w-10 flex-col items-center justify-center gap-1.5 rounded-md"
+            aria-label={mobileMenuOpen ? "Close menu" : "Open menu"}
+          >
+            <motion.span
+              animate={
+                mobileMenuOpen ? { rotate: 45, y: 6 } : { rotate: 0, y: 0 }
+              }
+              className="h-0.5 w-6 bg-black-100 transition-all dark:bg-white"
+            />
+            <motion.span
+              animate={mobileMenuOpen ? { opacity: 0 } : { opacity: 1 }}
+              className="h-0.5 w-6 bg-black-100 transition-all dark:bg-white"
+            />
+            <motion.span
+              animate={
+                mobileMenuOpen ? { rotate: -45, y: -6 } : { rotate: 0, y: 0 }
+              }
+              className="h-0.5 w-6 bg-black-100 transition-all dark:bg-white"
+            />
+          </button>
         </div>
       )}
 
@@ -107,9 +128,9 @@ export default function NavBar({
                 <PrismicNextLink
                   field={link}
                   className={cn(
-                    "text-md relative px-4 py-2 font-medium text-black-75 dark:text-white/70 transition-colors dark:hover:text-white",
+                    "text-md relative px-4 py-2 font-medium text-black-75 transition-colors dark:text-white/70 dark:hover:text-white",
                     pathname.includes(asLink(link) as string)
-                      ? "dark:text-white text-black"
+                      ? "text-black dark:text-white"
                       : "",
                   )}
                   aria-current={
@@ -121,10 +142,7 @@ export default function NavBar({
                   {label}
                   <span className="absolute bottom-0 left-0 right-0 mx-auto h-0.5 w-0 bg-purple2 transition-all duration-300 group-hover:w-1/2" />
                   {pathname.includes(asLink(link) as string) && (
-                    <motion.span
-                      layoutId="navbar-active"
-                      className="absolute bottom-0 left-0 right-0 mx-auto h-0.5 w-1/2 dark:bg-white bg-black-100"
-                    />
+                    <span className="absolute bottom-0 left-0 right-0 mx-auto h-0.5 w-1/2 bg-black-100 dark:bg-white" />
                   )}
                 </PrismicNextLink>
                 {index < settings.data.nav_item.length - 1 && (
@@ -138,23 +156,23 @@ export default function NavBar({
               </li>
             ))}
           </ul>
-          
+
           <div className="flex items-center gap-2">
-          <ThemeToggle />
-          <PrismicNextLink
-            field={settings.data.cta_link}
-            className="group relative ml-4 flex w-fit items-center justify-center overflow-hidden rounded-lg bg-slate-50 px-4 py-2 text-sm  font-bold text-slate-800 transition-transform ease-out  hover:text-white"
-          >
-            <span
-              className={cn(
-                "absolute inset-0 z-0 h-full translate-y-8 bg-violet-500 transition-transform  duration-300 ease-in-out group-hover:translate-y-0",
-              )}
-            />
-            <span className="relative flex items-center justify-center gap-2">
-              {settings.data.cta_label}
-              <SendHorizonal className="ml h-3 w-3" />
-            </span>
-          </PrismicNextLink>
+            <ThemeToggle />
+            <PrismicNextLink
+              field={settings.data.cta_link}
+              className="group relative ml-4 flex w-fit items-center justify-center overflow-hidden rounded-lg bg-slate-50 px-4 py-2 text-sm  font-bold text-slate-800 transition-transform ease-out  hover:text-white"
+            >
+              <span
+                className={cn(
+                  "absolute inset-0 z-0 h-full translate-y-8 bg-violet-600 transition-transform  duration-300 ease-in-out group-hover:translate-y-0",
+                )}
+              />
+              <span className="relative flex items-center justify-center gap-2">
+                {settings.data.cta_label}
+                <SendHorizonal className="ml h-3 w-3" />
+              </span>
+            </PrismicNextLink>
           </div>
         </nav>
       )}
@@ -168,11 +186,11 @@ export default function NavBar({
             height: mobileMenuOpen ? "auto" : 0,
           }}
           className={cn(
-            "absolute left-0 -top-4 z-40 w-full overflow-hidden dark:bg-black-100 bg-[#DDE4EB]",
+            "absolute -top-4 left-0 z-40 w-full overflow-hidden bg-slate-300 transition-all duration-300 ease-in-out dark:bg-black-100",
             mobileMenuOpen ? "flex" : "hidden",
           )}
         >
-          <div className="flex h-[100vh] w-full flex-col items-center justify-center bg-dot-black-500 gap-6 p-8">
+          <div className="flex h-[100vh] w-full flex-col items-center justify-center gap-6 p-8 bg-dot-black-500">
             <div className="absolute left-0 top-1/2 block h-[380px] w-[960px] -translate-y-1/2 translate-x-[-290px] rotate-90">
               <Image
                 src="/bg-outlines.svg"
@@ -186,10 +204,10 @@ export default function NavBar({
                 width={900}
                 height={380}
                 alt="outline"
-                className="absolute inset-0 invert dark:invert-0 opacity-5 mix-blend-soft-light"
+                className="absolute inset-0 opacity-5 mix-blend-soft-light invert dark:invert-0"
               />
             </div>
-            <ul className="relative z-10 flex w-full flex-col items-center gap-4">
+            <ul className="relative z-10 -mt-20 flex w-full flex-col items-center gap-4">
               {settings.data.nav_item.map(({ link, label }) => (
                 <motion.li
                   key={label}
@@ -201,9 +219,9 @@ export default function NavBar({
                   <PrismicNextLink
                     field={link}
                     className={cn(
-                      "block w-full py-2 text-lg font-medium dark:text-white/90 transition-colors dark:hover:text-white",
+                      "block w-full py-2 text-xl font-semibold text-black-100 dark:text-white/90",
                       pathname.includes(asLink(link) as string)
-                        ? "text-white"
+                        ? "text-violet-500 dark:text-violet-500"
                         : "",
                     )}
                     onClick={() => setMobileMenuOpen(false)}
@@ -214,20 +232,14 @@ export default function NavBar({
               ))}
             </ul>
 
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.3, delay: 0.2 }}
+            <PrismicNextLink
+              field={settings.data.cta_link}
+              className="relative z-10 flex items-center justify-center gap-1 rounded-lg bg-white px-6 py-2 font-semibold text-navy-900"
+              onClick={() => setMobileMenuOpen(false)}
             >
-              <PrismicNextLink
-                field={settings.data.cta_link}
-                className="relative z-10 flex items-center justify-center gap-1 rounded-lg bg-white px-6 py-2 text-navy-900"
-                onClick={() => setMobileMenuOpen(false)}
-              >
-                {settings.data.cta_label}
-                <Send className="ml-1 h-4 w-4" />
-              </PrismicNextLink>
-            </motion.div>
+              {settings.data.cta_label}
+              <Send className="ml-1 h-4 w-4" />
+            </PrismicNextLink>
           </div>
         </motion.nav>
       )}

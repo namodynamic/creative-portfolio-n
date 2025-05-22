@@ -160,7 +160,7 @@ const Testimonial = ({ slice }: TestimonialProps): JSX.Element => {
           <InfiniteMovingCards />
         </div>
 
-        <div className="flex flex-wrap items-center justify-center gap-4 max-lg:mt-10 md:gap-16">
+        <div className="flex flex-wrap items-center justify-center gap-4 mt-16 md:gap-16">
           {slice.primary.companies.map((item, index) => (
             <div key={index} className="flex max-w-32 px-2 md:max-w-60">
               <div className="flex flex-row items-center justify-center gap-2">

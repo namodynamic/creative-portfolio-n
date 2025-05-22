@@ -69,7 +69,7 @@ const Hero = ({ slice }: HeroProps): JSX.Element => {
                 {slice.primary.introduction}
               </p>
 
-              <Link href="/#featured-projects" className="group mb-2">
+              <Link href="/#featured-projects" className="group mb-2 mt-10">
                 <MagicButton
                   title="Explore my projects"
                   icon={
