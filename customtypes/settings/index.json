@@ -173,6 +173,21 @@
           "label": "Blog Author Bio",
           "placeholder": "My short bio"
         }
+      },
+      "logo": {
+        "type": "Image",
+        "config": {
+          "label": "Logo",
+          "constraint": {},
+          "thumbnails": []
+        }
+      },
+      "name_logo": {
+        "type": "Text",
+        "config": {
+          "label": "Name Logo",
+          "placeholder": "Nnamdi E."
+        }
       }
     },
     "SEO and Metadata": {

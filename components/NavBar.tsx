@@ -10,6 +10,7 @@ import { cn } from "@/lib/utils";
 import Image from "next/image";
 import { ThemeToggle } from "@/components/ThemeToggle";
 import { motion } from "motion/react";
+import NameLogo from "./Namelogo";
 
 export default function NavBar({
   settings,
@@ -78,22 +79,15 @@ export default function NavBar({
           : "bg-transparent",
       )}
     >
-      {/* Logo */}
-      <Link href="/" aria-label="Home page" className="z-50 flex items-center">
-        <motion.div
-          whileHover={{ scale: 1.05 }}
-          whileTap={{ scale: 0.95 }}
-          className="flex h-10 w-10 items-center justify-center rounded-lg border-2 text-xl font-bold dark:border-white dark:bg-black-100 dark:text-white"
-          onClick={() => setMobileMenuOpen(false)}
-        >
-          NE
-        </motion.div>
-      </Link>
+      <NameLogo
+        name={settings.data.name_logo || ""}
+        photoUrl={settings.data.logo.url || ""}
+        href="/"
+      />
 
       {/* Mobile menu button */}
       {isMobile && (
         <div className="flex items-center gap-2">
-          <ThemeToggle />
           <button
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
             className="z-50 flex h-10 w-10 flex-col items-center justify-center gap-1.5 rounded-md"
@@ -158,7 +152,7 @@ export default function NavBar({
           </ul>
 
           <div className="flex items-center gap-2">
-            <ThemeToggle />
+            <ThemeToggle variant="icon" />
             <PrismicNextLink
               field={settings.data.cta_link}
               className="group relative ml-4 flex w-fit items-center justify-center overflow-hidden rounded-lg bg-slate-50 px-4 py-2 text-sm  font-bold text-slate-800 transition-transform ease-out  hover:text-white"
@@ -186,7 +180,7 @@ export default function NavBar({
             height: mobileMenuOpen ? "auto" : 0,
           }}
           className={cn(
-            "absolute -top-4 left-0 z-40 w-full overflow-hidden bg-slate-300 transition-all duration-300 ease-in-out dark:bg-black-100",
+            "absolute -top-4 left-0 z-40 w-full overflow-hidden bg-slate-300 transition-all duration-300 ease-in-out dark:bg-slate-950",
             mobileMenuOpen ? "flex" : "hidden",
           )}
         >
@@ -231,6 +225,18 @@ export default function NavBar({
                 </motion.li>
               ))}
             </ul>
+
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.3, delay: 0.1 }}
+              className="flex flex-col items-center gap-3 rounded-lg bg-black/10 p-4 dark:bg-white/10"
+            >
+              <span className="text-xl font-medium text-black-100 dark:text-white/90">
+                Appearance
+              </span>
+              <ThemeToggle variant="slider" />
+            </motion.div>
 
             <PrismicNextLink
               field={settings.data.cta_link}

@@ -963,7 +963,29 @@ interface SettingsDocumentData {
    * - **Tab**: Main
    * - **Documentation**: https://prismic.io/docs/field#key-text
    */
-  author_bio: prismic.KeyTextField /**
+  author_bio: prismic.KeyTextField;
+
+  /**
+   * Logo field in *Settings*
+   *
+   * - **Field Type**: Image
+   * - **Placeholder**: *None*
+   * - **API ID Path**: settings.logo
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#image
+   */
+  logo: prismic.ImageField<never>;
+
+  /**
+   * Name Logo field in *Settings*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: Nnamdi E.
+   * - **API ID Path**: settings.name_logo
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  name_logo: prismic.KeyTextField /**
    * Meta Title field in *Settings*
    *
    * - **Field Type**: Text

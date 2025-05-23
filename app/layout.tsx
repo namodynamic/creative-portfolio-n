@@ -35,7 +35,7 @@ export default function RootLayout({
     <html lang="en" suppressHydrationWarning data-lt-installed="true">
       <body className={clsx(urbanist.className, "relative")}>
         
-        <ThemeProvider defaultTheme="dark">
+        <ThemeProvider defaultTheme="system">
          <script id="chatway" async src="https://cdn.chatway.app/widget.js?id=dEB2vdKKIwk1"></script>
 
          <Header />
