@@ -3,7 +3,6 @@
 import { useState, useEffect } from "react";
 import { type Content, asLink } from "@prismicio/client";
 import { PrismicNextLink } from "@prismicio/next";
-import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { SendHorizonal, Send } from "lucide-react";
 import { cn } from "@/lib/utils";
@@ -75,7 +74,7 @@ export default function NavBar({
       className={cn(
         "fixed left-0 right-0 top-0 z-50 mx-auto my-4 flex max-w-7xl items-center justify-between px-4 py-2  transition-all duration-300 max-md:px-4 md:rounded-xl",
         scrolled
-          ? "bg-white-50 bg-opacity-80 backdrop-blur-md dark:bg-black-100 md:shadow-lg"
+          ? "bg-white-50 bg-opacity-80 backdrop-blur-md dark:bg-black-100/50 md:shadow-lg"
           : "bg-transparent",
       )}
     >
@@ -134,7 +133,7 @@ export default function NavBar({
                   }
                 >
                   {label}
-                  <span className="absolute bottom-0 left-0 right-0 mx-auto h-0.5 w-0 bg-purple2 transition-all duration-300 group-hover:w-1/2" />
+                  <span className="absolute bottom-0 left-0 right-0 mx-auto h-0.5 w-0 bg-purple-700 transition-all duration-300 group-hover:w-1/2" />
                   {pathname.includes(asLink(link) as string) && (
                     <span className="absolute bottom-0 left-0 right-0 mx-auto h-0.5 w-1/2 bg-black-100 dark:bg-white" />
                   )}
@@ -159,7 +158,7 @@ export default function NavBar({
             >
               <span
                 className={cn(
-                  "absolute inset-0 z-0 h-full translate-y-8 bg-violet-600 transition-transform  duration-300 ease-in-out group-hover:translate-y-0",
+                  "absolute inset-0 z-0 h-full translate-y-8 bg-purple-600 transition-transform  duration-300 ease-in-out group-hover:translate-y-0",
                 )}
               />
               <span className="relative flex items-center justify-center gap-2">
@@ -180,11 +179,11 @@ export default function NavBar({
             height: mobileMenuOpen ? "auto" : 0,
           }}
           className={cn(
-            "absolute -top-4 left-0 z-40 w-full overflow-hidden bg-slate-300 transition-all duration-300 ease-in-out dark:bg-slate-950",
+            "absolute -top-4 left-0 z-40 w-full overflow-hidden bg-white transition-all duration-300 ease-in-out dark:bg-navy-900",
             mobileMenuOpen ? "flex" : "hidden",
           )}
         >
-          <div className="flex h-[100vh] w-full flex-col items-center justify-center gap-6 p-8 bg-dot-black-500">
+          <div className="flex h-screen w-full flex-col items-center justify-center gap-6 p-8">
             <div className="absolute left-0 top-1/2 block h-[380px] w-[960px] -translate-y-1/2 translate-x-[-290px] rotate-90">
               <Image
                 src="/bg-outlines.svg"
@@ -201,7 +200,7 @@ export default function NavBar({
                 className="absolute inset-0 opacity-5 mix-blend-soft-light invert dark:invert-0"
               />
             </div>
-            <ul className="relative z-10 -mt-20 flex w-full flex-col items-center gap-4">
+            <ul className="relative z-10  flex w-full flex-col items-center gap-4">
               {settings.data.nav_item.map(({ link, label }) => (
                 <motion.li
                   key={label}
@@ -215,7 +214,7 @@ export default function NavBar({
                     className={cn(
                       "block w-full py-2 text-xl font-semibold text-black-100 dark:text-white/90",
                       pathname.includes(asLink(link) as string)
-                        ? "text-violet-500 dark:text-violet-500"
+                        ? "text-purple-500 dark:text-purple-500"
                         : "",
                     )}
                     onClick={() => setMobileMenuOpen(false)}
@@ -240,7 +239,7 @@ export default function NavBar({
 
             <PrismicNextLink
               field={settings.data.cta_link}
-              className="relative z-10 flex items-center justify-center gap-1 rounded-lg bg-white px-6 py-2 font-semibold text-navy-900"
+              className="relative z-10 flex items-center justify-center gap-1 rounded-lg bg-black-50 dark:bg-white px-6 py-2 font-semibold text-white dark:text-navy-900"
               onClick={() => setMobileMenuOpen(false)}
             >
               {settings.data.cta_label}

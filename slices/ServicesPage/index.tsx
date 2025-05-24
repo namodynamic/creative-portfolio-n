@@ -8,17 +8,17 @@ import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/
 import { PrismicNextLink } from "@prismicio/next";
 
 const serviceIcons: { [key: string]: React.ReactNode } = {
-  code: <Code className="h-6 w-6 text-white dark:text-violet-500" />,
-  server: <Server className="h-6 w-6 text-white dark:text-violet-500" />,
-  database: <Database className="h-6 w-6 text-white dark:text-violet-500" />,
-  rocket: <Rocket className="h-6 w-6 text-white dark:text-violet-500" />,
+  code: <Code className="h-6 w-6 text-white dark:text-purple-500" />,
+  server: <Server className="h-6 w-6 text-white dark:text-purple-500" />,
+  database: <Database className="h-6 w-6 text-white dark:text-purple-500" />,
+  rocket: <Rocket className="h-6 w-6 text-white dark:text-purple-500" />,
 };
 
 const processIcons: { [key: string]: React.ReactNode } = {
-  lock: <Lock className="h-6 w-6 text-white dark:text-violet-500" />,
-  code: <Code className="h-6 w-6 text-white dark:text-violet-500" />,
-  refresh: <RefreshCw className="h-6 w-6 text-white dark:text-violet-500" />,
-  rocket: <Rocket className="h-6 w-6 text-white dark:text-violet-500" />,
+  lock: <Lock className="h-6 w-6 text-white dark:text-purple-500" />,
+  code: <Code className="h-6 w-6 text-white dark:text-purple-500" />,
+  refresh: <RefreshCw className="h-6 w-6 text-white dark:text-purple-500" />,
+  rocket: <Rocket className="h-6 w-6 text-white dark:text-purple-500" />,
 };
 
 const packageIcons: { [key: string]: React.ReactNode } = {
@@ -44,7 +44,7 @@ const Services: FC<ServicesProps> = ({ slice }) => {
     >
       <div className="px-4 py-8 sm:px-6 sm:py-16 lg:px-8">
         <div className="mx-auto max-w-6xl text-center">
-          <p className="mb-2 text-sm uppercase tracking-wider text-black-50 dark:text-violet-500">
+          <p className="mb-2 text-sm uppercase tracking-wider text-black-50 dark:text-purple-500">
             {slice.primary.heading}
           </p>
           <h1 className="mb-4 text-4xl font-bold text-black-50 dark:text-white md:text-5xl">
@@ -65,7 +65,7 @@ const Services: FC<ServicesProps> = ({ slice }) => {
               className="rounded-xl border-[0.5px] border-zinc-400 bg-white/20 p-6 shadow-lg backdrop-blur-sm dark:border-gray-800 dark:bg-blue-850/50"
             >
               <div className="mb-4 flex items-center">
-                <div className="mr-3 rounded-md bg-black/80 p-2 dark:bg-violet-500/10">
+                <div className="mr-3 rounded-md bg-black/80 p-2 dark:bg-purple-500/10">
                   {serviceIcons[service.icons as string]}
                 </div>
                 <h2 className="text-xl font-bold text-black-50 dark:text-white">
@@ -94,7 +94,7 @@ const Services: FC<ServicesProps> = ({ slice }) => {
               </div>
               <PrismicNextLink
                 field={service.link_url}
-                className="inline-flex items-center font-medium hover:text-black/50 dark:text-violet-500 dark:hover:text-violet-400"
+                className="inline-flex items-center font-medium hover:text-black/50 dark:text-purple-500 dark:hover:text-purple-400"
               >
                 {service.link_text}
                 <ArrowRight className="ml-2 h-4 w-4" />
@@ -108,7 +108,7 @@ const Services: FC<ServicesProps> = ({ slice }) => {
       <div className="px-4 py-16 sm:px-6 lg:px-8">
         <div className="mx-auto max-w-6xl">
           <div className="mb-12 text-center">
-            <p className="mb-2 text-sm uppercase tracking-wider dark:text-violet-500">
+            <p className="mb-2 text-sm uppercase tracking-wider dark:text-purple-500">
               {slice.primary.package_heading}
             </p>
             <h2 className="mb-4 text-3xl font-bold text-black-50 dark:text-white">
@@ -125,10 +125,10 @@ const Services: FC<ServicesProps> = ({ slice }) => {
                 key={index}
                 className="group relative overflow-hidden rounded-xl border-[0.5px] border-zinc-400 bg-white/20 p-6 shadow-lg backdrop-blur-sm dark:border-gray-800 dark:bg-blue-850/50"
               >
-                <div className="absolute -right-20 -top-20 h-40 w-40 rounded-full bg-violet-500/10 transition-transform duration-500 group-hover:scale-150" />
+                <div className="absolute -right-20 -top-20 h-40 w-40 rounded-full bg-purple-500/10 transition-transform duration-500 group-hover:scale-150" />
                 <div className="relative">
                   <div className="mb-6 flex justify-center">
-                    <div className="transform rounded-full bg-black/50 p-3 transition-transform group-hover:scale-110 dark:bg-violet-500/20">
+                    <div className="transform rounded-full bg-black/50 p-3 transition-transform group-hover:scale-110 dark:bg-purple-500/20">
                       {packageIcons[item.icons as string]}
                     </div>
                   </div>
@@ -154,7 +154,7 @@ const Services: FC<ServicesProps> = ({ slice }) => {
                     />
                   </div>
                   <div className="mb-6 text-center">
-                    <span className="inline-block rounded-full bg-black/50 px-4 py-1 text-sm font-medium text-white/80 dark:bg-violet-500/20 dark:text-violet-400">
+                    <span className="inline-block rounded-full bg-black/50 px-4 py-1 text-sm font-medium text-white/80 dark:bg-purple-500/20 dark:text-purple-400">
                       {item.tag}
                     </span>
                   </div>
@@ -162,7 +162,7 @@ const Services: FC<ServicesProps> = ({ slice }) => {
                   <div className="text-center">
                     <PrismicNextLink
                       field={item.link_url}
-                      className="inline-flex w-full items-center justify-center rounded-2xl bg-gradient-to-r from-violet-600 to-violet-700 px-6 py-3 font-medium text-white shadow-lg transition-all hover:bg-violet-700 hover:from-violet-700 hover:to-violet-800"
+                      className="inline-flex w-full items-center justify-center rounded-2xl bg-gradient-to-r from-purple-600 to-purple-700 px-6 py-3 font-medium text-white shadow-lg transition-all hover:bg-purple-700 hover:from-purple-700 hover:to-purple-800"
                     >
                       {item.link_text}
                       <ArrowRight className="ml-2 h-4 w-4" />
@@ -174,7 +174,7 @@ const Services: FC<ServicesProps> = ({ slice }) => {
           </div>
 
           <div className="mt-8 items-center justify-center space-x-1 text-center sm:flex">
-            <CheckCircle className="mr-1 inline-block h-4 w-4 text-violet-500" />
+            <CheckCircle className="mr-1 inline-block h-4 w-4 text-purple-500" />
             <p className="text-xs leading-relaxed text-black/50 dark:text-gray-400">
               Flexible payment plans available for all packages. Ask about our
               50% upfront option.
@@ -194,7 +194,7 @@ const Services: FC<ServicesProps> = ({ slice }) => {
             {slice.primary.dev_process.map((item, index) => (
               <div key={index} className="text-center">
                 <div className="mb-4 flex justify-center">
-                  <div className="rounded-full bg-black/80 p-3 dark:bg-violet-500/10">
+                  <div className="rounded-full bg-black/80 p-3 dark:bg-purple-500/10">
                     {processIcons[item.icons as string]}
                   </div>
                 </div>
@@ -214,7 +214,7 @@ const Services: FC<ServicesProps> = ({ slice }) => {
       <div className=" mt-16 px-4 py-16 sm:px-6 lg:px-8">
         <div className="mx-auto max-w-4xl">
           <div className="mb-12 text-center">
-            <p className="mb-2 text-sm uppercase tracking-wider text-black-50 dark:text-violet-500">
+            <p className="mb-2 text-sm uppercase tracking-wider text-black-50 dark:text-purple-500">
               FAQ
             </p>
             <h2 className="mb-4 text-3xl font-bold text-black-50 dark:text-white">
@@ -243,7 +243,7 @@ const Services: FC<ServicesProps> = ({ slice }) => {
           <div className="mt-8 text-center">
             <Link
               href="/faq"
-              className="inline-flex items-center text-violet-500 hover:text-violet-400"
+              className="inline-flex items-center text-purple-500 hover:text-purple-400"
             >
               View all FAQs
               <ArrowRight className="ml-2 h-4 w-4" />
@@ -266,7 +266,7 @@ const Services: FC<ServicesProps> = ({ slice }) => {
           <div className="flex flex-col justify-center gap-4 sm:flex-row">
             <Link
               href="/contact"
-              className="rounded-md bg-gradient-to-r from-violet-500 to-violet-700 px-6 py-3 font-medium text-white shadow-lg transition-all hover:from-indigo-700 hover:to-purple2"
+              className="rounded-md bg-gradient-to-r from-purple-500 to-purple-700 px-6 py-3 font-medium text-white shadow-lg transition-all hover:from-violet-700 hover:to-purple-600"
             >
               Start a Conversation
             </Link>

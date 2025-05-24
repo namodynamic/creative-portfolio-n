@@ -60,7 +60,7 @@ export default async function RelatedPosts({ params }: TagPageProps) {
                 <p className="mb-2 text-xs text-black/80 dark:text-gray-400">
                   {formattedDate}
                 </p>
-                <h3 className="mb-2 font-bold transition-colors group-hover:text-black/50 dark:text-white dark:group-hover:text-violet-400">
+                <h3 className="mb-2 font-bold transition-colors group-hover:text-black/50 dark:text-white dark:group-hover:text-purple-400">
                   {post.data.title}
                 </h3>
                 <p className="line-clamp-2 text-sm text-black/80 dark:text-gray-400">

@@ -28,7 +28,7 @@ export default async function TagPage({ params }: TagPageProps) {
       <div className="relative z-20 w-full py-6 md:py-10">
         <Link
           href="/blog"
-          className="mb-4 inline-flex items-center text-sm transition-colors hover:text-black/50 dark:text-violet-400 dark:hover:text-violet-300"
+          className="mb-4 inline-flex items-center text-sm transition-colors hover:text-black/50 dark:text-purple-400 dark:hover:text-purple-300"
         >
           <ArrowLeft className="mr-1 h-4 w-4" />
           Back to all blogs
@@ -38,7 +38,7 @@ export default async function TagPage({ params }: TagPageProps) {
       {/* Header */}
       <div className="pb-8 pt-5 md:pt-10">
         <div className="mx-auto max-w-3xl text-center">
-          <div className="mb-6 inline-flex items-center justify-center gap-2 rounded-full bg-black/50 px-4 py-2 text-white dark:bg-violet-900/20 dark:text-violet-300">
+          <div className="mb-6 inline-flex items-center justify-center gap-2 rounded-full bg-black/50 px-4 py-2 text-white dark:bg-purple-900/20 dark:text-purple-300">
             <Tag className="h-4 w-4" />
             <span className="text-sm font-medium">Tag</span>
           </div>
@@ -91,7 +91,7 @@ export default async function TagPage({ params }: TagPageProps) {
                         <Badge
                           key={tag}
                           variant="secondary"
-                          className="bg-black-50 text-white-50 hover:bg-black/50 dark:bg-indigo-900/20 dark:text-indigo-300 dark:hover:bg-indigo-900/30"
+                          className="bg-black-50 text-white-50 hover:bg-black/50 dark:bg-violet-900/20 dark:text-violet-300 dark:hover:bg-violet-900/30"
                         >
                           #{tag}
                         </Badge>
@@ -114,7 +114,7 @@ export default async function TagPage({ params }: TagPageProps) {
                       </time>
                       <Link
                         href={`/blog/${post.uid}`}
-                        className="text-sm font-medium transition-colors hover:text-black/50 dark:text-violet-400 dark:hover:text-violet-300"
+                        className="text-sm font-medium transition-colors hover:text-black/50 dark:text-purple-400 dark:hover:text-purple-300"
                       >
                         Read more
                       </Link>
@@ -138,7 +138,7 @@ export default async function TagPage({ params }: TagPageProps) {
             </p>
             <Link
               href="/blog"
-              className="inline-flex items-center justify-center rounded-md bg-indigo-600 px-6 py-3 font-medium text-white transition-colors hover:bg-indigo-700"
+              className="inline-flex items-center justify-center rounded-md bg-violet-600 px-6 py-3 font-medium text-white transition-colors hover:bg-violet-700"
             >
               Browse all posts
             </Link>

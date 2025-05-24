@@ -4,48 +4,40 @@
 
 
 :root {
-  --foreground-rgb: 255, 255, 255;
-  --background-start-rgb: 5, 8, 22;
-  --background-end-rgb: 5, 8, 22;
+  --background-start-rgb: 205, 215, 226;
+  --background-end-rgb: 205, 215, 226;
+  --background: 0 0% 100%;
+  --foreground: 0 0% 3.9%;
 }
 
 .dark {
-  --foreground-rgb: 255, 255, 255;
   --background-start-rgb: 5, 8, 22;
   --background-end-rgb: 5, 8, 22;
+  --background: 0 0% 3.9%;
+  --foreground: 0 0% 98%;
 }
-
-.light {
-  --foreground-rgb: 0, 0, 0;
-  --background-start-rgb: 205, 215, 226;
-  --background-end-rgb: 205, 215, 226;
-}
-
 
 body {
-  width: 100dvw;
-  overflow-x: hidden;
+  font-family: Arial, Helvetica, sans-serif;
   color: rgb(var(--foreground-rgb));
   background: linear-gradient(to bottom, transparent, rgb(var(--background-end-rgb))) rgb(var(--background-start-rgb));
-  transition: background-color 0.3s ease, color 0.3s ease;
+  transition: background 0.3s ease, color 0.3s ease;
+  min-height: 100vh;
+  background-attachment: local;
 }
-
-section {
-    width: 100dvw;
-}
-
-
 
 @layer base {
   * {
     @apply border-border;
   }
+  html {
+    transition: background-color 0.3s ease;
+    color-scheme: light dark;
+  }
   body {
-    @apply bg-background text-foreground;
+    @apply text-foreground;
   }
 }
-
-
 
 @layer utilities {
   .text-balance {
@@ -54,11 +46,6 @@ section {
   .heading {
     @apply text-center text-5xl font-bold dark:text-slate-300 md:text-6xl;
   }
-
-  .black-gradient {
-    background: linear-gradient(90deg, #161a31 0%, #06091f 100%);
-  }
-
   .btn-ping {
     @apply absolute inline-flex h-full w-full animate-ping rounded-full bg-green-400 opacity-75;
   }
@@ -66,94 +53,45 @@ section {
   .btn-ping_dot {
     @apply relative inline-flex h-3 w-3 rounded-full bg-green-500;
   }
-
-  .contact-container {
-    @apply relative z-10 mt-12 max-w-xl px-5 sm:px-10;
+  .theme-bg-primary {
+    background: rgb(var(--background-start-rgb));
+  }
+  .theme-bg-gradient {
+    background: linear-gradient(to bottom, transparent, rgb(var(--background-end-rgb))) rgb(var(--background-start-rgb));
   }
 
-  .head-text {
-    @apply text-gray_gradient text-3xl font-semibold sm:text-4xl;
+  .hero-dark-bg {
+    background-color: #050816;
+    background-image: url('/herobg.png');
+    background-position: top;
+    background-repeat: no-repeat;
+    background-size: cover;
   }
 
-  .field-label {
-    @apply text-lg text-white-600;
+  .hero-light-bg {
+    background-color: #CDD7E2;
+    background-image: url('/herobg1.png');
+    background-position: top;
+    background-repeat: no-repeat;
+    background-size: cover;
   }
+}
 
-  .field-input {
-    @apply min-h-14 w-full rounded-lg bg-black-300 px-5 py-2 text-lg text-white-800 shadow-2xl shadow-black-200 placeholder:text-white-500 focus:outline-none;
+@media (min-width: 1024px) {
+  .hero-dark-bg,
+  .hero-light-bg {
+    background-size: 100% 1080px;
+    min-height: 1080px;
+    max-height: 1080px;
+    background-repeat: no-repeat;
+    background-position: top center;
   }
+}
 
-  .field-btn {
-    @apply flex min-h-12 items-center justify-center gap-3 rounded-xl bg-black-500 px-5 py-2 text-lg text-white shadow-2xl shadow-black-200 transition-colors duration-500 hover:bg-black-500/80 hover:text-white-200;
+@media (max-width: 768px) {
+  .hero-dark-bg,
+  .hero-light-bg {
+    background-size: contain;
+    background-position: top center;
   }
-
-  .text-gray_gradient {
-    @apply bg-gradient-to-r from-[#BEC1CF] from-60% via-[#D5D8EA] via-60% to-[#D5D8EA] to-100% bg-clip-text text-transparent;
-  } 
-}
-
-.background-gradient {
-  background: radial-gradient(
-    circle at top center,
-    hsla(222, 80%, 60%, 0.5) 0%,
-    hsla(222, 0%, 0%, 0) 50%,
-    hsla(222, 0%, 0%, 0) 100%
-  );
-}
-
-.border-gradient {
-  background: linear-gradient(135deg, #7c3aed 0%, #3b82f6 100%);
-}
-
-
-
-
-.card {
-  --start: 0;
-  position: relative;
-  z-index: 40;
-  overflow: hidden;
-  transition: border-color 1s ease-in-out;
-}
-
-.card::before {
-  position: absolute;
-  content: "";
-  width: 100%;
-  height: 100%;
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%);
-  border-radius: 12px;
-  border: 2px solid transparent;
-  background: var(--gradient);
-  background-attachment: fixed;
-  mask:
-    linear-gradient(#0000, #0000),
-    conic-gradient(
-      from calc((var(--start) - 15) * 1deg),
-      #ffffff1f 0deg,
-      white,
-      #ffffff00 100deg
-    );
-  mask-composite: intersect;
-  mask-clip: padding-box, border-box;
-  opacity: 0;
-  transition: 0.5s ease;
-}
-
-.glow {
-  pointer-events: none;
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%);
-  filter: blur(10px);
-  filter: saturate(200);
-}
-
-.card:hover::before {
-  opacity: 1;
 }

@@ -24,7 +24,7 @@ const Cta = ({ slice }: CtaProps): JSX.Element => {
       <div className="flex flex-col items-center">
         <h1 className="heading lg:max-w-[45vw]">
           {slice.primary.heading?.split(" ").slice(0, 3).join(" ")}{" "}
-          <span className="text-violet-500">
+          <span className="text-purple-500">
             {slice.primary.heading?.split(" ").slice(3, 4).join(" ")}{" "}
           </span>
           {slice.primary.heading?.split(" ").slice(4).join(" ")}

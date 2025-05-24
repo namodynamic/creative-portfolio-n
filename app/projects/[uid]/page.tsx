@@ -52,8 +52,8 @@ export default async function Page({ params }: { params: Promise<Params> }) {
       date: page.data.current_status,
       status: "Status",
       icon: <CircleGauge className="h-4 w-4" />,
-      bgColor: "dark:bg-indigo-900/50 bg-indigo-900 ",
-      textColor: "text-violet-500",
+      bgColor: "bg-violet-900/50 ",
+      textColor: "text-purple-500",
     },
   ];
 
@@ -77,7 +77,7 @@ export default async function Page({ params }: { params: Promise<Params> }) {
               Projects
             </Link>
             <span className="text-slate-600">/</span>
-            <span className="dark:text-violet-500">{page.data.title}</span>
+            <span className="dark:text-purple-500">{page.data.title}</span>
           </div>
         </div>
       </div>
@@ -90,7 +90,7 @@ export default async function Page({ params }: { params: Promise<Params> }) {
               {page.data.accessibility === "Open Source Project" && (
                 <Badge
                   variant="outline"
-                  className="mb-4 border-violet-500 bg-violet-500 text-white dark:bg-indigo-950/30 dark:text-violet-500"
+                  className="mb-4 border-purple-500 bg-purple-500 text-white dark:bg-purple-950/30 dark:text-purple-500"
                 >
                   {page.data.accessibility}
                 </Badge>
@@ -114,7 +114,7 @@ export default async function Page({ params }: { params: Promise<Params> }) {
               {/* Role & Contribution */}
               <div className="mb-12">
                 <div className="mb-6 flex items-center gap-3">
-                  <div className="flex h-8 w-8 items-center justify-center rounded-full bg-white/50 text-black-100 dark:bg-indigo-900/50 dark:text-violet-500">
+                  <div className="flex h-8 w-8 items-center justify-center rounded-full bg-white/50 text-black-100 dark:bg-violet-900/50 dark:text-purple-500">
                     <GitGraph className="h-5 w-5" />
                   </div>
                   <h2 className="text-xl font-bold text-black/80 dark:text-white">
@@ -129,7 +129,7 @@ export default async function Page({ params }: { params: Promise<Params> }) {
               {/* Challenges & Solutions */}
               <div className="mb-12">
                 <div className="mb-6 flex items-center gap-3">
-                  <div className="flex h-8 w-8 items-center justify-center rounded-full bg-white/50 text-black-100 dark:bg-indigo-900/50 dark:text-violet-500">
+                  <div className="flex h-8 w-8 items-center justify-center rounded-full bg-white/50 text-black-100 dark:bg-violet-900/50 dark:text-purple-500">
                     <Loader className="h-5 w-5" />
                   </div>
                   <h2 className="text-xl font-bold text-black/80 dark:text-white">
@@ -152,7 +152,7 @@ export default async function Page({ params }: { params: Promise<Params> }) {
               {/* Features */}
               <div className="mb-12">
                 <div className="mb-6 flex items-center gap-3">
-                  <div className="flex h-8 w-8 items-center justify-center rounded-full bg-white/50 text-black-100 dark:bg-indigo-900/50 dark:text-violet-500">
+                  <div className="flex h-8 w-8 items-center justify-center rounded-full bg-white/50 text-black-100 dark:bg-violet-900/50 dark:text-purple-500">
                     <GoStack className="h-5 w-5" />
                   </div>
                   <h2 className="text-xl font-bold text-black/80 dark:text-white">
@@ -174,7 +174,7 @@ export default async function Page({ params }: { params: Promise<Params> }) {
               {/* Technical Details */}
               <div className="mb-12">
                 <div className="mb-6 flex items-center gap-3">
-                  <div className="flex h-8 w-8 items-center justify-center rounded-full bg-white/50 text-black-100 dark:bg-indigo-900/50 dark:text-violet-500">
+                  <div className="flex h-8 w-8 items-center justify-center rounded-full bg-white/50 text-black-100 dark:bg-violet-900/50 dark:text-purple-500">
                     <CodeXml className="h-5 w-5" />
                   </div>
                   <h2 className="text-xl font-bold text-black/80 dark:text-white">
@@ -232,7 +232,7 @@ export default async function Page({ params }: { params: Promise<Params> }) {
                 <div className="space-y-3">
                   <PrismicNextLink
                     field={page.data.view_live}
-                    className="flex w-full items-center justify-between rounded-md bg-gradient-to-r from-violet-500 to-violet-800 px-4 py-2 text-white transition-colors hover:from-indigo-700 hover:to-purple"
+                    className="flex w-full items-center justify-between rounded-md bg-gradient-to-r from-purple-500 to-purple-800 px-4 py-2 text-white transition-colors hover:from-purple-700 hover:to-purple-600"
                   >
                     <span className="font-medium">View Live Demo</span>
                     <ExternalLink className="h-4 w-4" />
@@ -271,7 +271,7 @@ export default async function Page({ params }: { params: Promise<Params> }) {
                       Development Time
                     </h4>
                     <div className="flex items-center gap-2">
-                      <Clock className="h-4 w-4 text-black/80 dark:text-violet-500" />
+                      <Clock className="h-4 w-4 text-black/80 dark:text-purple-500" />
                       <p className="font-medium dark:text-white">
                         {page.data.development_time || ""}
                       </p>
@@ -329,7 +329,7 @@ export default async function Page({ params }: { params: Promise<Params> }) {
                   {timeline.map((item, index) => (
                     <div key={index} className="relative pb-6 pl-6 last:pb-0">
                       {index < timeline.length - 1 && (
-                        <div className="absolute left-[11px] top-8 h-full w-[1px] bg-indigo-900/50"></div>
+                        <div className="absolute left-[11px] top-8 h-full w-[1px] bg-violet-900/50"></div>
                       )}
                       <div
                         className={`absolute -left-1 top-1 flex h-8 w-8 items-center justify-center rounded-full ${item.bgColor} ${item.textColor}`}
@@ -358,7 +358,7 @@ export default async function Page({ params }: { params: Promise<Params> }) {
                   {page.tags.map((tag) => (
                     <div
                       key={tag}
-                      className="rounded-full bg-violet-500 px-3 py-1 text-xs font-medium text-white transition-colors duration-300 hover:text-violet-200"
+                      className="rounded-full bg-purple-500 px-3 py-1 text-xs font-medium text-white transition-colors duration-300 hover:text-violet-200"
                     >
                       #{tag}
                     </div>
@@ -385,14 +385,14 @@ export default async function Page({ params }: { params: Promise<Params> }) {
           </p>
           <div className="flex flex-wrap justify-center gap-4">
             <Link href="/contact">
-              <Button className="bg-gradient-to-r from-indigo-600 to-purple text-white hover:from-indigo-700 hover:to-purple">
+              <Button className="bg-gradient-to-r from-purple-600 to-purple-800 text-white hover:from-purple-700 hover:to-purple-600">
                 Start a Conversation
               </Button>
             </Link>
             <Link href="/services">
               <Button
                 variant="outline"
-                className="border-slate-700 hover:bg-slate-800 hover:text-white dark:text-slate-300"
+                className="border-slate-700 dark:border-slate-300 hover:bg-slate-800 hover:text-white dark:text-slate-300"
               >
                 View Services
               </Button>

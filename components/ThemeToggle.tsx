@@ -60,14 +60,14 @@ export function ThemeToggle({ variant = "auto", className }: ThemeToggleProps) {
       <button
         onClick={toggleTheme}
         className={`relative flex h-8 w-16 items-center rounded-full p-1 transition-colors duration-300 ${
-          isDark ? "bg-slate-700" : "bg-gray-300"
+          isDark ? "bg-slate-950" : "bg-gray-300"
         } ${className}`}
         aria-label={`Switch to ${isDark ? "light" : "dark"} theme`}
       >
         <motion.div
           layout
           className={`flex h-6 w-6 items-center justify-center rounded-full bg-white shadow-md transition-colors duration-300 ${
-            isDark ? "text-slate-700" : "text-yellow-500"
+            isDark ? "text-slate-700" : "text-black-75"
           }`}
           animate={{
             x: isDark ? 32 : 0,

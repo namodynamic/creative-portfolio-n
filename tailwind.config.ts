@@ -7,7 +7,7 @@ const {
 } = require("tailwindcss/lib/util/flattenColorPalette");
 
 const config: Config = {
-  darkMode: ["class"],
+  darkMode: "class",
   content: [
     "./pages/**/*.{js,ts,jsx,tsx,mdx}",
     "./components/**/*.{js,ts,jsx,tsx,mdx}",
@@ -17,17 +17,32 @@ const config: Config = {
   ],
   safelist: [
     // Grid item wrapper classes
-    'lg:col-span-3', 'md:col-span-6', 'md:row-span-4', 'lg:min-h-[60vh]',
-    'lg:col-span-2', 'md:col-span-3', 'md:row-span-2',
-    'md:row-span-1', 'md:col-span-3',
+    "lg:col-span-3",
+    "md:col-span-6",
+    "md:row-span-4",
+    "lg:min-h-[60vh]",
+    "lg:col-span-2",
+    "md:col-span-3",
+    "md:row-span-2",
+    "md:row-span-1",
+    "md:col-span-3",
 
     // imgClassName values
-    'absolute', 'right-0', 'bottom-0', 'md:w-96', 'w-60',
+    "absolute",
+    "right-0",
+    "bottom-0",
+    "md:w-96",
+    "w-60",
 
     // titleClassName values
-    'justify-end', 'justify-start', 'justify-center',
-    'md:justify-start', 'lg:justify-center',
-    'md:max-w-full', 'max-w-60', 'text-center',
+    "justify-end",
+    "justify-start",
+    "justify-center",
+    "md:justify-start",
+    "lg:justify-center",
+    "md:max-w-full",
+    "max-w-60",
+    "text-center",
   ],
   theme: {
     container: {
@@ -64,8 +79,6 @@ const config: Config = {
           "200": "#1E293B",
           "850": "#0a0e29",
         },
-        purple: "#7C3AED",
-        purple2: "#6D28D9",
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
         ring: "hsl(var(--ring))",
@@ -103,9 +116,11 @@ const config: Config = {
           "800": "#051736",
           "900": "#020b1c",
         },
-      },
-       backgroundImage: {
-        "hero-pattern": "url('/herobg.png')",
+        borderRadius: {
+          lg: "var(--radius)",
+          md: "calc(var(--radius) - 2px)",
+          sm: "calc(var(--radius) - 4px)",
+        },
       },
       keyframes: {
         "accordion-down": {

@@ -17,12 +17,12 @@ export default function MagicButton({ title, icon, position = "left", otherClass
   return (
     <motion.button
       onClick={onClick}
-      className={cn("relative h-12 overflow-hidden rounded-md inline-flex p-[1px]", otherClasses)}
+      className={cn("relative h-12 overflow-hidden border dark:border-0 border-black rounded-3xl inline-flex p-0 dark:p-[1px]", otherClasses)}
       whileHover={{ scale: 1.05 }}
       whileTap={{ scale: 0.95 }}
     >
-      <span className="absolute z-[-1] inset-[-1000%] animate-[spin_2s_linear_infinite] bg-[conic-gradient(from_90deg_at_50%_50%,#E2CBFF_0%,#393BB2_50%,#E2CBFF_100%)]" />
-      <span className={`inline-flex relative h-full w-full cursor-pointer items-center justify-center rounded-md  bg-black-100 text-white px-6 py-1 text-base font-medium backdrop-blur-3xl ${otherClasses}`}>
+      <span className="absolute rounded-3xl z-[-1] inset-[-1000%] dark:animate-[spin_2s_linear_infinite] bg-[conic-gradient(from_90deg_at_50%_50%,#E2CBFF_0%,#393BB2_50%,#E2CBFF_100%)]" />
+      <span className={`inline-flex relative h-full w-full cursor-pointer items-center justify-center rounded-3xl  bg-black-100 text-white px-6 py-1 text-base font-semibold backdrop-blur-3xl ${otherClasses}`}>
         {isBeam && (
           <span className="relative mr-2 flex h-3 w-3">
             <span className="btn-ping"></span>

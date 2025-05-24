@@ -18,7 +18,7 @@ export default async function Footer() {
           <div className="relative grid grid-cols-1 gap-12 md:grid-cols-3">
             {/* Left Column */}
             <div className="z-20 space-y-6">
-              <div className="items-center border-l-4 border-violet-800 pl-3">
+              <div className="items-center border-l-4 border-purple-800 pl-3">
                 <h2 className="text-2xl font-bold dark:text-slate-300">
                   {settings.data.name}
                 </h2>
@@ -136,7 +136,7 @@ export default async function Footer() {
               <div className="relative z-20 flex items-center gap-4">
                 <Link
                   href="/contact"
-                  className="flex items-center gap-2 rounded-lg bg-violet-800 px-6 py-3 font-medium text-white transition-all hover:bg-violet-600"
+                  className="flex items-center gap-2 rounded-lg bg-purple-800 px-6 py-3 font-medium text-white transition-all hover:bg-purple-600"
                 >
                   Start a Project
                   <ArrowRight size={16} />

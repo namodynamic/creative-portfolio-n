@@ -140,7 +140,7 @@ const Contact = ({ slice }: ContactProps): JSX.Element => {
       >
         <div className="mx-auto my-8 max-w-7xl sm:py-16">
           <div className="mb-16 text-center">
-            <p className="heading-anim mb-2 text-sm uppercase tracking-wider dark:text-violet-500">
+            <p className="heading-anim mb-2 text-sm uppercase tracking-wider dark:text-purple-500">
               {slice.primary.heading}
             </p>
             <h1 className="heading-anim mb-4 text-4xl font-bold dark:text-white text-black-50 md:text-5xl">
@@ -182,7 +182,7 @@ const Contact = ({ slice }: ContactProps): JSX.Element => {
                     value={form.name}
                     onChange={handleChange}
                     placeholder="Your Name"
-                    className="w-full rounded-lg border-[0.5px] border-zinc-400 dark:border-gray-700 dark:bg-[#131a41]/50 bg-white/30 px-2 py-2 transition-all focus:outline-none focus:ring-1 focus:ring-violet-500"
+                    className="w-full rounded-lg border-[0.5px] border-zinc-400 dark:border-gray-700 dark:bg-[#131a41]/50 bg-white/30 px-2 py-2 transition-all focus:outline-none focus:ring-1 focus:ring-purple-500"
                     required
                   />
                 </div>
@@ -201,7 +201,7 @@ const Contact = ({ slice }: ContactProps): JSX.Element => {
                     value={form.email}
                     onChange={handleChange}
                     placeholder="your.email@example.com"
-                    className="w-full rounded-lg border-[0.5px] border-zinc-400 dark:border-gray-700 dark:bg-[#131a41]/50 px-2 bg-white/30 py-2 transition-all focus:outline-none focus:ring-1 focus:ring-violet-500"
+                    className="w-full rounded-lg border-[0.5px] border-zinc-400 dark:border-gray-700 dark:bg-[#131a41]/50 px-2 bg-white/30 py-2 transition-all focus:outline-none focus:ring-1 focus:ring-purple-500"
                     required
                   />
                 </div>
@@ -220,7 +220,7 @@ const Contact = ({ slice }: ContactProps): JSX.Element => {
                     value={form.message}
                     onChange={handleChange}
                     placeholder="Tell me about your project, questions, or just say hello!"
-                    className="w-full resize-none rounded-lg border-[0.5px] border-zinc-400 dark:border-gray-700 dark:bg-[#131a41]/50 bg-white/30 px-2 py-2 transition-all focus:outline-none focus:ring-1 focus:ring-violet-500"
+                    className="w-full resize-none rounded-lg border-[0.5px] border-zinc-400 dark:border-gray-700 dark:bg-[#131a41]/50 bg-white/30 px-2 py-2 transition-all focus:outline-none focus:ring-1 focus:ring-purple-500"
                     required
                   />
                 </div>
@@ -228,7 +228,7 @@ const Contact = ({ slice }: ContactProps): JSX.Element => {
                 <button
                   type="submit"
                   disabled={isLoading}
-                  className="flex w-full items-center justify-center rounded-lg bg-gradient-to-r from-violet-600 to-violet-800 px-6 py-3 font-medium text-white shadow-lg transition-all hover:from-violet-700 hover:to-violet-600 disabled:opacity-70"
+                  className="flex w-full items-center justify-center rounded-lg bg-gradient-to-r from-purple-500 via-violet-500 to-purple-700 px-6 py-3 font-medium text-white shadow-lg transition-all hover:from-purple-700 hover:via-violet-600 hover:to-purple-600 disabled:opacity-70"
                 >
                   {isLoading ? (
                     <span className="flex items-center">
@@ -284,7 +284,7 @@ const Contact = ({ slice }: ContactProps): JSX.Element => {
                 <div className="space-y-5">
                   <div className="flex items-start">
                     <div className="flex-shrink-0">
-                      <div className="flex h-10 w-10 items-center justify-center rounded-md bg-black-50 dark:bg-violet-600/20 dark:text-white text-white">
+                      <div className="flex h-10 w-10 items-center justify-center rounded-md bg-black-50 dark:bg-purple-600/20 dark:text-white text-white">
                         <Mail className="h-5 w-5" />
                       </div>
                     </div>
@@ -295,7 +295,7 @@ const Contact = ({ slice }: ContactProps): JSX.Element => {
                       <p className="mt-1 dark:text-gray-400 text-black/60">
                         <a
                           href={`mailto:${slice.primary.contact_email}`}
-                          className="transition-colors dark:hover:text-violet-100 hover:text-black-50"
+                          className="transition-colors dark:hover:text-purple-100 hover:text-black-50"
                         >
                           {slice.primary.contact_email}
                         </a>
@@ -345,7 +345,7 @@ const Contact = ({ slice }: ContactProps): JSX.Element => {
                     href="https://github.com/namodynamic"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="flex h-10 w-10 items-center justify-center rounded-full border border-gray-700 bg-black-50 dark:bg-[#131a41]/50 text-white transition-all hover:border-violet-500 hover:bg-violet-500"
+                    className="flex h-10 w-10 items-center justify-center rounded-full border border-gray-700 bg-black-50 dark:bg-[#131a41]/50 text-white transition-all hover:border-purple-500 hover:bg-purple-500"
                   >
                     <FaGithub className="h-5 w-5" />
                     <span className="sr-only">GitHub</span>
@@ -355,7 +355,7 @@ const Contact = ({ slice }: ContactProps): JSX.Element => {
                     href="https://linkedin.com/in/ekechinnamdi"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="flex h-10 w-10 items-center justify-center rounded-full border border-gray-700 bg-black-50 dark:bg-[#131a41]/50 text-white transition-all hover:border-violet-500 hover:bg-violet-500"
+                    className="flex h-10 w-10 items-center justify-center rounded-full border border-gray-700 bg-black-50 dark:bg-[#131a41]/50 text-white transition-all hover:border-purple-500 hover:bg-purple-500"
                   >
                     <FaLinkedin className="h-5 w-5" />
                     <span className="sr-only">LinkedIn</span>
@@ -365,7 +365,7 @@ const Contact = ({ slice }: ContactProps): JSX.Element => {
                     href="https://x.com/namodynamic"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="flex h-10 w-10 items-center justify-center rounded-full border border-gray-700 bg-black-50 dark:bg-[#131a41]/50 text-white transition-all hover:border-violet-500 hover:bg-violet-500"
+                    className="flex h-10 w-10 items-center justify-center rounded-full border border-gray-700 bg-black-50 dark:bg-[#131a41]/50 text-white transition-all hover:border-purple-500 hover:bg-purple-500"
                   >
                     <FaXTwitter className="h-5 w-5" />
                     <span className="sr-only">Twitter</span>
@@ -422,7 +422,7 @@ const Contact = ({ slice }: ContactProps): JSX.Element => {
             <div className="mt-8 text-center">
               <Link
                 href="/faq"
-                className="inline-flex items-center text-violet-600 hover:text-violet-500"
+                className="inline-flex items-center text-purple-600 hover:text-purple-500"
               >
                 View all FAQs
                 <ArrowRight className="ml-1 h-4 w-4" />
@@ -446,7 +446,7 @@ const Contact = ({ slice }: ContactProps): JSX.Element => {
                     <Send className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
                   }
                   position="right"
-                  otherClasses="group rounded-md"
+                  otherClasses=""
                   isBeam
                 />
               </Link>

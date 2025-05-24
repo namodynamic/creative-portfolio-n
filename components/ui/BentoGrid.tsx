@@ -153,20 +153,20 @@ export const BentoGridItem = ({
                 {leftLists?.map((item, i) => (
                   <span
                     key={i}
-                    className="rounded-lg  bg-violet-700 px-3 py-2 text-center text-xs 
+                    className="rounded-lg  bg-purple-700 px-3 py-2 text-center text-xs 
                     lg:px-3 lg:py-4 lg:text-base"
                   >
                     {item}
                   </span>
                 ))}
-                <span className="rounded-lg  bg-[#3A2493] px-3 py-4  text-center lg:px-3 lg:py-4"></span>
+                <span className="rounded-lg  bg-[#5D38F2] px-3 py-4  text-center lg:px-3 lg:py-4"></span>
               </div>
               <div className="flex flex-col gap-3 md:gap-3 lg:gap-8">
-                <span className="rounded-lg  bg-violet-700 px-3 py-4  text-center lg:px-3 lg:py-4"></span>
+                <span className="rounded-lg  bg-purple-700 px-3 py-4  text-center lg:px-3 lg:py-4"></span>
                 {rightLists?.map((item, i) => (
                   <span
                     key={i}
-                    className="rounded-lg  bg-[#3A2493] px-3 py-2 text-center text-xs 
+                    className="rounded-lg  bg-[#5D38F2] px-3 py-2 text-center text-xs 
                     lg:px-3 lg:py-4 lg:text-base"
                   >
                     {item}

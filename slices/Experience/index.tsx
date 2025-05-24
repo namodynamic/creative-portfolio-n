@@ -5,6 +5,7 @@ import Heading from "@/components/Heading";
 import { Content } from "@prismicio/client";
 import { PrismicNextImage } from "@prismicio/next";
 import { PrismicRichText, SliceComponentProps } from "@prismicio/react";
+import { useTheme } from "@/components/ThemeProvider";
 
 import {
   VerticalTimeline,
@@ -26,6 +27,8 @@ export type ExperienceProps = SliceComponentProps<Content.ExperienceSlice>;
  * Component for "Experience" Slices.
  */
 const Experience = ({ slice }: ExperienceProps): JSX.Element => {
+
+  const { theme } = useTheme();
   
   const dynamicLinearGradient = slice.items
     .map(
@@ -75,8 +78,8 @@ const Experience = ({ slice }: ExperienceProps): JSX.Element => {
                   boxShadow: "none",
                 }}
                 contentStyle={{
-                  background: "rgba(17,25, 40, 0.125)",
-                  color: "#708090",
+                  background: theme === "dark" ? "rgba(17,25, 40, 0.125)" : "rgba(240,245,255,0.125)",
+                  color: theme === "dark" ? "#ffffff" : "#000000",
                   border: "0.2px solid rgba(255, 255, 255, 0.11)",
                   borderRadius: "12px",
                   borderStyle: "solid",

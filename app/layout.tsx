@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import { Analytics } from "@vercel/analytics/react";
 import { Urbanist } from "next/font/google";
+import Script from "next/script";
 import "./globals.css";
 import clsx from "clsx";
 import { PrismicPreview } from "@prismicio/next";
@@ -9,7 +10,8 @@ import { createClient, repositoryName } from "@/prismicio";
 
 import Header from "../components/Header";
 import Footer from "@/components/Footer";
-import { ThemeProvider } from "@/components/ThemeProvider"
+import { ThemeProvider } from "@/components/ThemeProvider";
+import { ThemeScript } from "@/components/ThemeScript";
 
 const urbanist = Urbanist({ subsets: ["latin"] });
 
@@ -32,23 +34,33 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" suppressHydrationWarning data-lt-installed="true">
-      <body className={clsx(urbanist.className, "relative")}>
-        
+    <html
+      lang="en"
+      style={{ colorScheme: "light dark" }}
+      suppressHydrationWarning
+    >
+      <head>
+        <ThemeScript />
+        <Script
+          id="chatway"
+          async
+          src="https://cdn.chatway.app/widget.js?id=dEB2vdKKIwk1"
+          strategy="beforeInteractive"
+        />
+      </head>
+
+      <body
+        className={clsx(urbanist.className, "relative")}
+        suppressHydrationWarning
+      >
         <ThemeProvider defaultTheme="system">
-         <script id="chatway" async src="https://cdn.chatway.app/widget.js?id=dEB2vdKKIwk1"></script>
+          <Header />
 
-         <Header />
+          <main className="min-h-screen">{children}</main>
 
-         <main className="min-h-screen">
-          {children}
-         </main>
-
-         <Footer />
-
+          <Footer />
         </ThemeProvider>
         <Analytics />
-
         <SpeedInsights />
       </body>
       <PrismicPreview repositoryName={repositoryName} />

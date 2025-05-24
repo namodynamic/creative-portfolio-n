@@ -50,7 +50,7 @@ export default async function BlogPostPage(props: { params: Promise<Params> }) {
         <div className="relative z-20 w-full py-6 md:py-10">
           <Link
             href="/blog"
-            className="mb-4 inline-flex items-center text-sm transition-colors hover:text-black/50 dark:text-violet-400 dark:hover:text-violet-300"
+            className="mb-4 inline-flex items-center text-sm transition-colors hover:text-black/50 dark:text-purple-400 dark:hover:text-purple-300"
           >
             <ChevronLeft className="mr-1 h-4 w-4" />
             Back to all blogs
@@ -67,11 +67,11 @@ export default async function BlogPostPage(props: { params: Promise<Params> }) {
               <div className="border-b-[0.5px] border-zinc-400 p-6 dark:border-slate-800 md:p-8">
                 <div className="flex flex-wrap items-center gap-4 text-sm text-black/50  dark:text-gray-400">
                   <div className="flex items-center">
-                    <Calendar className="mr-2 h-4 w-4 text-black-50 dark:text-violet-500" />
+                    <Calendar className="mr-2 h-4 w-4 text-black-50 dark:text-white-100" />
                     {formattedDate}
                   </div>
                   <div className="flex items-center">
-                    <Clock className="mr-2 h-4 w-4 text-black-50 dark:text-violet-500" />
+                    <Clock className="mr-2 h-4 w-4 text-black-50 dark:text-white-100" />
                     {readTime.text}
                   </div>
                 </div>
@@ -80,7 +80,7 @@ export default async function BlogPostPage(props: { params: Promise<Params> }) {
                   {page.tags.map((tag) => (
                     <span
                       key={tag}
-                      className="rounded-full bg-black/80 px-3 py-1 text-xs font-medium text-white dark:bg-indigo-500/10 dark:text-violet-400"
+                      className="rounded-full bg-black/80 px-3 py-1 text-xs font-medium text-white dark:bg-purple-500/10 dark:text-purple-400"
                     >
                       #{tag}
                     </span>
@@ -90,11 +90,10 @@ export default async function BlogPostPage(props: { params: Promise<Params> }) {
 
               {/* Post Content */}
               <div className="p-4 ">
-                <div className="prose prose-base mx-auto max-w-prose dark:prose-invert md:prose-lg">
-                  <SliceZone
-                    slices={page.data.slices}
-                    components={components}
-                  />
+                <div className="overflow-x-auto">
+                <div className="prose prose-base mx-auto max-w-prose break-words dark:prose-invert md:prose-lg">
+                  <SliceZone slices={page.data.slices} components={components} />
+                </div>
                 </div>
               </div>
 

@@ -33,7 +33,7 @@ const Faq: FC<FaqProps> = ({ slice }) => {
     >
       <div className="mx-auto max-w-5xl py-8 md:py-16">
         <div className="mb-12 text-center">
-          <p className="mb-2 text-sm uppercase tracking-wider dark:text-violet-500">
+          <p className="mb-2 text-sm uppercase tracking-wider dark:text-purple-500">
             {slice.primary.heading}
           </p>
           <h1 className="mb-4 text-4xl font-bold text-black-50 dark:text-white md:text-5xl">
@@ -52,7 +52,7 @@ const Faq: FC<FaqProps> = ({ slice }) => {
               onClick={() => setActiveCategory(category.id || "default")}
               className={`rounded-md px-6 py-3 text-sm font-medium transition-all ${
                 activeCategory === category.id
-                  ? "bg-violet-600 text-white"
+                  ? "bg-purple-600 text-white"
                   : "bg-black/50 text-gray-300 hover:text-white dark:bg-[#0a0e29]/50 dark:hover:bg-[#0a0e29]"
               }`}
             >
@@ -65,7 +65,7 @@ const Faq: FC<FaqProps> = ({ slice }) => {
         <div className="mb-16">
           {activeCategory === "services" && (
             <>
-              <h2 className="mb-6 text-2xl font-bold text-violet-600">
+              <h2 className="mb-6 text-2xl font-bold text-purple-600">
                 Services & Expertise
               </h2>
               <Accordion type="single" collapsible className="space-y-4">
@@ -88,7 +88,7 @@ const Faq: FC<FaqProps> = ({ slice }) => {
           )}
           {activeCategory === "process" && (
             <>
-              <h2 className="mb-6 text-2xl font-bold text-violet-600">
+              <h2 className="mb-6 text-2xl font-bold text-purple-600">
                 Development Process
               </h2>
               <Accordion type="single" collapsible className="space-y-4">
@@ -111,7 +111,7 @@ const Faq: FC<FaqProps> = ({ slice }) => {
           )}
           {activeCategory === "pricing" && (
             <>
-              <h2 className="mb-6 text-2xl font-bold text-violet-600">
+              <h2 className="mb-6 text-2xl font-bold text-purple-600">
                 Pricing & Payment
               </h2>
               <Accordion type="single" collapsible className="space-y-4">
@@ -134,7 +134,7 @@ const Faq: FC<FaqProps> = ({ slice }) => {
           )}
           {activeCategory === "support" && (
             <>
-              <h2 className="mb-6 text-2xl font-bold text-violet-600">
+              <h2 className="mb-6 text-2xl font-bold text-purple-600">
                 Support & Maintenance
               </h2>
               <Accordion type="single" collapsible className="space-y-4">

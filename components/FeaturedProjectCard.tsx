@@ -52,7 +52,7 @@ export default async function FeaturedProjects({
                 className="object-cover transition-transform group-hover:scale-105"
               />
             </div>
-            <h4 className="font-medium text-black-50 transition-colors group-hover:text-black/50 dark:text-white dark:group-hover:text-violet-400">
+            <h4 className="font-medium text-black-50 transition-colors group-hover:text-black/50 dark:text-white dark:group-hover:text-purple-400">
               {project.data.title}
             </h4>
             <p className="flex gap-2 text-sm text-black/50 dark:text-gray-400">

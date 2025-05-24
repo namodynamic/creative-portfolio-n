@@ -28,13 +28,13 @@ const Certifications = ({ slice, index }: CertificationsProps): JSX.Element => {
     <Bounded
       data-slice-type={slice.slice_type}
       data-slice-variation={slice.variation}
-      className="max-md:-mt-20 bg-dot-white-500"
+      className="max-md:-mt-20"
     >
       <Heading as="h2" size="lg" className="max-md:text-3xl">
         {slice.primary.heading}
       </Heading>
 
-      <div className="grid grid-cols-1 gap-5 pt-12 md:grid-cols-2 lg:grid-cols-3">
+      <div className="grid grid-cols-1 gap-5 md:mt-10 pt-12 md:grid-cols-2 lg:grid-cols-3">
         {slice.items.map((item, index) => {
           const backgroundUrl = isFilled.image(item.background_image)
             ? asImageSrc(item.background_image, { w: 800, q: 80 })
