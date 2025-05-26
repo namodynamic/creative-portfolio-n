@@ -50,6 +50,10 @@ body {
     @apply absolute inline-flex h-full w-full animate-ping rounded-full bg-green-400 opacity-75;
   }
 
+  .timeline {
+    @apply absolute z-30 h-[110%] -top-10 w-14 md:w-28 bg-black;
+  }
+
   .btn-ping_dot {
     @apply relative inline-flex h-3 w-3 rounded-full bg-green-500;
   }
@@ -95,3 +99,52 @@ body {
     background-position: top center;
   }
 }
+
+ .card {
+    --start: 0;
+    position: relative;
+    z-index: 40;
+    overflow: hidden;
+    transition: border-color 1s ease-in-out;
+  }
+  
+  .card::before {
+    position: absolute;
+    content: "";
+    width: 100%;
+    height: 100%;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    border-radius: 12px;
+    border: 2px solid transparent;
+    background: var(--gradient);
+    background-attachment: fixed;
+    mask: linear-gradient(#0000, #0000),
+    conic-gradient(
+            from calc((var(--start) - 15) * 1deg),
+            #ffffff1f 0deg,
+            white,
+            #ffffff00 100deg
+    );
+    mask-composite: intersect;
+    mask-clip: padding-box, border-box;
+    opacity: 0;
+    transition: 0.5s ease;
+  }
+  
+  .glow {
+    pointer-events: none;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    filter: blur(10px) saturate(200%);
+  }
+  
+  
+  .card:hover::before {
+    opacity: 1;
+  }

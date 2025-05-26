@@ -152,7 +152,7 @@ const ProjectCard: FC<ProjectCardProps> = ({ item, index }) => {
         transition={{ duration: 0.3 }}
       >
         <PrismicNextLink field={item.project_slug}>
-        <PrismicNextImage field={item.featured_project_image} />
+        <PrismicNextImage field={item.featured_project_image} className="max-h-[200px] sm:max-h-[380px] w-full" />
         </PrismicNextLink>
       </motion.div>
 

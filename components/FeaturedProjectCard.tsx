@@ -49,7 +49,7 @@ export default async function FeaturedProjects({
                 src={project.data.hover_image.url || ""}
                 alt={project.data.title || "Project"}
                 fill
-                className="object-cover transition-transform group-hover:scale-105"
+                className="transition-transform group-hover:scale-105"
               />
             </div>
             <h4 className="font-medium text-black-50 transition-colors group-hover:text-black/50 dark:text-white dark:group-hover:text-purple-400">

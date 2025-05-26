@@ -164,7 +164,7 @@ export default function ContentList({
               aria-label={item.data.title || ""}
             >
               <div className="flex flex-col">
-                <span className="flex flex-wrap text-xl md:text-3xl font-bold">
+                <span className="flex flex-wrap text-lg md:text-2xl font-bold">
                   {item.data.title}
                 </span>
                 <div className="flex flex-wrap gap-2 text-black/50 dark:text-black-600 capitalize">

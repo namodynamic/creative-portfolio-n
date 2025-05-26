@@ -68,7 +68,7 @@ const TechList = ({ slice }: TechListProps): JSX.Element => {
         <Heading size="xl" className="mb-8" as="h2">
           {slice.primary.heading}
         </Heading>
-        <div className="prose prose-sm prose-invert col-start-1 mt-5 dark:text-slate-500 text-black-100  sm:prose-lg">
+        <div className="prose prose-lg prose-invert col-start-1 mt-5 dark:text-slate-500 text-black-100  sm:prose-xl">
           <p>{slice.primary.intro}</p>
         </div>
       </Bounded>

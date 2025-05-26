@@ -7,6 +7,11 @@
 				"__TYPE__": "FieldContent",
 				"value": "shelf",
 				"type": "Text"
+			},
+			"sub_heading": {
+				"__TYPE__": "FieldContent",
+				"value": "sweet",
+				"type": "Text"
 			}
 		},
 		"items": [
@@ -40,6 +45,7 @@
 					[
 						"credential_url",
 						{
+							"key": "b95ea440-b1a5-4918-b528-2aa5e68434ba",
 							"__TYPE__": "LinkContent",
 							"value": {
 								"__TYPE__": "ExternalLink",

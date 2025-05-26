@@ -1253,6 +1253,16 @@ export interface CertificationsSliceDefaultPrimary {
    * - **Documentation**: https://prismic.io/docs/field#key-text
    */
   heading: prismic.KeyTextField;
+
+  /**
+   * Sub Heading field in *Certifications → Default → Primary*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: certifications.default.primary.sub_heading
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  sub_heading: prismic.KeyTextField;
 }
 
 /**

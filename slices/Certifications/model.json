@@ -18,6 +18,13 @@
             "label": "Heading",
             "placeholder": ""
           }
+        },
+        "sub_heading": {
+          "type": "Text",
+          "config": {
+            "label": "Sub Heading",
+            "placeholder": ""
+          }
         }
       },
       "items": {

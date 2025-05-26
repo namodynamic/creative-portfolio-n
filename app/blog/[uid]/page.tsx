@@ -55,7 +55,7 @@ export default async function BlogPostPage(props: { params: Promise<Params> }) {
             <ChevronLeft className="mr-1 h-4 w-4" />
             Back to all blogs
           </Link>
-          <h1 className="max-w-4xl text-3xl font-bold text-black-50 dark:text-white md:text-4xl lg:text-5xl">
+          <h1 className="max-w-4xl text-xl font-bold text-black-50 dark:text-white md:text-2xl lg:text-3xl">
             {page.data.title}
           </h1>
         </div>
@@ -80,7 +80,7 @@ export default async function BlogPostPage(props: { params: Promise<Params> }) {
                   {page.tags.map((tag) => (
                     <span
                       key={tag}
-                      className="rounded-full bg-black/80 px-3 py-1 text-xs font-medium text-white dark:bg-purple-500/10 dark:text-purple-400"
+                      className="rounded-full bg-black/80 px-2 py-1 text-[6px] md:text-[8px] font-medium text-white dark:bg-purple-500/20 dark:text-purple-200"
                     >
                       #{tag}
                     </span>

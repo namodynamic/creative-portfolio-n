@@ -118,7 +118,7 @@ export default async function Footer() {
                       href="/faq"
                       className="transition-colors hover:text-black/50 dark:text-gray-400 dark:hover:text-white"
                     >
-                      FAQ
+                      FAQs
                     </Link>
                   </li>
                 </ul>
