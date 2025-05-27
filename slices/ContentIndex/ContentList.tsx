@@ -12,7 +12,7 @@ import { formatDate } from "@/utils/FormatDate";
 gsap.registerPlugin(ScrollTrigger);
 
 type ContentListProps = {
-  items: Content.BlogPostDocument[] | Content.ProjectDocument[];
+  items: Content.ProjectDocument[];
   contentType: Content.ContentIndexSlice["primary"]["content_type"];
   fallbackItemImage: Content.ContentIndexSlice["primary"]["fallback_item_image"];
   viewMoreText: Content.ContentIndexSlice["primary"]["view_more_text"];

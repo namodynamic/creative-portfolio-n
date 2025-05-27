@@ -2,17 +2,14 @@ import { Content, isFilled } from "@prismicio/client";
 import { PrismicRichText, SliceComponentProps } from "@prismicio/react";
 import { createClient } from "@/prismicio";
 import ContentList from "./ContentList";
+import BlogList from "./BlogList";
 import Bounded from "@/components/Bounded";
 import Heading from "@/components/Heading";
 import type { JSX } from "react";
-/**
- * Props for `ContentIndex`.
- */
+
+
 export type ContentIndexProps = SliceComponentProps<Content.ContentIndexSlice>;
 
-/**
- * Component for "ContentIndex" Slices.
- */
 const ContentIndex = async ({
   slice,
 }: ContentIndexProps): Promise<JSX.Element> => {
@@ -22,11 +19,10 @@ const ContentIndex = async ({
 
   const ContentType = slice.primary.content_type || "Blog";
 
-  const items = ContentType === "Blog" ? blogPosts : projects;
 
   return (
     <Bounded
-    as="section"
+      as="section"
       data-slice-type={slice.slice_type}
       data-slice-variation={slice.variation}
     >
@@ -34,16 +30,29 @@ const ContentIndex = async ({
         {slice.primary.heading}
       </Heading>
       {isFilled.richText(slice.primary.description) && (
-        <div className="prose sm:prose-xl prose-base text-black-100/80 dark:text-slate-400 mb-10">
+        <div className="prose prose-base mb-10 text-black-100/80 sm:prose-xl dark:text-slate-400">
           <PrismicRichText field={slice.primary.description} />
         </div>
       )}
-      <ContentList
-        items={items}
-        contentType={ContentType}
-        viewMoreText={slice.primary.view_more_text}
-        fallbackItemImage={slice.primary.fallback_item_image}
-      />
+      {ContentType === "Project" && (
+        <>
+          <ContentList
+            items={projects}
+            contentType="Project"
+            fallbackItemImage={slice.primary.fallback_item_image}
+            viewMoreText={slice.primary.view_more_text || "Read More"}
+          />
+        </>
+      )}
+      {ContentType === "Blog" && (
+        <div className="place-items-center">
+          <BlogList
+            items={blogPosts}
+            contentType="Blog"
+            viewMoreText={slice.primary.view_more_text || "Read More"}
+          />
+        </div>
+      )}
     </Bounded>
   );
 };

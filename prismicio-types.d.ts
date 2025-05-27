@@ -22,6 +22,17 @@ interface BlogPostDocumentData {
   title: prismic.KeyTextField;
 
   /**
+   * Excerpt field in *Blog Post*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: blog_post.excerpt
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  excerpt: prismic.KeyTextField;
+
+  /**
    * Date field in *Blog Post*
    *
    * - **Field Type**: Date

@@ -6,6 +6,12 @@
   "status": true,
   "json": {
     "Main": {
+      "uid": {
+        "config": {
+          "label": "UID"
+        },
+        "type": "UID"
+      },
       "title": {
         "type": "Text",
         "config": {
@@ -13,11 +19,12 @@
           "placeholder": ""
         }
       },
-      "uid": {
+      "excerpt": {
+        "type": "Text",
         "config": {
-          "label": "UID"
-        },
-        "type": "UID"
+          "label": "Excerpt",
+          "placeholder": ""
+        }
       },
       "date": {
         "type": "Date",
