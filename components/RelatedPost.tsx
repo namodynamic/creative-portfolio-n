@@ -34,12 +34,18 @@ export default async function RelatedPosts({ params }: TagPageProps) {
           const formattedDate = formatDate(post.data.date);
 
           const firstParagraph =
-            post.data.slices.find(
-              (slice) =>
-                slice.slice_type === "text_block" &&
-                slice.primary?.text &&
-                slice.primary.text[0]?.type === "paragraph",
-            )?.primary?.text[0]?.text || "No description available.";
+            post.data.slices
+              .find((slice) => {
+                return (
+                  slice.slice_type === "text_block" &&
+                  Array.isArray((slice as any).primary?.text) &&
+                  (slice as any).primary.text.some(
+                    (block: any) => block.type === "paragraph",
+                  )
+                );
+              })
+              ?.primary?.text.find((block: any) => block.type === "paragraph")
+              ?.text || "";
 
           return (
             <Link
@@ -52,8 +58,7 @@ export default async function RelatedPosts({ params }: TagPageProps) {
                   src={post.data.hover_image?.url || ""}
                   alt={post.data.title || "Blog Post"}
                   fill
-                  sizes=""
-                  className="object-cover transition-transform group-hover:scale-105"
+                  className="object-fill transition-transform group-hover:scale-105"
                 />
               </div>
               <div className="p-4">
@@ -63,8 +68,8 @@ export default async function RelatedPosts({ params }: TagPageProps) {
                 <h3 className="mb-2 font-bold transition-colors group-hover:text-black/50 dark:text-white dark:group-hover:text-purple-400">
                   {post.data.title}
                 </h3>
-                <p className="line-clamp-2 text-sm text-black/80 dark:text-gray-400">
-                  {firstParagraph}
+                <p className="line-clamp-3 text-sm text-black/80 dark:text-gray-400">
+                  {post.data.excerpt || firstParagraph}
                 </p>
               </div>
             </Link>

@@ -7,7 +7,7 @@ import { createClient } from "@/prismicio";
 import { components } from "@/slices";
 import { formatDate } from "@/utils/FormatDate";
 import Bounded from "@/components/Bounded";
-import { Clock, Calendar, ChevronLeft } from "lucide-react";
+import { Clock, Calendar, ChevronLeft, Tag } from "lucide-react";
 import AuthorCard from "@/components/AuthorCard";
 import RelatedPosts from "@/components/RelatedPost";
 import { readingTime } from "reading-time-estimator";
@@ -114,15 +114,16 @@ export default async function BlogPostPage(props: { params: Promise<Params> }) {
               {/* Popular Tags */}
               <div className="rounded-xl border-[0.5px] border-zinc-400 bg-white/20 p-6 shadow-xl backdrop-blur-sm dark:border-slate-800 dark:bg-blue-850/50">
                 <h3 className="mb-4 text-lg font-bold text-black-50 dark:text-white">
-                  Popular Topics
+                  Popular Topics By Tags
                 </h3>
                 <div className="flex flex-wrap gap-2">
                   {popularTags.map((tag, index) => (
                     <Link
                       key={index}
                       href={`/blog/tag/${tag.toLowerCase().replace(/\s+/g, "-")}`}
-                      className="rounded-full bg-[#131a41] px-3 py-1 text-xs uppercase text-gray-300 transition-colors hover:bg-[#1a2150] hover:text-white"
+                      className="rounded-full bg-[#131a41] inline-flex items-center gap-1 px-2 py-1 text-xs uppercase text-gray-300 transition-colors hover:bg-[#1a2150] hover:text-white"
                     >
+                      <Tag className="h-3 w-3" />
                       {tag}
                     </Link>
                   ))}

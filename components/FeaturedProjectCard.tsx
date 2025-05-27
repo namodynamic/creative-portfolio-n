@@ -1,5 +1,6 @@
 import * as prismic from "@prismicio/client";
 import { createClient } from "@/prismicio";
+import { Tag } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 
@@ -49,16 +50,17 @@ export default async function FeaturedProjects({
                 src={project.data.hover_image.url || ""}
                 alt={project.data.title || "Project"}
                 fill
-                className="transition-transform group-hover:scale-105"
+                className="transition-transform object-fill group-hover:scale-105"
               />
             </div>
             <h4 className="font-medium text-black-50 transition-colors group-hover:text-black/50 dark:text-white dark:group-hover:text-purple-400">
               {project.data.title}
             </h4>
-            <p className="flex gap-2 text-sm text-black/50 dark:text-gray-400">
+            <p className="flex flex-wrap gap-2 text-sm text-black/50 dark:text-gray-400">
               {project.tags.map((tag, index) => (
-                <span key={index} className="text-sm font-bold">
-                  #{tag}
+                <span key={index} className="text-sm inline-flex items-center gap-1 font-bold">
+                  <Tag className="h-3 w-3" />
+                  {tag}
                 </span>
               ))}
             </p>

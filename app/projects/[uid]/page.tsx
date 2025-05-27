@@ -15,6 +15,7 @@ import {
   GitGraph,
   Lock,
   CheckCheck,
+  Tag
 } from "lucide-react";
 import { FaGithub } from "react-icons/fa6";
 import { PrismicRichText } from "@prismicio/react";
@@ -358,9 +359,10 @@ export default async function Page({ params }: { params: Promise<Params> }) {
                   {page.tags.map((tag) => (
                     <div
                       key={tag}
-                      className="rounded-full bg-purple-500 px-3 py-1 text-xs font-medium text-white transition-colors duration-300 hover:text-violet-200"
+                      className="rounded-full inline-flex gap-1 items-center bg-purple-500 px-2 py-1 text-xs font-medium text-white transition-colors duration-300 hover:text-violet-200"
                     >
-                      #{tag}
+                      <Tag className="h-3 w-3" />
+                      {tag}
                     </div>
                   ))}
                 </div>

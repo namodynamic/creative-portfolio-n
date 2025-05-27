@@ -16,12 +16,18 @@ interface BlogCardProps {
 
 export default function BlogCard({ item, index, viewMoreText }: BlogCardProps) {
   const firstParagraph =
-    item.data.slices.find(
-      (slice) =>
-        slice.slice_type === "text_block" &&
-        slice.primary?.text &&
-        slice.primary.text[0]?.type === "paragraph",
-    )?.primary?.text[0]?.text || "";
+    item.data.slices
+      .find((slice) => {
+        return (
+          slice.slice_type === "text_block" &&
+          Array.isArray((slice as any).primary?.text) &&
+          (slice as any).primary.text.some(
+            (block: any) => block.type === "paragraph",
+          )
+        );
+      })
+      ?.primary?.text.find((block: any) => block.type === "paragraph")?.text ||
+    "";
 
   const textContent = extractTextFromSlices(item.data.slices);
   const readTime = readingTime(textContent);
@@ -61,7 +67,7 @@ export default function BlogCard({ item, index, viewMoreText }: BlogCardProps) {
             {item.tags.slice(0, 3).map((tag, tagIndex) => (
               <span
                 key={tagIndex}
-                className="inline-flex items-center gap-1 rounded-full bg-purple-100 px-2 py-1 text-xs font-medium text-purple-700 dark:bg-purple-900/30 dark:text-purple-300"
+                className="inline-flex items-center gap-1 rounded-full bg-black/50 text-white px-2 py-1 text-xs font-medium dark:bg-slate-800/60 dark:text-slate-300"
               >
                 <Tag className="h-3 w-3" />
                 {tag}

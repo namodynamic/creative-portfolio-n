@@ -35,37 +35,6 @@
         }
       },
       "items": {
-        "title": {
-          "type": "Text",
-          "config": {
-            "label": "Title",
-            "placeholder": ""
-          }
-        },
-        "description": {
-          "type": "StructuredText",
-          "config": {
-            "label": "Description",
-            "placeholder": "",
-            "allowTargetBlank": true,
-            "multi": "paragraph,preformatted,heading1,heading2,heading3,heading4,heading5,heading6,strong,em,hyperlink,image,embed,list-item,o-list-item,rtl"
-          }
-        },
-        "featured_project_image": {
-          "type": "Image",
-          "config": {
-            "label": "Featured Project Image",
-            "constraint": {},
-            "thumbnails": []
-          }
-        },
-        "tags": {
-          "type": "Text",
-          "config": {
-            "label": "Tags",
-            "placeholder": ""
-          }
-        },
         "project_slug": {
           "type": "Link",
           "config": {

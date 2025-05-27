@@ -2,6 +2,7 @@ import * as prismic from "@prismicio/client";
 import { createClient } from "@/prismicio";
 import Link from "next/link";
 import Image from "next/image";
+import { Tag } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import MagicButton from "@/components/ui/MagicButton";
 
@@ -49,25 +50,26 @@ export default async function RelatedProjects({ tags }: RelatedProjectsProps) {
                   alt={project.data.title || ""}
                   width={400}
                   height={225}
-                  className="h-full w-full object-cover transition-transform group-hover:scale-105"
+                  className="h-full w-full object-fill transition-transform group-hover:scale-105"
                 />
               </div>
               <div className="p-5">
-                <h3 className="text-lg font-semibold transition-colors group-hover:text-black/50 dark:text-white dark:group-hover:text-indigo-500">
+                <h3 className="text-lg font-semibold transition-colors group-hover:text-black/50 dark:text-white dark:group-hover:text-purple-500">
                   {project.data.title}
                 </h3>
-                <div className="mt-2 flex gap-2">
+                <div className="mt-2 flex flex-wrap items-center gap-2">
                   {project.tags.slice(0, 4).map((tag) => (
                     <Badge
                       key={tag}
                       variant="outline"
-                      className="border-slate-700 bg-black/50 text-xs text-white dark:bg-slate-800/50 dark:text-slate-300"
+                      className="border-slate-700 gap-1 inline-flex items-center bg-black/50 text-xs text-white dark:bg-slate-800/50 dark:text-slate-300"
                     >
-                      #{tag}
+                      <Tag className="h-3 w-3" />
+                      {tag}
                     </Badge>
                   ))}
                   {project.tags.length > 4 && (
-                    <span className="text-xs dark:text-slate-500">
+                    <span className="text-sm dark:text-slate-500">
                       +{project.tags.length - 4}
                     </span>
                   )}

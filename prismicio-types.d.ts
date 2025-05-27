@@ -455,6 +455,18 @@ interface ProjectDocumentData {
   title: prismic.KeyTextField;
 
   /**
+   * Is Featured field in *Project*
+   *
+   * - **Field Type**: Boolean
+   * - **Placeholder**: *None*
+   * - **Default Value**: false
+   * - **API ID Path**: project.is_featured
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#boolean
+   */
+  is_featured: prismic.BooleanField;
+
+  /**
    * Tech Stack field in *Project*
    *
    * - **Field Type**: Group
@@ -2383,46 +2395,6 @@ export interface FeaturedProjectsSliceDefaultPrimary {
  * Primary content in *FeaturedProjects → Items*
  */
 export interface FeaturedProjectsSliceDefaultItem {
-  /**
-   * Title field in *FeaturedProjects → Items*
-   *
-   * - **Field Type**: Text
-   * - **Placeholder**: *None*
-   * - **API ID Path**: featured_projects.items[].title
-   * - **Documentation**: https://prismic.io/docs/field#key-text
-   */
-  title: prismic.KeyTextField;
-
-  /**
-   * Description field in *FeaturedProjects → Items*
-   *
-   * - **Field Type**: Rich Text
-   * - **Placeholder**: *None*
-   * - **API ID Path**: featured_projects.items[].description
-   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
-   */
-  description: prismic.RichTextField;
-
-  /**
-   * Featured Project Image field in *FeaturedProjects → Items*
-   *
-   * - **Field Type**: Image
-   * - **Placeholder**: *None*
-   * - **API ID Path**: featured_projects.items[].featured_project_image
-   * - **Documentation**: https://prismic.io/docs/field#image
-   */
-  featured_project_image: prismic.ImageField<never>;
-
-  /**
-   * Tags field in *FeaturedProjects → Items*
-   *
-   * - **Field Type**: Text
-   * - **Placeholder**: *None*
-   * - **API ID Path**: featured_projects.items[].tags
-   * - **Documentation**: https://prismic.io/docs/field#key-text
-   */
-  tags: prismic.KeyTextField;
-
   /**
    * Project Slug field in *FeaturedProjects → Items*
    *

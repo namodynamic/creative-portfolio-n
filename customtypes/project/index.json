@@ -19,6 +19,15 @@
           "placeholder": ""
         }
       },
+      "is_featured": {
+        "type": "Boolean",
+        "config": {
+          "label": "Is Featured",
+          "placeholder_false": "false",
+          "placeholder_true": "true",
+          "default_value": false
+        }
+      },
       "tech_stack": {
         "type": "Group",
         "config": {

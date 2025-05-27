@@ -17,11 +17,10 @@ export default async function TagPage({ params }: TagPageProps) {
   const decodedTag = decodeURIComponent(params.tag);
 
   // Fetch posts with the specified tag
-  const posts = await client
-    .getAllByType("blog_post", {
-      predicates: [Prismic.filter.at("document.tags", [decodedTag])],
-    })
-    .catch(() => []);
+  const allPosts = await client.getAllByType("blog_post", { pageSize: 100 });
+  const posts = allPosts.filter((post) =>
+    post.tags.some((tag) => tag.toLowerCase() === decodedTag.toLowerCase()),
+  );
 
   return (
     <Bounded className="">
@@ -60,14 +59,20 @@ export default async function TagPage({ params }: TagPageProps) {
         {posts.length > 0 ? (
           <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
             {posts.map((post) => {
-              // Extract the first paragraph text from slices for excerpt
               const firstParagraph =
-                post.data.slices.find(
-                  (slice) =>
-                    slice.slice_type === "text_block" &&
-                    slice.primary?.text &&
-                    slice.primary.text[0]?.type === "paragraph",
-                )?.primary?.text[0]?.text || "No description available.";
+                post.data.slices
+                  .find((slice) => {
+                    return (
+                      slice.slice_type === "text_block" &&
+                      Array.isArray((slice as any).primary?.text) &&
+                      (slice as any).primary.text.some(
+                        (block: any) => block.type === "paragraph",
+                      )
+                    );
+                  })
+                  ?.primary?.text.find(
+                    (block: any) => block.type === "paragraph",
+                  )?.text || "No description available.";
 
               const formattedDate = formatDate(post.data.date);
 
@@ -82,12 +87,12 @@ export default async function TagPage({ params }: TagPageProps) {
                       alt={post.data.title || ""}
                       width={600}
                       height={340}
-                      className="h-48 w-full object-cover transition-transform duration-300 group-hover:scale-105"
+                      className="max-h-48 w-full object-fill transition-transform duration-300 group-hover:scale-105"
                     />
                   </Link>
                   <div className="flex flex-grow flex-col p-6">
-                    <div className="mb-4 flex gap-2">
-                      {post.tags.slice(0, 5).map((tag) => (
+                    <div className="mb-4 flex flex-wrap gap-2">
+                      {post.tags.slice(0, 3).map((tag) => (
                         <Badge
                           key={tag}
                           variant="secondary"
@@ -96,6 +101,11 @@ export default async function TagPage({ params }: TagPageProps) {
                           #{tag}
                         </Badge>
                       ))}
+                      {post.tags.length > 3 && (
+                        <span className="inline-flex items-center rounded-full bg-gray-100 px-2 py-1 text-xs font-medium text-gray-500 dark:bg-violet-800/20 dark:text-gray-400">
+                          +{post.tags.length - 3} more
+                        </span>
+                      )}
                     </div>
                     <Link
                       href={`/blog/${post.uid}`}
@@ -129,7 +139,7 @@ export default async function TagPage({ params }: TagPageProps) {
             <div className="mb-6 inline-flex h-20 w-20 items-center justify-center rounded-full bg-slate-800">
               <Tag className="h-8 w-8 text-slate-400" />
             </div>
-            <h2 className="mb-2 text-2xl font-bold text-white">
+            <h2 className="mb-2 text-2xl font-bold text-black dark:text-white">
               No posts found
             </h2>
             <p className="mx-auto mb-8 max-w-md text-slate-400">
