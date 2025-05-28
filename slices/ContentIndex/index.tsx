@@ -7,7 +7,6 @@ import Bounded from "@/components/Bounded";
 import Heading from "@/components/Heading";
 import type { JSX } from "react";
 
-
 export type ContentIndexProps = SliceComponentProps<Content.ContentIndexSlice>;
 
 const ContentIndex = async ({
@@ -16,9 +15,17 @@ const ContentIndex = async ({
   const client = createClient();
   const blogPosts = await client.getAllByType("blog_post");
   const projects = await client.getAllByType("project");
+  const settings = await client.getSingle("settings");
+
+  const blogCategories = [
+    { value: "all", label: "All" },
+    ...(settings.data.blog_categories ?? []).map((item) => ({
+      value: item.value || "",
+      label: item.label || "",
+    })),
+  ];
 
   const ContentType = slice.primary.content_type || "Blog";
-
 
   return (
     <Bounded
@@ -45,9 +52,10 @@ const ContentIndex = async ({
         </>
       )}
       {ContentType === "Blog" && (
-        <div className="place-items-center">
+        <div className="place-items-start">
           <BlogList
             items={blogPosts}
+            categories={blogCategories}
             contentType="Blog"
             viewMoreText={slice.primary.view_more_text || "Read More"}
           />

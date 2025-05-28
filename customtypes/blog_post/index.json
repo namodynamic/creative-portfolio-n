@@ -41,6 +41,14 @@
           "thumbnails": []
         }
       },
+      "category": {
+        "type": "Select",
+        "config": {
+          "label": "Category",
+          "placeholder": "e.g. tutorials, guides, opinion",
+          "options": ["tutorials", "guides", "opinion"]
+        }
+      },
       "slices": {
         "type": "Slices",
         "fieldset": "Slice Zone",

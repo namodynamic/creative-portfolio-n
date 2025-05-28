@@ -55,6 +55,17 @@ interface BlogPostDocumentData {
   hover_image: prismic.ImageField<never>;
 
   /**
+   * Category field in *Blog Post*
+   *
+   * - **Field Type**: Select
+   * - **Placeholder**: e.g. tutorials, guides, opinion
+   * - **API ID Path**: blog_post.category
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#select
+   */
+  category: prismic.SelectField<"tutorials" | "guides" | "opinion">;
+
+  /**
    * Slice Zone field in *Blog Post*
    *
    * - **Field Type**: Slice Zone
@@ -777,6 +788,31 @@ export interface SettingsDocumentDataTechListItem {
 }
 
 /**
+ * Item in *Settings → Blog Categories*
+ */
+export interface SettingsDocumentDataBlogCategoriesItem {
+  /**
+   * Value field in *Settings → Blog Categories*
+   *
+   * - **Field Type**: Select
+   * - **Placeholder**: e.g. tutorials, guides, opinion
+   * - **API ID Path**: settings.blog_categories[].value
+   * - **Documentation**: https://prismic.io/docs/field#select
+   */
+  value: prismic.SelectField<"tutorials" | "guides" | "opinion">;
+
+  /**
+   * Label field in *Settings → Blog Categories*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: e.g. Tutorials, Guides, Opinion
+   * - **API ID Path**: settings.blog_categories[].label
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  label: prismic.KeyTextField;
+}
+
+/**
  * Content for Settings documents
  */
 interface SettingsDocumentData {
@@ -1008,7 +1044,20 @@ interface SettingsDocumentData {
    * - **Tab**: Main
    * - **Documentation**: https://prismic.io/docs/field#key-text
    */
-  name_logo: prismic.KeyTextField /**
+  name_logo: prismic.KeyTextField;
+
+  /**
+   * Blog Categories field in *Settings*
+   *
+   * - **Field Type**: Group
+   * - **Placeholder**: *None*
+   * - **API ID Path**: settings.blog_categories[]
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#group
+   */
+  blog_categories: prismic.GroupField<
+    Simplify<SettingsDocumentDataBlogCategoriesItem>
+  > /**
    * Meta Title field in *Settings*
    *
    * - **Field Type**: Text
@@ -3199,6 +3248,7 @@ declare module "@prismicio/client" {
       SettingsDocumentDataNavItemItem,
       SettingsDocumentDataMobileNavItemItem,
       SettingsDocumentDataTechListItem,
+      SettingsDocumentDataBlogCategoriesItem,
       AllDocumentTypes,
       ApproachSlice,
       ApproachSliceDefaultPrimary,

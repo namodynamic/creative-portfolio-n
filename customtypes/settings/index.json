@@ -188,6 +188,30 @@
           "label": "Name Logo",
           "placeholder": "Nnamdi E."
         }
+      },
+      "blog_categories": {
+        "type": "Group",
+        "config": {
+          "label": "Blog Categories",
+          "repeat": true,
+          "fields": {
+            "value": {
+              "type": "Select",
+              "config": {
+                "label": "Value",
+                "placeholder": "e.g. tutorials, guides, opinion",
+                "options": ["tutorials", "guides", "opinion"]
+              }
+            },
+            "label": {
+              "type": "Text",
+              "config": {
+                "label": "Label",
+                "placeholder": "e.g. Tutorials, Guides, Opinion"
+              }
+            }
+          }
+        }
       }
     },
     "SEO and Metadata": {
