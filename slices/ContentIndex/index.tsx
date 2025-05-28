@@ -6,6 +6,7 @@ import BlogList from "./BlogList";
 import Bounded from "@/components/Bounded";
 import Heading from "@/components/Heading";
 import type { JSX } from "react";
+import TechNewsCard from "@/components/TechNewsCard";
 
 export type ContentIndexProps = SliceComponentProps<Content.ContentIndexSlice>;
 
@@ -52,7 +53,8 @@ const ContentIndex = async ({
         </>
       )}
       {ContentType === "Blog" && (
-        <div className="place-items-start">
+       <div className="relative z-20 grid grid-cols-1 gap-10 lg:grid-cols-12">
+         <div className="place-items-start lg:col-span-8 flex-1">
           <BlogList
             items={blogPosts}
             categories={blogCategories}
@@ -60,6 +62,11 @@ const ContentIndex = async ({
             viewMoreText={slice.primary.view_more_text || "Read More"}
           />
         </div>
+
+        <aside className="lg:col-span-4">
+            <TechNewsCard />
+          </aside>
+       </div>
       )}
     </Bounded>
   );

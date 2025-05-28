@@ -101,7 +101,7 @@ export default function BlogList({
   };
 
   return (
-    <div className="w-full max-w-4xl">
+    <div className="w-full">
       <div className="mb-8 space-y-4">
         <div className="relative">
           <Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-gray-400" />
@@ -214,7 +214,7 @@ export default function BlogList({
 
       {/* Pagination */}
       {totalPages > 0 && (
-        <div className="flex items-center justify-center gap-2 pt-10">
+        <div className="flex items-center justify-center mb-10 gap-2 md:pt-10">
           <Button
             variant="outline"
             size="sm"
