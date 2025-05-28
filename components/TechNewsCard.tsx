@@ -106,21 +106,14 @@ export default function TechNewsCard() {
     return text.substring(0, maxLength).trim() + "...";
   };
 
-  const fetchRedditPosts = async (subreddit: string) => {
+  const fetchRedditPosts = async (subreddit: string, signal?: AbortSignal) => {
     try {
       setLoading(true);
       setError(null);
 
-      const res = await fetch(
-        `https://www.reddit.com/r/${subreddit}/hot.json?limit=5&t=day`,
-        {
-          headers: {
-            "User-Agent": "TechNewsSidebar/1.0",
-          },
-        },
-      );
+      const res = await fetch(`/api/reddit?subreddit=${subreddit}`, { signal });
 
-      if (!res.ok) throw new Error("Failed to fetch posts");
+      if (!res.ok) throw new Error(`Reddit error: ${res.status}`);
 
       const data = await res.json();
 
@@ -141,12 +134,12 @@ export default function TechNewsCard() {
             excerpt: post.selftext ? truncateText(post.selftext, 100) : "",
           };
         })
-        .filter((post: NewsItem) => post.title.length > 10) // Filter out very short titles
+        .filter((post: NewsItem) => post.title.length > 10)
         .slice(0, 5);
 
       setNews(posts);
-    } catch (err) {
-      console.error("Error fetching Reddit posts:", err);
+    } catch (err: any) {
+      if (err.name === "AbortError") return;
       setError("Unable to load tech news");
     } finally {
       setLoading(false);
@@ -154,10 +147,12 @@ export default function TechNewsCard() {
   };
 
   useEffect(() => {
+    const controller = new AbortController();
     const source = sources.find((s) => s.key === selectedSource);
     if (source) {
-      fetchRedditPosts(source.subreddit);
+      fetchRedditPosts(source.subreddit, controller.signal);
     }
+    return () => controller.abort();
   }, [selectedSource]);
 
   const handleRefresh = () => {
@@ -168,7 +163,7 @@ export default function TechNewsCard() {
   };
 
   return (
-    <Card className="sticky top-24 w-full space-y-8 border-[0.5px] border-zinc-300 bg-white/20 shadow-sm dark:bg-blue-850/50 backdrop-blur-sm dark:border-gray-800">
+    <Card className="sticky top-24 w-full space-y-8 border-[0.5px] border-zinc-300 bg-white/20 shadow-sm backdrop-blur-sm dark:border-gray-800 dark:bg-blue-850/50">
       <CardHeader className="pb-3">
         <div className="mb-2 flex items-center justify-between">
           <CardTitle className="flex items-center gap-2 text-lg">
