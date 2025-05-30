@@ -8,6 +8,7 @@
   --background-end-rgb: 205, 215, 226;
   --background: 0 0% 100%;
   --foreground: 0 0% 3.9%;
+  --gradient: radial-gradient(circle, #e5e5e5 0%, #fff 100%);
 }
 
 .dark {
@@ -21,7 +22,6 @@ body {
   font-family: Arial, Helvetica, sans-serif;
   color: rgb(var(--foreground-rgb));
   background: linear-gradient(to bottom, transparent, rgb(var(--background-end-rgb))) rgb(var(--background-start-rgb));
-  transition: background 0.3s ease, color 0.3s ease;
   min-height: 100vh;
   background-attachment: local;
 }
@@ -64,24 +64,30 @@ body {
     background: linear-gradient(to bottom, transparent, rgb(var(--background-end-rgb))) rgb(var(--background-start-rgb));
   }
 
-  .hero-dark-bg {
-    background-color: #050816;
-    background-image: url('/herobg.png');
-    background-position: top;
-    background-repeat: no-repeat;
-    background-size: cover;
-  }
+ .hero-dark-bg {
+  background-color: #050816;
+  background-image: image-set(
+    url('/herobg.webp') type('image/webp'),
+    url('/herobg.png') type('image/png')
+  );
+  background-position: top;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
 
   .hero-light-bg {
-    background-color: #CDD7E2;
-    background-image: url('/herobg1.png');
-    background-position: top;
-    background-repeat: no-repeat;
-    background-size: cover;
+   background-color: #CDD7E2;
+   background-image: image-set(
+      url('/herobg-light.webp') type('image/webp'),
+      url('/herobg-light.png') type('image/png')
+   );
+   background-position: top;
+   background-repeat: no-repeat;
+   background-size: cover;
   }
 }
 
-@media (min-width: 1024px) {
+@media (min-width: 820px) {
   .hero-dark-bg,
   .hero-light-bg {
     background-size: 100% 1080px;
@@ -99,52 +105,3 @@ body {
     background-position: top center;
   }
 }
-
- .card {
-    --start: 0;
-    position: relative;
-    z-index: 40;
-    overflow: hidden;
-    transition: border-color 1s ease-in-out;
-  }
-  
-  .card::before {
-    position: absolute;
-    content: "";
-    width: 100%;
-    height: 100%;
-    left: 50%;
-    top: 50%;
-    transform: translate(-50%, -50%);
-    border-radius: 12px;
-    border: 2px solid transparent;
-    background: var(--gradient);
-    background-attachment: fixed;
-    mask: linear-gradient(#0000, #0000),
-    conic-gradient(
-            from calc((var(--start) - 15) * 1deg),
-            #ffffff1f 0deg,
-            white,
-            #ffffff00 100deg
-    );
-    mask-composite: intersect;
-    mask-clip: padding-box, border-box;
-    opacity: 0;
-    transition: 0.5s ease;
-  }
-  
-  .glow {
-    pointer-events: none;
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    left: 50%;
-    top: 50%;
-    transform: translate(-50%, -50%);
-    filter: blur(10px) saturate(200%);
-  }
-  
-  
-  .card:hover::before {
-    opacity: 1;
-  }

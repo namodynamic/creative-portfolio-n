@@ -19,7 +19,7 @@ export default async function Footer() {
             {/* Left Column */}
             <div className="z-20 space-y-6">
               <div className="items-center border-l-4 border-purple-800 pl-3">
-                <h2 className="text-2xl font-bold dark:text-slate-300">
+                <h2 className="text-2xl font-bold text-black-100 dark:text-white-50">
                   {settings.data.name}
                 </h2>
                 <p className="dark:text-gray-400">{settings.data.role}</p>
@@ -69,7 +69,7 @@ export default async function Footer() {
               aria-label="Footer Navigation"
             >
               <div className="space-y-6">
-                <h3 className="text-lg font-semibold dark:text-white">
+                <h3 className="text-lg font-semibold text-black-100 dark:text-white-50">
                   Quick Links
                 </h3>
                 <ul className="space-y-3">
@@ -127,7 +127,7 @@ export default async function Footer() {
 
             {/* CTA */}
             <div className="relative space-y-6">
-              <h3 className="text-lg font-semibold dark:text-white">
+              <h3 className="text-lg font-semibold text-black-100 dark:text-white-50">
                 Let&apos;s Work Together
               </h3>
               <p className="text-sm dark:text-gray-400">

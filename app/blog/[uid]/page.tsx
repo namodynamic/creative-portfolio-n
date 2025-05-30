@@ -50,7 +50,7 @@ export default async function BlogPostPage(props: { params: Promise<Params> }) {
         <div className="relative z-20 w-full py-6 md:py-10">
           <Link
             href="/blog"
-            className="mb-4 inline-flex items-center text-sm transition-colors hover:text-black/50 dark:text-purple-400 dark:hover:text-purple-300"
+            className="mb-4 inline-flex items-center text-sm transition-colors hover:text-black/50 dark:text-slate-300 dark:hover:text-purple-300"
           >
             <ChevronLeft className="mr-1 h-4 w-4" />
             Back to all blogs

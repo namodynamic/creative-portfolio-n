@@ -7,20 +7,12 @@ import { MdCircle } from "react-icons/md";
 import { CodeXml } from "lucide-react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-
-import Bounded from "@/components/Bounded";
-import Heading from "@/components/Heading";
+import TitleHeader from "@/components/TitleHeader";
 
 gsap.registerPlugin(ScrollTrigger);
 
-/**
- * Props for `TechList`.
- */
 export type TechListProps = SliceComponentProps<Content.TechListSlice>;
 
-/**
- * Component for "TechList" Slices.
- */
 const TechList = ({ slice }: TechListProps): JSX.Element => {
   const component = useRef(null);
 
@@ -64,19 +56,21 @@ const TechList = ({ slice }: TechListProps): JSX.Element => {
       className="overflow-hidden"
       ref={component}
     >
-      <Bounded as="section" className="max-md:-mt-20">
-        <Heading size="xl" className="mb-8" as="h2">
-          {slice.primary.heading}
-        </Heading>
-        <div className="prose prose-lg prose-invert col-start-1 mt-5 dark:text-slate-500 text-black-100  sm:prose-xl">
-          <p>{slice.primary.intro}</p>
-        </div>
-      </Bounded>
+      <div className="px-4 pt-14 md:px-6 md:pt-14 lg:pt-16">
+        <TitleHeader
+          title={slice.primary.heading || ""}
+          subtitle={slice.primary.sub_heading || ""}
+          intro={slice.primary.intro || ""}
+          icon={
+            <CodeXml className="h-5 w-5 text-white-50" />
+          }
+        />
+      </div>
 
       {slice.items.map(({ tech_color, tech_name }, index) => (
         <div
           key={index}
-          className="tech-row mb-4 md:mb-8 flex items-center justify-center gap-2 text-slate-400 dark:text-slate-700"
+          className="tech-row mb-4 flex items-center justify-center gap-2 text-slate-500 dark:text-slate-700 md:mb-8"
           aria-label={tech_name || ""}
         >
           {Array.from({ length: 15 }, (_, index) => (
@@ -88,12 +82,11 @@ const TechList = ({ slice }: TechListProps): JSX.Element => {
                 style={{
                   color: index === 7 && tech_color ? tech_color : "inherit",
                 }}
-                >
+              >
                 {tech_name}
               </span>
               <span className="text-3xl">
-                {/* <MdCircle /> */}
-                <CodeXml className="h-8 w-8" />
+                <MdCircle />
               </span>
             </React.Fragment>
           ))}

@@ -179,7 +179,7 @@ export default function NavBar({
             height: mobileMenuOpen ? "auto" : 0,
           }}
           className={cn(
-            "absolute -top-4 left-0 z-40 w-full overflow-hidden bg-white transition-all duration-300 ease-in-out dark:bg-navy-900",
+            "absolute -top-4 left-0 z-40 w-full overflow-hidden bg-slate-300 transition-all duration-300 ease-in-out dark:bg-navy-900",
             mobileMenuOpen ? "flex" : "hidden",
           )}
         >

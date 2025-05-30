@@ -19,6 +19,13 @@
             "placeholder": ""
           }
         },
+        "sub_heading": {
+          "type": "Text",
+          "config": {
+            "label": "Sub Heading",
+            "placeholder": ""
+          }
+        },
         "intro": {
           "type": "Text",
           "config": {

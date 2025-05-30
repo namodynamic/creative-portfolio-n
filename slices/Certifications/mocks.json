@@ -12,6 +12,11 @@
 				"__TYPE__": "FieldContent",
 				"value": "sweet",
 				"type": "Text"
+			},
+			"intro": {
+				"__TYPE__": "FieldContent",
+				"value": "written",
+				"type": "Text"
 			}
 		},
 		"items": [
@@ -117,6 +122,14 @@
 							"alt": null,
 							"__TYPE__": "ImageContent",
 							"thumbnails": {}
+						}
+					],
+					[
+						"icon_name",
+						{
+							"__TYPE__": "FieldContent",
+							"value": "database",
+							"type": "Select"
 						}
 					]
 				]

@@ -1335,6 +1335,16 @@ export interface CertificationsSliceDefaultPrimary {
    * - **Documentation**: https://prismic.io/docs/field#key-text
    */
   sub_heading: prismic.KeyTextField;
+
+  /**
+   * Intro field in *Certifications → Default → Primary*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: certifications.default.primary.intro
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  intro: prismic.KeyTextField;
 }
 
 /**
@@ -1416,6 +1426,30 @@ export interface CertificationsSliceDefaultItem {
    * - **Documentation**: https://prismic.io/docs/field#image
    */
   hover_image: prismic.ImageField<never>;
+
+  /**
+   * Icon Name field in *Certifications → Items*
+   *
+   * - **Field Type**: Select
+   * - **Placeholder**: *None*
+   * - **Default Value**: certificate
+   * - **API ID Path**: certifications.items[].icon_name
+   * - **Documentation**: https://prismic.io/docs/field#select
+   */
+  icon_name: prismic.SelectField<
+    | "certificate"
+    | "database"
+    | "zap"
+    | "code"
+    | "users"
+    | "trending"
+    | "globe"
+    | "brain"
+    | "computer"
+    | "server"
+    | "award",
+    "filled"
+  >;
 }
 
 /**
@@ -1773,6 +1807,26 @@ export interface EducationSliceDefaultPrimary {
    * - **Documentation**: https://prismic.io/docs/field#key-text
    */
   heading: prismic.KeyTextField;
+
+  /**
+   * Sub Heading field in *Education → Default → Primary*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: Academic Journey
+   * - **API ID Path**: education.default.primary.sub_heading
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  sub_heading: prismic.KeyTextField;
+
+  /**
+   * Intro field in *Education → Default → Primary*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: education.default.primary.intro
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  intro: prismic.KeyTextField;
 }
 
 /**
@@ -1780,14 +1834,24 @@ export interface EducationSliceDefaultPrimary {
  */
 export interface EducationSliceDefaultItem {
   /**
-   * Title field in *Education → Items*
+   * Degree field in *Education → Items*
    *
    * - **Field Type**: Text
-   * - **Placeholder**: *None*
-   * - **API ID Path**: education.items[].title
+   * - **Placeholder**: Bachelor of Science
+   * - **API ID Path**: education.items[].degree
    * - **Documentation**: https://prismic.io/docs/field#key-text
    */
-  title: prismic.KeyTextField;
+  degree: prismic.KeyTextField;
+
+  /**
+   * Course Study field in *Education → Items*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: e.g Actuarial Science
+   * - **API ID Path**: education.items[].course_study
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  course_study: prismic.KeyTextField;
 
   /**
    * Time Period field in *Education → Items*
@@ -1810,14 +1874,34 @@ export interface EducationSliceDefaultItem {
   institution: prismic.KeyTextField;
 
   /**
-   * Description field in *Education → Items*
+   * Key Achievement Heading field in *Education → Items*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: e.g. Key Achievements & Skills
+   * - **API ID Path**: education.items[].key_achievement
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  key_achievement: prismic.KeyTextField;
+
+  /**
+   * Kay Achievement Description field in *Education → Items*
    *
    * - **Field Type**: Rich Text
-   * - **Placeholder**: *None*
-   * - **API ID Path**: education.items[].description
+   * - **Placeholder**: Bullet List
+   * - **API ID Path**: education.items[].achievement_description
    * - **Documentation**: https://prismic.io/docs/field#rich-text-title
    */
-  description: prismic.RichTextField;
+  achievement_description: prismic.RichTextField;
+
+  /**
+   * Badge field in *Education → Items*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: Graduated with honours
+   * - **API ID Path**: education.items[].badge
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  badge: prismic.KeyTextField;
 }
 
 /**
@@ -1863,6 +1947,16 @@ export interface ExperienceSliceDefaultPrimary {
    * - **Documentation**: https://prismic.io/docs/field#key-text
    */
   heading: prismic.KeyTextField;
+
+  /**
+   * Sub Heading field in *Experience → Default → Primary*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: experience.default.primary.sub_heading
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  sub_heading: prismic.KeyTextField;
 
   /**
    * Intro field in *Experience → Default → Primary*
@@ -2962,6 +3056,16 @@ export interface TechListSliceDefaultPrimary {
    * - **Documentation**: https://prismic.io/docs/field#key-text
    */
   heading: prismic.KeyTextField;
+
+  /**
+   * Sub Heading field in *TechList → Default → Primary*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: tech_list.default.primary.sub_heading
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  sub_heading: prismic.KeyTextField;
 
   /**
    * Intro field in *TechList → Default → Primary*

@@ -10,14 +10,9 @@ import MagicButton from "@/components/ui/MagicButton";
 import { FaArrowDown } from "react-icons/fa6";
 import Link from "next/link";
 
-/**
- * Props for `Hero`.
- */
+
 export type HeroProps = SliceComponentProps<Content.HeroSlice>;
 
-/**
- * Component for "Hero" Slices.
- */
 const Hero = ({ slice }: HeroProps): JSX.Element => {
   const component = useRef(null);
 
@@ -81,7 +76,7 @@ const Hero = ({ slice }: HeroProps): JSX.Element => {
           </div>
         </div>
       </Bounded>
-      <div className="absolute inset-0 -z-10 block dark:hidden theme-bg-gradient" />
+      <div className="absolute inset-0 -z-10 block dark:hidden bg-blend-lighten hero-light-bg" />
       <div className="absolute inset-0 -z-10 dark:block hidden hero-dark-bg" />
     </>
   );

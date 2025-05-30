@@ -18,14 +18,35 @@
             "label": "Heading",
             "placeholder": ""
           }
+        },
+        "sub_heading": {
+          "type": "Text",
+          "config": {
+            "label": "Sub Heading",
+            "placeholder": "Academic Journey"
+          }
+        },
+        "intro": {
+          "type": "Text",
+          "config": {
+            "label": "Intro",
+            "placeholder": ""
+          }
         }
       },
       "items": {
-        "title": {
+        "degree": {
           "type": "Text",
           "config": {
-            "label": "Title",
-            "placeholder": ""
+            "label": "Degree",
+            "placeholder": "Bachelor of Science"
+          }
+        },
+        "course_study": {
+          "type": "Text",
+          "config": {
+            "label": "Course Study",
+            "placeholder": "e.g Actuarial Science"
           }
         },
         "time_period": {
@@ -42,13 +63,27 @@
             "placeholder": ""
           }
         },
-        "description": {
+        "key_achievement": {
+          "type": "Text",
+          "config": {
+            "label": "Key Achievement Heading",
+            "placeholder": "e.g. Key Achievements & Skills"
+          }
+        },
+        "achievement_description": {
           "type": "StructuredText",
           "config": {
-            "label": "Description",
-            "placeholder": "",
+            "label": "Kay Achievement Description",
+            "placeholder": "Bullet List",
             "allowTargetBlank": true,
             "multi": "paragraph,preformatted,heading1,heading2,heading3,heading4,heading5,heading6,strong,em,hyperlink,image,embed,list-item,o-list-item,rtl"
+          }
+        },
+        "badge": {
+          "type": "Text",
+          "config": {
+            "label": "Badge",
+            "placeholder": "Graduated with honours"
           }
         }
       }

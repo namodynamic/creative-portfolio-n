@@ -6,6 +6,7 @@ import { Content } from "@prismicio/client";
 import { PrismicNextImage } from "@prismicio/next";
 import { PrismicRichText, SliceComponentProps } from "@prismicio/react";
 import { useTheme } from "@/components/ThemeProvider";
+import { Briefcase } from "lucide-react";
 
 import {
   VerticalTimeline,
@@ -15,21 +16,11 @@ import "react-vertical-timeline-component/style.min.css";
 
 import type { JSX } from "react";
 
-// const LinearGradient =
-//   "linear-gradient(0deg, rgba(145, 40, 207, 0) 0%, #004384 30%, #00AEFF 57.51%, #20BBD9 96.91%)";
-
-/**
- * Props for `Experience`.
- */
 export type ExperienceProps = SliceComponentProps<Content.ExperienceSlice>;
 
-/**
- * Component for "Experience" Slices.
- */
 const Experience = ({ slice }: ExperienceProps): JSX.Element => {
-
   const { theme } = useTheme();
-  
+
   const dynamicLinearGradient = slice.items
     .map(
       (item, index) =>
@@ -41,19 +32,26 @@ const Experience = ({ slice }: ExperienceProps): JSX.Element => {
 
   return (
     <Bounded
+      as="section"
       data-slice-type={slice.slice_type}
       data-slice-variation={slice.variation}
       className="max-md:-mt-20"
     >
-      <Heading as="h2" size="lg" className="max-md:text-5xl">
+      <div className="mb-6 inline-flex w-fit items-center gap-2 text-nowrap rounded-full bg-slate-950  px-4 py-2 text-sm text-white-50 dark:bg-slate-900 md:text-base">
+        <Briefcase className="h-5 w-5 text-white-50" />
+        <p className="text-sm font-medium text-white-50 dark:text-slate-300">
+          {slice.primary.sub_heading}
+        </p>
+      </div>
+      <Heading as="h2" size="md" className="max-md:text-5xl">
         {slice.primary.heading}
       </Heading>
 
-      <div className="prose prose-base prose-invert col-start-1 mt-5 dark:text-slate-500 text-black-100  lg:prose-lg">
+      <div className="prose prose-base prose-invert col-start-1 mt-5 text-black-100 lg:prose-xl  dark:text-slate-300">
         <p>{slice.primary.intro}</p>
       </div>
 
-      <div className="mt-8 flex sm:mt-16">
+      <div className="mt-8 flex place-items-start sm:mt-16">
         <VerticalTimeline layout="1-column-left" lineColor={linearGradient}>
           {slice.items
             .slice()
@@ -78,8 +76,14 @@ const Experience = ({ slice }: ExperienceProps): JSX.Element => {
                   boxShadow: "none",
                 }}
                 contentStyle={{
-                  background: theme === "dark" ? "rgba(17,25, 40, 0.125)" : "rgba(240,245,255,0.125)",
-                  color: theme === "dark" ? "#ffffff" : "#000000",
+                  background:
+                    theme === "dark" || theme === "system"
+                      ? "rgba(17,25,40,0.125)"
+                      : "rgba(240,245,255,0.125)",
+                  color:
+                    theme === "dark" || theme === "system"
+                      ? "#ffffff"
+                      : "#000000",
                   border: "0.2px solid rgba(255, 255, 255, 0.11)",
                   borderRadius: "12px",
                   borderStyle: "solid",
@@ -91,17 +95,17 @@ const Experience = ({ slice }: ExperienceProps): JSX.Element => {
                 className="vertical-timeline-element--work"
               >
                 <div>
-                  <h3 className="text-[24px] font-bold dark:text-white text-black-100 ">
+                  <h3 className="text-[24px] font-bold text-black-100 dark:text-white ">
                     {item.title}
                   </h3>
                   <p
-                    className="text-base font-semibold dark:text-slate-400 text-black/80"
+                    className="text-base font-semibold text-black/80 dark:text-slate-300"
                     style={{ margin: 0 }}
                   >
                     {item.company}
                   </p>
                 </div>
-                <div className="prose prose-base prose-invert text-black dark:text-slate-500 lg:prose-lg">
+                <div className="prose prose-base prose-invert text-black lg:prose-lg dark:text-slate-400">
                   <PrismicRichText field={item.description} />
                 </div>
               </VerticalTimelineElement>
