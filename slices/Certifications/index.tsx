@@ -1,11 +1,11 @@
 import { Content } from "@prismicio/client";
 import { SliceComponentProps } from "@prismicio/react";
 import Bounded from "@/components/Bounded";
-import Testimonials from "@/components/Testimonial";
+import TestimonialCard from "@/components/TestimonialCard";
 import { createClient } from "@/prismicio";
 import CertificationCard from "@/components/CertificationCard";
 import TitleHeader from "@/components/TitleHeader";
-
+import { LiaCertificateSolid } from "react-icons/lia";
 
 export type CertificationsProps =
   SliceComponentProps<Content.CertificationsSlice>;
@@ -25,16 +25,18 @@ const Certifications = async ({ slice, index }: CertificationsProps) => {
       <TitleHeader
         title={slice.primary.heading || ""}
         subtitle={slice.primary.sub_heading || ""}
+        icon={<LiaCertificateSolid className="h-5 w-5 text-white-50" />}
+        intro={slice.primary.intro || ""}
       />
 
-      <div className="grid grid-cols-1 gap-5 pt-12 md:mt-10 md:grid-cols-2 lg:grid-cols-3">
+      <div className="grid grid-cols-1 gap-5 mt-12 md:mt-10 md:grid-cols-2 lg:grid-cols-3">
         {slice.items.map((item, index) => (
-          <CertificationCard key={index} item={item} index={index} />
+          <CertificationCard key={index} item={item} index={index} icon={item.icon_name} />
         ))}
       </div>
 
       <div className="mt-16">
-        <Testimonials slice={testimonialSlice as Content.TestimonialSlice} />
+        <TestimonialCard slice={testimonialSlice as Content.TestimonialSlice} />
       </div>
     </Bounded>
   );

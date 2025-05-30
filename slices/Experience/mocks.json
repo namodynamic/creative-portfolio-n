@@ -12,6 +12,11 @@
 				"__TYPE__": "FieldContent",
 				"value": "greater",
 				"type": "Text"
+			},
+			"sub_heading": {
+				"__TYPE__": "FieldContent",
+				"value": "parallel",
+				"type": "Text"
 			}
 		},
 		"items": [

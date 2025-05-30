@@ -7,20 +7,22 @@
 				"__TYPE__": "FieldContent",
 				"value": "imagine",
 				"type": "Text"
+			},
+			"sub_heading": {
+				"__TYPE__": "FieldContent",
+				"value": "thou",
+				"type": "Text"
+			},
+			"intro": {
+				"__TYPE__": "FieldContent",
+				"value": "sharp",
+				"type": "Text"
 			}
 		},
 		"items": [
 			{
 				"__TYPE__": "GroupItemContent",
 				"value": [
-					[
-						"title",
-						{
-							"__TYPE__": "FieldContent",
-							"value": "flies",
-							"type": "Text"
-						}
-					],
 					[
 						"time_period",
 						{
@@ -38,14 +40,46 @@
 						}
 					],
 					[
-						"description",
+						"badge",
+						{
+							"__TYPE__": "FieldContent",
+							"value": "tune",
+							"type": "Text"
+						}
+					],
+					[
+						"degree",
+						{
+							"__TYPE__": "FieldContent",
+							"value": "well",
+							"type": "Text"
+						}
+					],
+					[
+						"course_study",
+						{
+							"__TYPE__": "FieldContent",
+							"value": "importance",
+							"type": "Text"
+						}
+					],
+					[
+						"key_achievement",
+						{
+							"__TYPE__": "FieldContent",
+							"value": "president",
+							"type": "Text"
+						}
+					],
+					[
+						"achievement_description",
 						{
 							"__TYPE__": "StructuredTextContent",
 							"value": [
 								{
 									"type": "paragraph",
 									"content": {
-										"text": "Et quis aliqua esse dolore incididunt anim veniam nulla fugiat non cupidatat mollit commodo et irure. Pariatur pariatur est sint anim ad minim culpa sint mollit cillum ex eu veniam mollit duis."
+										"text": "Lorem elit quis cupidatat elit anim mollit velit minim exercitation."
 									}
 								}
 							]

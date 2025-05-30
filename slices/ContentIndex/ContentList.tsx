@@ -4,10 +4,11 @@ import React, { useRef, useState, useEffect } from "react";
 import { asImageSrc, isFilled } from "@prismicio/client";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { MdArrowOutward } from "react-icons/md";
 import { Content } from "@prismicio/client";
 import Link from "next/link";
 import { formatDate } from "@/utils/FormatDate";
+import { Tag, ArrowRight } from "lucide-react";
+import { PrismicNextImage } from "@prismicio/next";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -93,7 +94,7 @@ export default function ContentList({
             duration: 1.3,
           });
           gsap.to(revealRef.current, {
-            opacity: hovering ? 1 : 0,
+            opacity: hovering ? 0.4 : 0,
             visibility: "visible",
             ease: "power3.out",
             duration: 0.4,
@@ -127,9 +128,9 @@ export default function ContentList({
       : fallbackItemImage;
     return asImageSrc(image, {
       fit: "scale",
-      w: 320,
-      h: 320,
-      exp: -10,
+      w: 220,
+      h: 220,
+      exp: -5,
     });
   });
 
@@ -137,54 +138,90 @@ export default function ContentList({
   useEffect(() => {
     contentImages.forEach((url) => {
       if (!url) return;
-      const img = new Image();
+      const img = document.createElement("img");
       img.src = url;
     });
   }, [contentImages]);
 
   return (
-    <>
-      <ul
-        ref={component}
-        className="grid border-b dark:border-b-slate-100"
-        onMouseLeave={onMouseLeave}
-      >
-        {sortedItems.map((item, index) => (
-          <li
-            key={index}
-            ref={(el) => {
-              itemsRef.current[index] = el;
-            }}
-            onMouseEnter={() => onMouseEnter(index)}
-            className="list-item opacity-0"
-          >
-            <Link
-              href={`${urlPrefix}/${item.uid}`}
-              className="flex flex-col justify-between border-t dark:border-t-slate-100 py-10  dark:text-slate-200 md:flex-row "
-              aria-label={item.data.title || ""}
+    <section>
+      <ul ref={component} onMouseLeave={onMouseLeave}>
+        {sortedItems.map((item, index) => {
+          const firstParagraph =
+            item.data.slices
+              .find((slice) => {
+                return (
+                  slice.slice_type === "text_block" &&
+                  Array.isArray((slice as any).primary?.text) &&
+                  (slice as any).primary.text.some(
+                    (block: any) => block.type === "paragraph",
+                  )
+                );
+              })
+              ?.primary?.text.find((block: any) => block.type === "paragraph")
+              ?.text || "";
+
+          return (
+            <li
+              key={index}
+              ref={(el) => {
+                itemsRef.current[index] = el;
+              }}
+              onMouseEnter={() => onMouseEnter(index)}
+              className="list-item opacity-0"
             >
-              <div className="flex flex-col">
-                <span className="flex flex-wrap text-lg md:text-2xl font-bold">
-                  {item.data.title}
-                </span>
-                <div className="flex flex-wrap gap-2 text-black/50 dark:text-black-600 capitalize">
-                  {item.tags.map((tag, index) => (
-                    <span key={index} className="text-sm font-bold">
-                      #{tag}
+              <Link
+                href={`${urlPrefix}/${item.uid}`}
+                className="flex flex-col items-start justify-between gap-5 border-t border-slate-400 py-8 dark:border-t-slate-700 dark:text-slate-200  sm:flex-row sm:py-12 "
+                aria-label={item.data.title || ""}
+              >
+                <div className="mb-4 space-y-4 sm:mb-0">
+                  <div className="flex items-baseline gap-4">
+                    <h3 className="text-xl font-bold uppercase sm:text-2xl">
+                      {item.data.title}
+                    </h3>
+                    <span className="text-sm text-gray-400">
+                      ({sortedItems.length - index})
                     </span>
-                  ))}
+                  </div>
+                  <p className="line-clamp-3 max-w-full dark:text-slate-400 lg:max-w-[50vw]">
+                    {firstParagraph || ""}
+                  </p>
+                  <div className="flex flex-wrap gap-2 pt-2 capitalize">
+                    {item.tags.map((tag, index) => (
+                      <span
+                        key={index}
+                        className="inline-flex items-center gap-1 rounded-full bg-black/60 px-2 py-1 text-xs font-medium text-white dark:bg-slate-800/70 dark:text-slate-100"
+                      >
+                        <Tag className="h-3 w-3" />
+                        {tag}
+                      </span>
+                    ))}
+                  </div>
                 </div>
-              </div>
-              <span className="text-sm ml-auto flex items-center  gap-2 font-medium md:ml-0 md:text-base">
-                {viewMoreText} <MdArrowOutward />
-              </span>
-            </Link>
-          </li>
-        ))}
+
+                <div className="flex flex-col items-start gap-2 sm:gap-5">
+                  <div className="hidden h-32 w-48 rounded-lg bg-gray-900 md:block">
+                    <PrismicNextImage
+                      field={item.data.hover_image}
+                      width={200}
+                      height={130}
+                      fallbackAlt=""
+                      className="h-full w-full rounded-lg object-fill"
+                    />
+                  </div>
+                  <span className="inline-flex items-center gap-1">
+                    {viewMoreText} <ArrowRight className="h-4 w-4" />
+                  </span>
+                </div>
+              </Link>
+            </li>
+          );
+        })}
 
         {/* Hover element */}
         <div
-          className="hover-reveal pointer-events-none absolute left-0 top-0 -z-10 h-[220px] lg:h-[320px] w-[220px] lg:w-[320px] rounded-2xl bg-cover bg-center opacity-0 transition-[background] duration-300"
+          className="hover-reveal pointer-events-none absolute left-0 top-0 -z-10 h-48 w-48 rounded-2xl bg-cover bg-center opacity-0 transition-[background] duration-300"
           style={{
             backgroundImage:
               currentItem !== null ? `url(${contentImages[currentItem]})` : "",
@@ -192,6 +229,6 @@ export default function ContentList({
           ref={revealRef}
         ></div>
       </ul>
-    </>
+    </section>
   );
 }

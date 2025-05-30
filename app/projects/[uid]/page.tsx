@@ -78,7 +78,7 @@ export default async function Page({ params }: { params: Promise<Params> }) {
               Projects
             </Link>
             <span className="text-slate-600">/</span>
-            <span className="dark:text-purple-500">{page.data.title}</span>
+            <span className="dark:text-white-50">{page.data.title}</span>
           </div>
         </div>
       </div>

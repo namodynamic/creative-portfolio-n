@@ -1,21 +1,28 @@
 interface TitleHeaderProps {
-    title: string;
-    subtitle: string;
+  title: string;
+  subtitle: string;
+  icon?: React.ReactNode;
+  intro?: string;
 }
 
-const TitleHeader = ({ title, subtitle }: TitleHeaderProps) => {
-    return (
-        <div className="flex flex-col items-center gap-5">
-            <div className="bg-slate-950 dark:bg-slate-900 text-white-50 py-2 px-4 rounded-full w-fit text-sm md:text-base text-nowrap">
-                <p>{subtitle}</p>
-            </div>
-            <div>
-                <h1 className="font-semibold md:text-5xl text-3xl text-center text-black-100  dark:text-slate-300">
-                    {title}
-                </h1>
-            </div>
-        </div>
-    );
+const TitleHeader = ({ title, subtitle, icon, intro }: TitleHeaderProps) => {
+  return (
+    <div className="mb-16 text-center">
+      <div className="mb-6 inline-flex w-fit items-center gap-2 text-nowrap rounded-full bg-slate-950  px-4 py-2 text-sm text-white-50 dark:bg-slate-900 md:text-base">
+        {icon}
+        <p className="text-sm font-medium text-white-50 dark:text-slate-300">
+          {subtitle}
+        </p>
+      </div>
+      <h2 className="mb-4 bg-gradient-to-r from-slate-900 via-slate-700 to-slate-900 bg-clip-text text-4xl font-bold text-black-100  dark:text-transparent dark:from-white-50 dark:via-slate-200 dark:to-white md:text-5xl">
+        {title}
+      </h2>
+
+      <p className="mx-auto max-w-2xl text-lg text-slate-600 dark:text-slate-400">
+        {intro}
+      </p>
+    </div>
+  );
 };
 
 export default TitleHeader;

@@ -8,13 +8,41 @@ import { ExternalLink } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { asImageSrc, isFilled } from "@prismicio/client";
 import { LiaCertificateSolid } from "react-icons/lia";
+import { FaAward } from "react-icons/fa";
+import {
+  Database,
+  Zap,
+  CodeXml,
+  Users,
+  TrendingUp,
+  Globe,
+  BrainCircuit,
+  Computer,
+  Server,
+} from "lucide-react";
+import React from "react";
 
 interface CertificationCardProps {
   item: any;
   index: number;
+  icon: React.ReactNode;
 }
 
-const CertificationCard = ({ item, index }: CertificationCardProps) => {
+const iconMap: Record<string, React.ReactNode> = {
+  certificate: <LiaCertificateSolid className="h-6 w-6 text-white-50" />,
+  award: <FaAward className="h-6 w-6 text-white-50" />,
+  database: <Database className="h-6 w-6 text-white-50" />,
+  zap: <Zap className="h-6 w-6 text-white-50" />,
+  code: <CodeXml className="h-6 w-6 text-white-50" />,
+  users: <Users className="h-6 w-6 text-white-50" />,
+  trending: <TrendingUp className="h-6 w-6 text-white-50" />,
+  globe: <Globe className="h-6 w-6 text-white-50" />,
+  brain: <BrainCircuit className="h-6 w-6 text-white-50" />,
+  computer: <Computer className="h-6 w-6 text-white-50" />,
+  server: <Server className="h-6 w-6 text-white-50" />,
+};
+
+const CertificationCard = ({ item, index, icon }: CertificationCardProps) => {
   const backgroundUrl = isFilled.image(item.background_image)
     ? asImageSrc(item.background_image, { w: 800, q: 80 })
     : undefined;
@@ -40,7 +68,7 @@ const CertificationCard = ({ item, index }: CertificationCardProps) => {
       key={index}
       className={cn(
         "card group relative aspect-[16/11] w-full overflow-hidden rounded-2xl border border-neutral-800 shadow-md shadow-white/20 transition-all duration-500",
-        "hover:after:absolute hover:after:inset-0 hover:after:rounded-2xl hover:after:transition-all hover:after:duration-500 hover:after:content-[''] md:hover:after:bg-black/60",
+        "hover:after:absolute hover:after:inset-0 hover:after:rounded-2xl hover:after:transition-all hover:after:duration-500 hover:after:content-[''] md:hover:after:bg-black-100/60",
       )}
       style={{
         backgroundImage: backgroundUrl ? `url(${backgroundUrl})` : undefined,
@@ -49,11 +77,20 @@ const CertificationCard = ({ item, index }: CertificationCardProps) => {
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
     >
-      <div className="absolute inset-0 z-0 bg-black/60  transition duration-500 md:group-hover:bg-black/10" />
+      <div className="absolute inset-0 z-0 bg-black-100/50  transition duration-500 md:group-hover:bg-black/10" />
 
       <div className="relative z-10 flex h-full flex-col justify-between p-5 text-white">
         <div className="flex items-center justify-between transition-opacity duration-500 md:group-hover:opacity-0">
-          <LiaCertificateSolid className="h-8 w-8 text-white-50" />
+          <div className="rounded-lg bg-white/10 p-2">
+            <div className="text-white dark:text-slate-900">
+              {iconMap[
+                (item.icon_name || "certificate")
+                  .toString()
+                  .trim()
+                  .toLowerCase()
+              ] || iconMap["certificate"]}
+            </div>
+          </div>
           <Badge
             variant="secondary"
             className="bg-black/40 px-2 py-1 text-xs text-slate-400 backdrop-blur hover:bg-black/50"

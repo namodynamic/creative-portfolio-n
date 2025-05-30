@@ -12,6 +12,11 @@
 				"__TYPE__": "FieldContent",
 				"value": "asleep",
 				"type": "Text"
+			},
+			"sub_heading": {
+				"__TYPE__": "FieldContent",
+				"value": "state",
+				"type": "Text"
 			}
 		},
 		"items": [

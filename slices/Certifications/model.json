@@ -25,6 +25,13 @@
             "label": "Sub Heading",
             "placeholder": ""
           }
+        },
+        "intro": {
+          "type": "Text",
+          "config": {
+            "label": "Intro",
+            "placeholder": ""
+          }
         }
       },
       "items": {
@@ -80,6 +87,27 @@
             "label": "Hover image",
             "constraint": {},
             "thumbnails": []
+          }
+        },
+        "icon_name": {
+          "type": "Select",
+          "config": {
+            "label": "Icon Name",
+            "placeholder": "",
+            "options": [
+              "certificate",
+              "database",
+              "zap",
+              "code",
+              "users",
+              "trending",
+              "globe",
+              "brain",
+              "computer",
+              "server",
+              "award"
+            ],
+            "default_value": "certificate"
           }
         }
       }
