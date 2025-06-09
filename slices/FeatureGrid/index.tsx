@@ -4,14 +4,10 @@ import { SliceComponentProps } from "@prismicio/react";
 import { BentoGrid, BentoGridItem } from "@/components/ui/BentoGrid";
 import Bounded from "@/components/Bounded";
 
-/**
- * Props for `FeatureGrid`.
- */
+
 export type FeatureGridProps = SliceComponentProps<Content.FeatureGridSlice>;
 
-/**
- * Component for "FeatureGrid" Slices.
- */
+
 const FeatureGrid: FC<FeatureGridProps> = ({ slice }) => {
 
   return (
@@ -19,7 +15,7 @@ const FeatureGrid: FC<FeatureGridProps> = ({ slice }) => {
     as="section"
     data-slice-type={slice.slice_type}
     data-slice-variation={slice.variation}
-    className="md:mt-20"
+    className="md:mt-10 lg:mt-20 -mt-10"
     >
       <BentoGrid className="w-full">
       {slice.primary.items.map((item, i) => (

@@ -37,6 +37,16 @@
 				"__TYPE__": "FieldContent",
 				"value": "bell",
 				"type": "Text"
+			},
+			"sub_heading": {
+				"__TYPE__": "FieldContent",
+				"value": "ride",
+				"type": "Text"
+			},
+			"intro": {
+				"__TYPE__": "FieldContent",
+				"value": "gift",
+				"type": "Text"
 			}
 		},
 		"items": []

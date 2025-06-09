@@ -1131,6 +1131,26 @@ export interface ApproachSliceDefaultPrimary {
   heading: prismic.KeyTextField;
 
   /**
+   * Sub Heading field in *Approach → Default → Primary*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: approach.default.primary.sub_heading
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  sub_heading: prismic.KeyTextField;
+
+  /**
+   * Intro field in *Approach → Default → Primary*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: approach.default.primary.intro
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  intro: prismic.KeyTextField;
+
+  /**
    * Phase 1 Title field in *Approach → Default → Primary*
    *
    * - **Field Type**: Text

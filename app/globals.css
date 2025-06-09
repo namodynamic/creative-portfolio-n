@@ -2,7 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-
 :root {
   --background-start-rgb: 205, 215, 226;
   --background-end-rgb: 205, 215, 226;
@@ -21,7 +20,12 @@
 body {
   font-family: Arial, Helvetica, sans-serif;
   color: rgb(var(--foreground-rgb));
-  background: linear-gradient(to bottom, transparent, rgb(var(--background-end-rgb))) rgb(var(--background-start-rgb));
+  background: linear-gradient(
+      to bottom,
+      transparent,
+      rgb(var(--background-end-rgb))
+    )
+    rgb(var(--background-start-rgb));
   min-height: 100vh;
   background-attachment: local;
 }
@@ -51,7 +55,7 @@ body {
   }
 
   .timeline {
-    @apply absolute z-30 h-[110%] -top-10 w-14 md:w-28 bg-black;
+    @apply absolute -top-10 z-30 h-[110%] w-14 bg-black md:w-28;
   }
 
   .btn-ping_dot {
@@ -61,29 +65,28 @@ body {
     background: rgb(var(--background-start-rgb));
   }
   .theme-bg-gradient {
-    background: linear-gradient(to bottom, transparent, rgb(var(--background-end-rgb))) rgb(var(--background-start-rgb));
+    background: linear-gradient(
+        to bottom,
+        transparent,
+        rgb(var(--background-end-rgb))
+      )
+      rgb(var(--background-start-rgb));
   }
 
- .hero-dark-bg {
-  background-color: #050816;
-  background-image: image-set(
-    url('/herobg.webp') type('image/webp'),
-    url('/herobg.png') type('image/png')
-  );
-  background-position: top;
-  background-repeat: no-repeat;
-  background-size: cover;
-}
+  .hero-dark-bg {
+    background-color: #050816;
+    background-image: url("/herobg.png");
+    background-position: top;
+    background-repeat: no-repeat;
+    background-size: cover;
+  }
 
   .hero-light-bg {
-   background-color: #CDD7E2;
-   background-image: image-set(
-      url('/herobg-light.webp') type('image/webp'),
-      url('/herobg-light.png') type('image/png')
-   );
-   background-position: top;
-   background-repeat: no-repeat;
-   background-size: cover;
+    background-color: #cdd7e2;
+    background-image: url("/herobg-light.png");
+    background-position: top;
+    background-repeat: no-repeat;
+    background-size: cover;
   }
 }
 
@@ -98,7 +101,7 @@ body {
   }
 }
 
-@media (max-width: 768px) {
+@media (max-width: 820px) {
   .hero-dark-bg,
   .hero-light-bg {
     background-size: contain;

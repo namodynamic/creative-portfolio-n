@@ -7,25 +7,27 @@ import { SliceComponentProps } from "@prismicio/react";
 import { AnimatePresence, motion } from "motion/react";
 import { CanvasRevealEffect } from "@/components/ui/CanvasRevealEffect";
 import Heading from "@/components/Heading";
+import { Workflow } from "lucide-react";
 
-/**
- * Props for `Approach`.
- */
 export type ApproachProps = SliceComponentProps<Content.ApproachSlice>;
 
-/**
- * Component for "Approach" Slices.
- */
 const Approach = ({ slice }: ApproachProps): JSX.Element => {
   return (
     <Bounded
       data-slice-type={slice.slice_type}
       data-slice-variation={slice.variation}
     >
-      <Heading as="h2" size="lg" className="max-md:text-5xl">
-        {slice.primary.heading}
+      <div className="mb-6 inline-flex w-fit items-center gap-2 text-nowrap rounded-lg bg-slate-950  px-4 py-2 text-sm text-white-50 dark:bg-slate-900 md:text-base">
+        <Workflow className="h-5 w-5 text-white" />
+        <p className="text-sm font-bold text-white">{slice.primary.heading}</p>
+      </div>
+      <Heading as="h2" size="sm">
+        {slice.primary.sub_heading}
       </Heading>
-      <div className="mt-20 flex w-full flex-col items-center justify-center gap-4 lg:flex-row">
+      <div className="prose prose-base prose-invert col-start-1 mt-5 text-black-100 lg:prose-xl  dark:text-slate-300">
+        <p>{slice.primary.intro}</p>
+      </div>
+      <div className="mt-10 flex w-full flex-col items-center justify-center gap-4 lg:flex-row">
         <Card
           title={slice.primary.phase_1_title ?? ""}
           icon={<AceternityIcon order="Phase 01" />}
@@ -140,7 +142,7 @@ const AceternityIcon = ({ order }: { order: string }) => {
          bg-[conic-gradient(from_90deg_at_50%_50%,#E2CBFF_0%,#393BB2_50%,#E2CBFF_100%)]"
         />
         <span
-          className="inline-flex relative h-full w-full cursor-pointer items-center 
+          className="relative inline-flex h-full w-full cursor-pointer items-center 
         justify-center rounded-full bg-black-100 px-5 py-2 text-sm font-bold text-white backdrop-blur-3xl"
         >
           {order}
