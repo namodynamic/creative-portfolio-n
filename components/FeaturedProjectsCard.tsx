@@ -3,17 +3,18 @@
 import { type FC, useRef } from "react";
 import { motion, useInView } from "motion/react";
 import type { Content } from "@prismicio/client";
-import { Button } from "@/components/ui/button";
-import { Tag } from "lucide-react";
-import { PrismicNextImage } from "@prismicio/next";
+import { ArrowRight, Tag, ExternalLink, Eye } from "lucide-react";
+import { PrismicNextImage, PrismicNextLink } from "@prismicio/next";
 import Link from "next/link";
+import { FaGithub } from "react-icons/fa6";
+import { it } from "node:test";
 
 type FeaturedProjectProps = {
   items: Content.ProjectDocument[];
   index: number;
 };
 
-const ProjectCard: FC<FeaturedProjectProps> = ({ items, index }) => {
+const FeaturedProjectsCard: FC<FeaturedProjectProps> = ({ items, index }) => {
   const isEven = index % 2 === 0;
   const cardRef = useRef(null);
   const isInView = useInView(cardRef, { once: true, amount: 0.3 });
@@ -86,23 +87,68 @@ const ProjectCard: FC<FeaturedProjectProps> = ({ items, index }) => {
   return (
     <motion.div
       ref={cardRef}
-      className={`grid grid-cols-1 items-center gap-8 rounded-xl lg:grid-cols-2 ${isEven ? "" : "lg:flex-row-reverse"}`}
+      className={`grid grid-cols-1 items-center gap-8 rounded-xl lg:grid-cols-2 ${isEven ? "lg:grid-flow-col-dense" : ""}`}
       variants={cardVariants}
       initial="hidden"
       animate={isInView ? "visible" : "hidden"}
     >
       <motion.div
-        className={`relative overflow-hidden rounded-xl border border-b-0 border-slate-800 shadow-lg ${isEven ? "lg:order-1" : "lg:order-2"}`}
+        className={`relative  ${isEven ? "lg:order-1" : "lg:order-2"}`}
         variants={imageVariants}
         whileHover={{ scale: 1.03 }}
         transition={{ duration: 0.3 }}
       >
-        <Link href={`/projects/${items[index].uid}`}>
-          <PrismicNextImage
-            field={items[index].data.hover_image}
-            className="max-h-[200px] w-full object-fill sm:max-h-[380px]"
+        <div className="group relative">
+          <div
+            className={`absolute inset-0 bg-gradient-to-br ${items[index].data.color} rotate-1 transform rounded-3xl backdrop-blur-sm transition-transform duration-700 group-hover:rotate-2`}
           />
-        </Link>
+
+          <div className="relative rounded-3xl border border-white/20 bg-white-50/80 p-4 shadow-2xl backdrop-blur-xl dark:border-gray-700/30 dark:bg-gray-900/80 md:p-6">
+            <div className="relative aspect-[5/3] overflow-hidden rounded-2xl">
+              <PrismicNextImage
+                field={items[index].data.hover_image}
+                className="h-full object-fill transition-transform duration-700 group-hover:scale-105"
+              />
+            </div>
+          </div>
+          <motion.div
+            className="absolute inset-0 flex items-center justify-center rounded-3xl bg-black/10 opacity-0 backdrop-blur-sm transition-all duration-300 group-hover:opacity-100 dark:bg-black/40"
+            initial={{ opacity: 0 }}
+            whileHover={{ opacity: 1 }}
+          >
+            <div className="flex gap-4">
+              <motion.div
+                whileHover={{ scale: 1.1 }}
+                whileTap={{ scale: 0.95 }}
+              >
+                <PrismicNextLink
+                  field={items[index].data.view_live}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center gap-2 rounded-full bg-white/90 px-4 py-2 text-sm font-medium text-gray-900 shadow-lg backdrop-blur-sm transition-colors hover:bg-white"
+                >
+                  <Eye className="h-4 w-4" />
+                  Live Demo
+                </PrismicNextLink>
+              </motion.div>
+
+              <motion.div
+                whileHover={{ scale: 1.1 }}
+                whileTap={{ scale: 0.95 }}
+              >
+                <PrismicNextLink
+                  field={items[index].data.source_code}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center gap-2 rounded-full bg-gray-900/90 px-4 py-2 text-sm font-medium text-white shadow-lg backdrop-blur-sm transition-colors hover:bg-gray-900"
+                >
+                  <FaGithub className="h-4 w-4" />
+                  Code
+                </PrismicNextLink>
+              </motion.div>
+            </div>
+          </motion.div>
+        </div>
       </motion.div>
 
       <motion.div
@@ -150,17 +196,30 @@ const ProjectCard: FC<FeaturedProjectProps> = ({ items, index }) => {
           )}
         </motion.div>
 
-        <motion.div variants={itemVariants} whileTap={{ scale: 0.95 }}>
-          <Button
-            className="border-black-100 border-[0.5px] md:mt-4 text-black-100 hover:text-neutral-700 dark:hover:text-gray-300 dark:border-white bg-white-50 dark:text-white dark:bg-black-100"
-            variant="outline"
+        <motion.div
+          variants={itemVariants}
+          whileTap={{ scale: 0.95 }}
+          className="flex gap-4"
+        >
+          <Link
+            href={`/projects/${items[index].uid}`}
+            className="inline-flex items-center gap-2 rounded-lg bg-gray-900 px-6 py-3 font-medium text-white transition-colors hover:bg-gray-800 dark:bg-white dark:text-gray-900 dark:hover:bg-gray-100"
           >
-            <Link href={`/projects/${items[index].uid}`}>View Project</Link>
-          </Button>
+            View Project
+            <ArrowRight className="h-4 w-4" />
+          </Link>
+
+          <PrismicNextLink
+            field={items[index].data.view_live}
+            className="inline-flex items-center gap-2 rounded-lg border border-white/20 bg-white/60 px-6 py-3 font-medium text-gray-900 backdrop-blur-sm transition-colors hover:bg-white/80 dark:border-gray-700/30 dark:bg-gray-800/60 dark:text-white dark:hover:bg-gray-800/80"
+          >
+            <ExternalLink className="h-4 w-4" />
+            Live Demo
+          </PrismicNextLink>
         </motion.div>
       </motion.div>
     </motion.div>
   );
 };
 
-export default ProjectCard;
+export default FeaturedProjectsCard;
