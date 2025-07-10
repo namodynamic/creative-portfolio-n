@@ -43,6 +43,18 @@ const config: Config = {
     "md:max-w-full",
     "max-w-60",
     "text-center",
+    {
+      pattern:
+        /from-(slate|gray|zinc|neutral|stone|red|orange|amber|yellow|lime|green|emerald|teal|cyan|sky|blue|indigo|violet|purple|fuchsia|pink|rose)-\d{3}(\/\d{2,3})?/,
+    },
+    {
+      pattern:
+        /via-(slate|gray|zinc|neutral|stone|red|orange|amber|yellow|lime|green|emerald|teal|cyan|sky|blue|indigo|violet|purple|fuchsia|pink|rose)-\d{3}(\/\d{2,3})?/,
+    },
+    {
+      pattern:
+        /to-(slate|gray|zinc|neutral|stone|red|orange|amber|yellow|lime|green|emerald|teal|cyan|sky|blue|indigo|violet|purple|fuchsia|pink|rose)-\d{3}(\/\d{2,3})?/,
+    },
   ],
   theme: {
     container: {

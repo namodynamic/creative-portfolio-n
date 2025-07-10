@@ -91,7 +91,7 @@ export default async function Page({ params }: { params: Promise<Params> }) {
               {page.data.accessibility === "Open Source Project" && (
                 <Badge
                   variant="outline"
-                  className="mb-4 border-purple-500 bg-purple-500 text-white dark:bg-purple-950/30 dark:text-purple-500"
+                  className="mb-4 bg-[#131a41] text-white-50 border-[#131a41]"
                 >
                   {page.data.accessibility}
                 </Badge>
@@ -115,10 +115,10 @@ export default async function Page({ params }: { params: Promise<Params> }) {
               {/* Role & Contribution */}
               <div className="mb-12">
                 <div className="mb-6 flex items-center gap-3">
-                  <div className="flex h-8 w-8 items-center justify-center rounded-full bg-white/50 text-black-100 dark:bg-violet-900/50 dark:text-purple-500">
+                  <div className="flex h-8 w-8 items-center justify-center rounded-full bg-black text-white dark:bg-slate-200 dark:text-black">
                     <GitGraph className="h-5 w-5" />
                   </div>
-                  <h2 className="text-xl font-bold text-black/80 dark:text-white">
+                  <h2 className="text-xl font-bold text-black/80 dark:text-slate-300">
                     My Role & Contribution
                   </h2>
                 </div>
@@ -130,10 +130,10 @@ export default async function Page({ params }: { params: Promise<Params> }) {
               {/* Challenges & Solutions */}
               <div className="mb-12">
                 <div className="mb-6 flex items-center gap-3">
-                  <div className="flex h-8 w-8 items-center justify-center rounded-full bg-white/50 text-black-100 dark:bg-violet-900/50 dark:text-purple-500">
+                  <div className="flex h-8 w-8 items-center justify-center rounded-full bg-black text-white dark:bg-slate-200 dark:text-black">
                     <Loader className="h-5 w-5" />
                   </div>
-                  <h2 className="text-xl font-bold text-black/80 dark:text-white">
+                  <h2 className="text-xl font-bold text-black/80 dark:text-slate-300">
                     Technical Challenges & Solutions
                   </h2>
                 </div>
@@ -153,10 +153,10 @@ export default async function Page({ params }: { params: Promise<Params> }) {
               {/* Features */}
               <div className="mb-12">
                 <div className="mb-6 flex items-center gap-3">
-                  <div className="flex h-8 w-8 items-center justify-center rounded-full bg-white/50 text-black-100 dark:bg-violet-900/50 dark:text-purple-500">
+                  <div className="flex h-8 w-8 items-center justify-center rounded-full bg-black text-white dark:bg-slate-200 dark:text-black">
                     <GoStack className="h-5 w-5" />
                   </div>
-                  <h2 className="text-xl font-bold text-black/80 dark:text-white">
+                  <h2 className="text-xl font-bold text-black/80 dark:text-slate-300">
                     Key Features
                   </h2>
                 </div>
@@ -175,10 +175,10 @@ export default async function Page({ params }: { params: Promise<Params> }) {
               {/* Technical Details */}
               <div className="mb-12">
                 <div className="mb-6 flex items-center gap-3">
-                  <div className="flex h-8 w-8 items-center justify-center rounded-full bg-white/50 text-black-100 dark:bg-violet-900/50 dark:text-purple-500">
+                  <div className="flex h-8 w-8 items-center justify-center rounded-full bg-black text-white dark:bg-slate-200 dark:text-black">
                     <CodeXml className="h-5 w-5" />
                   </div>
-                  <h2 className="text-xl font-bold text-black/80 dark:text-white">
+                  <h2 className="text-xl font-bold text-black/80 dark:text-slate-300">
                     Technical Details
                   </h2>
                 </div>
@@ -359,7 +359,7 @@ export default async function Page({ params }: { params: Promise<Params> }) {
                   {page.tags.map((tag) => (
                     <div
                       key={tag}
-                      className="rounded-full inline-flex gap-1 items-center bg-purple-500 px-2 py-1 text-xs font-medium text-white transition-colors duration-300 hover:text-violet-200"
+                      className="rounded-full inline-flex gap-1 items-center bg-[#131a41] px-2 py-1 text-xs font-medium text-white transition-colors duration-300 hover:text-violet-200"
                     >
                       <Tag className="h-3 w-3" />
                       {tag}

@@ -7,7 +7,6 @@ import { ArrowRight, Tag, ExternalLink, Eye } from "lucide-react";
 import { PrismicNextImage, PrismicNextLink } from "@prismicio/next";
 import Link from "next/link";
 import { FaGithub } from "react-icons/fa6";
-import { it } from "node:test";
 
 type FeaturedProjectProps = {
   items: Content.ProjectDocument[];
@@ -43,8 +42,9 @@ const FeaturedProjectsCard: FC<FeaturedProjectProps> = ({ items, index }) => {
       opacity: 1,
       x: 0,
       transition: {
-        duration: 0.6,
+        duration: 0.8,
         ease: "easeOut",
+        staggerChildren: 0.1,
       },
     },
   };
@@ -87,7 +87,7 @@ const FeaturedProjectsCard: FC<FeaturedProjectProps> = ({ items, index }) => {
   return (
     <motion.div
       ref={cardRef}
-      className={`grid grid-cols-1 items-center gap-8 rounded-xl lg:grid-cols-2 ${isEven ? "lg:grid-flow-col-dense" : ""}`}
+      className={`grid grid-cols-1 items-center gap-8 rounded-xl lg:grid-cols-2 ${isEven ? "" : ""}`}
       variants={cardVariants}
       initial="hidden"
       animate={isInView ? "visible" : "hidden"}

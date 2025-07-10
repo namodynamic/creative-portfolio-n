@@ -140,7 +140,7 @@ const Contact = ({ slice }: ContactProps): JSX.Element => {
       >
         <div className="mx-auto my-8 max-w-7xl sm:py-16">
           <div className="mb-16 text-center">
-            <p className="heading-anim mb-2 text-sm uppercase tracking-wider dark:text-purple-500">
+            <p className="heading-anim mb-2 text-sm uppercase tracking-wider dark:text-slate-300">
               {slice.primary.heading}
             </p>
             <h1 className="heading-anim mb-4 text-4xl font-bold dark:text-white text-black-50 md:text-5xl">

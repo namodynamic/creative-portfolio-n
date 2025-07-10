@@ -33,7 +33,7 @@ const Faq: FC<FaqProps> = ({ slice }) => {
     >
       <div className="mx-auto max-w-5xl py-8 md:py-16">
         <div className="mb-12 text-center">
-          <p className="mb-2 text-sm uppercase tracking-wider dark:text-purple-500">
+          <p className="mb-2 text-sm uppercase tracking-wider dark:text-slate-300">
             {slice.primary.heading}
           </p>
           <h1 className="mb-4 text-4xl font-bold text-black-50 dark:text-white md:text-5xl">

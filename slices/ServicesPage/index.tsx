@@ -8,10 +8,10 @@ import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/
 import { PrismicNextLink } from "@prismicio/next";
 
 const serviceIcons: { [key: string]: React.ReactNode } = {
-  code: <Code className="h-6 w-6 text-white dark:text-purple-500" />,
-  server: <Server className="h-6 w-6 text-white dark:text-purple-500" />,
-  database: <Database className="h-6 w-6 text-white dark:text-purple-500" />,
-  rocket: <Rocket className="h-6 w-6 text-white dark:text-purple-500" />,
+  code: <Code className="h-6 w-6 text-white dark:text-slate-200" />,
+  server: <Server className="h-6 w-6 text-white dark:text-slate-200" />,
+  database: <Database className="h-6 w-6 text-white dark:text-slate-200" />,
+  rocket: <Rocket className="h-6 w-6 text-white dark:text-slate-200" />,
 };
 
 const processIcons: { [key: string]: React.ReactNode } = {
@@ -22,9 +22,9 @@ const processIcons: { [key: string]: React.ReactNode } = {
 };
 
 const packageIcons: { [key: string]: React.ReactNode } = {
-  file: <FileText className="h-8 w-8 text-white" />,
-  globe: <Globe className="h-8 w-8 text-white" />,
-  rocket: <Rocket className="h-8 w-8 text-white" />,
+  file: <FileText className="h-8 w-8 text-white dark:text-black" />,
+  globe: <Globe className="h-8 w-8 text-white dark:text-black" />,
+  rocket: <Rocket className="h-8 w-8 text-white dark:text-black" />,
 };
 
 /**
@@ -44,7 +44,7 @@ const Services: FC<ServicesProps> = ({ slice }) => {
     >
       <div className="px-4 py-8 sm:px-6 sm:py-16 lg:px-8">
         <div className="mx-auto max-w-6xl text-center">
-          <p className="mb-2 text-sm uppercase tracking-wider text-black-50 dark:text-purple-500">
+          <p className="mb-2 text-sm uppercase tracking-wider text-black-50 dark:text-slate-300">
             {slice.primary.heading}
           </p>
           <h1 className="mb-4 text-4xl font-bold text-black-50 dark:text-white md:text-5xl">
@@ -108,7 +108,7 @@ const Services: FC<ServicesProps> = ({ slice }) => {
       <div className="px-4 py-16 sm:px-6 lg:px-8">
         <div className="mx-auto max-w-6xl">
           <div className="mb-12 text-center">
-            <p className="mb-2 text-sm uppercase tracking-wider dark:text-purple-500">
+            <p className="mb-2 text-sm uppercase tracking-wider dark:text-slate-300">
               {slice.primary.package_heading}
             </p>
             <h2 className="mb-4 text-3xl font-bold text-black-50 dark:text-white">
@@ -128,7 +128,7 @@ const Services: FC<ServicesProps> = ({ slice }) => {
                 <div className="absolute -right-20 -top-20 h-40 w-40 rounded-full bg-purple-500/10 transition-transform duration-500 group-hover:scale-150" />
                 <div className="relative">
                   <div className="mb-6 flex justify-center">
-                    <div className="transform rounded-full bg-black/50 p-3 transition-transform group-hover:scale-110 dark:bg-purple-500/20">
+                    <div className="transform rounded-full bg-black/80 p-3 transition-transform group-hover:scale-110 dark:bg-slate-200">
                       {packageIcons[item.icons as string]}
                     </div>
                   </div>
@@ -154,7 +154,7 @@ const Services: FC<ServicesProps> = ({ slice }) => {
                     />
                   </div>
                   <div className="mb-6 text-center">
-                    <span className="inline-block rounded-full bg-black/50 px-4 py-1 text-sm font-medium text-white/80 dark:bg-purple-500/20 dark:text-purple-400">
+                    <span className="inline-block rounded-full bg-black/50 px-4 py-1 text-sm font-medium text-white/80 dark:bg-slate-500/20 dark:text-slate-200">
                       {item.tag}
                     </span>
                   </div>
@@ -174,7 +174,7 @@ const Services: FC<ServicesProps> = ({ slice }) => {
           </div>
 
           <div className="mt-8 items-center justify-center space-x-1 text-center sm:flex">
-            <CheckCircle className="mr-1 inline-block h-4 w-4 text-purple-500" />
+            <CheckCircle className="mr-1 inline-block h-4 w-4 text-slate-500" />
             <p className="text-xs leading-relaxed text-black/50 dark:text-gray-400">
               Flexible payment plans available for all packages. Ask about our
               50% upfront option.
@@ -214,8 +214,8 @@ const Services: FC<ServicesProps> = ({ slice }) => {
       <div className=" mt-16 px-4 py-16 sm:px-6 lg:px-8">
         <div className="mx-auto max-w-4xl">
           <div className="mb-12 text-center">
-            <p className="mb-2 text-sm uppercase tracking-wider text-black-50 dark:text-purple-500">
-              FAQ
+            <p className="mb-2 text-sm uppercase tracking-wider text-black-50 dark:text-slate-300">
+              FAQs
             </p>
             <h2 className="mb-4 text-3xl font-bold text-black-50 dark:text-white">
               Frequently Asked Questions
