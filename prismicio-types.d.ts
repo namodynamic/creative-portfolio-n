@@ -2545,6 +2545,16 @@ export interface FeaturedProjectsSliceDefaultPrimary {
   heading: prismic.KeyTextField;
 
   /**
+   * Sub Heading field in *FeaturedProjects → Default → Primary*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: featured_projects.default.primary.sub_heading
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  sub_heading: prismic.KeyTextField;
+
+  /**
    * Intro Text field in *FeaturedProjects → Default → Primary*
    *
    * - **Field Type**: Text

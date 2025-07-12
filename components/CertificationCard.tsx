@@ -20,7 +20,8 @@ import {
   Computer,
   Server,
 } from "lucide-react";
-import React from "react";
+import { useInView, motion } from "motion/react";
+import { useRef } from "react";
 
 interface CertificationCardProps {
   item: any;
@@ -43,6 +44,8 @@ const iconMap: Record<string, React.ReactNode> = {
 };
 
 const CertificationCard = ({ item, index, icon }: CertificationCardProps) => {
+  const ref = useRef(null);
+  const isInView = useInView(ref, { once: true, amount: 0.3 });
   const backgroundUrl = isFilled.image(item.background_image)
     ? asImageSrc(item.background_image, { w: 800, q: 80 })
     : undefined;
@@ -64,7 +67,21 @@ const CertificationCard = ({ item, index, icon }: CertificationCardProps) => {
   };
 
   return (
-    <div
+    <motion.div
+      ref={ref}
+      initial={{ opacity: 0, y: 40, scale: 0.95 }}
+      animate={
+        isInView
+          ? { opacity: 1, y: 0, scale: 1 }
+          : { opacity: 0, y: 0, scale: 0.95 }
+      }
+      transition={{
+        duration: 0.6,
+        delay: index * 0.25,
+        ease: "easeOut",
+        stiffness: 100,
+        damping: 10,
+      }}
       key={index}
       className={cn(
         "card group relative aspect-[16/11] w-full overflow-hidden rounded-2xl border border-neutral-800 shadow-md shadow-white/20 transition-all duration-500",
@@ -128,7 +145,7 @@ const CertificationCard = ({ item, index, icon }: CertificationCardProps) => {
           </Button>
         </div>
       </div>
-    </div>
+    </motion.div>
   );
 };
 

@@ -12,58 +12,95 @@ import { Workflow } from "lucide-react";
 export type ApproachProps = SliceComponentProps<Content.ApproachSlice>;
 
 const Approach = ({ slice }: ApproachProps): JSX.Element => {
+  const phases = [
+    {
+      title: slice.primary.phase_1_title,
+      desc: slice.primary.phase_1_desc,
+      color: "bg-emerald-900",
+      order: "Phase 01",
+      canvasProps: {},
+    },
+    {
+      title: slice.primary.phase_2_title,
+      desc: slice.primary.phase_2_desc,
+      color: "bg-pink-900",
+      order: "Phase 02",
+      canvasProps: {
+        colors: [
+          [255, 166, 158],
+          [221, 255, 247],
+        ],
+        dotSize: 2,
+      },
+    },
+    {
+      title: slice.primary.phase_3_title,
+      desc: slice.primary.phase_3_desc,
+      color: "bg-sky-600",
+      order: "Phase 03",
+      canvasProps: {
+        colors: [[125, 211, 252]],
+      },
+    },
+  ];
+
   return (
     <Bounded
       data-slice-type={slice.slice_type}
       data-slice-variation={slice.variation}
     >
-      <div className="mb-6 inline-flex w-fit items-center gap-2 text-nowrap rounded-lg bg-slate-950  px-4 py-2 text-sm text-white-50 dark:bg-slate-900 md:text-base">
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.8 }}
+        viewport={{ once: true }}
+        className="mb-6 inline-flex w-fit items-center gap-2 text-nowrap rounded-lg bg-slate-950  px-4 py-2 text-sm text-white-50 dark:bg-slate-900 md:text-base"
+      >
         <Workflow className="h-5 w-5 text-white" />
         <p className="text-sm font-bold text-white">{slice.primary.heading}</p>
-      </div>
-      <Heading as="h2" size="sm">
-        {slice.primary.sub_heading}
-      </Heading>
-      <div className="prose prose-base prose-invert col-start-1 mt-5 text-black-100 lg:prose-xl  dark:text-slate-300">
+      </motion.div>
+      <motion.div
+        initial={{ opacity: 0, y: 10 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.7, delay: 0.2 }}
+        viewport={{ once: true }}
+      >
+        <Heading as="h2" size="sm">
+          {slice.primary.sub_heading}
+        </Heading>
+      </motion.div>
+      <motion.div
+        initial={{ opacity: 0, y: 10 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.6, delay: 0.3 }}
+        viewport={{ once: true }}
+        className="prose prose-base prose-invert col-start-1 mt-5 text-black-100 lg:prose-xl  dark:text-slate-300"
+      >
         <p>{slice.primary.intro}</p>
-      </div>
+      </motion.div>
+
       <div className="mt-10 flex w-full flex-col items-center justify-center gap-4 lg:flex-row">
-        <Card
-          title={slice.primary.phase_1_title ?? ""}
-          icon={<AceternityIcon order="Phase 01" />}
-          des={slice.primary.phase_1_desc ?? ""}
-        >
-          <CanvasRevealEffect
-            animationSpeed={5.1}
-            containerClassName="bg-emerald-900 rounded-xl overflow-hidden"
-          />
-        </Card>
-        <Card
-          title={slice.primary.phase_2_title ?? ""}
-          icon={<AceternityIcon order="Phase 02" />}
-          des={slice.primary.phase_2_desc ?? ""}
-        >
-          <CanvasRevealEffect
-            animationSpeed={3}
-            containerClassName="bg-pink-900 rounded-xl overflow-hidden"
-            colors={[
-              [255, 166, 158],
-              [221, 255, 247],
-            ]}
-            dotSize={2}
-          />
-        </Card>
-        <Card
-          title={slice.primary.phase_3_title ?? ""}
-          icon={<AceternityIcon order="Phase 03" />}
-          des={slice.primary.phase_3_desc ?? ""}
-        >
-          <CanvasRevealEffect
-            animationSpeed={3}
-            containerClassName="bg-sky-600 rounded-xl overflow-hidden"
-            colors={[[125, 211, 252]]}
-          />
-        </Card>
+        {phases.map((phase, index) => (
+          <motion.div
+            key={index}
+            initial={{ opacity: 0, y: 30, scale: 0.95 }}
+            whileInView={{ opacity: 1, y: 0, scale: 1 }}
+            transition={{ duration: 0.7, delay: 0.3 + index * 0.2 }}
+            viewport={{ once: true }}
+          >
+            <Card
+              title={phase.title ?? ""}
+              icon={<AceternityIcon order={phase.order} />}
+              des={phase.desc ?? ""}
+            >
+              <CanvasRevealEffect
+                animationSpeed={index === 0 ? 5.1 : 3}
+                containerClassName={`${phase.color} rounded-xl overflow-hidden`}
+                {...phase.canvasProps}
+              />
+            </Card>
+          </motion.div>
+        ))}
       </div>
     </Bounded>
   );

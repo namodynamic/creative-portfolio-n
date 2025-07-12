@@ -20,6 +20,11 @@
 					"__TYPE__": "DocumentLink",
 					"id": "mock_document_id"
 				}
+			},
+			"sub_heading": {
+				"__TYPE__": "FieldContent",
+				"value": "land",
+				"type": "Text"
 			}
 		},
 		"items": [

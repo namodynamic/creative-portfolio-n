@@ -5,27 +5,42 @@ import Image from "next/image";
 import { asText, Content } from "@prismicio/client";
 import { FaStar } from "react-icons/fa6";
 import { Quote } from "lucide-react";
+import { useInView, motion } from "motion/react";
+import { useRef } from "react";
 
 const TestimonialCard = ({ slice }: { slice: Content.TestimonialSlice }) => {
- 
+  const ref = useRef(null);
+  const isInView = useInView(ref, { once: true, amount: 0.3 });
 
   return (
-    <section
-      className="mt-20 flex items-center justify-center md:mt-40"
-    >
+    <section className="mt-20 flex items-center justify-center md:mt-40">
       <div className="h-full w-full">
         <TitleHeader
           title="Testimonials"
           subtitle="What People Say"
-          icon={<Quote className="w-5 h-5 text-white-50" />}
+          icon={<Quote className="h-5 w-5 text-white-50" />}
           intro="Feedback from colleagues and clients I've worked with"
         />
 
         <div className="mt-16 columns-1 md:columns-2 lg:columns-3">
           {slice.items.map((testimonial, index) => (
-            <div
+            <motion.div
+              ref={ref}
+              initial={{ opacity: 0, y: 40, scale: 0.95 }}
+              animate={
+                isInView
+                  ? { opacity: 1, y: 0, scale: 1 }
+                  : { opacity: 0, y: 0, scale: 0.95 }
+              }
+              transition={{
+                duration: 0.6,
+                delay: index * 0.3,
+                ease: "easeOut",
+                stiffness: 100,
+                damping: 10,
+              }}
               key={index}
-              className="group mb-5 break-inside-avoid-column rounded-xl border border-black-50 bg-black-100 p-6"
+              className="group mb-5 break-inside-avoid-column rounded-xl border border-black-50 bg-black-50/90 p-6 dark:bg-black-100"
             >
               <div className="mb-5 flex items-center gap-1">
                 {Array.from({ length: 5 }, (_, i) => (
@@ -33,7 +48,7 @@ const TestimonialCard = ({ slice }: { slice: Content.TestimonialSlice }) => {
                 ))}
               </div>
               <div className="mb-5">
-                <p className="text-base leading-relaxed text-gray-300">
+                <p className="text-base leading-relaxed text-gray-300 transition-colors duration-300 hover:text-white">
                   {asText(testimonial.feedback)}
                 </p>
               </div>
@@ -52,7 +67,7 @@ const TestimonialCard = ({ slice }: { slice: Content.TestimonialSlice }) => {
                   <p className="text-white-50">{testimonial.occupation}</p>
                 </div>
               </div>
-            </div>
+            </motion.div>
           ))}
         </div>
       </div>

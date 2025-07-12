@@ -8,6 +8,7 @@ import { PrismicRichText, SliceComponentProps } from "@prismicio/react";
 import Bounded from "@/components/Bounded";
 import { PrismicNextImage } from "@prismicio/next";
 import { FaStar } from "react-icons/fa6";
+import { motion } from "motion/react";
 
 /**
  * Props for `Testimonial`.
@@ -147,12 +148,18 @@ const Testimonial = ({ slice }: TestimonialProps): JSX.Element => {
         data-slice-variation={slice.variation}
         className="max-md:-my-20"
       >
-        <h1 className="heading">
+        <motion.h1
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, ease: "easeOut" }}
+          viewport={{ once: true }}
+          className="heading"
+        >
           {slice.primary.title?.split(" ").slice(0, -2).join(" ")}{" "}
           <span className="text-purple-500">
             {slice.primary.title?.split(" ").slice(-2).join(" ")}
           </span>
-        </h1>
+        </motion.h1>
       </Bounded>
 
       <div className="-mt-20 mb-5 flex flex-col items-center max-lg:mt-10">
@@ -160,7 +167,7 @@ const Testimonial = ({ slice }: TestimonialProps): JSX.Element => {
           <InfiniteMovingCards />
         </div>
 
-        <div className="flex flex-wrap items-center justify-center gap-4 mt-16 md:gap-16">
+        <div className="mt-16 flex flex-wrap items-center justify-center gap-4 md:gap-16">
           {slice.primary.companies.map((item, index) => (
             <div key={index} className="flex max-w-32 px-2 md:max-w-60">
               <div className="flex flex-row items-center justify-center gap-2">
