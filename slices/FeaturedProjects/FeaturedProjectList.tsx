@@ -20,34 +20,49 @@ export default function FeaturedProjectList({
     return dateB - dateA;
   });
 
+  const container = {
+    hidden: { opacity: 0 },
+    show: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.1,
+        delayChildren: 0.2,
+      },
+    },
+  };
+
   return (
     <section>
-      <div className="relative z-10">
-        <div className="space-y-24">
-          {sortedItems.map((item, index) => (
-            <FeaturedProjectsCard key={item.id} items={items} index={index} />
-          ))}
-        </div>
+      <motion.div
+        variants={container}
+        initial="hidden"
+        whileInView="show"
+        viewport={{ once: true, margin: "-100px" }}
+        className="space-y-24"
+      >
+        {sortedItems.map((item, index) => (
+          <FeaturedProjectsCard key={item.id} item={items} index={index} />
+        ))}
+      </motion.div>
 
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.8 }}
-          className="mt-32 text-center"
-        >
-          <div className="relative inline-block">
-            <div className="absolute inset-0 animate-pulse rounded-2xl bg-gradient-to-r from-blue-500 to-purple-500 opacity-30 blur-xl" />
-            <Link
-              href="/projects"
-              className="group relative inline-flex items-center gap-3 rounded-2xl border border-white/20 bg-white/80 px-8 py-4 text-lg font-semibold text-gray-900 shadow-2xl backdrop-blur-xl transition-all duration-300 hover:bg-white/90 dark:border-gray-700/30 dark:bg-gray-900/80 dark:text-white dark:hover:bg-gray-900/90"
-            >
-              <span>Explore All Projects</span>
-              <ArrowRight className="h-5 w-5 transition-transform group-hover:translate-x-1" />
-            </Link>
-          </div>
-        </motion.div>
-      </div>
+      <motion.div
+        initial={{ opacity: 0, y: 30 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.8 }}
+        className="mt-32 text-center"
+      >
+        <div className="relative inline-block">
+          <div className="absolute inset-0 animate-pulse rounded-2xl bg-gradient-to-r from-blue-500 to-purple-500 opacity-30 blur-xl" />
+          <Link
+            href="/projects"
+            className="group relative inline-flex items-center gap-3 rounded-2xl border border-white/20 bg-white/80 px-8 py-4 text-lg font-semibold text-gray-900 shadow-2xl backdrop-blur-xl transition-all duration-300 hover:bg-white/90 dark:border-gray-700/30 dark:bg-gray-900/80 dark:text-white dark:hover:bg-gray-900/90"
+          >
+            <span>Explore All Projects</span>
+            <ArrowRight className="h-5 w-5 transition-transform group-hover:translate-x-1" />
+          </Link>
+        </div>
+      </motion.div>
     </section>
   );
 }
