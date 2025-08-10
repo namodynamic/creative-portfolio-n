@@ -12,7 +12,7 @@ export default async function Footer() {
   const settings = await client.getSingle("settings");
 
   return (
-    <footer className="mt-12 w-full border-t-[0.5px] border-blue-200 dark:border-blue-200/80">
+    <footer className="w-full border-t-[0.5px] border-blue-200 dark:border-blue-200/80">
       <Bounded as="section">
         <div className="mx-auto max-w-7xl px-6">
           <div className="relative grid grid-cols-1 gap-12 md:grid-cols-3">
