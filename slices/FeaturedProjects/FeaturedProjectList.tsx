@@ -53,7 +53,6 @@ export default function FeaturedProjectList({
         className="mt-32 text-center"
       >
         <div className="relative inline-block">
-          <div className="absolute inset-0 animate-pulse rounded-2xl bg-gradient-to-r from-blue-500 to-purple-500 opacity-30 blur-xl" />
           <Link
             href="/projects"
             className="group relative inline-flex items-center gap-3 rounded-2xl border border-white/20 bg-white/80 px-8 py-4 text-lg font-semibold text-gray-900 shadow-2xl backdrop-blur-xl transition-all duration-300 hover:bg-white/90 dark:border-gray-700/30 dark:bg-gray-900/80 dark:text-white dark:hover:bg-gray-900/90"
