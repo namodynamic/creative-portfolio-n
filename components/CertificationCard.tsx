@@ -76,15 +76,14 @@ const CertificationCard = ({ item, index, icon }: CertificationCardProps) => {
           : { opacity: 0, y: 0, scale: 0.95 }
       }
       transition={{
-        duration: 0.6,
-        delay: index * 0.25,
+        type: "tween",
         ease: "easeOut",
-        stiffness: 100,
-        damping: 10,
+        duration: 0.6,
+        delay: index * 0.15,
       }}
       key={index}
       className={cn(
-        "card group relative aspect-[16/11] w-full overflow-hidden rounded-2xl border border-neutral-800 shadow-md shadow-white/20 transition-all duration-500",
+        "will-change-transform card group relative aspect-[16/11] w-full overflow-hidden rounded-2xl border border-neutral-800 shadow-md shadow-white/20 transition-all duration-500",
         "hover:after:absolute hover:after:inset-0 hover:after:rounded-2xl hover:after:transition-all hover:after:duration-500 hover:after:content-[''] md:hover:after:bg-black-100/60",
       )}
       style={{

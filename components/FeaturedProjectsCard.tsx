@@ -9,7 +9,7 @@ import Link from "next/link";
 import { FaGithub } from "react-icons/fa6";
 
 type FeaturedProjectProps = {
-  item: Content.ProjectDocument[];
+  item: Content.ProjectDocument;
   index: number;
 };
 
@@ -19,7 +19,7 @@ const FeaturedProjectsCard: FC<FeaturedProjectProps> = ({ item, index }) => {
   const isInView = useInView(cardRef, { once: true, amount: 0.3 });
 
   const firstParagraph =
-    item[index].data.slices
+    item.data.slices
       .find((slice) => {
         return (
           slice.slice_type === "text_block" &&
@@ -104,13 +104,13 @@ const FeaturedProjectsCard: FC<FeaturedProjectProps> = ({ item, index }) => {
       >
         <div className="group relative">
           <div
-            className={`absolute inset-0 bg-gradient-to-br ${item[index].data.color} rotate-1 transform rounded-3xl backdrop-blur-sm transition-transform duration-300 group-hover:rotate-2`}
+            className={`absolute inset-0 bg-gradient-to-br ${item.data.color} rotate-1 transform rounded-3xl backdrop-blur-sm transition-transform duration-300 group-hover:rotate-2`}
           />
 
           <div className="relative rounded-3xl border border-white/20 bg-white-50/80 p-4 shadow-2xl backdrop-blur-xl dark:border-gray-700/30 dark:bg-gray-900/80 md:p-6">
             <div className="relative aspect-[5/3] overflow-hidden rounded-2xl">
               <PrismicNextImage
-                field={item[index].data.hover_image}
+                field={item.data.hover_image}
                 className="h-full object-fill transition-transform duration-700 group-hover:scale-105"
               />
             </div>
@@ -127,7 +127,7 @@ const FeaturedProjectsCard: FC<FeaturedProjectProps> = ({ item, index }) => {
                 whileTap={{ scale: 0.95 }}
               >
                 <PrismicNextLink
-                  field={item[index].data.view_live}
+                  field={item.data.view_live}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="flex items-center gap-2 rounded-full bg-white/90 px-4 py-2 text-sm font-medium text-gray-900 shadow-lg backdrop-blur-sm transition-colors hover:bg-white"
@@ -142,7 +142,7 @@ const FeaturedProjectsCard: FC<FeaturedProjectProps> = ({ item, index }) => {
                 whileTap={{ scale: 0.95 }}
               >
                 <PrismicNextLink
-                  field={item[index].data.source_code}
+                  field={item.data.source_code}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="flex items-center gap-2 rounded-full bg-gray-900/90 px-4 py-2 text-sm font-medium text-white shadow-lg backdrop-blur-sm transition-colors hover:bg-gray-900"
@@ -164,7 +164,7 @@ const FeaturedProjectsCard: FC<FeaturedProjectProps> = ({ item, index }) => {
           className="text-2xl font-bold tracking-tight dark:text-white md:text-3xl"
           variants={itemVariants}
         >
-          {item[index].data.title}
+          {item.data.title}
         </motion.h2>
 
         <motion.div className="dark:text-slate-300" variants={itemVariants}>
@@ -175,9 +175,9 @@ const FeaturedProjectsCard: FC<FeaturedProjectProps> = ({ item, index }) => {
           className="flex flex-wrap gap-2 pt-2 capitalize"
           variants={itemVariants}
         >
-          {item[index].tags && item[index].tags.length > 0 && (
+          {item.tags && item.tags.length > 0 && (
             <div className="mb-4 flex flex-wrap gap-2">
-              {item[index].tags
+              {item.tags
                 .slice(0, 3)
                 .map((tag: string, tagIndex: number) => (
                   <motion.span
@@ -192,9 +192,9 @@ const FeaturedProjectsCard: FC<FeaturedProjectProps> = ({ item, index }) => {
                     {tag}
                   </motion.span>
                 ))}
-              {item[index].tags.length > 3 && (
+              {item.tags.length > 3 && (
                 <span className="inline-flex items-center rounded-full bg-gray-100 px-2 py-1 text-xs font-medium text-gray-500 dark:bg-gray-700 dark:text-gray-400">
-                  +{item[index].tags.length - 3} more
+                  +{item.tags.length - 3} more
                 </span>
               )}
             </div>
@@ -204,7 +204,7 @@ const FeaturedProjectsCard: FC<FeaturedProjectProps> = ({ item, index }) => {
         <div className="flex gap-4">
           <motion.div variants={itemVariants} whileTap={{ scale: 0.95 }}>
             <Link
-              href={`/projects/${item[index].uid}`}
+              href={`/projects/${item.uid}`}
               className="inline-flex items-center gap-2 rounded-lg bg-gray-900 px-6 py-3 font-medium text-white transition-colors hover:bg-gray-800 dark:bg-white dark:text-gray-900 dark:hover:bg-gray-100"
             >
               View Project
@@ -213,7 +213,7 @@ const FeaturedProjectsCard: FC<FeaturedProjectProps> = ({ item, index }) => {
           </motion.div>
           <motion.div variants={itemVariants} whileTap={{ scale: 0.95 }}>
             <PrismicNextLink
-              field={item[index].data.view_live}
+              field={item.data.view_live}
               className="inline-flex items-center gap-2 rounded-lg border border-white/20 bg-white/60 px-6 py-3 font-medium text-gray-900 backdrop-blur-sm transition-colors hover:bg-white/80 dark:border-gray-700/30 dark:bg-gray-800/60 dark:text-white dark:hover:bg-gray-800/80"
             >
               <ExternalLink className="h-4 w-4" />

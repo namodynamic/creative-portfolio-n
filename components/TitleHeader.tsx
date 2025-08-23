@@ -17,6 +17,7 @@ const TitleHeader = ({ title, subtitle, icon, intro }: TitleHeaderProps) => {
   viewport={{ once: true, amount: 0.6 }}
   transition={{
     duration: 0.6,
+    type: "tween",
     ease: "easeOut",
   }}
       className="mb-16 text-center"

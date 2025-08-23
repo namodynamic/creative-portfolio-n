@@ -7,14 +7,14 @@ import { ArrowRight } from "lucide-react";
 import Link from "next/link";
 
 type FeaturedProjectListProps = {
-  items: Content.ProjectDocument[];
+  item: Content.ProjectDocument[];
   contentType: Content.ContentIndexSlice["primary"]["content_type"];
 };
 
 export default function FeaturedProjectList({
-  items,
+  item,
 }: FeaturedProjectListProps) {
-  const sortedItems = items.sort((a, b) => {
+  const sortedItems = [...item].sort((a, b) => {
     const dateA = new Date(a.data.date || "").getTime();
     const dateB = new Date(b.data.date || "").getTime();
     return dateB - dateA;
@@ -25,7 +25,7 @@ export default function FeaturedProjectList({
     show: {
       opacity: 1,
       transition: {
-        staggerChildren: 0.1,
+        staggerChildren: 0.15,
         delayChildren: 0.2,
       },
     },
@@ -41,7 +41,7 @@ export default function FeaturedProjectList({
         className="space-y-24"
       >
         {sortedItems.map((item, index) => (
-          <FeaturedProjectsCard key={item.id} item={items} index={index} />
+          <FeaturedProjectsCard key={item.id} item={item} index={index} />
         ))}
       </motion.div>
 

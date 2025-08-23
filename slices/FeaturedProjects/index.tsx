@@ -39,7 +39,7 @@ const FeaturedProjects: FC<FeaturedProjectsProps> = async ({ slice }) => {
       </div>
 
       <div className="mx-auto mt-8 max-w-7xl">
-        <FeaturedProjectList items={featuredProjects} contentType="Project" />
+        <FeaturedProjectList item={featuredProjects} contentType="Project" />
       </div>
     </Bounded>
   );

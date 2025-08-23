@@ -33,14 +33,13 @@ const TestimonialCard = ({ slice }: { slice: Content.TestimonialSlice }) => {
                   : { opacity: 0, y: 0, scale: 0.95 }
               }
               transition={{
-                duration: 0.6,
-                delay: index * 0.3,
+                type: "tween",
                 ease: "easeOut",
-                stiffness: 100,
-                damping: 10,
+                duration: 0.6,
+                delay: index * 0.15,
               }}
               key={index}
-              className="group mb-5 break-inside-avoid-column rounded-xl border border-black-50 bg-black-50/90 p-6 dark:bg-black-100"
+              className="will-change-transform group mb-5 break-inside-avoid-column rounded-xl border border-black-50 bg-black-50/90 p-6 dark:bg-black-100"
             >
               <div className="mb-5 flex items-center gap-1">
                 {Array.from({ length: 5 }, (_, i) => (

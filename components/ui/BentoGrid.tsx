@@ -89,23 +89,16 @@ export const BentoGridItem = ({
   return (
     <motion.div
       ref={ref}
-      initial={prefersReducedMotion ? { opacity: 1, y: 0, scale: 1, rotate: 0 } : { opacity: 0, y: 24, scale: 0.96, rotate: -1 }}
-      animate={
-        prefersReducedMotion
-          ? { opacity: 1, y: 0, scale: 1, rotate: 0 }
-          : isInView
-            ? { opacity: 1, y: 0, scale: 1, rotate: 0 }
-            : { opacity: 0, y: 24, scale: 0.96, rotate: -1 }
-      }
+      initial={{ opacity: 0, y: 24, scale: 0.96, rotate: -1 }}
+      animate={isInView ? { opacity: 1, y: 0, scale: 1, rotate: 0 } : {}}
       transition={{
-        type: "spring",
-        stiffness: 180,
-        damping: 20,
-        mass: 0.8,
-        delay: id * 0.06,
+        type: "tween",
+        ease: "easeOut",
+        duration: 0.5,
+        delay: id * 0.12,
       }}
       className={cn(
-        "group/bento relative row-span-1 flex flex-col justify-between space-y-4 overflow-hidden rounded-xl transition duration-200 md:rounded-3xl",
+        "will-change-transform group/bento relative row-span-1 flex flex-col justify-between space-y-4 overflow-hidden rounded-xl transition duration-200 md:rounded-3xl",
 
         `${id === 2 && "dark:bg-dot-black-500"}`,
         `${id === 3 && "dark:bg-dot-black-500"}`,
@@ -154,9 +147,24 @@ export const BentoGridItem = ({
         >
           <motion.div
             className="z-10 font-sans text-sm font-extralight dark:text-[#C1C2D3] md:max-w-32 md:text-xs lg:text-base"
-            initial={prefersReducedMotion ? { opacity: 1, y: 0 } : { opacity: 0, y: 12 }}
-            animate={prefersReducedMotion ? { opacity: 1, y: 0 } : isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 12 }}
-            transition={{ type: "spring", stiffness: 200, damping: 22, delay: id * 0.06 + 0.12 }}
+            initial={
+              prefersReducedMotion
+                ? { opacity: 1, y: 0 }
+                : { opacity: 0, y: 12 }
+            }
+            animate={
+              prefersReducedMotion
+                ? { opacity: 1, y: 0 }
+                : isInView
+                  ? { opacity: 1, y: 0 }
+                  : { opacity: 0, y: 12 }
+            }
+            transition={{
+              type: "tween",
+              ease: "easeOut",
+              duration: 0.5,
+              delay: id * 0.12 + 0.12,
+            }}
           >
             {description}
           </motion.div>
@@ -167,9 +175,24 @@ export const BentoGridItem = ({
               "text-md z-10 max-w-96 font-sans font-bold lg:text-2xl",
               id === 6 && "text-white",
             )}
-            initial={prefersReducedMotion ? { opacity: 1, y: 0 } : { opacity: 0, y: 14 }}
-            animate={prefersReducedMotion ? { opacity: 1, y: 0 } : isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 14 }}
-            transition={{ type: "spring", stiffness: 220, damping: 24, delay: id * 0.06 + 0.18 }}
+            initial={
+              prefersReducedMotion
+                ? { opacity: 1, y: 0 }
+                : { opacity: 0, y: 14 }
+            }
+            animate={
+              prefersReducedMotion
+                ? { opacity: 1, y: 0 }
+                : isInView
+                  ? { opacity: 1, y: 0 }
+                  : { opacity: 0, y: 14 }
+            }
+            transition={{
+              type: "tween",
+              ease: "easeOut",
+              duration: 0.5,
+              delay: id * 0.12 + 0.18,
+            }}
           >
             {title}
           </motion.div>
