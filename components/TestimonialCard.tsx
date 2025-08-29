@@ -5,12 +5,11 @@ import Image from "next/image";
 import { asText, Content } from "@prismicio/client";
 import { FaStar } from "react-icons/fa6";
 import { Quote } from "lucide-react";
-import { useInView, motion } from "motion/react";
+import { motion } from "motion/react";
 import { useRef } from "react";
 
 const TestimonialCard = ({ slice }: { slice: Content.TestimonialSlice }) => {
   const ref = useRef(null);
-  const isInView = useInView(ref, { once: true, amount: 0.3 });
 
   return (
     <section className="mt-20 flex items-center justify-center md:mt-40">
@@ -27,11 +26,8 @@ const TestimonialCard = ({ slice }: { slice: Content.TestimonialSlice }) => {
             <motion.div
               ref={ref}
               initial={{ opacity: 0, y: 40, scale: 0.95 }}
-              animate={
-                isInView
-                  ? { opacity: 1, y: 0, scale: 1 }
-                  : { opacity: 0, y: 0, scale: 0.95 }
-              }
+              whileInView={{ opacity: 1, y: 0, scale: 1 }}
+              viewport={{ once: true, amount: 0.3 }}
               transition={{
                 type: "tween",
                 ease: "easeOut",
@@ -39,7 +35,7 @@ const TestimonialCard = ({ slice }: { slice: Content.TestimonialSlice }) => {
                 delay: index * 0.15,
               }}
               key={index}
-              className="will-change-transform group mb-5 break-inside-avoid-column rounded-xl border border-black-50 bg-black-50/90 p-6 dark:bg-black-100"
+              className="group mb-5 break-inside-avoid-column rounded-xl border border-black-50 bg-black-50/90 p-6 will-change-transform dark:bg-black-100"
             >
               <div className="mb-5 flex items-center gap-1">
                 {Array.from({ length: 5 }, (_, i) => (

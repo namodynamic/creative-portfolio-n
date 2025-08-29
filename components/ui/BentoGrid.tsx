@@ -62,7 +62,7 @@ export const BentoGridItem = ({
   const [copied, setCopied] = useState(false);
   const [isThrottled, setIsThrottled] = useState(false);
   const ref = useRef(null);
-  const isInView = useInView(ref, { once: true, amount: 0.3 });
+  const isInView = useInView(ref, { once: true, amount: 0.1 });
   const prefersReducedMotion = useReducedMotion();
 
   const defaultOptions = {
@@ -89,8 +89,8 @@ export const BentoGridItem = ({
   return (
     <motion.div
       ref={ref}
-      initial={{ opacity: 0, y: 24, scale: 0.96, rotate: -1 }}
-      animate={isInView ? { opacity: 1, y: 0, scale: 1, rotate: 0 } : {}}
+      initial={{ opacity: 0, y: 24, scale: 0.95 }}
+      animate={isInView ? { opacity: 1, y: 0, scale: 1} : {}}
       transition={{
         type: "tween",
         ease: "easeOut",
