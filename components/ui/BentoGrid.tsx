@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef, useState } from "react";
+import { useState } from "react";
 import { IoCopyOutline } from "react-icons/io5";
 
 import Lottie from "react-lottie";
@@ -13,7 +13,6 @@ import animationData from "@/data/confetti.json";
 import MagicButton from "./MagicButton";
 import Image from "next/image";
 import type { KeyTextField } from "@prismicio/client";
-import { useInView, useReducedMotion, motion } from "motion/react";
 
 export const BentoGrid = ({
   className,
@@ -25,7 +24,7 @@ export const BentoGrid = ({
   return (
     <div
       className={cn(
-        "md:grid-row-7 mx-auto grid grid-cols-1 gap-4 md:grid-cols-6 lg:grid-cols-5 lg:gap-8",
+        "md:grid-row-7 mx-auto grid grid-cols-1 gap-3 px-2 sm:gap-4 sm:px-4 md:grid-cols-6 md:gap-5 lg:grid-cols-5 lg:gap-6 xl:gap-8",
         className,
       )}
     >
@@ -61,9 +60,6 @@ export const BentoGridItem = ({
 }) => {
   const [copied, setCopied] = useState(false);
   const [isThrottled, setIsThrottled] = useState(false);
-  const ref = useRef(null);
-  const isInView = useInView(ref, { once: true, amount: 0.1 });
-  const prefersReducedMotion = useReducedMotion();
 
   const defaultOptions = {
     loop: false,
@@ -87,18 +83,9 @@ export const BentoGridItem = ({
   };
 
   return (
-    <motion.div
-      ref={ref}
-      initial={{ opacity: 0, y: 24, scale: 0.95 }}
-      animate={isInView ? { opacity: 1, y: 0, scale: 1} : {}}
-      transition={{
-        type: "tween",
-        ease: "easeOut",
-        duration: 0.5,
-        delay: id * 0.12,
-      }}
+    <div
       className={cn(
-        "will-change-transform group/bento relative row-span-1 flex flex-col justify-between space-y-4 overflow-hidden rounded-xl transition duration-200 md:rounded-3xl",
+        "group/bento relative row-span-1 flex flex-col justify-between space-y-3 overflow-hidden rounded-lg transition duration-200 sm:space-y-4 sm:rounded-xl md:rounded-2xl lg:rounded-3xl",
 
         `${id === 2 && "dark:bg-dot-black-500"}`,
         `${id === 3 && "dark:bg-dot-black-500"}`,
@@ -142,84 +129,44 @@ export const BentoGridItem = ({
         <div
           className={cn(
             titleClassName,
-            "relative flex min-h-40 flex-col p-5 px-5 transition duration-200 group-hover/bento:translate-x-2 md:h-full lg:p-10",
+            "relative flex min-h-32 flex-col p-4 transition duration-200 group-hover/bento:translate-x-2 sm:min-h-40 sm:p-5 md:h-full md:p-6 lg:p-8 xl:p-10",
           )}
         >
-          <motion.div
-            className="z-10 font-sans text-sm font-extralight dark:text-[#C1C2D3] md:max-w-32 md:text-xs lg:text-base"
-            initial={
-              prefersReducedMotion
-                ? { opacity: 1, y: 0 }
-                : { opacity: 0, y: 12 }
-            }
-            animate={
-              prefersReducedMotion
-                ? { opacity: 1, y: 0 }
-                : isInView
-                  ? { opacity: 1, y: 0 }
-                  : { opacity: 0, y: 12 }
-            }
-            transition={{
-              type: "tween",
-              ease: "easeOut",
-              duration: 0.5,
-              delay: id * 0.12 + 0.12,
-            }}
-          >
+          <div className="z-10 font-sans text-xs font-extralight dark:text-[#C1C2D3] sm:text-sm md:max-w-32 md:text-xs lg:max-w-40 lg:text-sm xl:text-base">
             {description}
-          </motion.div>
+          </div>
 
-          <motion.div
+          <div
             className={cn(
               id === 1 && "absolute flex flex-wrap text-white",
-              "text-md z-10 max-w-96 font-sans font-bold lg:text-2xl",
+              "z-10 max-w-full font-sans text-sm font-bold sm:text-base md:text-lg lg:max-w-96 lg:text-xl xl:text-2xl",
               id === 6 && "text-white",
             )}
-            initial={
-              prefersReducedMotion
-                ? { opacity: 1, y: 0 }
-                : { opacity: 0, y: 14 }
-            }
-            animate={
-              prefersReducedMotion
-                ? { opacity: 1, y: 0 }
-                : isInView
-                  ? { opacity: 1, y: 0 }
-                  : { opacity: 0, y: 14 }
-            }
-            transition={{
-              type: "tween",
-              ease: "easeOut",
-              duration: 0.5,
-              delay: id * 0.12 + 0.18,
-            }}
           >
             {title}
-          </motion.div>
+          </div>
 
           {id === 2 && <GridGlobe />}
 
           {id === 3 && (
-            <div className="absolute -right-3 flex w-fit gap-1 text-white lg:-right-2 lg:gap-5">
-              <div className="flex flex-col gap-3 md:gap-3 lg:gap-8">
+            <div className="absolute -right-2 flex w-fit gap-1 text-white sm:-right-3 sm:gap-2 md:gap-3 lg:-right-2 lg:gap-5">
+              <div className="flex flex-col gap-2 sm:gap-3 md:gap-4 lg:gap-8">
                 {leftLists?.map((item, i) => (
                   <span
                     key={i}
-                    className="rounded-lg  bg-purple-700 px-3 py-2 text-center text-xs 
-                    lg:px-3 lg:py-4 lg:text-base"
+                    className="rounded-md bg-purple-700 px-2 py-1.5 text-center text-[10px] sm:rounded-lg sm:px-3 sm:py-2 sm:text-xs md:text-sm lg:px-3 lg:py-4 lg:text-base"
                   >
                     {item}
                   </span>
                 ))}
-                <span className="rounded-lg  bg-[#5D38F2] px-3 py-4  text-center lg:px-3 lg:py-4"></span>
+                <span className="rounded-md bg-[#5D38F2] px-2 py-3 text-center sm:rounded-lg sm:px-3 sm:py-4 lg:px-3 lg:py-4"></span>
               </div>
-              <div className="flex flex-col gap-3 md:gap-3 lg:gap-8">
-                <span className="rounded-lg  bg-purple-700 px-3 py-4  text-center lg:px-3 lg:py-4"></span>
+              <div className="flex flex-col gap-2 sm:gap-3 md:gap-4 lg:gap-8">
+                <span className="rounded-md bg-purple-700 px-2 py-3 text-center sm:rounded-lg sm:px-3 sm:py-4 lg:px-3 lg:py-4"></span>
                 {rightLists?.map((item, i) => (
                   <span
                     key={i}
-                    className="rounded-lg  bg-[#5D38F2] px-3 py-2 text-center text-xs 
-                    lg:px-3 lg:py-4 lg:text-base"
+                    className="rounded-md bg-[#5D38F2] px-2 py-1.5 text-center text-[10px] sm:rounded-lg sm:px-3 sm:py-2 sm:text-xs md:text-sm lg:px-3 lg:py-4 lg:text-base"
                   >
                     {item}
                   </span>
@@ -228,10 +175,16 @@ export const BentoGridItem = ({
             </div>
           )}
           {id === 6 && (
-            <div className="relative mt-5">
+            <div className="relative mt-3 sm:mt-5">
               {copied && (
-                <div className="absolute -bottom-5 right-0 z-50">
-                  <Lottie options={defaultOptions} height={200} width={400} />
+                <div className="absolute -bottom-3 right-0 z-50 sm:-bottom-5">
+                  <div className="h-[150px] w-[300px] sm:h-[200px] sm:w-[400px]">
+                    <Lottie
+                      options={defaultOptions}
+                      height="100%"
+                      width="100%"
+                    />
+                  </div>
                 </div>
               )}
 
@@ -240,14 +193,16 @@ export const BentoGridItem = ({
                 icon={<IoCopyOutline className="mr-1" />}
                 position="left"
                 onClick={handleCopy}
-                otherClasses="bg-gray-800 dark:bg-gray-900/90 text-xs backdrop-blur-sm  border border-white/20 dark:border-gray-700/20 hover:bg-gray-700 dark:hover:bg-gray-800/90"
+                otherClasses="bg-gray-800 dark:bg-gray-900/90 text-[10px] sm:text-xs backdrop-blur-sm border border-white/20 dark:border-gray-700/20 hover:bg-gray-700 dark:hover:bg-gray-800/90"
               />
             </div>
           )}
 
-          {id === 1 && <div className="h-[260px]"></div>}
+          {id === 1 && (
+            <div className="h-[180px] sm:h-[220px] md:h-[260px]"></div>
+          )}
         </div>
       </div>
-    </motion.div>
+    </div>
   );
 };

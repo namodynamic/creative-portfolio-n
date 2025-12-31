@@ -7,7 +7,7 @@ export const TextGenerateEffect = ({
   words,
   className,
 }: {
-  words: string | '';
+  words: string | "";
   className?: string;
 }) => {
   const [scope, animate] = useAnimate();
@@ -21,7 +21,7 @@ export const TextGenerateEffect = ({
       {
         duration: 2,
         delay: stagger(0.2),
-      }
+      },
     );
   }, [animate]);
 
@@ -32,8 +32,9 @@ export const TextGenerateEffect = ({
           return (
             <motion.span
               key={word + idx}
-              className={` ${idx > 3 ? "text-purple-600" : " dark:text-white"
-                } opacity-0`}
+              className={` ${
+                idx > 3 ? "text-purple-600" : " text-black dark:text-white"
+              } opacity-0`}
             >
               {word}{" "}
             </motion.span>
@@ -46,7 +47,7 @@ export const TextGenerateEffect = ({
   return (
     <div className={cn("font-bold", className)}>
       <div className="my-4">
-        <div className=" dark:text-white text-black leading-snug tracking-wide">
+        <div className=" leading-snug tracking-wide text-black dark:text-white">
           {renderWords()}
         </div>
       </div>

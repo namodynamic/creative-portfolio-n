@@ -2,7 +2,6 @@
 
 import FeaturedProjectsCard from "@/components/FeaturedProjectsCard";
 import type { Content } from "@prismicio/client";
-import { motion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
 import Link from "next/link";
 
@@ -20,48 +19,26 @@ export default function FeaturedProjectList({
     return dateB - dateA;
   });
 
-  const container = {
-    hidden: { opacity: 0 },
-    show: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.15,
-        delayChildren: 0.2,
-      },
-    },
-  };
-
   return (
     <section>
-      <motion.div
-        variants={container}
-        initial="hidden"
-        whileInView="show"
-        viewport={{ once: true, margin: "-100px" }}
-        className="space-y-24"
-      >
+      <div className="space-y-16 sm:space-y-20 md:space-y-24 lg:space-y-28">
         {sortedItems.map((item, index) => (
           <FeaturedProjectsCard key={item.id} item={item} index={index} />
         ))}
-      </motion.div>
+      </div>
 
-      <motion.div
-        initial={{ opacity: 0, y: 30 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true }}
-        transition={{ duration: 0.8 }}
-        className="mt-32 text-center"
-      >
+      <div className="mt-16 text-center sm:mt-20 md:mt-24 lg:mt-28 xl:mt-32">
         <div className="relative inline-block">
+          <div className="absolute inset-0 animate-pulse rounded-xl bg-gradient-to-r from-blue-500 to-purple-500 opacity-20 blur-xl sm:rounded-2xl" />
           <Link
             href="/projects"
-            className="group relative inline-flex items-center gap-3 rounded-2xl border border-white/20 bg-white/80 px-8 py-4 text-lg font-semibold text-gray-900 shadow-2xl backdrop-blur-xl transition-all duration-300 hover:bg-white/90 dark:border-gray-700/30 dark:bg-gray-900/80 dark:text-white dark:hover:bg-gray-900/90"
+            className="group relative inline-flex items-center gap-2 rounded-xl border border-gray-300 bg-white/95 px-5 py-2.5 text-sm font-bold text-gray-900 shadow-xl backdrop-blur-xl transition-all duration-200 hover:scale-105 hover:border-gray-400 hover:bg-white hover:shadow-2xl active:scale-95 dark:border-gray-600/50 dark:bg-gray-900/95 dark:text-white dark:hover:border-gray-500 dark:hover:bg-gray-900 sm:gap-3 sm:rounded-2xl sm:px-7 sm:py-3.5 sm:text-base md:px-8 md:py-4 md:text-lg"
           >
             <span>Explore All Projects</span>
-            <ArrowRight className="h-5 w-5 transition-transform group-hover:translate-x-1" />
+            <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1 sm:h-5 sm:w-5" />
           </Link>
         </div>
-      </motion.div>
+      </div>
     </section>
   );
 }
