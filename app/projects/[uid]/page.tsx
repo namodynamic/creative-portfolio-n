@@ -15,7 +15,7 @@ import {
   GitGraph,
   Lock,
   CheckCheck,
-  Tag
+  Tag,
 } from "lucide-react";
 import { FaGithub } from "react-icons/fa6";
 import { PrismicRichText } from "@prismicio/react";
@@ -91,7 +91,7 @@ export default async function Page({ params }: { params: Promise<Params> }) {
               {page.data.accessibility === "Open Source Project" && (
                 <Badge
                   variant="outline"
-                  className="mb-4 bg-[#131a41] text-white-50 border-[#131a41]"
+                  className="mb-4 border-[#131a41] bg-[#131a41] text-white-50"
                 >
                   {page.data.accessibility}
                 </Badge>
@@ -258,21 +258,10 @@ export default async function Page({ params }: { params: Promise<Params> }) {
                 <div className="space-y-4">
                   <div>
                     <h4 className="mb-1 text-sm font-medium text-black-100/50 dark:text-slate-400">
-                      Completed In
-                    </h4>
-                    <p className="font-medium dark:text-white">
-                      {page.data.date
-                        ? new Date(page.data.date).getFullYear()
-                        : ""}
-                    </p>
-                  </div>
-
-                  <div>
-                    <h4 className="mb-1 text-sm font-medium text-black-100/50 dark:text-slate-400">
                       Development Time
                     </h4>
                     <div className="flex items-center gap-2">
-                      <Clock className="h-4 w-4 text-black/80 dark:text-purple-500" />
+                      <Clock className="h-4 w-4 text-orange-500" />
                       <p className="font-medium dark:text-white">
                         {page.data.development_time || ""}
                       </p>
@@ -359,7 +348,7 @@ export default async function Page({ params }: { params: Promise<Params> }) {
                   {page.tags.map((tag) => (
                     <div
                       key={tag}
-                      className="rounded-full inline-flex gap-1 items-center bg-[#131a41] px-2 py-1 text-xs font-medium text-white transition-colors duration-300 hover:text-violet-200"
+                      className="inline-flex items-center gap-1 rounded-full bg-[#131a41] px-2 py-1 text-xs font-medium text-white transition-colors duration-300 hover:text-violet-200"
                     >
                       <Tag className="h-3 w-3" />
                       {tag}
@@ -394,7 +383,7 @@ export default async function Page({ params }: { params: Promise<Params> }) {
             <Link href="/services">
               <Button
                 variant="outline"
-                className="border-slate-700 dark:border-slate-300 hover:bg-slate-800 hover:text-white dark:text-slate-300"
+                className="border-slate-700 hover:bg-slate-800 hover:text-white dark:border-slate-300 dark:text-slate-300"
               >
                 View Services
               </Button>
