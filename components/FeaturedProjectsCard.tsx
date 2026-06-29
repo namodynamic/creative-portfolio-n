@@ -6,6 +6,7 @@ import { ArrowRight, Tag, ExternalLink, Eye } from "lucide-react";
 import { PrismicNextImage, PrismicNextLink } from "@prismicio/next";
 import Link from "next/link";
 import { FaGithub } from "react-icons/fa6";
+import { extractFirstParagraphFromSlices } from "@/utils/extractSliceText";
 
 type FeaturedProjectProps = {
   item: Content.ProjectDocument;
@@ -15,19 +16,7 @@ type FeaturedProjectProps = {
 const FeaturedProjectsCard: FC<FeaturedProjectProps> = ({ item, index }) => {
   const isEven = index % 2 === 0;
 
-  const firstParagraph =
-    item.data.slices
-      .find((slice) => {
-        return (
-          slice.slice_type === "text_block" &&
-          Array.isArray((slice as any).primary?.text) &&
-          (slice as any).primary.text.some(
-            (block: any) => block.type === "paragraph",
-          )
-        );
-      })
-      ?.primary?.text.find((block: any) => block.type === "paragraph")?.text ||
-    "";
+  const firstParagraph = extractFirstParagraphFromSlices(item.data.slices);
 
   return (
     <div

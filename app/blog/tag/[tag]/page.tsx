@@ -4,6 +4,7 @@ import Link from "next/link";
 import Bounded from "@/components/Bounded";
 import Image from "next/image";
 import { formatDate } from "@/utils/FormatDate";
+import { extractFirstParagraphFromSlices } from "@/utils/extractSliceText";
 import { Badge } from "@/components/ui/badge";
 import { ArrowLeft, Tag } from "lucide-react";
 import Heading from "@/components/Heading";
@@ -59,20 +60,10 @@ export default async function TagPage({ params }: TagPageProps) {
         {posts.length > 0 ? (
           <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
             {posts.map((post) => {
-              const firstParagraph =
-                post.data.slices
-                  .find((slice) => {
-                    return (
-                      slice.slice_type === "text_block" &&
-                      Array.isArray((slice as any).primary?.text) &&
-                      (slice as any).primary.text.some(
-                        (block: any) => block.type === "paragraph",
-                      )
-                    );
-                  })
-                  ?.primary?.text.find(
-                    (block: any) => block.type === "paragraph",
-                  )?.text || "No description available.";
+              const firstParagraph = extractFirstParagraphFromSlices(
+                post.data.slices,
+                "No description available.",
+              );
 
               const formattedDate = formatDate(post.data.date);
 

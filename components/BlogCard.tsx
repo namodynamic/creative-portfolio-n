@@ -5,7 +5,10 @@ import { ArrowRight, Calendar, Clock, Tag } from "lucide-react";
 import type { Content } from "@prismicio/client";
 import Link from "next/link";
 import { formatDate } from "@/utils/FormatDate";
-import { extractTextFromSlices } from "@/utils/extractSliceText";
+import {
+  extractFirstParagraphFromSlices,
+  extractTextFromSlices,
+} from "@/utils/extractSliceText";
 import { readingTime } from "reading-time-estimator";
 
 interface BlogCardProps {
@@ -15,19 +18,7 @@ interface BlogCardProps {
 }
 
 export default function BlogCard({ item, index, viewMoreText }: BlogCardProps) {
-  const firstParagraph =
-    item.data.slices
-      .find((slice) => {
-        return (
-          slice.slice_type === "text_block" &&
-          Array.isArray((slice as any).primary?.text) &&
-          (slice as any).primary.text.some(
-            (block: any) => block.type === "paragraph",
-          )
-        );
-      })
-      ?.primary?.text.find((block: any) => block.type === "paragraph")?.text ||
-    "";
+  const firstParagraph = extractFirstParagraphFromSlices(item.data.slices);
 
   const textContent = extractTextFromSlices(item.data.slices);
   const readTime = readingTime(textContent);

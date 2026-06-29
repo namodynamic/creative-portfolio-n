@@ -1,8 +1,12 @@
 {
   "compilerOptions": {
     "types": [],
-    "target": "es5",
-    "lib": ["dom", "dom.iterable", "esnext"],
+    "target": "ES2017",
+    "lib": [
+      "dom",
+      "dom.iterable",
+      "esnext"
+    ],
     "allowJs": true,
     "skipLibCheck": true,
     "strict": true,
@@ -12,7 +16,7 @@
     "moduleResolution": "bundler",
     "resolveJsonModule": true,
     "isolatedModules": true,
-    "jsx": "preserve",
+    "jsx": "react-jsx",
     "incremental": true,
     "plugins": [
       {
@@ -20,9 +24,14 @@
       }
     ],
     "paths": {
-      "@/*": ["./*"]
+      "@/*": [
+        "./*"
+      ]
     },
-    "typeRoots": ["./node_modules/@types", "./types"]
+    "typeRoots": [
+      "./node_modules/@types",
+      "./types"
+    ]
   },
   "include": [
     "next-env.d.ts",
@@ -30,7 +39,11 @@
     "**/*.tsx",
     ".next/types/**/*.ts",
     "slices/Experience/index.tsx",
-    "components/GlowCard.tsx"
-, "components/ExperienceSection.tsx"  ],
-  "exclude": ["node_modules"]
+    "components/GlowCard.tsx",
+    "components/ExperienceSection.tsx",
+    ".next/dev/types/**/*.ts"
+  ],
+  "exclude": [
+    "node_modules"
+  ]
 }

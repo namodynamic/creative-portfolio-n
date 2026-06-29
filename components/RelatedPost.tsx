@@ -3,6 +3,7 @@ import { createClient } from "@/prismicio";
 import Image from "next/image";
 import Link from "next/link";
 import { formatDate } from "@/utils/FormatDate";
+import { extractFirstParagraphFromSlices } from "@/utils/extractSliceText";
 
 type TagPageProps = {
   params: { tag: string };
@@ -33,19 +34,9 @@ export default async function RelatedPosts({ params }: TagPageProps) {
         {relatedPosts.results.map((post) => {
           const formattedDate = formatDate(post.data.date);
 
-          const firstParagraph =
-            post.data.slices
-              .find((slice) => {
-                return (
-                  slice.slice_type === "text_block" &&
-                  Array.isArray((slice as any).primary?.text) &&
-                  (slice as any).primary.text.some(
-                    (block: any) => block.type === "paragraph",
-                  )
-                );
-              })
-              ?.primary?.text.find((block: any) => block.type === "paragraph")
-              ?.text || "";
+          const firstParagraph = extractFirstParagraphFromSlices(
+            post.data.slices,
+          );
 
           return (
             <Link
