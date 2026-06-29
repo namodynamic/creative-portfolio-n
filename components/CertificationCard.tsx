@@ -30,17 +30,19 @@ interface CertificationCardProps {
 }
 
 const iconMap: Record<string, React.ReactNode> = {
-  certificate: <LiaCertificateSolid className="h-6 w-6 text-white-50" />,
-  award: <FaAward className="h-6 w-6 text-white-50" />,
-  database: <Database className="h-6 w-6 text-white-50" />,
-  zap: <Zap className="h-6 w-6 text-white-50" />,
-  code: <CodeXml className="h-6 w-6 text-white-50" />,
-  users: <Users className="h-6 w-6 text-white-50" />,
-  trending: <TrendingUp className="h-6 w-6 text-white-50" />,
-  globe: <Globe className="h-6 w-6 text-white-50" />,
-  brain: <BrainCircuit className="h-6 w-6 text-white-50" />,
-  computer: <Computer className="h-6 w-6 text-white-50" />,
-  server: <Server className="h-6 w-6 text-white-50" />,
+  certificate: (
+    <LiaCertificateSolid className="text-primary-foreground h-6 w-6" />
+  ),
+  award: <FaAward className="text-primary-foreground h-6 w-6" />,
+  database: <Database className="text-primary-foreground h-6 w-6" />,
+  zap: <Zap className="text-primary-foreground h-6 w-6" />,
+  code: <CodeXml className="text-primary-foreground h-6 w-6" />,
+  users: <Users className="text-primary-foreground h-6 w-6" />,
+  trending: <TrendingUp className="text-primary-foreground h-6 w-6" />,
+  globe: <Globe className="text-primary-foreground h-6 w-6" />,
+  brain: <BrainCircuit className="text-primary-foreground h-6 w-6" />,
+  computer: <Computer className="text-primary-foreground h-6 w-6" />,
+  server: <Server className="text-primary-foreground h-6 w-6" />,
 };
 
 const CertificationCard = ({ item, index, icon }: CertificationCardProps) => {
@@ -83,8 +85,8 @@ const CertificationCard = ({ item, index, icon }: CertificationCardProps) => {
       }}
       key={index}
       className={cn(
-        "will-change-transform card group relative aspect-[16/11] w-full overflow-hidden rounded-2xl border border-neutral-800 shadow-md shadow-white/20 transition-all duration-500",
-        "hover:after:absolute hover:after:inset-0 hover:after:rounded-2xl hover:after:transition-all hover:after:duration-500 hover:after:content-[''] md:hover:after:bg-black-100/60",
+        "card group relative aspect-[16/11] w-full overflow-hidden rounded-2xl border border-neutral-800 shadow-md shadow-white/20 transition-all duration-500 will-change-transform",
+        "md:hover:after:bg-foreground/60 hover:after:absolute hover:after:inset-0 hover:after:rounded-2xl hover:after:transition-all hover:after:duration-500 hover:after:content-['']",
       )}
       style={{
         backgroundImage: backgroundUrl ? `url(${backgroundUrl})` : undefined,
@@ -93,7 +95,7 @@ const CertificationCard = ({ item, index, icon }: CertificationCardProps) => {
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
     >
-      <div className="absolute inset-0 z-0 bg-black-100/50  transition duration-500 md:group-hover:bg-black/10" />
+      <div className="bg-foreground/50 absolute inset-0 z-0 transition duration-500 md:group-hover:bg-black/10" />
 
       <div className="relative z-10 flex h-full flex-col justify-between p-5 text-white">
         <div className="flex items-center justify-between transition-opacity duration-500 md:group-hover:opacity-0">
@@ -116,7 +118,7 @@ const CertificationCard = ({ item, index, icon }: CertificationCardProps) => {
         </div>
 
         <div className="mt-6 space-y-2 text-slate-300 transition-opacity duration-500 md:group-hover:opacity-0">
-          <h3 className="text-xl font-semibold leading-tight tracking-wide">
+          <h3 className="text-xl leading-tight font-semibold tracking-wide">
             {item.title}
           </h3>
           <div className="line-clamp-3 text-sm text-slate-300 opacity-80">

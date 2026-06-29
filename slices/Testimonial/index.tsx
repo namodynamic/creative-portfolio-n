@@ -82,29 +82,29 @@ const Testimonial = ({ slice }: TestimonialProps): JSX.Element => {
       <div
         ref={containerRef}
         className={cn(
-          "scroller relative z-20 w-screen overflow-hidden  [mask-image:linear-gradient(to_right,transparent,white_20%,white_80%,transparent)]",
+          "scroller relative z-20 w-screen overflow-hidden [mask-image:linear-gradient(to_right,transparent,white_20%,white_80%,transparent)]",
           className,
         )}
       >
         <ul
           ref={scrollerRef}
           className={cn(
-            " flex w-max min-w-full shrink-0 flex-nowrap gap-10 py-4",
-            start && "animate-scroll ",
+            "flex w-max min-w-full shrink-0 flex-nowrap gap-10 py-4",
+            start && "animate-scroll",
             pauseOnHover && "hover:[animation-play-state:paused]",
           )}
         >
           {slice.items.map((item, idx) => (
             <li
-              className="relative w-[280px] max-w-full shrink-0 rounded-xl border-[0.5px] border-b-0 border-zinc-100 bg-white/20 p-4 dark:border-slate-800 dark:bg-[linear-gradient(90deg,_rgba(4,7,29,1)_0%,_rgba(12,14,35,1)_100%)] sm:w-[350px] sm:rounded-2xl sm:p-5 md:w-[50vw] md:p-12 lg:p-16"
+              className="relative w-[280px] max-w-full shrink-0 rounded-xl border-[0.5px] border-b-0 border-zinc-100 bg-white/20 p-4 sm:w-[350px] sm:rounded-2xl sm:p-5 md:w-[50vw] md:p-12 lg:p-16 dark:border-slate-800 dark:bg-[linear-gradient(90deg,_rgba(4,7,29,1)_0%,_rgba(12,14,35,1)_100%)]"
               key={idx}
             >
               <blockquote>
                 <div
                   aria-hidden="true"
-                  className="user-select-none -z-1 pointer-events-none absolute -left-0.5 -top-0.5 h-[calc(100%_+_4px)] w-[calc(100%_+_4px)]"
+                  className="user-select-none pointer-events-none absolute -top-0.5 -left-0.5 -z-1 h-[calc(100%_+_4px)] w-[calc(100%_+_4px)]"
                 ></div>
-                <span className=" prose relative z-20 text-xs font-normal leading-[1.6] text-neutral-800 dark:text-gray-100 sm:text-sm md:text-base">
+                <span className="prose relative z-20 text-xs leading-[1.6] font-normal text-neutral-800 sm:text-sm md:text-base dark:text-gray-100">
                   <PrismicRichText field={item.feedback} />
                 </span>
                 <div className="flex flex-col justify-between gap-3 sm:flex-row sm:gap-0">
@@ -116,10 +116,10 @@ const Testimonial = ({ slice }: TestimonialProps): JSX.Element => {
                       />
                     </div>
                     <span className="flex flex-col gap-0.5 sm:gap-1">
-                      <span className="text-sm font-bold leading-[1.6] dark:text-white sm:text-base md:text-lg lg:text-xl">
+                      <span className="text-sm leading-[1.6] font-bold sm:text-base md:text-lg lg:text-xl dark:text-white">
                         {item.name}
                       </span>
-                      <span className="text-xs font-normal dark:text-white-200 sm:text-sm">
+                      <span className="dark:text-muted-foreground text-xs font-normal sm:text-sm">
                         {item.occupation}
                       </span>
                     </span>

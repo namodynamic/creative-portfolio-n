@@ -84,10 +84,6 @@
   --sidebar-ring: oklch(0.556 0 0);
 }
 
-body {
-  min-height: 100vh;
-  background-attachment: local;
-}
 
 @layer base {
   * {

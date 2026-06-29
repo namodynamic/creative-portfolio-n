@@ -23,18 +23,18 @@ export default async function RelatedProjects({ tags }: RelatedProjectsProps) {
 
   if (!projects.results.length)
     return (
-      <div className="rounded-xl border-[0.5px] border-slate-800 bg-white/20 p-6 shadow-xl backdrop-blur-sm dark:bg-blue-850/50">
-        <h3 className="mb-4 text-lg font-bold text-black-50 dark:text-white">
+      <div className="dark:bg-card/80 rounded-xl border-[0.5px] border-slate-800 bg-white/20 p-6 shadow-xl backdrop-blur-sm">
+        <h3 className="text-foreground mb-4 text-lg font-bold dark:text-white">
           Featured Projects
         </h3>
-        <p className="text-xs text-muted-foreground">No related projects.</p>
+        <p className="text-muted-foreground text-xs">No related projects.</p>
       </div>
     );
 
   return (
     <section>
       <div className="mb-10">
-        <h2 className="mb-8 text-2xl font-bold text-black-50 dark:text-white">
+        <h2 className="text-foreground mb-8 text-2xl font-bold dark:text-white">
           Explore More Projects
         </h2>
         <div className="grid gap-8 md:grid-cols-3">
@@ -42,7 +42,7 @@ export default async function RelatedProjects({ tags }: RelatedProjectsProps) {
             <Link
               key={project.uid}
               href={`/projects/${project.uid}`}
-              className="group block overflow-hidden rounded-lg border-[0.5px] border-zinc-400 bg-white/20 transition-all hover:border-slate-700 hover:bg-white-50 dark:border-slate-800 dark:bg-blue-850/50 dark:hover:bg-slate-900/50"
+              className="group hover:bg-muted dark:bg-card/80 block overflow-hidden rounded-lg border-[0.5px] border-zinc-400 bg-white/20 transition-all hover:border-slate-700 dark:border-slate-800 dark:hover:bg-slate-900/50"
             >
               <div className="aspect-video overflow-hidden">
                 <Image
@@ -62,7 +62,7 @@ export default async function RelatedProjects({ tags }: RelatedProjectsProps) {
                     <Badge
                       key={tag}
                       variant="outline"
-                      className="border-slate-700 gap-1 inline-flex items-center bg-black/50 text-xs text-white dark:bg-slate-800/50 dark:text-slate-300"
+                      className="inline-flex items-center gap-1 border-slate-700 bg-black/50 text-xs text-white dark:bg-slate-800/50 dark:text-slate-300"
                     >
                       <Tag className="h-3 w-3" />
                       {tag}

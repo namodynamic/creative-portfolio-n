@@ -51,7 +51,7 @@ const Approach = ({ slice }: ApproachProps): JSX.Element => {
       data-slice-variation={slice.variation}
       className="px-4 py-16 sm:px-6 sm:py-20 md:px-8 md:py-24 lg:py-28"
     >
-      <div className="text-white-50 mb-4 inline-flex w-fit items-center gap-2 rounded-lg bg-slate-950 px-3 py-1.5 text-nowrap sm:mb-6 sm:gap-2.5 sm:px-4 sm:py-2 md:gap-3 dark:bg-slate-900">
+      <div className="text-primary-foreground mb-4 inline-flex w-fit items-center gap-2 rounded-lg bg-slate-950 px-3 py-1.5 text-nowrap sm:mb-6 sm:gap-2.5 sm:px-4 sm:py-2 md:gap-3 dark:bg-slate-900">
         <Workflow className="h-4 w-4 text-white sm:h-5 sm:w-5" />
         <p className="text-xs font-bold text-white sm:text-sm md:text-base">
           {slice.primary.heading}
@@ -62,7 +62,7 @@ const Approach = ({ slice }: ApproachProps): JSX.Element => {
           {slice.primary.sub_heading}
         </Heading>
       </div>
-      <div className="prose prose-sm prose-invert text-black-100 sm:prose-base md:prose-lg lg:prose-xl col-start-1 mt-3 px-2 sm:mt-4 sm:px-0 md:mt-5 dark:text-slate-300">
+      <div className="prose prose-sm prose-invert text-foreground sm:prose-base md:prose-lg lg:prose-xl col-start-1 mt-3 px-2 sm:mt-4 sm:px-0 md:mt-5 dark:text-slate-300">
         <p className="text-sm leading-relaxed sm:text-base md:text-lg">
           {slice.primary.intro}
         </p>
@@ -108,7 +108,7 @@ const Card = ({
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
       className={cn(
-        "group/canvas-card border-white-200 bg-dot-white-500 relative mx-auto flex w-full max-w-sm items-center justify-center rounded-xl border p-4 sm:p-5 md:p-6 lg:h-128 xl:h-140 dark:border-white/20",
+        "group/canvas-card border-border bg-dot-zinc-400 relative mx-auto flex w-full max-w-sm items-center justify-center rounded-xl border p-4 sm:p-5 md:p-6 lg:h-128 xl:h-140 dark:border-white/20",
       )}
     >
       <Icon className="absolute -top-2.5 -left-2 h-6 w-6 text-black opacity-30 dark:text-white" />
@@ -166,7 +166,7 @@ const AceternityIcon = ({ order }: { order: string }) => {
         />
         <span
           className={cn(
-            "bg-black-100 relative inline-flex h-full w-full cursor-pointer items-center justify-center rounded-full px-5 py-2 text-sm font-bold text-white backdrop-blur-3xl",
+            "bg-primary relative inline-flex h-full w-full cursor-pointer items-center justify-center rounded-full px-5 py-2 text-sm font-bold text-white backdrop-blur-3xl",
           )}
         >
           {order}

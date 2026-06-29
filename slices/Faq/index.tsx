@@ -7,7 +7,12 @@ import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import MagicButton from "@/components/ui/MagicButton";
 import Bounded from "@/components/Bounded";
-import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from "@/components/ui/accordion";
 
 /**
  * Props for `Faq`.
@@ -33,10 +38,10 @@ const Faq: FC<FaqProps> = ({ slice }) => {
     >
       <div className="mx-auto max-w-5xl py-8 md:py-16">
         <div className="mb-12 text-center">
-          <p className="mb-2 text-sm uppercase tracking-wider dark:text-slate-300">
+          <p className="mb-2 text-sm tracking-wider uppercase dark:text-slate-300">
             {slice.primary.heading}
           </p>
-          <h1 className="mb-4 text-4xl font-bold text-black-50 dark:text-white md:text-5xl">
+          <h1 className="text-foreground mb-4 text-4xl font-bold md:text-5xl dark:text-white">
             {slice.primary.sub_heading}
           </h1>
           <p className="mx-auto mt-4 max-w-2xl text-lg text-black/80 dark:text-gray-300">
@@ -73,7 +78,7 @@ const Faq: FC<FaqProps> = ({ slice }) => {
                   <AccordionItem
                     key={index}
                     value={`item-${index}`}
-                    className="rounded-lg border-[0.5px] border-zinc-400 bg-white/20 px-6 shadow-lg backdrop-blur-sm dark:border-gray-800 dark:bg-blue-850/50"
+                    className="dark:bg-card/80 rounded-lg border-[0.5px] border-zinc-400 bg-white/20 px-6 shadow-lg backdrop-blur-sm dark:border-gray-800"
                   >
                     <AccordionTrigger className="text-lg font-medium">
                       {item.question}
@@ -96,7 +101,7 @@ const Faq: FC<FaqProps> = ({ slice }) => {
                   <AccordionItem
                     key={index}
                     value={`item-${index}`}
-                    className="rounded-lg border-[0.5px] border-zinc-400 bg-white/20 px-6 shadow-lg backdrop-blur-sm dark:border-gray-800 dark:bg-blue-850/50"
+                    className="dark:bg-card/80 rounded-lg border-[0.5px] border-zinc-400 bg-white/20 px-6 shadow-lg backdrop-blur-sm dark:border-gray-800"
                   >
                     <AccordionTrigger className="text-lg font-medium">
                       {item.question}
@@ -119,7 +124,7 @@ const Faq: FC<FaqProps> = ({ slice }) => {
                   <AccordionItem
                     key={index}
                     value={`item-${index}`}
-                    className="rounded-lg border-[0.5px] border-zinc-400 bg-white/20 px-6 shadow-lg backdrop-blur-sm dark:border-gray-800 dark:bg-blue-850/50"
+                    className="dark:bg-card/80 rounded-lg border-[0.5px] border-zinc-400 bg-white/20 px-6 shadow-lg backdrop-blur-sm dark:border-gray-800"
                   >
                     <AccordionTrigger className="text-lg font-medium">
                       {item.question}
@@ -142,7 +147,7 @@ const Faq: FC<FaqProps> = ({ slice }) => {
                   <AccordionItem
                     key={index}
                     value={`item-${index}`}
-                    className="rounded-lg border-[0.5px] border-zinc-400 bg-white/20 px-6 shadow-lg backdrop-blur-sm dark:border-gray-800 dark:bg-blue-850/50"
+                    className="dark:bg-card/80 rounded-lg border-[0.5px] border-zinc-400 bg-white/20 px-6 shadow-lg backdrop-blur-sm dark:border-gray-800"
                   >
                     <AccordionTrigger className="text-lg font-medium">
                       {item.question}
@@ -158,8 +163,8 @@ const Faq: FC<FaqProps> = ({ slice }) => {
         </div>
 
         {/* cta */}
-        <div className="rounded-xl border-[0.5px] border-zinc-400 bg-white/20 p-8 text-center shadow-lg backdrop-blur-sm dark:border-gray-800 dark:bg-blue-850/70 md:p-12">
-          <h2 className="mb-4 text-2xl font-bold text-black-50 dark:text-white md:text-3xl">
+        <div className="dark:bg-card rounded-xl border-[0.5px] border-zinc-400 bg-white/20 p-8 text-center shadow-lg backdrop-blur-sm md:p-12 dark:border-gray-800">
+          <h2 className="text-foreground mb-4 text-2xl font-bold md:text-3xl">
             Still Have Questions?
           </h2>
           <p className="mx-auto mb-8 max-w-2xl text-black/80 dark:text-gray-300">

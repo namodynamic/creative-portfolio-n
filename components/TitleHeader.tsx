@@ -12,14 +12,14 @@ interface TitleHeaderProps {
 const TitleHeader = ({ title, subtitle, icon, intro }: TitleHeaderProps) => {
   return (
     <motion.div
-    initial={{ opacity: 0, y: 40, scale: 0.95 }}
-  whileInView={{ opacity: 1, y: 0, scale: 1 }}
-  viewport={{ once: true, amount: 0.6 }}
-  transition={{
-    duration: 0.6,
-    type: "tween",
-    ease: "easeOut",
-  }}
+      initial={{ opacity: 0, y: 40, scale: 0.95 }}
+      whileInView={{ opacity: 1, y: 0, scale: 1 }}
+      viewport={{ once: true, amount: 0.6 }}
+      transition={{
+        duration: 0.6,
+        type: "tween",
+        ease: "easeOut",
+      }}
       className="mb-16 text-center"
     >
       <motion.div
@@ -27,10 +27,10 @@ const TitleHeader = ({ title, subtitle, icon, intro }: TitleHeaderProps) => {
           hidden: { opacity: 0, scale: 0.95 },
           show: { opacity: 1, scale: 1 },
         }}
-        className="mb-6 inline-flex w-fit items-center gap-2 rounded-full bg-slate-950 px-4 py-2 text-sm text-white-50 dark:bg-slate-900 md:text-base"
+        className="text-primary-foreground mb-6 inline-flex w-fit items-center gap-2 rounded-full bg-slate-950 px-4 py-2 text-sm md:text-base dark:bg-slate-900"
       >
         {icon}
-        <p className="text-sm font-medium text-white-50 dark:text-slate-300">
+        <p className="text-primary-foreground text-sm font-medium dark:text-slate-300">
           {subtitle}
         </p>
       </motion.div>
@@ -40,7 +40,7 @@ const TitleHeader = ({ title, subtitle, icon, intro }: TitleHeaderProps) => {
           hidden: { opacity: 0, y: 20 },
           show: { opacity: 1, y: 0 },
         }}
-        className="mb-4 bg-gradient-to-r from-slate-900 via-slate-700 to-slate-900 bg-clip-text text-4xl font-bold text-black-100 dark:from-white-50 dark:via-slate-200 dark:to-white dark:text-transparent md:text-5xl"
+        className="text-foreground dark:from-foreground mb-4 bg-gradient-to-r from-slate-900 via-slate-700 to-slate-900 bg-clip-text text-4xl font-bold md:text-5xl dark:via-slate-200 dark:to-white dark:text-transparent"
       >
         {title}
       </motion.h2>

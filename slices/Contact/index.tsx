@@ -10,7 +10,14 @@ import { gsap } from "gsap";
 
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { Send, Mail, MapPin, Clock, ArrowRight, CheckCheck } from "lucide-react";
+import {
+  Send,
+  Mail,
+  MapPin,
+  Clock,
+  ArrowRight,
+  CheckCheck,
+} from "lucide-react";
 import { FaGithub, FaXTwitter, FaLinkedin } from "react-icons/fa6";
 import { MdOutlinePrivacyTip } from "react-icons/md";
 import { GrServices } from "react-icons/gr";
@@ -140,10 +147,10 @@ const Contact = ({ slice }: ContactProps): JSX.Element => {
       >
         <div className="mx-auto my-8 max-w-7xl sm:py-16">
           <div className="mb-16 text-center">
-            <p className="heading-anim mb-2 text-sm uppercase tracking-wider dark:text-slate-300">
+            <p className="heading-anim mb-2 text-sm tracking-wider uppercase dark:text-slate-300">
               {slice.primary.heading}
             </p>
-            <h1 className="heading-anim mb-4 text-4xl font-bold dark:text-white text-black-50 md:text-5xl">
+            <h1 className="heading-anim text-foreground mb-4 text-4xl font-bold md:text-5xl dark:text-white">
               {slice.primary.sub_heading}
             </h1>
             <p className="heading-anim mx-auto mt-4 max-w-2xl text-lg text-black/80 dark:text-gray-300">
@@ -153,7 +160,7 @@ const Contact = ({ slice }: ContactProps): JSX.Element => {
 
           <div className="grid grid-cols-1 items-start gap-8 lg:grid-cols-3">
             {/* Contact Form */}
-            <div className="contact-card rounded-lg border-[0.5px] border-zinc-400 dark:border-gray-800 dark:bg-blue-850/50 bg-white/20 p-8  backdrop-blur-sm lg:col-span-2">
+            <div className="contact-card dark:bg-card/80 rounded-lg border-[0.5px] border-zinc-400 bg-white/20 p-8 backdrop-blur-sm lg:col-span-2 dark:border-gray-800">
               <div className="flex items-center justify-between space-x-2">
                 <div className="mb-6 flex space-x-2">
                   <div className="h-3 w-3 rounded-full bg-red-500"></div>
@@ -163,7 +170,7 @@ const Contact = ({ slice }: ContactProps): JSX.Element => {
                 <Icon className="h-6 w-6 text-gray-400" />
               </div>
 
-              <h2 className="mb-6 text-2xl font-bold dark:text-white text-black-50">
+              <h2 className="text-foreground mb-6 text-2xl font-bold dark:text-white">
                 Send Me a Message
               </h2>
 
@@ -171,7 +178,7 @@ const Contact = ({ slice }: ContactProps): JSX.Element => {
                 <div className="space-y-2">
                   <label
                     htmlFor="name"
-                    className="block text-sm font-medium dark:text-white text-black-50"
+                    className="text-foreground block text-sm font-medium dark:text-white"
                   >
                     Name
                   </label>
@@ -182,7 +189,7 @@ const Contact = ({ slice }: ContactProps): JSX.Element => {
                     value={form.name}
                     onChange={handleChange}
                     placeholder="Your Name"
-                    className="w-full rounded-lg border-[0.5px] border-zinc-400 dark:border-gray-700 dark:bg-[#131a41]/50 bg-white/30 px-2 py-2 transition-all focus:outline-none focus:ring-1 focus:ring-purple-500"
+                    className="w-full rounded-lg border-[0.5px] border-zinc-400 bg-white/30 px-2 py-2 transition-all focus:ring-1 focus:ring-purple-500 focus:outline-none dark:border-gray-700 dark:bg-[#131a41]/50"
                     required
                   />
                 </div>
@@ -190,7 +197,7 @@ const Contact = ({ slice }: ContactProps): JSX.Element => {
                 <div className="space-y-2">
                   <label
                     htmlFor="email"
-                    className="block text-sm font-medium dark:text-white text-black-50"
+                    className="text-foreground block text-sm font-medium dark:text-white"
                   >
                     Email Address
                   </label>
@@ -201,7 +208,7 @@ const Contact = ({ slice }: ContactProps): JSX.Element => {
                     value={form.email}
                     onChange={handleChange}
                     placeholder="your.email@example.com"
-                    className="w-full rounded-lg border-[0.5px] border-zinc-400 dark:border-gray-700 dark:bg-[#131a41]/50 px-2 bg-white/30 py-2 transition-all focus:outline-none focus:ring-1 focus:ring-purple-500"
+                    className="w-full rounded-lg border-[0.5px] border-zinc-400 bg-white/30 px-2 py-2 transition-all focus:ring-1 focus:ring-purple-500 focus:outline-none dark:border-gray-700 dark:bg-[#131a41]/50"
                     required
                   />
                 </div>
@@ -209,7 +216,7 @@ const Contact = ({ slice }: ContactProps): JSX.Element => {
                 <div className="space-y-2">
                   <label
                     htmlFor="message"
-                    className="block text-sm font-medium dark:text-white text-black-50"
+                    className="text-foreground block text-sm font-medium dark:text-white"
                   >
                     Message
                   </label>
@@ -220,7 +227,7 @@ const Contact = ({ slice }: ContactProps): JSX.Element => {
                     value={form.message}
                     onChange={handleChange}
                     placeholder="Tell me about your project, questions, or just say hello!"
-                    className="w-full resize-none rounded-lg border-[0.5px] border-zinc-400 dark:border-gray-700 dark:bg-[#131a41]/50 bg-white/30 px-2 py-2 transition-all focus:outline-none focus:ring-1 focus:ring-purple-500"
+                    className="w-full resize-none rounded-lg border-[0.5px] border-zinc-400 bg-white/30 px-2 py-2 transition-all focus:ring-1 focus:ring-purple-500 focus:outline-none dark:border-gray-700 dark:bg-[#131a41]/50"
                     required
                   />
                 </div>
@@ -233,7 +240,7 @@ const Contact = ({ slice }: ContactProps): JSX.Element => {
                   {isLoading ? (
                     <span className="flex items-center">
                       <svg
-                        className="-ml-1 mr-3 h-5 w-5 animate-spin text-white"
+                        className="mr-3 -ml-1 h-5 w-5 animate-spin text-white"
                         xmlns="http://www.w3.org/2000/svg"
                         fill="none"
                         viewBox="0 0 24 24"
@@ -263,7 +270,7 @@ const Contact = ({ slice }: ContactProps): JSX.Element => {
                 </button>
               </form>
 
-              <div className="mt-6 flex items-center justify-center text-xs dark:text-white/50 text-black/50">
+              <div className="mt-6 flex items-center justify-center text-xs text-black/50 dark:text-white/50">
                 <span>
                   <MdOutlinePrivacyTip className="mr-1 inline h-4 w-4" />
                   <span>
@@ -276,15 +283,15 @@ const Contact = ({ slice }: ContactProps): JSX.Element => {
 
             {/* Contact Info */}
             <div className="space-y-6">
-              <div className="contact-card rounded-lg border-[0.5px] border-zinc-400 dark:border-gray-800 dark:bg-blue-850/50 bg-white/20 p-6 shadow-lg backdrop-blur-sm">
-                <h2 className="mb-6 text-xl font-bold dark:text-white text-black-50">
+              <div className="contact-card dark:bg-card/80 rounded-lg border-[0.5px] border-zinc-400 bg-white/20 p-6 shadow-lg backdrop-blur-sm dark:border-gray-800">
+                <h2 className="text-foreground mb-6 text-xl font-bold dark:text-white">
                   Contact Information
                 </h2>
 
                 <div className="space-y-5">
                   <div className="flex items-start">
                     <div className="flex-shrink-0">
-                      <div className="flex h-10 w-10 items-center justify-center rounded-md bg-black-50 dark:bg-purple-600/20 dark:text-white text-white">
+                      <div className="bg-primary flex h-10 w-10 items-center justify-center rounded-md text-white dark:bg-purple-600/20 dark:text-white">
                         <Mail className="h-5 w-5" />
                       </div>
                     </div>
@@ -292,10 +299,10 @@ const Contact = ({ slice }: ContactProps): JSX.Element => {
                       <h3 className="text-sm font-medium dark:text-white">
                         Email
                       </h3>
-                      <p className="mt-1 dark:text-gray-400 text-black/60">
+                      <p className="mt-1 text-black/60 dark:text-gray-400">
                         <a
                           href={`mailto:${slice.primary.contact_email}`}
-                          className="transition-colors dark:hover:text-purple-100 hover:text-black-50"
+                          className="hover:text-foreground transition-colors dark:hover:text-purple-100"
                         >
                           {slice.primary.contact_email}
                         </a>
@@ -305,7 +312,7 @@ const Contact = ({ slice }: ContactProps): JSX.Element => {
 
                   <div className="flex items-start">
                     <div className="flex-shrink-0">
-                      <div className="flex h-10 w-10 items-center justify-center rounded-md dark:bg-yellow-700/20 bg-black-50 dark:text-yellow-500 text-white">
+                      <div className="bg-primary flex h-10 w-10 items-center justify-center rounded-md text-white dark:bg-yellow-700/20 dark:text-yellow-500">
                         <MapPin className="h-5 w-5" />
                       </div>
                     </div>
@@ -313,7 +320,7 @@ const Contact = ({ slice }: ContactProps): JSX.Element => {
                       <h3 className="text-sm font-medium dark:text-white">
                         Location
                       </h3>
-                      <p className="mt-1 dark:text-gray-400 text-black/60">
+                      <p className="mt-1 text-black/60 dark:text-gray-400">
                         {slice.primary.location}
                       </p>
                     </div>
@@ -321,7 +328,7 @@ const Contact = ({ slice }: ContactProps): JSX.Element => {
 
                   <div className="flex items-start">
                     <div className="flex-shrink-0">
-                      <div className="flex h-10 w-10 items-center justify-center rounded-md dark:bg-green-700/20 dark:text-green-500 bg-black-50 text-white">
+                      <div className="bg-primary flex h-10 w-10 items-center justify-center rounded-md text-white dark:bg-green-700/20 dark:text-green-500">
                         <Clock className="h-5 w-5" />
                       </div>
                     </div>
@@ -329,14 +336,16 @@ const Contact = ({ slice }: ContactProps): JSX.Element => {
                       <h3 className="text-sm font-medium dark:text-white">
                         Response Time
                       </h3>
-                      <p className="mt-1 dark:text-gray-400 text-black/60">Within 24 hours</p>
+                      <p className="mt-1 text-black/60 dark:text-gray-400">
+                        Within 24 hours
+                      </p>
                     </div>
                   </div>
                 </div>
               </div>
 
-              <div className="contact-card rounded-lg border-[0.5px] border-zinc-400 dark:border-gray-800 dark:bg-blue-850/50 bg-white/20 p-6 shadow-lg backdrop-blur-sm">
-                <h2 className="mb-4 text-xl font-bold dark:text-white text-black-50">
+              <div className="contact-card dark:bg-card/80 rounded-lg border-[0.5px] border-zinc-400 bg-white/20 p-6 shadow-lg backdrop-blur-sm dark:border-gray-800">
+                <h2 className="text-foreground mb-4 text-xl font-bold dark:text-white">
                   Connect with me:
                 </h2>
 
@@ -345,7 +354,7 @@ const Contact = ({ slice }: ContactProps): JSX.Element => {
                     href="https://github.com/namodynamic"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="flex h-10 w-10 items-center justify-center rounded-full border border-gray-700 bg-black-50 dark:bg-[#131a41]/50 text-white transition-all hover:border-purple-500 hover:bg-purple-500"
+                    className="bg-primary flex h-10 w-10 items-center justify-center rounded-full border border-gray-700 text-white transition-all hover:border-purple-500 hover:bg-purple-500 dark:bg-[#131a41]/50"
                   >
                     <FaGithub className="h-5 w-5" />
                     <span className="sr-only">GitHub</span>
@@ -355,7 +364,7 @@ const Contact = ({ slice }: ContactProps): JSX.Element => {
                     href="https://linkedin.com/in/ekechinnamdi"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="flex h-10 w-10 items-center justify-center rounded-full border border-gray-700 bg-black-50 dark:bg-[#131a41]/50 text-white transition-all hover:border-purple-500 hover:bg-purple-500"
+                    className="bg-primary flex h-10 w-10 items-center justify-center rounded-full border border-gray-700 text-white transition-all hover:border-purple-500 hover:bg-purple-500 dark:bg-[#131a41]/50"
                   >
                     <FaLinkedin className="h-5 w-5" />
                     <span className="sr-only">LinkedIn</span>
@@ -365,7 +374,7 @@ const Contact = ({ slice }: ContactProps): JSX.Element => {
                     href="https://x.com/namodynamic"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="flex h-10 w-10 items-center justify-center rounded-full border border-gray-700 bg-black-50 dark:bg-[#131a41]/50 text-white transition-all hover:border-purple-500 hover:bg-purple-500"
+                    className="bg-primary flex h-10 w-10 items-center justify-center rounded-full border border-gray-700 text-white transition-all hover:border-purple-500 hover:bg-purple-500 dark:bg-[#131a41]/50"
                   >
                     <FaXTwitter className="h-5 w-5" />
                     <span className="sr-only">Twitter</span>
@@ -373,13 +382,17 @@ const Contact = ({ slice }: ContactProps): JSX.Element => {
                 </div>
               </div>
 
-              <div className="contact-card rounded-lg border-[0.5px] border-zinc-400 dark:border-gray-800 dark:bg-blue-850/50 bg-white/20 p-6 shadow-lg backdrop-blur-sm">
-                <h2 className="mb-4 text-xl font-bold dark:text-white text-black-50">Services</h2>
+              <div className="contact-card dark:bg-card/80 rounded-lg border-[0.5px] border-zinc-400 bg-white/20 p-6 shadow-lg backdrop-blur-sm dark:border-gray-800">
+                <h2 className="text-foreground mb-4 text-xl font-bold dark:text-white">
+                  Services
+                </h2>
                 <ul className="space-y-3">
                   {slice.items.map((item, index) => (
                     <li key={index} className="flex items-center">
                       <GrServices className="mr-2 h-3 w-3 flex-shrink-0" />
-                      <span className="dark:text-gray-300 text-black/80">{item.services}</span>
+                      <span className="text-black/80 dark:text-gray-300">
+                        {item.services}
+                      </span>
                     </li>
                   ))}
                 </ul>
@@ -390,10 +403,10 @@ const Contact = ({ slice }: ContactProps): JSX.Element => {
           {/* FAQ Section */}
           <div className="contact-card mt-20">
             <div className="mb-10 text-center">
-              <h2 className="text-3xl font-bold dark:text-white text-black-50">
+              <h2 className="text-foreground text-3xl font-bold dark:text-white">
                 {slice.primary.faq_title}
               </h2>
-              <p className="mt-4 dark:text-gray-300 text-black/80">
+              <p className="mt-4 text-black/80 dark:text-gray-300">
                 {slice.primary.faq_intro}
               </p>
             </div>
@@ -407,7 +420,7 @@ const Contact = ({ slice }: ContactProps): JSX.Element => {
                 <AccordionItem
                   value={`item-${index + 1}`}
                   key={index}
-                  className="rounded-lg border-[0.5px] border-zinc-400 dark:border-gray-800 dark:bg-blue-850/50 bg-white/20 px-6 py-2 dark:text-white text-black-50 shadow-lg backdrop-blur-sm"
+                  className="dark:bg-card/80 text-foreground rounded-lg border-[0.5px] border-zinc-400 bg-white/20 px-6 py-2 shadow-lg backdrop-blur-sm dark:border-gray-800 dark:text-white"
                 >
                   <AccordionTrigger className="text-lg font-medium">
                     {item.question}
@@ -431,13 +444,13 @@ const Contact = ({ slice }: ContactProps): JSX.Element => {
           </div>
 
           {/* CTA */}
-          <div className="contact-card mt-20 rounded-xl border-[0.5px] border-zinc-400 dark:border-gray-800 dark:bg-blue-850/70 bg-white/20 p-6 shadow-lg backdrop-blur-sm sm:p-12">
+          <div className="contact-card dark:bg-card mt-20 rounded-xl border-[0.5px] border-zinc-400 bg-white/20 p-6 shadow-lg backdrop-blur-sm sm:p-12 dark:border-gray-800">
             <div className="text-center">
-              <h2 className="mb-4 text-3xl font-bold dark:text-white text-black-50">
+              <h2 className="text-foreground mb-4 text-3xl font-bold dark:text-white">
                 {slice.primary.cta_title}
               </h2>
               <p className="mx-auto mb-8 max-w-2xl dark:text-gray-300">
-               {slice.primary.cta_intro}
+                {slice.primary.cta_intro}
               </p>
               <Link href="#">
                 <MagicButton

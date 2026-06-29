@@ -26,13 +26,20 @@ const Certifications = async ({ slice, index }: CertificationsProps) => {
       <TitleHeader
         title={slice.primary.heading || ""}
         subtitle={slice.primary.sub_heading || ""}
-        icon={<LiaCertificateSolid className="h-5 w-5 text-white-50" />}
+        icon={
+          <LiaCertificateSolid className="text-primary-foreground h-5 w-5" />
+        }
         intro={slice.primary.intro || ""}
       />
 
-      <div className="grid grid-cols-1 gap-5 mt-12 md:mt-10 md:grid-cols-2 lg:grid-cols-3">
+      <div className="mt-12 grid grid-cols-1 gap-5 md:mt-10 md:grid-cols-2 lg:grid-cols-3">
         {slice.items.map((item, index) => (
-          <CertificationCard key={index} item={item} index={index} icon={item.icon_name} />
+          <CertificationCard
+            key={index}
+            item={item}
+            index={index}
+            icon={item.icon_name}
+          />
         ))}
       </div>
 

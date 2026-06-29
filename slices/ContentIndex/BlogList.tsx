@@ -104,16 +104,16 @@ export default function BlogList({
     <div className="w-full">
       <div className="mb-8 space-y-4">
         <div className="relative">
-          <Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-gray-400" />
+          <Search className="absolute top-1/2 left-3 h-4 w-4 -translate-y-1/2 text-gray-400" />
           <Input
             type="text"
             placeholder="Search articles..."
             value={searchQuery}
             onChange={(e) => handleSearchChange(e.target.value)}
-            className="border-gray-200 bg-white/80 pl-10 dark:border-gray-800 dark:bg-blue-850/80"
+            className="dark:bg-card border-gray-200 bg-white/80 pl-10 dark:border-gray-800"
           />
           {searchQuery !== debouncedSearchQuery && (
-            <div className="absolute right-3 top-1/2 -translate-y-1/2">
+            <div className="absolute top-1/2 right-3 -translate-y-1/2">
               <div className="h-4 w-4 animate-spin rounded-full border-2 border-gray-300 border-t-purple-600"></div>
             </div>
           )}
@@ -143,10 +143,10 @@ export default function BlogList({
               value={sortOrder}
               onValueChange={(value) => handleFilterChange("sort", value)}
             >
-              <SelectTrigger className="w-[140px] border-[0.5px] border-gray-500 bg-white/80 dark:bg-blue-850/80">
+              <SelectTrigger className="dark:bg-card w-[140px] border-[0.5px] border-gray-500 bg-white/80">
                 <SelectValue />
               </SelectTrigger>
-              <SelectContent className="border-[0.5px] border-gray-500 bg-white dark:bg-black-100">
+              <SelectContent className="dark:bg-card border-[0.5px] border-gray-500 bg-white">
                 <SelectItem value="newest">Most Recent</SelectItem>
                 <SelectItem value="oldest">Oldest First</SelectItem>
               </SelectContent>
@@ -214,7 +214,7 @@ export default function BlogList({
 
       {/* Pagination */}
       {totalPages > 0 && (
-        <div className="flex items-center justify-center mb-10 gap-2 md:pt-10">
+        <div className="mb-10 flex items-center justify-center gap-2 md:pt-10">
           <Button
             variant="outline"
             size="sm"

@@ -3,8 +3,25 @@ import { Content } from "@prismicio/client";
 import { SliceComponentProps, PrismicRichText } from "@prismicio/react";
 import Bounded from "@/components/Bounded";
 import Link from "next/link";
-import { Code, Database, Server, Rocket, FileText, Globe, CheckCircle, ArrowRight, Lock, RefreshCw, CheckCheck } from "lucide-react";
-import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
+import {
+  Code,
+  Database,
+  Server,
+  Rocket,
+  FileText,
+  Globe,
+  CheckCircle,
+  ArrowRight,
+  Lock,
+  RefreshCw,
+  CheckCheck,
+} from "lucide-react";
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from "@/components/ui/accordion";
 import { PrismicNextLink } from "@prismicio/next";
 
 const serviceIcons: { [key: string]: React.ReactNode } = {
@@ -44,10 +61,10 @@ const Services: FC<ServicesProps> = ({ slice }) => {
     >
       <div className="px-4 py-8 sm:px-6 sm:py-16 lg:px-8">
         <div className="mx-auto max-w-6xl text-center">
-          <p className="mb-2 text-sm uppercase tracking-wider text-black-50 dark:text-slate-300">
+          <p className="text-foreground mb-2 text-sm tracking-wider uppercase dark:text-slate-300">
             {slice.primary.heading}
           </p>
-          <h1 className="mb-4 text-4xl font-bold text-black-50 dark:text-white md:text-5xl">
+          <h1 className="text-foreground mb-4 text-4xl font-bold md:text-5xl dark:text-white">
             {slice.primary.sub_heading}
           </h1>
           <p className="mx-auto max-w-3xl text-xl text-black/80 dark:text-gray-300">
@@ -62,13 +79,13 @@ const Services: FC<ServicesProps> = ({ slice }) => {
           {slice.primary.services.map((service, index) => (
             <div
               key={index}
-              className="rounded-xl border-[0.5px] border-zinc-400 bg-white/20 p-6 shadow-lg backdrop-blur-sm dark:border-gray-800 dark:bg-blue-850/50"
+              className="dark:bg-card/80 rounded-xl border-[0.5px] border-zinc-400 bg-white/20 p-6 shadow-lg backdrop-blur-sm dark:border-gray-800"
             >
               <div className="mb-4 flex items-center">
                 <div className="mr-3 rounded-md bg-black/80 p-2 dark:bg-purple-500/10">
                   {serviceIcons[service.icons as string]}
                 </div>
-                <h2 className="text-xl font-bold text-black-50 dark:text-white">
+                <h2 className="text-foreground text-xl font-bold dark:text-white">
                   {service.title}
                 </h2>
               </div>
@@ -82,7 +99,7 @@ const Services: FC<ServicesProps> = ({ slice }) => {
                     components={{
                       listItem: ({ children }) => (
                         <li className="flex items-start">
-                          <CheckCircle className="mr-2 mt-0.5 h-4 w-4 flex-shrink-0 text-black/50 dark:text-white" />
+                          <CheckCircle className="mt-0.5 mr-2 h-4 w-4 flex-shrink-0 text-black/50 dark:text-white" />
                           <span className="text-sm text-black/80 dark:text-gray-300">
                             {children}
                           </span>
@@ -108,10 +125,10 @@ const Services: FC<ServicesProps> = ({ slice }) => {
       <div className="px-4 py-16 sm:px-6 lg:px-8">
         <div className="mx-auto max-w-6xl">
           <div className="mb-12 text-center">
-            <p className="mb-2 text-sm uppercase tracking-wider dark:text-slate-300">
+            <p className="mb-2 text-sm tracking-wider uppercase dark:text-slate-300">
               {slice.primary.package_heading}
             </p>
-            <h2 className="mb-4 text-3xl font-bold text-black-50 dark:text-white">
+            <h2 className="text-foreground mb-4 text-3xl font-bold dark:text-white">
               {slice.primary.package_sub_heading}
             </h2>
             <p className="mx-auto max-w-3xl text-lg text-black/80 dark:text-gray-300">
@@ -123,16 +140,16 @@ const Services: FC<ServicesProps> = ({ slice }) => {
             {slice.primary.packages.map((item, index) => (
               <div
                 key={index}
-                className="group relative overflow-hidden rounded-xl border-[0.5px] border-zinc-400 bg-white/20 p-6 shadow-lg backdrop-blur-sm dark:border-gray-800 dark:bg-blue-850/50"
+                className="group dark:bg-card/80 relative overflow-hidden rounded-xl border-[0.5px] border-zinc-400 bg-white/20 p-6 shadow-lg backdrop-blur-sm dark:border-gray-800"
               >
-                <div className="absolute -right-20 -top-20 h-40 w-40 rounded-full bg-purple-500/10 transition-transform duration-500 group-hover:scale-150" />
+                <div className="absolute -top-20 -right-20 h-40 w-40 rounded-full bg-purple-500/10 transition-transform duration-500 group-hover:scale-150" />
                 <div className="relative">
                   <div className="mb-6 flex justify-center">
                     <div className="transform rounded-full bg-black/80 p-3 transition-transform group-hover:scale-110 dark:bg-slate-200">
                       {packageIcons[item.icons as string]}
                     </div>
                   </div>
-                  <h3 className="mb-3 text-center text-xl font-bold text-black-50 dark:text-white">
+                  <h3 className="text-foreground mb-3 text-center text-xl font-bold dark:text-white">
                     {item.title}
                   </h3>
                   <p className="mb-6 h-14 text-center text-black/80 dark:text-gray-300">
@@ -144,7 +161,7 @@ const Services: FC<ServicesProps> = ({ slice }) => {
                       components={{
                         listItem: ({ children }) => (
                           <li className="flex items-start">
-                            <CheckCheck className="mr-2 mt-0.5 h-4 w-4 flex-shrink-0 text-black/80 dark:text-white" />
+                            <CheckCheck className="mt-0.5 mr-2 h-4 w-4 flex-shrink-0 text-black/80 dark:text-white" />
                             <span className="text-sm text-black/80 dark:text-gray-300">
                               {children}
                             </span>
@@ -184,9 +201,9 @@ const Services: FC<ServicesProps> = ({ slice }) => {
       </div>
 
       {/* Development Process */}
-      <div className="mt-10 relative z-20 rounded-xl shadow-lg backdrop-blur-sm bg-white/20 px-4 py-16 dark:bg-blue-850/50 sm:px-6 lg:px-8">
+      <div className="dark:bg-card/80 relative z-20 mt-10 rounded-xl bg-white/20 px-4 py-16 shadow-lg backdrop-blur-sm sm:px-6 lg:px-8">
         <div className="mx-auto max-w-6xl">
-          <h2 className="mb-12 text-center text-3xl font-bold text-black-50 dark:text-white">
+          <h2 className="text-foreground mb-12 text-center text-3xl font-bold dark:text-white">
             {slice.primary.development_process}
           </h2>
 
@@ -198,7 +215,7 @@ const Services: FC<ServicesProps> = ({ slice }) => {
                     {processIcons[item.icons as string]}
                   </div>
                 </div>
-                <h3 className="mb-2 text-xl font-bold text-black-50 dark:text-white">
+                <h3 className="text-foreground mb-2 text-xl font-bold dark:text-white">
                   {item.process}
                 </h3>
                 <p className="text-black/80 dark:text-gray-300">
@@ -211,13 +228,13 @@ const Services: FC<ServicesProps> = ({ slice }) => {
       </div>
 
       {/* FAQ */}
-      <div className=" mt-16 px-4 py-16 sm:px-6 lg:px-8">
+      <div className="mt-16 px-4 py-16 sm:px-6 lg:px-8">
         <div className="mx-auto max-w-4xl">
           <div className="mb-12 text-center">
-            <p className="mb-2 text-sm uppercase tracking-wider text-black-50 dark:text-slate-300">
+            <p className="text-foreground mb-2 text-sm tracking-wider uppercase dark:text-slate-300">
               FAQs
             </p>
-            <h2 className="mb-4 text-3xl font-bold text-black-50 dark:text-white">
+            <h2 className="text-foreground mb-4 text-3xl font-bold dark:text-white">
               Frequently Asked Questions
             </h2>
             <p className="text-lg text-black/80 dark:text-gray-300">
@@ -229,7 +246,7 @@ const Services: FC<ServicesProps> = ({ slice }) => {
               <AccordionItem
                 key={index}
                 value={`item-${index}`}
-                className="rounded-lg border-[0.5px] border-zinc-400 bg-white/20 px-6 shadow-lg backdrop-blur-sm dark:border-gray-800 dark:bg-blue-850/50"
+                className="dark:bg-card/80 rounded-lg border-[0.5px] border-zinc-400 bg-white/20 px-6 shadow-lg backdrop-blur-sm dark:border-gray-800"
               >
                 <AccordionTrigger className="text-lg font-medium">
                   {item.question}
@@ -254,8 +271,8 @@ const Services: FC<ServicesProps> = ({ slice }) => {
 
       {/* CTA  */}
       <div className="px-4 py-16 sm:px-6 lg:px-8">
-        <div className="mx-auto max-w-5xl rounded-lg border-[0.5px] border-zinc-400 bg-white/20 p-6 text-center shadow-lg backdrop-blur-sm dark:border-gray-800 dark:bg-blue-850/70 sm:p-12">
-          <h2 className="mb-4 text-3xl font-bold text-black-50 dark:text-white">
+        <div className="dark:bg-card mx-auto max-w-5xl rounded-lg border-[0.5px] border-zinc-400 bg-white/20 p-6 text-center shadow-lg backdrop-blur-sm sm:p-12 dark:border-gray-800">
+          <h2 className="text-foreground mb-4 text-3xl font-bold dark:text-white">
             Ready to Transform Your Ideas Into Reality?
           </h2>
           <p className="mx-auto mb-8 max-w-3xl text-xl text-black/80 dark:text-gray-300">
@@ -272,7 +289,7 @@ const Services: FC<ServicesProps> = ({ slice }) => {
             </Link>
             <Link
               href="/projects"
-              className="rounded-md border border-gray-700 bg-transparent px-6 py-3 font-medium shadow-lg transition-all hover:bg-blue-850 hover:text-gray-300 dark:text-white dark:hover:text-gray-400"
+              className="hover:bg-muted rounded-md border border-gray-700 bg-transparent px-6 py-3 font-medium shadow-lg transition-all hover:text-gray-300 dark:text-white dark:hover:text-gray-400"
             >
               View My Projects
             </Link>

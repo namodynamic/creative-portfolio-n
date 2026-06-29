@@ -87,10 +87,10 @@ export const BentoGridItem = ({
       className={cn(
         "group/bento relative row-span-1 flex flex-col justify-between space-y-3 overflow-hidden rounded-lg transition duration-200 sm:space-y-4 sm:rounded-xl md:rounded-2xl lg:rounded-3xl",
 
-        `${id === 2 && "dark:bg-dot-black-500"}`,
-        `${id === 3 && "dark:bg-dot-black-500"}`,
+        `${id === 2 && "dark:bg-dot-zinc-700"}`,
+        `${id === 3 && "dark:bg-dot-zinc-700"}`,
 
-        "border border-white/30 bg-opacity-80 shadow-[0_4px_30px_rgba(0,0,0,0.1)] backdrop-blur-lg bg-dot-white-500 hover:shadow-[0_6px_40px_rgba(0,0,0,0.15)]",
+        "bg-opacity-80 bg-dot-zinc-400 border border-white/30 shadow-[0_4px_30px_rgba(0,0,0,0.1)] backdrop-blur-lg hover:shadow-[0_6px_40px_rgba(0,0,0,0.15)]",
 
         "dark:border-white/10 dark:bg-[linear-gradient(90deg,_rgba(4,7,29,1)_0%,_rgba(12,14,35,1)_100%)] dark:shadow-none dark:hover:shadow-xl",
 
@@ -109,7 +109,7 @@ export const BentoGridItem = ({
             />
           )}
         </div>
-        <div className={`absolute bottom-0 right-0 ${id === 5 && "inset-0"} `}>
+        <div className={`absolute right-0 bottom-0 ${id === 5 && "inset-0"} `}>
           {spareImg && (
             <Image
               src={spareImg}
@@ -132,7 +132,7 @@ export const BentoGridItem = ({
             "relative flex min-h-32 flex-col p-4 transition duration-200 group-hover/bento:translate-x-2 sm:min-h-40 sm:p-5 md:h-full md:p-6 lg:p-8 xl:p-10",
           )}
         >
-          <div className="z-10 font-sans text-xs font-extralight dark:text-[#C1C2D3] sm:text-sm md:max-w-32 md:text-xs lg:max-w-40 lg:text-sm xl:text-base">
+          <div className="z-10 font-sans text-xs font-extralight sm:text-sm md:max-w-32 md:text-xs lg:max-w-40 lg:text-sm xl:text-base dark:text-[#C1C2D3]">
             {description}
           </div>
 
@@ -177,7 +177,7 @@ export const BentoGridItem = ({
           {id === 6 && (
             <div className="relative mt-3 sm:mt-5">
               {copied && (
-                <div className="absolute -bottom-3 right-0 z-50 sm:-bottom-5">
+                <div className="absolute right-0 -bottom-3 z-50 sm:-bottom-5">
                   <div className="h-[150px] w-[300px] sm:h-[200px] sm:w-[400px]">
                     <Lottie
                       options={defaultOptions}

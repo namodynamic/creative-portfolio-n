@@ -5,92 +5,8 @@ const flattenColorPalette =
   flattenColorPaletteModule.default ?? flattenColorPaletteModule;
 
 const config = {
-  darkMode: "class",
-  content: [
-    "./pages/**/*.{js,ts,jsx,tsx,mdx}",
-    "./components/**/*.{js,ts,jsx,tsx,mdx}",
-    "./app/**/*.{js,ts,jsx,tsx,mdx}",
-    "./slices/**/*.{js,jsx,tsx,mdx}",
-    "./prismic/**/*",
-  ],
   theme: {
-    container: {
-      center: true,
-      padding: "2rem",
-      screens: {
-        "2xl": "1400px",
-      },
-    },
     extend: {
-      colors: {
-        black: {
-          "50": "#1c1c21",
-          "75": "#000319",
-          "100": "#050816",
-          "200": "rgba(17, 25, 40, 0.75)",
-          "300": "rgba(255, 255, 255, 0.125)",
-          "500": "#3A3A49",
-          "600": "#1E293B",
-          DEFAULT: "#000",
-        },
-        white: {
-          "50": "#CDD7E2",
-          "100": "#BEC1DD",
-          "200": "#C1C2D3",
-          "500": "#62646C",
-          "600": "#AFB0B6",
-          "700": "#D6D9E9",
-          "800": "#E4E4E6",
-          DEFAULT: "#FFF",
-        },
-        blue: {
-          "100": "#E4ECFF",
-          "200": "#1E293B",
-          "850": "#0a0e29",
-        },
-        border: "hsl(var(--border))",
-        input: "hsl(var(--input))",
-        ring: "hsl(var(--ring))",
-        background: "hsl(var(--background))",
-        foreground: "hsl(var(--foreground))",
-        primary: {
-          DEFAULT: "hsl(var(--primary))",
-          foreground: "hsl(var(--primary-foreground))",
-        },
-        secondary: {
-          DEFAULT: "hsl(var(--secondary))",
-          foreground: "hsl(var(--secondary-foreground))",
-        },
-        destructive: {
-          DEFAULT: "hsl(var(--destructive))",
-          foreground: "hsl(var(--destructive-foreground))",
-        },
-        muted: {
-          DEFAULT: "hsl(var(--muted))",
-          foreground: "hsl(var(--muted-foreground))",
-        },
-        accent: {
-          DEFAULT: "hsl(var(--accent))",
-          foreground: "hsl(var(--accent-foreground))",
-        },
-        popover: {
-          DEFAULT: "hsl(var(--popover))",
-          foreground: "hsl(var(--popover-foreground))",
-        },
-        card: {
-          DEFAULT: "hsl(var(--card))",
-          foreground: "hsl(var(--card-foreground))",
-        },
-        navy: {
-          "800": "#051736",
-          "900": "#020b1c",
-        },
-        borderRadius: {
-          lg: "var(--radius)",
-          md: "calc(var(--radius) - 2px)",
-          sm: "calc(var(--radius) - 4px)",
-        },
-      },
       keyframes: {
         "accordion-down": {
           from: {
@@ -106,24 +22,6 @@ const config = {
           },
           to: {
             height: "0",
-          },
-        },
-        spotlight: {
-          "0%": {
-            opacity: "0",
-            transform: "translate(-72%, -62%) scale(0.5)",
-          },
-          "100%": {
-            opacity: "1",
-            transform: "translate(-50%,-40%) scale(1)",
-          },
-        },
-        shimmer: {
-          from: {
-            backgroundPosition: "0 0",
-          },
-          to: {
-            backgroundPosition: "-200% 0",
           },
         },
         moveHorizontal: {
@@ -164,20 +62,10 @@ const config = {
             transform: "translate(calc(-50% - 0.5rem))",
           },
         },
-        move: {
-          "0%": {
-            transform: "translateX(-200px)",
-          },
-          "100%": {
-            transform: "translateX(200px)",
-          },
-        },
       },
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
-        spotlight: "spotlight 2s ease .75s 1 forwards",
-        shimmer: "shimmer 2s linear infinite",
         first: "moveVertical 30s ease infinite",
         second: "moveInCircle 20s reverse infinite",
         third: "moveInCircle 40s linear infinite",
@@ -190,8 +78,6 @@ const config = {
   },
   plugins: [
     require("@tailwindcss/typography"),
-    require("tailwindcss-animate"),
-    addVariablesForColors,
     function ({ matchUtilities, theme }: any) {
       matchUtilities(
         {
@@ -219,16 +105,5 @@ const config = {
     },
   ],
 };
-
-function addVariablesForColors({ addBase, theme }: any) {
-  let allColors = flattenColorPalette(theme("colors"));
-  let newVars = Object.fromEntries(
-    Object.entries(allColors).map(([key, val]) => [`--${key}`, val]),
-  );
-
-  addBase({
-    ":root": newVars,
-  });
-}
 
 module.exports = config;

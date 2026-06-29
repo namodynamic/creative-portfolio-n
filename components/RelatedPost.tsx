@@ -27,7 +27,7 @@ export default async function RelatedPosts({ params }: TagPageProps) {
 
   return (
     <div className="mt-12">
-      <h2 className="mb-6 text-2xl font-bold text-black-50 dark:text-white">
+      <h2 className="text-foreground mb-6 text-2xl font-bold dark:text-white">
         Related Posts
       </h2>
       <div className="grid grid-cols-1 gap-6 md:grid-cols-3">
@@ -42,7 +42,7 @@ export default async function RelatedPosts({ params }: TagPageProps) {
             <Link
               key={post.id}
               href={`/blog/${post.uid}`}
-              className="group overflow-hidden rounded-xl border border-zinc-400 bg-white/20 shadow-xl backdrop-blur-sm transition-transform hover:-translate-y-1 dark:border-slate-800 dark:bg-blue-850/50"
+              className="group dark:bg-card/80 overflow-hidden rounded-xl border border-zinc-400 bg-white/20 shadow-xl backdrop-blur-sm transition-transform hover:-translate-y-1 dark:border-slate-800"
             >
               <div className="relative h-40 w-full overflow-hidden">
                 <Image

@@ -61,23 +61,21 @@ const TechList = ({ slice }: TechListProps): JSX.Element => {
           title={slice.primary.heading || ""}
           subtitle={slice.primary.sub_heading || ""}
           intro={slice.primary.intro || ""}
-          icon={
-            <CodeXml className="h-5 w-5 text-white-50" />
-          }
+          icon={<CodeXml className="text-primary-foreground h-5 w-5" />}
         />
       </div>
 
       {slice.items.map(({ tech_color, tech_name }, index) => (
         <div
           key={index}
-          className="tech-row mb-4 flex items-center justify-center gap-2 text-slate-500 dark:text-slate-700 md:mb-8"
+          className="tech-row mb-4 flex items-center justify-center gap-2 text-slate-500 md:mb-8 dark:text-slate-700"
           aria-label={tech_name || ""}
         >
           {Array.from({ length: 15 }, (_, index) => (
             <React.Fragment key={index}>
               <span
                 className={
-                  "tech-item text-3xl font-extrabold uppercase tracking-tighter sm:text-5xl"
+                  "tech-item text-3xl font-extrabold tracking-tighter uppercase sm:text-5xl"
                 }
                 style={{
                   color: index === 7 && tech_color ? tech_color : "inherit",

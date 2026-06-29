@@ -60,7 +60,7 @@ export function ThemeToggle({ variant = "auto", className }: ThemeToggleProps) {
         <motion.div
           layout
           className={`flex h-6 w-6 items-center justify-center rounded-full bg-white shadow-md transition-colors duration-300 ${
-            isDark ? "text-slate-700" : "text-black-75"
+            isDark ? "text-slate-700" : "text-foreground"
           }`}
           animate={{
             x: isDark ? 32 : 0,

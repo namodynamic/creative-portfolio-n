@@ -17,7 +17,7 @@ const TestimonialCard = ({ slice }: { slice: Content.TestimonialSlice }) => {
         <TitleHeader
           title="Testimonials"
           subtitle="What People Say"
-          icon={<Quote className="text-white-50 h-5 w-5" />}
+          icon={<Quote className="text-primary-foreground h-5 w-5" />}
           intro="Feedback from colleagues and clients I've worked with"
         />
 
@@ -35,11 +35,14 @@ const TestimonialCard = ({ slice }: { slice: Content.TestimonialSlice }) => {
                 delay: index * 0.15,
               }}
               key={index}
-              className="group border-black-50 bg-black-50/90 dark:bg-black-100 mb-5 break-inside-avoid-column rounded-xl border p-6 will-change-transform"
+              className="group border-border bg-primary text-primary-foreground dark:bg-card dark:text-card-foreground mb-5 break-inside-avoid-column rounded-xl border p-6 will-change-transform"
             >
               <div className="mb-5 flex items-center gap-1">
                 {Array.from({ length: 5 }, (_, i) => (
-                  <FaStar key={i} className="text-white-50 size-5" />
+                  <FaStar
+                    key={i}
+                    className="text-primary-foreground size-5 dark:text-yellow-400"
+                  />
                 ))}
               </div>
               <div className="mb-5">
@@ -58,8 +61,10 @@ const TestimonialCard = ({ slice }: { slice: Content.TestimonialSlice }) => {
                   />
                 </div>
                 <div>
-                  <p className="font-bold text-white">{testimonial.name}</p>
-                  <p className="text-white-50">{testimonial.occupation}</p>
+                  <p className="font-bold">{testimonial.name}</p>
+                  <p className="text-primary-foreground dark:text-muted-foreground">
+                    {testimonial.occupation}
+                  </p>
                 </div>
               </div>
             </motion.div>
