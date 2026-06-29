@@ -1,8 +1,6 @@
-"use client";
-
 import Link from "next/link";
-import Image from "next/image";
 import { motion } from "framer-motion";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 
 interface PhotoNameLogoProps {
   name?: string;
@@ -15,26 +13,31 @@ export default function NameLogo({
   photoUrl = "/logo.png",
   href = "/",
 }: PhotoNameLogoProps) {
+  const initials = name
+    .split(" ")
+    .filter(Boolean)
+    .slice(0, 2)
+    .map((part) => part[0])
+    .join("")
+    .toUpperCase();
+
   return (
-    <Link href={href} aria-label="Home page" className="z-50 flex items-center">
+    <Link
+      href={href}
+      aria-label="Home page"
+      className="focus-visible:ring-ring relative z-50 flex items-center rounded-full outline-none focus-visible:ring-3"
+    >
       <motion.div
         whileHover={{ scale: 1.05 }}
         whileTap={{ scale: 0.95 }}
-        className="flex items-center gap-2"
+        className="flex items-center gap-2.5"
       >
-        <div className="dark:border-border relative h-9 w-9 overflow-hidden rounded-full border-2 border-white/30">
-          <div className="h-full w-full overflow-hidden rounded-full">
-            <Image
-              src={photoUrl || ""}
-              alt={`${name} profile photo`}
-              width={40}
-              height={40}
-              className="h-full w-full object-cover"
-            />
-          </div>
-        </div>
+        <Avatar className="shadow-sm">
+          <AvatarImage src={photoUrl || ""} alt={`${name} profile photo`} />
+          <AvatarFallback>{initials || "NE"}</AvatarFallback>
+        </Avatar>
 
-        <span className="text-foreground text-lg font-semibold dark:text-white">
+        <span className="text-foreground max-w-34 truncate text-sm font-semibold sm:max-w-none sm:text-base">
           {name}
         </span>
       </motion.div>
