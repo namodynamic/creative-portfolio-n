@@ -19,6 +19,7 @@
     "@prismicio/react": "^3.4.1",
     "@react-three/drei": "^10.7.7",
     "@react-three/fiber": "^9.6.1",
+    "@tabler/icons-react": "^3.44.0",
     "@types/react-lottie": "^1.2.10",
     "@types/three": "^0.185.0",
     "@vercel/analytics": "^2.0.1",
