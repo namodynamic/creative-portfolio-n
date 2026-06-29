@@ -26,8 +26,11 @@ const Hero = ({ slice }: HeroProps): JSX.Element => {
       data-slice-variation={slice.variation}
       className="relative overflow-hidden"
     >
-      <div className="relative mx-auto flex min-h-[calc(100dvh-24rem)] w-full max-w-6xl flex-col items-center justify-center text-center">
-        <Badge variant="secondary" className="mb-5 uppercase">
+      <div className="relative mx-auto flex min-h-[calc(100dvh-28rem)] w-full max-w-6xl flex-col items-center justify-center text-center">
+        <Badge
+          variant="secondary"
+          className="animate-in fade-in zoom-in mb-5 text-[9px] uppercase duration-700 sm:text-xs"
+        >
           {introText}
         </Badge>
 
@@ -41,14 +44,14 @@ const Hero = ({ slice }: HeroProps): JSX.Element => {
         </p>
 
         <div className="mt-10 flex flex-wrap items-center justify-center gap-3">
-          <Button asChild size="lg" className="text-base">
+          <Button asChild size="lg" className="sm:text-base">
             <Link href="/#featured-projects">
               View selected work
               <IconArrowDownRight data-icon="inline-end" />
             </Link>
           </Button>
 
-          <Button asChild variant="outline" size="lg" className="text-base">
+          <Button asChild variant="outline" size="lg" className="sm:text-base">
             <Link href="/contact">Start a conversation</Link>
           </Button>
         </div>

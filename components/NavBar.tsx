@@ -63,7 +63,7 @@ export default function NavBar({
       initial={{ y: -8, opacity: 0 }}
       animate={{ y: 0, opacity: 1 }}
       transition={{ duration: 0.25, ease: "easeOut" }}
-      className="fixed inset-x-0 top-0 z-50 px-3 py-3 sm:px-4"
+      className="fixed top-0 left-0 z-50 w-dvw max-w-dvw overflow-x-clip px-3 py-3 sm:px-4"
     >
       <div
         className={cn(
