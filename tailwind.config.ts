@@ -1,8 +1,8 @@
 const svgToDataUri = require("mini-svg-data-uri");
 
-const {
-  default: flattenColorPalette,
-} = require("tailwindcss/lib/util/flattenColorPalette");
+const flattenColorPaletteModule = require("tailwindcss/lib/util/flattenColorPalette");
+const flattenColorPalette =
+  flattenColorPaletteModule.default ?? flattenColorPaletteModule;
 
 const config = {
   darkMode: "class",
@@ -12,47 +12,6 @@ const config = {
     "./app/**/*.{js,ts,jsx,tsx,mdx}",
     "./slices/**/*.{js,jsx,tsx,mdx}",
     "./prismic/**/*",
-  ],
-  safelist: [
-    // Grid item wrapper classes
-    "lg:col-span-3",
-    "md:col-span-6",
-    "md:row-span-4",
-    "lg:min-h-[60vh]",
-    "lg:col-span-2",
-    "md:col-span-3",
-    "md:row-span-2",
-    "md:row-span-1",
-    "md:col-span-3",
-
-    // imgClassName values
-    "absolute",
-    "right-0",
-    "bottom-0",
-    "md:w-96",
-    "w-60",
-
-    // titleClassName values
-    "justify-end",
-    "justify-start",
-    "justify-center",
-    "md:justify-start",
-    "lg:justify-center",
-    "md:max-w-full",
-    "max-w-60",
-    "text-center",
-    {
-      pattern:
-        /from-(slate|gray|zinc|neutral|stone|red|orange|amber|yellow|lime|green|emerald|teal|cyan|sky|blue|indigo|violet|purple|fuchsia|pink|rose)-\d{3}(\/\d{2,3})?/,
-    },
-    {
-      pattern:
-        /via-(slate|gray|zinc|neutral|stone|red|orange|amber|yellow|lime|green|emerald|teal|cyan|sky|blue|indigo|violet|purple|fuchsia|pink|rose)-\d{3}(\/\d{2,3})?/,
-    },
-    {
-      pattern:
-        /to-(slate|gray|zinc|neutral|stone|red|orange|amber|yellow|lime|green|emerald|teal|cyan|sky|blue|indigo|violet|purple|fuchsia|pink|rose)-\d{3}(\/\d{2,3})?/,
-    },
   ],
   theme: {
     container: {
@@ -272,4 +231,4 @@ function addVariablesForColors({ addBase, theme }: any) {
   });
 }
 
-export default config;
+module.exports = config;

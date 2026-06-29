@@ -1,6 +1,10 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss";
+@config "../tailwind.config.ts";
+
+@source inline("absolute bottom-0 right-0 text-center w-60");
+@source inline("{md:,lg:}{col-span-2,col-span-3,col-span-6,col-span-8,row-span-1,row-span-2,row-span-4,justify-start,justify-center,max-w-full,min-h-[60vh],w-96}");
+@source inline("justify-start justify-center justify-end max-w-60");
+@source inline("{from,via,to}-{slate,gray,zinc,neutral,stone,red,orange,amber,yellow,lime,green,emerald,teal,cyan,sky,blue,indigo,violet,purple,fuchsia,pink,rose}-{100,200,300,400,500,600,700,800,900}{,/10,/20,/25,/30,/40,/50,/60,/70,/75,/80,/90}");
 
 :root {
   --background-start-rgb: 205, 215, 226;
