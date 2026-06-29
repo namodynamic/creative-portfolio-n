@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import { Analytics } from "@vercel/analytics/react";
-import { Urbanist } from "next/font/google";
+import { Urbanist, Geist } from "next/font/google";
 import Script from "next/script";
 import "./globals.css";
 import clsx from "clsx";
@@ -12,6 +12,9 @@ import Header from "../components/Header";
 import Footer from "@/components/Footer";
 import { ThemeProvider } from "@/components/ThemeProvider";
 import { ThemeScript } from "@/components/ThemeScript";
+import { cn } from "@/lib/utils";
+
+const geist = Geist({subsets:['latin'],variable:'--font-sans'});
 
 const urbanist = Urbanist({ subsets: ["latin"] });
 
@@ -37,7 +40,7 @@ export default function RootLayout({
     <html
       lang="en"
       style={{ colorScheme: "light dark" }}
-      suppressHydrationWarning
+      suppressHydrationWarning className={cn("font-sans", geist.variable)}
     >
       <head>
         <ThemeScript />

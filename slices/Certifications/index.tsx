@@ -16,6 +16,7 @@ const Certifications = async ({ slice, index }: CertificationsProps) => {
   const testimonialSlice = page.data.slices.find(
     (slice) => slice.slice_type === "testimonial",
   );
+
   return (
     <Bounded
       data-slice-type={slice.slice_type}

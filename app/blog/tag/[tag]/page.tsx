@@ -1,4 +1,3 @@
-import * as Prismic from "@prismicio/client";
 import { createClient } from "@/prismicio";
 import Link from "next/link";
 import Bounded from "@/components/Bounded";
@@ -81,7 +80,7 @@ export default async function TagPage({ params }: TagPageProps) {
                       className="max-h-48 w-full object-fill transition-transform duration-300 group-hover:scale-105"
                     />
                   </Link>
-                  <div className="flex flex-grow flex-col p-6">
+                  <div className="flex grow flex-col p-6">
                     <div className="mb-4 flex flex-wrap gap-2">
                       {post.tags.slice(0, 3).map((tag) => (
                         <Badge
