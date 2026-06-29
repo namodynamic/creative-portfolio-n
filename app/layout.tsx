@@ -4,7 +4,6 @@ import { Analytics } from "@vercel/analytics/react";
 import { Urbanist, Geist } from "next/font/google";
 import Script from "next/script";
 import "./globals.css";
-import clsx from "clsx";
 import { PrismicPreview } from "@prismicio/next";
 import { createClient, repositoryName } from "@/prismicio";
 
@@ -13,7 +12,7 @@ import Footer from "@/components/Footer";
 import { ThemeProvider } from "@/components/ThemeProvider";
 import { cn } from "@/lib/utils";
 
-const geist = Geist({subsets:['latin'],variable:'--font-sans'});
+const geist = Geist({ subsets: ["latin"], variable: "--font-sans" });
 
 const urbanist = Urbanist({ subsets: ["latin"] });
 
@@ -38,8 +37,8 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      style={{ colorScheme: "light dark" }}
-      suppressHydrationWarning className={cn("font-sans", geist.variable)}
+      suppressHydrationWarning
+      className={cn("font-sans", geist.variable)}
     >
       <head>
         <Script
@@ -51,16 +50,16 @@ export default function RootLayout({
       </head>
 
       <body
-        className={clsx(urbanist.className, "relative")}
+        className={cn(
+          urbanist.className,
+          "relative flex min-h-dvh flex-col antialiased",
+        )}
         suppressHydrationWarning
       >
-         <ThemeProvider  
-          >
+        <ThemeProvider>
           <Header />
 
-          <main className="relative min-h-screen">
-            {children}
-          </main>
+          <main className="relative flex-1">{children}</main>
 
           <Footer />
         </ThemeProvider>

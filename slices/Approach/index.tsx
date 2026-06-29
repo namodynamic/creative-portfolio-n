@@ -8,6 +8,7 @@ import { AnimatePresence, motion } from "motion/react";
 import { CanvasRevealEffect } from "@/components/ui/CanvasRevealEffect";
 import Heading from "@/components/Heading";
 import { Workflow } from "lucide-react";
+import { cn } from "@/lib/utils";
 
 export type ApproachProps = SliceComponentProps<Content.ApproachSlice>;
 
@@ -50,7 +51,7 @@ const Approach = ({ slice }: ApproachProps): JSX.Element => {
       data-slice-variation={slice.variation}
       className="px-4 py-16 sm:px-6 sm:py-20 md:px-8 md:py-24 lg:py-28"
     >
-      <div className="mb-4 inline-flex w-fit items-center gap-2 text-nowrap rounded-lg bg-slate-950 px-3 py-1.5 text-white-50 dark:bg-slate-900 sm:mb-6 sm:gap-2.5 sm:px-4 sm:py-2 md:gap-3">
+      <div className="text-white-50 mb-4 inline-flex w-fit items-center gap-2 rounded-lg bg-slate-950 px-3 py-1.5 text-nowrap sm:mb-6 sm:gap-2.5 sm:px-4 sm:py-2 md:gap-3 dark:bg-slate-900">
         <Workflow className="h-4 w-4 text-white sm:h-5 sm:w-5" />
         <p className="text-xs font-bold text-white sm:text-sm md:text-base">
           {slice.primary.heading}
@@ -61,7 +62,7 @@ const Approach = ({ slice }: ApproachProps): JSX.Element => {
           {slice.primary.sub_heading}
         </Heading>
       </div>
-      <div className="prose prose-sm prose-invert col-start-1 mt-3 px-2 text-black-100 sm:prose-base md:prose-lg lg:prose-xl dark:text-slate-300 sm:mt-4 sm:px-0 md:mt-5">
+      <div className="prose prose-sm prose-invert text-black-100 sm:prose-base md:prose-lg lg:prose-xl col-start-1 mt-3 px-2 sm:mt-4 sm:px-0 md:mt-5 dark:text-slate-300">
         <p className="text-sm leading-relaxed sm:text-base md:text-lg">
           {slice.primary.intro}
         </p>
@@ -106,13 +107,14 @@ const Card = ({
     <div
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
-      className="group/canvas-card relative mx-auto flex w-full
-       max-w-sm items-center justify-center rounded-xl border border-white-200 p-4 bg-dot-white-500 dark:border-white/[0.2] sm:p-5 md:p-6 lg:h-[32rem] xl:h-[35rem]"
+      className={cn(
+        "group/canvas-card border-white-200 bg-dot-white-500 relative mx-auto flex w-full max-w-sm items-center justify-center rounded-xl border p-4 sm:p-5 md:p-6 lg:h-128 xl:h-140 dark:border-white/20",
+      )}
     >
-      <Icon className="absolute -left-2 -top-2.5 h-6 w-6 text-black opacity-30 dark:text-white" />
+      <Icon className="absolute -top-2.5 -left-2 h-6 w-6 text-black opacity-30 dark:text-white" />
       <Icon className="absolute -bottom-2 -left-2.5 h-6 w-6 text-black opacity-30 dark:text-white" />
-      <Icon className="absolute -right-2 -top-2.5 h-6 w-6 text-black opacity-30 dark:text-white" />
-      <Icon className="absolute -bottom-2 -right-2.5 h-6 w-6 text-black opacity-30 dark:text-white" />
+      <Icon className="absolute -top-2.5 -right-2 h-6 w-6 text-black opacity-30 dark:text-white" />
+      <Icon className="absolute -right-2.5 -bottom-2 h-6 w-6 text-black opacity-30 dark:text-white" />
 
       <AnimatePresence>
         {hovered && (
@@ -128,22 +130,23 @@ const Card = ({
 
       <div className="relative z-20 px-6 sm:px-8 md:px-10">
         <div
-          className="absolute left-[50%] top-[50%] mx-auto flex min-w-32 translate-x-[-50%] 
-        translate-y-[-50%] items-center justify-center text-center transition duration-200 group-hover/canvas-card:-translate-y-4 group-hover/canvas-card:opacity-0 sm:min-w-40"
+          className={cn(
+            "absolute top-[50%] left-[50%] mx-auto flex min-w-32 translate-x-[-50%] translate-y-[-50%] items-center justify-center text-center transition duration-200 group-hover/canvas-card:-translate-y-4 group-hover/canvas-card:opacity-0 sm:min-w-40",
+          )}
         >
           {icon}
         </div>
         <h2
-          className="relative z-10 mt-4 text-center text-xl
-         font-bold text-white opacity-0  transition duration-200 
-         group-hover/canvas-card:-translate-y-2 group-hover/canvas-card:text-white group-hover/canvas-card:opacity-100 sm:text-2xl md:text-3xl"
+          className={cn(
+            "relative z-10 mt-4 text-center text-xl font-bold text-white opacity-0 transition duration-200 group-hover/canvas-card:-translate-y-2 group-hover/canvas-card:text-white group-hover/canvas-card:opacity-100 sm:text-2xl md:text-3xl",
+          )}
         >
           {title}
         </h2>
         <p
-          className="relative z-10 mt-3
-         text-center text-xs opacity-0 transition duration-200
-         group-hover/canvas-card:-translate-y-2 group-hover/canvas-card:text-white group-hover/canvas-card:opacity-100 sm:mt-4 sm:text-sm"
+          className={cn(
+            "relative z-10 mt-3 text-center text-xs opacity-0 transition duration-200 group-hover/canvas-card:-translate-y-2 group-hover/canvas-card:text-white group-hover/canvas-card:opacity-100 sm:mt-4 sm:text-sm",
+          )}
           style={{ color: "#E4ECFF" }}
         >
           {des}
@@ -155,14 +158,16 @@ const Card = ({
 const AceternityIcon = ({ order }: { order: string }) => {
   return (
     <div>
-      <button className="relative inline-flex overflow-hidden rounded-full p-[1px] ">
+      <button className="relative inline-flex overflow-hidden rounded-full p-px">
         <span
-          className="absolute inset-[-1000%] animate-[spin_2s_linear_infinite]
-         bg-[conic-gradient(from_90deg_at_50%_50%,#E2CBFF_0%,#393BB2_50%,#E2CBFF_100%)]"
+          className={cn(
+            "absolute inset-[-1000%] animate-[spin_2s_linear_infinite] bg-[conic-gradient(from_90deg_at_50%_50%,#E2CBFF_0%,#393BB2_50%,#E2CBFF_100%)]",
+          )}
         />
         <span
-          className="relative inline-flex h-full w-full cursor-pointer items-center 
-        justify-center rounded-full bg-black-100 px-5 py-2 text-sm font-bold text-white backdrop-blur-3xl"
+          className={cn(
+            "bg-black-100 relative inline-flex h-full w-full cursor-pointer items-center justify-center rounded-full px-5 py-2 text-sm font-bold text-white backdrop-blur-3xl",
+          )}
         >
           {order}
         </span>
