@@ -17,7 +17,7 @@ const TestimonialCard = ({ slice }: { slice: Content.TestimonialSlice }) => {
         <TitleHeader
           title="Testimonials"
           subtitle="What People Say"
-          icon={<Quote className="h-5 w-5 text-white-50" />}
+          icon={<Quote className="text-white-50 h-5 w-5" />}
           intro="Feedback from colleagues and clients I've worked with"
         />
 
@@ -35,11 +35,11 @@ const TestimonialCard = ({ slice }: { slice: Content.TestimonialSlice }) => {
                 delay: index * 0.15,
               }}
               key={index}
-              className="group mb-5 break-inside-avoid-column rounded-xl border border-black-50 bg-black-50/90 p-6 will-change-transform dark:bg-black-100"
+              className="group border-black-50 bg-black-50/90 dark:bg-black-100 mb-5 break-inside-avoid-column rounded-xl border p-6 will-change-transform"
             >
               <div className="mb-5 flex items-center gap-1">
                 {Array.from({ length: 5 }, (_, i) => (
-                  <FaStar key={i} className="size-5 text-white-50" />
+                  <FaStar key={i} className="text-white-50 size-5" />
                 ))}
               </div>
               <div className="mb-5">

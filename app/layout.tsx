@@ -11,7 +11,6 @@ import { createClient, repositoryName } from "@/prismicio";
 import Header from "../components/Header";
 import Footer from "@/components/Footer";
 import { ThemeProvider } from "@/components/ThemeProvider";
-import { ThemeScript } from "@/components/ThemeScript";
 import { cn } from "@/lib/utils";
 
 const geist = Geist({subsets:['latin'],variable:'--font-sans'});
@@ -43,7 +42,6 @@ export default function RootLayout({
       suppressHydrationWarning className={cn("font-sans", geist.variable)}
     >
       <head>
-        <ThemeScript />
         <Script
           id="chatway"
           async
@@ -56,11 +54,11 @@ export default function RootLayout({
         className={clsx(urbanist.className, "relative")}
         suppressHydrationWarning
       >
-        <ThemeProvider defaultTheme="system">
+         <ThemeProvider  
+          >
           <Header />
 
           <main className="relative min-h-screen">
-            <div className="absolute inset-0 -z-10 bg-[linear-gradient(rgba(0,0,0,0.02)_1px,transparent_1px),linear-gradient(90deg,rgba(0,0,0,0.02)_1px,transparent_1px)] bg-[size:50px_50px] dark:bg-[linear-gradient(rgba(255,255,255,0.02)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.02)_1px,transparent_1px)]" />
             {children}
           </main>
 

@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { useTheme } from "@/components/ThemeProvider";
+import { useTheme } from "next-themes";
 import { Sun, MoonStar } from "lucide-react";
 import { motion } from "motion/react";
 
@@ -11,7 +11,7 @@ interface ThemeToggleProps {
 }
 
 export function ThemeToggle({ variant = "auto", className }: ThemeToggleProps) {
-  const { theme, setTheme } = useTheme();
+  const { resolvedTheme, setTheme } = useTheme();
   const [mounted, setMounted] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
 
@@ -39,17 +39,10 @@ export function ThemeToggle({ variant = "auto", className }: ThemeToggleProps) {
     );
   }
 
-  const isDark =
-    theme === "dark" ||
-    (theme === "system" &&
-      window.matchMedia("(prefers-color-scheme: dark)").matches);
+  const isDark = resolvedTheme === "dark";
 
   const toggleTheme = () => {
-    if (theme === "system") {
-      setTheme(isDark ? "light" : "dark");
-    } else {
-      setTheme(theme === "dark" ? "light" : "dark");
-    }
+    setTheme(isDark ? "light" : "dark");
   };
 
   const showSlider = variant === "slider" || (variant === "auto" && isMobile);

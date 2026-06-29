@@ -5,7 +5,7 @@ import Heading from "@/components/Heading";
 import { Content } from "@prismicio/client";
 import { PrismicNextImage } from "@prismicio/next";
 import { PrismicRichText, SliceComponentProps } from "@prismicio/react";
-import { useTheme } from "@/components/ThemeProvider";
+import { useTheme } from "next-themes";
 import { Briefcase } from "lucide-react";
 
 import {
@@ -19,7 +19,8 @@ import type { JSX } from "react";
 export type ExperienceProps = SliceComponentProps<Content.ExperienceSlice>;
 
 const Experience = ({ slice }: ExperienceProps): JSX.Element => {
-  const { theme } = useTheme();
+  const { resolvedTheme } = useTheme();
+  const isDark = resolvedTheme === "dark";
 
   const dynamicLinearGradient = slice.items
     .map(
@@ -77,13 +78,8 @@ const Experience = ({ slice }: ExperienceProps): JSX.Element => {
                 }}
                 contentStyle={{
                   background:
-                    theme === "dark" || theme === "system"
-                      ? "rgba(17,25,40,0.125)"
-                      : "rgba(240,245,255,0.125)",
-                  color:
-                    theme === "dark" || theme === "system"
-                      ? "#ffffff"
-                      : "#000000",
+                    isDark ? "rgba(17,25,40,0.125)" : "rgba(240,245,255,0.125)",
+                  color: isDark ? "#ffffff" : "#000000",
                   border: "0.2px solid rgba(255, 255, 255, 0.11)",
                   borderRadius: "12px",
                   borderStyle: "solid",
