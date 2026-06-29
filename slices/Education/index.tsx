@@ -128,8 +128,8 @@ const Education = ({ slice }: EducationProps): JSX.Element => {
                     </div>
                   </div>
 
-                  <div className="flex items-center justify-center md:w-80">
-                    <div className="relative">
+                  <div className="flex items-center justify-center overflow-hidden md:w-80">
+                    <div className="relative p-4">
                       <div className="absolute -top-4 -left-4 h-48 w-48 rounded-full bg-gradient-to-br from-purple-400 via-violet-500 to-indigo-600 opacity-20"></div>
                       <div className="relative z-10 flex h-40 w-40 items-center justify-center rounded-2xl bg-gradient-to-br from-purple-500 to-violet-600 shadow-2xl">
                         <GraduationCap className="h-20 w-20 text-white" />
