@@ -38,7 +38,7 @@ const ContentIndex = async ({
         {slice.primary.heading}
       </Heading>
       {isFilled.richText(slice.primary.description) && (
-        <div className="prose prose-lg mb-10 text-black sm:prose-xl dark:text-slate-200">
+        <div className="prose prose-neutral dark:prose-invert prose-p:text-muted-foreground prose-p:leading-8 sm:prose-lg mb-10 max-w-3xl">
           <PrismicRichText field={slice.primary.description} />
         </div>
       )}
@@ -53,20 +53,20 @@ const ContentIndex = async ({
         </>
       )}
       {ContentType === "Blog" && (
-       <div className="relative z-20 grid grid-cols-1 gap-10 lg:grid-cols-12">
-         <div className="place-items-start lg:col-span-8 flex-1">
-          <BlogList
-            items={blogPosts}
-            categories={blogCategories}
-            contentType="Blog"
-            viewMoreText={slice.primary.view_more_text || "Read More"}
-          />
-        </div>
+        <div className="relative grid grid-cols-1 gap-10 lg:grid-cols-12">
+          <div className="flex-1 place-items-start lg:col-span-8">
+            <BlogList
+              items={blogPosts}
+              categories={blogCategories}
+              contentType="Blog"
+              viewMoreText={slice.primary.view_more_text || "Read More"}
+            />
+          </div>
 
-        <aside className="lg:col-span-4">
+          <aside className="lg:col-span-4">
             <TechNewsCard />
           </aside>
-       </div>
+        </div>
       )}
     </Bounded>
   );

@@ -1,15 +1,15 @@
 "use client";
 
-import React, { useRef, useState, useEffect } from "react";
+import { useRef, useState, useEffect } from "react";
 import { asImageSrc, isFilled } from "@prismicio/client";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { Content } from "@prismicio/client";
 import Link from "next/link";
-import { formatDate } from "@/utils/FormatDate";
 import { extractFirstParagraphFromSlices } from "@/utils/extractSliceText";
-import { Tag, ArrowRight } from "lucide-react";
+import { IconArrowRight, IconTag } from "@tabler/icons-react";
 import { PrismicNextImage } from "@prismicio/next";
+import { Badge } from "@/components/ui/badge";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -29,10 +29,8 @@ export default function ContentList({
   const component = useRef(null);
   const itemsRef = useRef<Array<HTMLLIElement | null>>([]);
 
-  const date = formatDate(items[0].data.date);
-
   // Sort the items by date in descending order
-  const sortedItems = items.sort((a, b) => {
+  const sortedItems = [...items].sort((a, b) => {
     const dateA = new Date(a.data.date || "").getTime();
     const dateB = new Date(b.data.date || "").getTime();
     return dateB - dateA;
@@ -123,7 +121,7 @@ export default function ContentList({
     setCurrentItem(null);
   };
 
-  const contentImages = items.map((item) => {
+  const contentImages = sortedItems.map((item) => {
     const image = isFilled.image(item.data.hover_image)
       ? item.data.hover_image
       : fallbackItemImage;
@@ -163,46 +161,47 @@ export default function ContentList({
             >
               <Link
                 href={`${urlPrefix}/${item.uid}`}
-                className="flex flex-col items-start justify-between gap-5 border-t border-slate-400 py-8 dark:border-t-slate-700 dark:text-slate-200  sm:flex-row sm:py-12 "
+                className="group text-foreground flex flex-col items-start justify-between gap-5 border-t py-8 sm:flex-row sm:py-12"
                 aria-label={item.data.title || ""}
               >
-                <div className="mb-4 space-y-4 sm:mb-0">
+                <div className="mb-4 flex flex-col gap-4 sm:mb-0">
                   <div className="flex items-baseline gap-4">
-                    <h3 className="text-xl font-bold uppercase sm:text-2xl">
+                    <h3 className="font-heading text-xl font-semibold tracking-normal uppercase sm:text-2xl">
                       {item.data.title}
                     </h3>
-                    <span className="text-sm text-gray-400">
+                    <span className="text-muted-foreground text-sm">
                       ({sortedItems.length - index})
                     </span>
                   </div>
-                  <p className="line-clamp-3 max-w-full dark:text-slate-400 lg:max-w-[50vw]">
+                  <p className="text-muted-foreground line-clamp-3 max-w-full lg:max-w-[50vw]">
                     {firstParagraph || ""}
                   </p>
                   <div className="flex flex-wrap gap-2 pt-2 capitalize">
                     {item.tags.map((tag, index) => (
-                      <span
-                        key={index}
-                        className="inline-flex items-center gap-1 rounded-full bg-black/60 px-2 py-1 text-xs font-medium text-white dark:bg-slate-800/70 dark:text-slate-100"
-                      >
-                        <Tag className="h-3 w-3" />
+                      <Badge key={index} variant="secondary">
+                        <IconTag data-icon="inline-start" />
                         {tag}
-                      </span>
+                      </Badge>
                     ))}
                   </div>
                 </div>
 
                 <div className="flex flex-col items-start gap-2 sm:gap-5">
-                  <div className="hidden h-32 w-48 rounded-lg bg-gray-900 md:block">
+                  <div className=" bg-muted hidden h-32 w-48 overflow-hidden rounded-lg border md:block">
                     <PrismicNextImage
                       field={item.data.hover_image}
                       width={200}
                       height={130}
                       fallbackAlt=""
-                      className="h-full w-full rounded-lg object-fill"
+                      className="h-full w-full object-cover transition duration-300 group-hover:scale-105"
                     />
                   </div>
-                  <span className="inline-flex items-center gap-1">
-                    {viewMoreText} <ArrowRight className="h-4 w-4" />
+                  <span className="text-primary inline-flex items-center gap-1 text-sm font-medium transition-colors">
+                    {viewMoreText}
+                    <IconArrowRight
+                      data-icon="inline-end"
+                      className="size-4 transition-transform duration-300 group-hover:translate-x-1"
+                    />
                   </span>
                 </div>
               </Link>
@@ -212,7 +211,7 @@ export default function ContentList({
 
         {/* Hover element */}
         <div
-          className="hover-reveal pointer-events-none absolute left-0 top-0 -z-10 h-48 w-48 rounded-2xl bg-cover bg-center opacity-0 transition-[background] duration-300"
+          className="hover-reveal pointer-events-none absolute top-0 left-0 -z-10 h-48 w-48 rounded-2xl bg-cover bg-center opacity-0 transition-[background] duration-300"
           style={{
             backgroundImage:
               currentItem !== null ? `url(${contentImages[currentItem]})` : "",

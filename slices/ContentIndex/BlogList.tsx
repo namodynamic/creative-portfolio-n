@@ -2,12 +2,13 @@
 
 import { useState, useMemo } from "react";
 import {
-  Search,
-  Filter,
-  ChevronLeft,
-  ChevronRight,
-  FileText,
-} from "lucide-react";
+  IconChevronLeft,
+  IconChevronRight,
+  IconFileText,
+  IconFilter,
+  IconLoader2,
+  IconSearch,
+} from "@tabler/icons-react";
 import type { Content } from "@prismicio/client";
 import BlogCard from "@/components/BlogCard";
 import { Button } from "@/components/ui/button";
@@ -15,11 +16,13 @@ import { Input } from "@/components/ui/input";
 import {
   Select,
   SelectContent,
+  SelectGroup,
   SelectItem,
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
 import { useDebounce } from "@/hooks/useDebounce";
+import { Card, CardContent } from "@/components/ui/card";
 
 type BlogListProps = {
   items: Content.BlogPostDocument[];
@@ -102,19 +105,19 @@ export default function BlogList({
 
   return (
     <div className="w-full">
-      <div className="mb-8 space-y-4">
+      <div className="mb-8 flex flex-col gap-4">
         <div className="relative">
-          <Search className="absolute top-1/2 left-3 h-4 w-4 -translate-y-1/2 text-gray-400" />
+          <IconSearch className="text-muted-foreground absolute top-1/2 left-3 size-4 -translate-y-1/2" />
           <Input
             type="text"
             placeholder="Search articles..."
             value={searchQuery}
             onChange={(e) => handleSearchChange(e.target.value)}
-            className="dark:bg-card border-gray-200 bg-white/80 pl-10 dark:border-gray-800"
+            className="pl-10"
           />
           {searchQuery !== debouncedSearchQuery && (
             <div className="absolute top-1/2 right-3 -translate-y-1/2">
-              <div className="h-4 w-4 animate-spin rounded-full border-2 border-gray-300 border-t-purple-600"></div>
+              <IconLoader2 className="text-primary size-4 animate-spin" />
             </div>
           )}
         </div>
@@ -123,39 +126,41 @@ export default function BlogList({
         <div className="flex flex-col items-start justify-between gap-4 sm:flex-row sm:items-center">
           <div className="flex flex-wrap gap-2">
             {categories.map((category) => (
-              <button
+              <Button
                 key={category.value}
+                type="button"
+                variant={
+                  selectedCategory === category.value ? "default" : "outline"
+                }
+                size="sm"
                 onClick={() => handleFilterChange("category", category.value)}
-                className={`rounded-md px-4 py-2 text-sm font-medium transition-all duration-200 ${
-                  selectedCategory === category.value
-                    ? "bg-purple-600 text-white hover:bg-purple-700"
-                    : "bg-black/50 text-gray-300 hover:text-white dark:bg-[#0a0e29]/80 dark:hover:bg-[#0a0e29]"
-                }`}
               >
                 {category.label}
-              </button>
+              </Button>
             ))}
           </div>
 
           <div className="flex items-center gap-2">
-            <Filter className="h-4 w-4 text-gray-500" />
+            <IconFilter className="text-muted-foreground size-4" />
             <Select
               value={sortOrder}
               onValueChange={(value) => handleFilterChange("sort", value)}
             >
-              <SelectTrigger className="dark:bg-card w-[140px] border-[0.5px] border-gray-500 bg-white/80">
+              <SelectTrigger className="bg-card/60">
                 <SelectValue />
               </SelectTrigger>
-              <SelectContent className="dark:bg-card border-[0.5px] border-gray-500 bg-white">
-                <SelectItem value="newest">Most Recent</SelectItem>
-                <SelectItem value="oldest">Oldest First</SelectItem>
+              <SelectContent>
+                <SelectGroup>
+                  <SelectItem value="newest">Most Recent</SelectItem>
+                  <SelectItem value="oldest">Oldest First</SelectItem>
+                </SelectGroup>
               </SelectContent>
             </Select>
           </div>
         </div>
 
         {/* Results Count */}
-        <div className="text-sm text-gray-600 dark:text-gray-400">
+        <div className="text-muted-foreground text-sm">
           {filteredAndSortedItems.length === 0 ? (
             "No articles found"
           ) : (
@@ -172,7 +177,7 @@ export default function BlogList({
       </div>
 
       {/* Blog Posts */}
-      <div className="mb-10 space-y-6">
+      <div className="mb-10 flex flex-col gap-6">
         {currentItems.length > 0 ? (
           currentItems.map((item, index) => (
             <BlogCard
@@ -183,32 +188,33 @@ export default function BlogList({
             />
           ))
         ) : (
-          <div className="py-12 text-center">
-            <div className="mb-4 text-gray-400 dark:text-gray-500">
-              <FileText className="mx-auto h-12 w-12" />
-            </div>
-            <h3 className="mb-2 text-lg font-medium text-gray-900 dark:text-white">
-              No articles found
-            </h3>
-            <p className="text-gray-500 dark:text-gray-400">
-              {debouncedSearchQuery || selectedCategory !== "all"
-                ? "Try adjusting your search or filters"
-                : "Check back soon for new content!"}
-            </p>
-            {(debouncedSearchQuery || selectedCategory !== "all") && (
-              <Button
-                variant="outline"
-                onClick={() => {
-                  setSearchQuery("");
-                  setSelectedCategory("all");
-                  setCurrentPage(1);
-                }}
-                className="mt-4"
-              >
-                Clear filters
-              </Button>
-            )}
-          </div>
+          <Card className="ring-foreground/5">
+            <CardContent className="flex flex-col items-center gap-3 py-12 text-center">
+              <IconFileText className="text-muted-foreground size-12" />
+              <h3 className="font-heading text-lg font-medium">
+                No articles found
+              </h3>
+              <p className="text-muted-foreground">
+                {debouncedSearchQuery || selectedCategory !== "all"
+                  ? "Try adjusting your search or filters."
+                  : "Check back soon for new content."}
+              </p>
+              {(debouncedSearchQuery || selectedCategory !== "all") && (
+                <Button
+                  variant="outline"
+                  size="sm"
+                  onClick={() => {
+                    setSearchQuery("");
+                    setSelectedCategory("all");
+                    setCurrentPage(1);
+                  }}
+                  className="mt-2"
+                >
+                  Clear filters
+                </Button>
+              )}
+            </CardContent>
+          </Card>
         )}
       </div>
 
@@ -220,9 +226,8 @@ export default function BlogList({
             size="sm"
             onClick={() => handlePageChange(currentPage - 1)}
             disabled={currentPage === 1}
-            className="flex items-center gap-1"
           >
-            <ChevronLeft className="h-4 w-4" />
+            <IconChevronLeft data-icon="inline-start" />
             Previous
           </Button>
 
@@ -236,10 +241,7 @@ export default function BlogList({
               if (!showPage) {
                 if (page === currentPage - 2 || page === currentPage + 2) {
                   return (
-                    <span
-                      key={page}
-                      className="px-2 text-black dark:text-gray-400"
-                    >
+                    <span key={page} className="text-muted-foreground px-2">
                       ...
                     </span>
                   );
@@ -251,13 +253,8 @@ export default function BlogList({
                 <Button
                   key={page}
                   variant={currentPage === page ? "default" : "outline"}
-                  size="sm"
+                  size="icon-sm"
                   onClick={() => handlePageChange(page)}
-                  className={`h-8 w-8 p-0 ${
-                    currentPage === page
-                      ? "bg-purple-600 text-white hover:bg-purple-700"
-                      : ""
-                  }`}
                 >
                   {page}
                 </Button>
@@ -270,10 +267,9 @@ export default function BlogList({
             size="sm"
             onClick={() => handlePageChange(currentPage + 1)}
             disabled={currentPage === totalPages}
-            className="flex items-center gap-1"
           >
             Next
-            <ChevronRight className="h-4 w-4" />
+            <IconChevronRight data-icon="inline-end" />
           </Button>
         </div>
       )}
