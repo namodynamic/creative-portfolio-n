@@ -1,8 +1,14 @@
 "use client";
 
-import type { Content } from "@prismicio/client";
 import type { ComponentType } from "react";
 
+import type {
+  ImageField,
+  KeyTextField,
+  LinkField,
+  RichTextField,
+  SelectField,
+} from "@prismicio/client";
 import { asText } from "@prismicio/client";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -34,15 +40,36 @@ import {
 import { useInView, motion } from "motion/react";
 import { useRef } from "react";
 
+type CertificationIconName =
+  | "certificate"
+  | "database"
+  | "zap"
+  | "code"
+  | "users"
+  | "trending"
+  | "globe"
+  | "brain"
+  | "computer"
+  | "server"
+  | "award";
+
+export interface CertificationCardItem {
+  title: KeyTextField;
+  time_period: KeyTextField;
+  credential_url: LinkField;
+  issuer: KeyTextField;
+  description: KeyTextField | RichTextField;
+  background_image: ImageField<never>;
+  hover_image: ImageField<never>;
+  icon_name: SelectField<CertificationIconName, "filled">;
+}
+
 interface CertificationCardProps {
-  item: Content.CertificationsSliceDefaultItem;
+  item: CertificationCardItem;
   index: number;
 }
 
-const iconMap: Record<
-  NonNullable<Content.CertificationsSliceDefaultItem["icon_name"]>,
-  ComponentType<IconProps>
-> = {
+const iconMap: Record<CertificationIconName, ComponentType<IconProps>> = {
   certificate: IconCertificate,
   award: IconAward,
   database: IconDatabase,
@@ -61,7 +88,9 @@ const CertificationCard = ({ item, index }: CertificationCardProps) => {
   const isInView = useInView(ref, { once: true, amount: 0.3 });
   const Icon = iconMap[item.icon_name || "certificate"];
   const hasCredential = isFilled.link(item.credential_url);
-  const description = asText(item.description);
+  const description = Array.isArray(item.description)
+    ? asText(item.description)
+    : item.description || "";
   const hasBackground = isFilled.image(item.background_image);
   const hasHoverImage = isFilled.image(item.hover_image);
 
@@ -84,7 +113,7 @@ const CertificationCard = ({ item, index }: CertificationCardProps) => {
     >
       <Card
         className={cn(
-          "group/card border-border/70 bg-card relative isolate h-full min-h-72 overflow-hidden p-0 shadow-sm",
+          "group/card bg-card relative isolate aspect-16/11 h-full min-h-72 w-full rounded-2xl shadow-md",
           "transition duration-300 hover:-translate-y-1 hover:shadow-xl",
         )}
       >
@@ -108,29 +137,24 @@ const CertificationCard = ({ item, index }: CertificationCardProps) => {
           )}
 
           <div className="bg-background/80 absolute inset-0" />
-          <div className="from-background via-background/80 to-background/30 absolute inset-0 bg-linear-to-t" />
+          <div className="from-background via-background/50 to-background/30 absolute inset-0 bg-linear-to-t" />
         </div>
 
         <div className="flex h-full flex-col">
           <CardHeader className="gap-4">
             <div className="flex items-start justify-between gap-4">
-              <div className="border-border/70 bg-background/70 text-primary flex size-11 shrink-0 items-center justify-center rounded-xl border backdrop-blur">
-                <Icon className="size-6" />
+              <div className="border-border/70 bg-background/70 text-primary flex size-9 shrink-0 items-center justify-center rounded-xl border backdrop-blur">
+                <Icon className="size-5" />
               </div>
 
               {item.time_period && (
-                <Badge
-                  variant="secondary"
-                  className="bg-background/70 h-auto rounded-full px-3 py-1 backdrop-blur"
-                >
-                  {item.time_period}
-                </Badge>
+                <Badge variant="secondary">{item.time_period}</Badge>
               )}
             </div>
           </CardHeader>
 
           <CardContent className="mt-auto flex flex-col gap-3">
-            <CardTitle className="text-foreground line-clamp-2 text-xl md:text-2xl">
+            <CardTitle className="text-foreground line-clamp-2 text-base md:text-xl">
               {item.title}
             </CardTitle>
 

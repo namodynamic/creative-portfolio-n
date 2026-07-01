@@ -1,12 +1,16 @@
 "use client";
 
 import Bounded from "@/components/Bounded";
+import CertificationCard, {
+  type CertificationCardItem,
+} from "@/components/CertificationCard";
 import SectionHeader from "@/components/SectionHeader";
 import { Content } from "@prismicio/client";
 import { PrismicRichText, SliceComponentProps } from "@prismicio/react";
 import {
   IconAward,
   IconCalendar,
+  IconCertificate,
   IconCircleCheck,
   IconMapPin,
   IconSchool,
@@ -26,6 +30,15 @@ import type { JSX } from "react";
 export type EducationProps = SliceComponentProps<Content.EducationSlice>;
 
 const Education = ({ slice }: EducationProps): JSX.Element => {
+  const certifications =
+    (
+      slice.primary as Content.EducationSlice["primary"] & {
+        certifications?: CertificationCardItem[];
+      }
+    ).certifications?.filter(
+      (item) => item.title || item.issuer || item.description,
+    ) ?? [];
+
   return (
     <Bounded
       as="section"
@@ -34,7 +47,7 @@ const Education = ({ slice }: EducationProps): JSX.Element => {
       className="py-16 md:py-24"
     >
       <SectionHeader
-        eyebrow={slice.primary.sub_heading}
+        eyebrow={slice.primary.eyebrow}
         title={slice.primary.heading}
         description={slice.primary.intro}
         icon={<IconSchool data-icon="inline-start" className="size-3.5" />}
@@ -125,6 +138,30 @@ const Education = ({ slice }: EducationProps): JSX.Element => {
           </motion.div>
         ))}
       </div>
+
+      {certifications.length > 0 && (
+        <div className="mt-16 flex flex-col gap-8 md:mt-20">
+          <div className="flex max-w-3xl flex-col gap-3">
+            <h3 className="font-heading text-xl leading-tight font-semibold text-balance md:text-2xl">
+              {slice.primary.subsection_heading}
+            </h3>
+
+            <p className="text-muted-foreground max-w-2xl text-base leading-7">
+              {slice.primary.subsection_intro}
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 gap-5 md:grid-cols-2 lg:grid-cols-3">
+            {certifications.map((item, index) => (
+              <CertificationCard
+                key={`${item.title}-${item.issuer}-${index}`}
+                item={item}
+                index={index}
+              />
+            ))}
+          </div>
+        </div>
+      )}
     </Bounded>
   );
 };

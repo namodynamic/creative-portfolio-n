@@ -454,7 +454,7 @@ const Contact = ({ slice }: ContactProps): JSX.Element => {
           </div>
         </div>
 
-        <Card className="contact-card bg-opacity-80">
+        <Card className="contact-card ring-foreground/5 bg-opacity-80">
           <CardContent className="flex flex-col items-center gap-5 p-8 text-center md:p-12">
             <div className="bg-muted text-muted-foreground flex size-12 items-center justify-center rounded-xl border">
               <IconCheck className="size-5" />

@@ -388,7 +388,6 @@ export type HomepageDocument<Lang extends string = string> =
 type PageDocumentDataSlicesSlice =
   | ServicesSlice
   | FaqSlice
-  | CertificationsSlice
   | TestimonialSlice
   | ContactSlice
   | EducationSlice
@@ -1451,176 +1450,6 @@ export type BiographySlice = prismic.SharedSlice<
 >;
 
 /**
- * Primary content in *Certifications → Default → Primary*
- */
-export interface CertificationsSliceDefaultPrimary {
-  /**
-   * Heading field in *Certifications → Default → Primary*
-   *
-   * - **Field Type**: Text
-   * - **Placeholder**: *None*
-   * - **API ID Path**: certifications.default.primary.heading
-   * - **Documentation**: https://prismic.io/docs/fields/text
-   */
-  heading: prismic.KeyTextField;
-
-  /**
-   * Sub Heading field in *Certifications → Default → Primary*
-   *
-   * - **Field Type**: Text
-   * - **Placeholder**: *None*
-   * - **API ID Path**: certifications.default.primary.sub_heading
-   * - **Documentation**: https://prismic.io/docs/fields/text
-   */
-  sub_heading: prismic.KeyTextField;
-
-  /**
-   * Intro field in *Certifications → Default → Primary*
-   *
-   * - **Field Type**: Text
-   * - **Placeholder**: *None*
-   * - **API ID Path**: certifications.default.primary.intro
-   * - **Documentation**: https://prismic.io/docs/fields/text
-   */
-  intro: prismic.KeyTextField;
-}
-
-/**
- * Primary content in *Certifications → Items*
- */
-export interface CertificationsSliceDefaultItem {
-  /**
-   * Title field in *Certifications → Items*
-   *
-   * - **Field Type**: Text
-   * - **Placeholder**: *None*
-   * - **API ID Path**: certifications.items[].title
-   * - **Documentation**: https://prismic.io/docs/fields/text
-   */
-  title: prismic.KeyTextField;
-
-  /**
-   * Time Period field in *Certifications → Items*
-   *
-   * - **Field Type**: Text
-   * - **Placeholder**: *None*
-   * - **API ID Path**: certifications.items[].time_period
-   * - **Documentation**: https://prismic.io/docs/fields/text
-   */
-  time_period: prismic.KeyTextField;
-
-  /**
-   * Credential Url field in *Certifications → Items*
-   *
-   * - **Field Type**: Link
-   * - **Placeholder**: *None*
-   * - **API ID Path**: certifications.items[].credential_url
-   * - **Documentation**: https://prismic.io/docs/fields/link
-   */
-  credential_url: prismic.LinkField<
-    string,
-    string,
-    unknown,
-    prismic.FieldState,
-    never
-  >;
-
-  /**
-   * Issuer field in *Certifications → Items*
-   *
-   * - **Field Type**: Text
-   * - **Placeholder**: *None*
-   * - **API ID Path**: certifications.items[].issuer
-   * - **Documentation**: https://prismic.io/docs/fields/text
-   */
-  issuer: prismic.KeyTextField;
-
-  /**
-   * Description field in *Certifications → Items*
-   *
-   * - **Field Type**: Rich Text
-   * - **Placeholder**: *None*
-   * - **API ID Path**: certifications.items[].description
-   * - **Documentation**: https://prismic.io/docs/fields/rich-text
-   */
-  description: prismic.RichTextField;
-
-  /**
-   * Background image field in *Certifications → Items*
-   *
-   * - **Field Type**: Image
-   * - **Placeholder**: *None*
-   * - **API ID Path**: certifications.items[].background_image
-   * - **Documentation**: https://prismic.io/docs/fields/image
-   */
-  background_image: prismic.ImageField<never>;
-
-  /**
-   * Hover image field in *Certifications → Items*
-   *
-   * - **Field Type**: Image
-   * - **Placeholder**: *None*
-   * - **API ID Path**: certifications.items[].hover_image
-   * - **Documentation**: https://prismic.io/docs/fields/image
-   */
-  hover_image: prismic.ImageField<never>;
-
-  /**
-   * Icon Name field in *Certifications → Items*
-   *
-   * - **Field Type**: Select
-   * - **Placeholder**: *None*
-   * - **Default Value**: certificate
-   * - **API ID Path**: certifications.items[].icon_name
-   * - **Documentation**: https://prismic.io/docs/fields/select
-   */
-  icon_name: prismic.SelectField<
-    | "certificate"
-    | "database"
-    | "zap"
-    | "code"
-    | "users"
-    | "trending"
-    | "globe"
-    | "brain"
-    | "computer"
-    | "server"
-    | "award",
-    "filled"
-  >;
-}
-
-/**
- * Default variation for Certifications Slice
- *
- * - **API ID**: `default`
- * - **Description**: Default
- * - **Documentation**: https://prismic.io/docs/slices
- */
-export type CertificationsSliceDefault = prismic.SharedSliceVariation<
-  "default",
-  Simplify<CertificationsSliceDefaultPrimary>,
-  Simplify<CertificationsSliceDefaultItem>
->;
-
-/**
- * Slice variation for *Certifications*
- */
-type CertificationsSliceVariation = CertificationsSliceDefault;
-
-/**
- * Certifications Shared Slice
- *
- * - **API ID**: `certifications`
- * - **Description**: Certifications
- * - **Documentation**: https://prismic.io/docs/slices
- */
-export type CertificationsSlice = prismic.SharedSlice<
-  "certifications",
-  CertificationsSliceVariation
->;
-
-/**
  * Item in *Contact → Default → Primary → Faq*
  */
 export interface ContactSliceDefaultPrimaryFaqItem {
@@ -1963,6 +1792,111 @@ type CtaSliceVariation = CtaSliceDefault;
 export type CtaSlice = prismic.SharedSlice<"cta", CtaSliceVariation>;
 
 /**
+ * Item in *Education → Default → Primary → Certifications*
+ */
+export interface EducationSliceDefaultPrimaryCertificationsItem {
+  /**
+   * Title field in *Education → Default → Primary → Certifications*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: education.default.primary.certifications[].title
+   * - **Documentation**: https://prismic.io/docs/fields/text
+   */
+  title: prismic.KeyTextField;
+
+  /**
+   * Time Period field in *Education → Default → Primary → Certifications*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: e.g. 2026
+   * - **API ID Path**: education.default.primary.certifications[].time_period
+   * - **Documentation**: https://prismic.io/docs/fields/text
+   */
+  time_period: prismic.KeyTextField;
+
+  /**
+   * Credential Url field in *Education → Default → Primary → Certifications*
+   *
+   * - **Field Type**: Link
+   * - **Placeholder**: *None*
+   * - **API ID Path**: education.default.primary.certifications[].credential_url
+   * - **Documentation**: https://prismic.io/docs/fields/link
+   */
+  credential_url: prismic.LinkField<
+    string,
+    string,
+    unknown,
+    prismic.FieldState,
+    never
+  >;
+
+  /**
+   * Issuer field in *Education → Default → Primary → Certifications*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: e.g. coursera
+   * - **API ID Path**: education.default.primary.certifications[].issuer
+   * - **Documentation**: https://prismic.io/docs/fields/text
+   */
+  issuer: prismic.KeyTextField;
+
+  /**
+   * Description field in *Education → Default → Primary → Certifications*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: education.default.primary.certifications[].description
+   * - **Documentation**: https://prismic.io/docs/fields/text
+   */
+  description: prismic.KeyTextField;
+
+  /**
+   * Background Image field in *Education → Default → Primary → Certifications*
+   *
+   * - **Field Type**: Image
+   * - **Placeholder**: *None*
+   * - **API ID Path**: education.default.primary.certifications[].background_image
+   * - **Documentation**: https://prismic.io/docs/fields/image
+   */
+  background_image: prismic.ImageField<never>;
+
+  /**
+   * Hover Image field in *Education → Default → Primary → Certifications*
+   *
+   * - **Field Type**: Image
+   * - **Placeholder**: *None*
+   * - **API ID Path**: education.default.primary.certifications[].hover_image
+   * - **Documentation**: https://prismic.io/docs/fields/image
+   */
+  hover_image: prismic.ImageField<never>;
+
+  /**
+   * Icon Name field in *Education → Default → Primary → Certifications*
+   *
+   * - **Field Type**: Select
+   * - **Placeholder**: *None*
+   * - **Default Value**: certificate
+   * - **API ID Path**: education.default.primary.certifications[].icon_name
+   * - **Documentation**: https://prismic.io/docs/fields/select
+   */
+  icon_name: prismic.SelectField<
+    | "certificate"
+    | "database"
+    | "code"
+    | "users"
+    | "trending"
+    | "globe"
+    | "brain"
+    | "computer"
+    | "server"
+    | "award"
+    | "zap",
+    "filled"
+  >;
+}
+
+/**
  * Primary content in *Education → Default → Primary*
  */
 export interface EducationSliceDefaultPrimary {
@@ -1977,14 +1911,14 @@ export interface EducationSliceDefaultPrimary {
   heading: prismic.KeyTextField;
 
   /**
-   * Sub Heading field in *Education → Default → Primary*
+   * Eyebrow field in *Education → Default → Primary*
    *
    * - **Field Type**: Text
    * - **Placeholder**: Academic Journey
-   * - **API ID Path**: education.default.primary.sub_heading
+   * - **API ID Path**: education.default.primary.eyebrow
    * - **Documentation**: https://prismic.io/docs/fields/text
    */
-  sub_heading: prismic.KeyTextField;
+  eyebrow: prismic.KeyTextField;
 
   /**
    * Intro field in *Education → Default → Primary*
@@ -1995,6 +1929,38 @@ export interface EducationSliceDefaultPrimary {
    * - **Documentation**: https://prismic.io/docs/fields/text
    */
   intro: prismic.KeyTextField;
+
+  /**
+   * Subsection Heading field in *Education → Default → Primary*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: education.default.primary.subsection_heading
+   * - **Documentation**: https://prismic.io/docs/fields/text
+   */
+  subsection_heading: prismic.KeyTextField;
+
+  /**
+   * Subsection Intro field in *Education → Default → Primary*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: education.default.primary.subsection_intro
+   * - **Documentation**: https://prismic.io/docs/fields/text
+   */
+  subsection_intro: prismic.KeyTextField;
+
+  /**
+   * Certifications field in *Education → Default → Primary*
+   *
+   * - **Field Type**: Group
+   * - **Placeholder**: *None*
+   * - **API ID Path**: education.default.primary.certifications[]
+   * - **Documentation**: https://prismic.io/docs/fields/repeatable-group
+   */
+  certifications: prismic.GroupField<
+    Simplify<EducationSliceDefaultPrimaryCertificationsItem>
+  >;
 }
 
 /**
@@ -3510,11 +3476,6 @@ declare module "@prismicio/client" {
       BiographySliceDefaultPrimary,
       BiographySliceVariation,
       BiographySliceDefault,
-      CertificationsSlice,
-      CertificationsSliceDefaultPrimary,
-      CertificationsSliceDefaultItem,
-      CertificationsSliceVariation,
-      CertificationsSliceDefault,
       ContactSlice,
       ContactSliceDefaultPrimaryFaqItem,
       ContactSliceDefaultPrimary,
@@ -3530,6 +3491,7 @@ declare module "@prismicio/client" {
       CtaSliceVariation,
       CtaSliceDefault,
       EducationSlice,
+      EducationSliceDefaultPrimaryCertificationsItem,
       EducationSliceDefaultPrimary,
       EducationSliceDefaultItem,
       EducationSliceVariation,
