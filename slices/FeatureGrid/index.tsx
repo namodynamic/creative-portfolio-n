@@ -31,9 +31,6 @@ const FeatureGrid: FC<FeatureGridProps> = ({ slice }) => {
             description={item.description}
             img={item.img?.url || ""}
             spareImg={item.spareImg?.url || ""}
-            className={item.className || ""}
-            imgClassName={item.imgClassName || ""}
-            titleClassName={item.titleClassName || ""}
             leftLists={slice.primary.left_tech_list.map(
               (item) => item.technology,
             )}

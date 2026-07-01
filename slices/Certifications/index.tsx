@@ -1,50 +1,36 @@
 import { Content } from "@prismicio/client";
 import { SliceComponentProps } from "@prismicio/react";
 import Bounded from "@/components/Bounded";
-import TestimonialCard from "@/components/TestimonialCard";
-import { createClient } from "@/prismicio";
 import CertificationCard from "@/components/CertificationCard";
-import TitleHeader from "@/components/TitleHeader";
-import { LiaCertificateSolid } from "react-icons/lia";
+import SectionHeader from "@/components/SectionHeader";
+import { IconCertificate } from "@tabler/icons-react";
 
 export type CertificationsProps =
   SliceComponentProps<Content.CertificationsSlice>;
 
-const Certifications = async ({ slice, index }: CertificationsProps) => {
-  const client = createClient();
-  const page = await client.getSingle("homepage");
-  const testimonialSlice = page.data.slices.find(
-    (slice) => slice.slice_type === "testimonial",
-  );
-
+const Certifications = ({ slice }: CertificationsProps) => {
   return (
     <Bounded
+      as="section"
       data-slice-type={slice.slice_type}
       data-slice-variation={slice.variation}
-      className="max-md:-mt-20"
+      className="py-16 md:py-24"
     >
-      <TitleHeader
-        title={slice.primary.heading || ""}
-        subtitle={slice.primary.sub_heading || ""}
-        icon={
-          <LiaCertificateSolid className="text-primary-foreground h-5 w-5" />
-        }
-        intro={slice.primary.intro || ""}
+      <SectionHeader
+        eyebrow={slice.primary.sub_heading}
+        title={slice.primary.heading}
+        description={slice.primary.intro}
+        icon={<IconCertificate data-icon="inline-start" className="size-3.5" />}
       />
 
-      <div className="mt-12 grid grid-cols-1 gap-5 md:mt-10 md:grid-cols-2 lg:grid-cols-3">
+      <div className="mt-10 grid grid-cols-1 gap-5 md:grid-cols-2 lg:grid-cols-3">
         {slice.items.map((item, index) => (
           <CertificationCard
-            key={index}
+            key={`${item.title}-${index}`}
             item={item}
             index={index}
-            icon={item.icon_name}
           />
         ))}
-      </div>
-
-      <div className="mt-16">
-        <TestimonialCard slice={testimonialSlice as Content.TestimonialSlice} />
       </div>
     </Bounded>
   );

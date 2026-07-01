@@ -1374,14 +1374,14 @@ export interface BiographySliceDefaultPrimary {
   heading: prismic.KeyTextField;
 
   /**
-   * Description field in *Biography → Default → Primary*
+   * Bio Body field in *Biography → Default → Primary*
    *
    * - **Field Type**: Rich Text
    * - **Placeholder**: *None*
-   * - **API ID Path**: biography.default.primary.description
+   * - **API ID Path**: biography.default.primary.bio_body
    * - **Documentation**: https://prismic.io/docs/fields/rich-text
    */
-  description: prismic.RichTextField;
+  bio_body: prismic.RichTextField;
 
   /**
    * Button Text field in *Biography → Default → Primary*

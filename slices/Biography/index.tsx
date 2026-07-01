@@ -1,8 +1,11 @@
+import { PrismicNextLink } from "@prismicio/next";
 import { PrismicRichText, SliceComponentProps } from "@prismicio/react";
-import { Content } from "@prismicio/client";
+import { Content, isFilled } from "@prismicio/client";
 import Avatar from "@/components/Avatar";
 import Bounded from "@/components/Bounded";
 import Heading from "@/components/Heading";
+import { Button } from "@/components/ui/button";
+import { IconArrowRight } from "@tabler/icons-react";
 
 import type { JSX } from "react";
 
@@ -17,22 +20,39 @@ export type BiographyProps = SliceComponentProps<Content.BiographySlice>;
 const Biography = ({ slice }: BiographyProps): JSX.Element => {
   return (
     <Bounded
+      as="section"
       data-slice-type={slice.slice_type}
       data-slice-variation={slice.variation}
+      className="sm:mt-10"
     >
-      <div className="my-10 grid gap-x-8 gap-y-6 md:my-20 md:grid-cols-[2fr,1fr]">
-        <Heading size="xl" className="col-start-1">
+      <div className="grid gap-x-10 gap-y-8 lg:grid-cols-[minmax(0,1fr)_24rem] lg:items-start xl:grid-cols-[minmax(0,1fr)_30rem]">
+        <Heading size="xl" className="leading-none text-balance lg:col-start-1">
           {slice.primary.heading}
         </Heading>
 
-        <div className="prose prose-base text-black dark:text-slate-400 lg:prose-lg prose-invert col-start-1">
-          <PrismicRichText field={slice.primary.description} />
-        </div>
-
         <Avatar
           image={slice.primary.avatar}
-          className="z-20 row-start-1 max-w-sm md:col-start-2 md:row-end-3"
+          className="z-20 mx-auto w-full max-w-sm rotate-2 lg:col-start-2 lg:row-span-3 lg:row-start-1 lg:mt-12"
         />
+
+        <div className="prose prose-neutral dark:prose-invert prose-p:text-muted-foreground prose-p:text-lg prose-p:leading-8 prose-strong:text-foreground max-w-3xl lg:col-start-1 xl:max-w-208">
+          <PrismicRichText field={slice.primary.bio_body} />
+        </div>
+
+        {isFilled.link(slice.primary.button_link) &&
+          slice.primary.button_text && (
+            <Button
+              asChild
+              variant="outline"
+              size="sm"
+              className="w-fit lg:col-start-1"
+            >
+              <PrismicNextLink field={slice.primary.button_link}>
+                {slice.primary.button_text}
+                <IconArrowRight data-icon="inline-end" className="size-4" />
+              </PrismicNextLink>
+            </Button>
+          )}
       </div>
     </Bounded>
   );

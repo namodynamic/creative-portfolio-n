@@ -29,9 +29,9 @@ export default function SectionHeader({
       )}
     >
       {eyebrow && (
-        <Badge variant="secondary" className="w-fit gap-2 rounded-full">
+        <Badge variant="secondary">
           {icon}
-          <span className="text-xs font-medium uppercase">{eyebrow}</span>
+          <span className="uppercase">{eyebrow}</span>
         </Badge>
       )}
 

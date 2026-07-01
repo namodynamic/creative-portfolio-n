@@ -1,151 +1,169 @@
 "use client";
 
-import { PrismicRichText } from "@prismicio/react";
+import type { Content } from "@prismicio/client";
+import type { ComponentType } from "react";
+
+import { asText } from "@prismicio/client";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { PrismicNextLink } from "@prismicio/next";
-import { ExternalLink } from "lucide-react";
-import { cn } from "@/lib/utils";
-import { asImageSrc, isFilled } from "@prismicio/client";
-import { LiaCertificateSolid } from "react-icons/lia";
-import { FaAward } from "react-icons/fa";
 import {
-  Database,
-  Zap,
-  CodeXml,
-  Users,
-  TrendingUp,
-  Globe,
-  BrainCircuit,
-  Computer,
-  Server,
-} from "lucide-react";
+  Card,
+  CardContent,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+import { PrismicNextImage, PrismicNextLink } from "@prismicio/next";
+import { cn } from "@/lib/utils";
+import { isFilled } from "@prismicio/client";
+import {
+  IconAward,
+  IconBrain,
+  IconCertificate,
+  IconCode,
+  IconDatabase,
+  IconDeviceDesktop,
+  IconExternalLink,
+  IconServer,
+  IconSparkles,
+  IconTrendingUp,
+  IconUsers,
+  IconWorld,
+  type IconProps,
+} from "@tabler/icons-react";
 import { useInView, motion } from "motion/react";
 import { useRef } from "react";
 
 interface CertificationCardProps {
-  item: any;
+  item: Content.CertificationsSliceDefaultItem;
   index: number;
-  icon: React.ReactNode;
 }
 
-const iconMap: Record<string, React.ReactNode> = {
-  certificate: (
-    <LiaCertificateSolid className="text-primary-foreground h-6 w-6" />
-  ),
-  award: <FaAward className="text-primary-foreground h-6 w-6" />,
-  database: <Database className="text-primary-foreground h-6 w-6" />,
-  zap: <Zap className="text-primary-foreground h-6 w-6" />,
-  code: <CodeXml className="text-primary-foreground h-6 w-6" />,
-  users: <Users className="text-primary-foreground h-6 w-6" />,
-  trending: <TrendingUp className="text-primary-foreground h-6 w-6" />,
-  globe: <Globe className="text-primary-foreground h-6 w-6" />,
-  brain: <BrainCircuit className="text-primary-foreground h-6 w-6" />,
-  computer: <Computer className="text-primary-foreground h-6 w-6" />,
-  server: <Server className="text-primary-foreground h-6 w-6" />,
+const iconMap: Record<
+  NonNullable<Content.CertificationsSliceDefaultItem["icon_name"]>,
+  ComponentType<IconProps>
+> = {
+  certificate: IconCertificate,
+  award: IconAward,
+  database: IconDatabase,
+  zap: IconSparkles,
+  code: IconCode,
+  users: IconUsers,
+  trending: IconTrendingUp,
+  globe: IconWorld,
+  brain: IconBrain,
+  computer: IconDeviceDesktop,
+  server: IconServer,
 };
 
-const CertificationCard = ({ item, index, icon }: CertificationCardProps) => {
+const CertificationCard = ({ item, index }: CertificationCardProps) => {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, amount: 0.3 });
-  const backgroundUrl = isFilled.image(item.background_image)
-    ? asImageSrc(item.background_image, { w: 800, q: 80 })
-    : undefined;
-
-  const hoverUrl = isFilled.image(item.hover_image)
-    ? asImageSrc(item.hover_image, { w: 800, q: 80 })
-    : undefined;
-
-  const handleMouseEnter = (e: React.MouseEvent<HTMLDivElement>) => {
-    if (hoverUrl && window.innerWidth >= 768) {
-      e.currentTarget.style.backgroundImage = `url(${hoverUrl})`;
-    }
-  };
-
-  const handleMouseLeave = (e: React.MouseEvent<HTMLDivElement>) => {
-    if (backgroundUrl && window.innerWidth >= 768) {
-      e.currentTarget.style.backgroundImage = `url(${backgroundUrl})`;
-    }
-  };
+  const Icon = iconMap[item.icon_name || "certificate"];
+  const hasCredential = isFilled.link(item.credential_url);
+  const description = asText(item.description);
+  const hasBackground = isFilled.image(item.background_image);
+  const hasHoverImage = isFilled.image(item.hover_image);
 
   return (
     <motion.div
       ref={ref}
-      initial={{ opacity: 0, y: 40, scale: 0.95 }}
+      initial={{ opacity: 0, y: 24, scale: 0.98 }}
       animate={
         isInView
           ? { opacity: 1, y: 0, scale: 1 }
-          : { opacity: 0, y: 0, scale: 0.95 }
+          : { opacity: 0, y: 12, scale: 0.98 }
       }
       transition={{
         type: "tween",
         ease: "easeOut",
-        duration: 0.6,
-        delay: index * 0.15,
+        duration: 0.45,
+        delay: index * 0.08,
       }}
-      key={index}
-      className={cn(
-        "card group relative aspect-[16/11] w-full overflow-hidden rounded-2xl border border-neutral-800 shadow-md shadow-white/20 transition-all duration-500 will-change-transform",
-        "md:hover:after:bg-foreground/60 hover:after:absolute hover:after:inset-0 hover:after:rounded-2xl hover:after:transition-all hover:after:duration-500 hover:after:content-['']",
-      )}
-      style={{
-        backgroundImage: backgroundUrl ? `url(${backgroundUrl})` : undefined,
-        backgroundSize: "cover",
-      }}
-      onMouseEnter={handleMouseEnter}
-      onMouseLeave={handleMouseLeave}
+      className="h-full"
     >
-      <div className="bg-foreground/50 absolute inset-0 z-0 transition duration-500 md:group-hover:bg-black/10" />
+      <Card
+        className={cn(
+          "group/card border-border/70 bg-card relative isolate h-full min-h-72 overflow-hidden p-0 shadow-sm",
+          "transition duration-300 hover:-translate-y-1 hover:shadow-xl",
+        )}
+      >
+        <div className="absolute inset-0 -z-10">
+          {hasBackground && (
+            <PrismicNextImage
+              field={item.background_image}
+              fill
+              sizes="(min-width: 1024px) 33vw, (min-width: 768px) 50vw, 100vw"
+              className="object-cover transition duration-500 group-hover/card:scale-105"
+            />
+          )}
 
-      <div className="relative z-10 flex h-full flex-col justify-between p-5 text-white">
-        <div className="flex items-center justify-between transition-opacity duration-500 md:group-hover:opacity-0">
-          <div className="rounded-lg bg-white/10 p-2">
-            <div className="text-white dark:text-slate-900">
-              {iconMap[
-                (item.icon_name || "certificate")
-                  .toString()
-                  .trim()
-                  .toLowerCase()
-              ] || iconMap["certificate"]}
+          {hasHoverImage && (
+            <PrismicNextImage
+              field={item.hover_image}
+              fill
+              sizes="(min-width: 1024px) 33vw, (min-width: 768px) 50vw, 100vw"
+              className="object-cover opacity-0 transition duration-500 group-hover/card:scale-105 group-hover/card:opacity-100"
+            />
+          )}
+
+          <div className="bg-background/80 absolute inset-0" />
+          <div className="from-background via-background/80 to-background/30 absolute inset-0 bg-linear-to-t" />
+        </div>
+
+        <div className="flex h-full flex-col">
+          <CardHeader className="gap-4">
+            <div className="flex items-start justify-between gap-4">
+              <div className="border-border/70 bg-background/70 text-primary flex size-11 shrink-0 items-center justify-center rounded-xl border backdrop-blur">
+                <Icon className="size-6" />
+              </div>
+
+              {item.time_period && (
+                <Badge
+                  variant="secondary"
+                  className="bg-background/70 h-auto rounded-full px-3 py-1 backdrop-blur"
+                >
+                  {item.time_period}
+                </Badge>
+              )}
             </div>
-          </div>
-          <Badge
-            variant="secondary"
-            className="bg-black/40 px-2 py-1 text-xs text-slate-400 backdrop-blur hover:bg-black/50"
-          >
-            {item.time_period}
-          </Badge>
-        </div>
+          </CardHeader>
 
-        <div className="mt-6 space-y-2 text-slate-300 transition-opacity duration-500 md:group-hover:opacity-0">
-          <h3 className="text-xl leading-tight font-semibold tracking-wide">
-            {item.title}
-          </h3>
-          <div className="line-clamp-3 text-sm text-slate-300 opacity-80">
-            <PrismicRichText field={item.description} />
-          </div>
-        </div>
+          <CardContent className="mt-auto flex flex-col gap-3">
+            <CardTitle className="text-foreground line-clamp-2 text-xl md:text-2xl">
+              {item.title}
+            </CardTitle>
 
-        <div className="mt-4 flex items-center justify-between text-xs">
-          <span className="opacity-70 transition-opacity duration-500 md:group-hover:opacity-0">
-            Issued by {item.issuer}
-          </span>
-          <Button
-            size="sm"
-            asChild
-            variant="ghost"
-            className="text-slate-300 hover:bg-black/20 hover:text-white"
-          >
-            <PrismicNextLink
-              field={item.credential_url}
-              className="flex items-center gap-2"
-            >
-              View Credential
-              <ExternalLink className="h-4 w-4" />
-            </PrismicNextLink>
-          </Button>
+            {item.issuer && (
+              <p className="text-muted-foreground text-sm font-medium">
+                Issued by {item.issuer}
+              </p>
+            )}
+
+            {description && (
+              <p className="text-muted-foreground line-clamp-3 text-sm leading-7">
+                {description}
+              </p>
+            )}
+          </CardContent>
+
+          {hasCredential && (
+            <CardFooter className="border-t-0 bg-transparent">
+              <Button
+                asChild
+                variant="secondary"
+                size="sm"
+                className="bg-background/80 w-full backdrop-blur"
+              >
+                <PrismicNextLink field={item.credential_url}>
+                  View credential
+                  <IconExternalLink data-icon="inline-end" className="size-4" />
+                </PrismicNextLink>
+              </Button>
+            </CardFooter>
+          )}
         </div>
-      </div>
+      </Card>
     </motion.div>
   );
 };
