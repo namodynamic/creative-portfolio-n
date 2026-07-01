@@ -70,6 +70,47 @@ type ContactFormState = {
   message: string;
 };
 
+function getEmailJsErrorDetails(error: unknown) {
+  if (error instanceof Error) {
+    return error.message;
+  }
+
+  if (typeof error === "string") {
+    return error;
+  }
+
+  if (error && typeof error === "object") {
+    const emailJsError = error as { status?: number; text?: string };
+    const status = emailJsError.status ? `EmailJS ${emailJsError.status}` : "";
+    const text = emailJsError.text ?? "";
+    const message = [status, text].filter(Boolean).join(": ");
+
+    if (message) {
+      return message;
+    }
+  }
+
+  return "Please try again or email me directly.";
+}
+
+function getPublicEmailJsErrorDescription(error: unknown) {
+  const details = getEmailJsErrorDetails(error);
+  const isEmailProviderAuthError =
+    details.includes("Gmail_API") ||
+    details.toLowerCase().includes("invalid grant") ||
+    details.toLowerCase().includes("insufficient authentication scopes");
+
+  if (isEmailProviderAuthError) {
+    return "Email delivery is temporarily unavailable. Please email me directly instead.";
+  }
+
+  if (process.env.NODE_ENV !== "production") {
+    return details;
+  }
+
+  return "Please try again or email me directly.";
+}
+
 function ContactDetail({
   icon: Icon,
   label,
@@ -166,11 +207,14 @@ const Contact = ({ slice }: ContactProps): JSX.Element => {
         emailjsServiceId,
         emailjsTemplateId,
         {
+          name: form.name,
+          email: form.email,
           from_name: form.name,
           from_email: form.email,
+          reply_to: form.email,
           message: form.message,
         },
-        emailjsPublicKey,
+        { publicKey: emailjsPublicKey },
       );
 
       toast.success("Message sent", {
@@ -178,9 +222,8 @@ const Contact = ({ slice }: ContactProps): JSX.Element => {
       });
       setForm({ name: "", email: "", message: "" });
     } catch (error) {
-      console.error(error);
       toast.error("Message failed to send", {
-        description: "Please try again or email me directly.",
+        description: getPublicEmailJsErrorDescription(error),
       });
     } finally {
       setIsLoading(false);

@@ -210,7 +210,7 @@ export const BentoGridItem = ({
             </div>
           )}
 
-          {id === 1 && <div className="1min-h-40"></div>}
+          {id === 1 && <div className="min-h-40"></div>}
         </div>
       </CardContent>
     </Card>
