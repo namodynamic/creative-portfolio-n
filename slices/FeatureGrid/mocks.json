@@ -35,22 +35,6 @@
 								}
 							],
 							[
-								"imgClassName",
-								{
-									"__TYPE__": "FieldContent",
-									"value": "folks",
-									"type": "Text"
-								}
-							],
-							[
-								"className",
-								{
-									"__TYPE__": "FieldContent",
-									"value": "wait",
-									"type": "Text"
-								}
-							],
-							[
 								"spareImg",
 								{
 									"origin": {
@@ -74,14 +58,6 @@
 									"credits": null,
 									"__TYPE__": "ImageContent",
 									"thumbnails": {}
-								}
-							],
-							[
-								"titleClassName",
-								{
-									"__TYPE__": "FieldContent",
-									"value": "cover",
-									"type": "Text"
 								}
 							],
 							[

@@ -37,27 +37,6 @@
                   "placeholder": "optional short text"
                 }
               },
-              "className": {
-                "type": "Text",
-                "config": {
-                  "label": "Class Name",
-                  "placeholder": "Tailwind classes for wrapper div"
-                }
-              },
-              "imgClassName": {
-                "type": "Text",
-                "config": {
-                  "label": "Image Class name",
-                  "placeholder": "image className (tailwindcss)"
-                }
-              },
-              "titleClassName": {
-                "type": "Text",
-                "config": {
-                  "label": "Title Class Name",
-                  "placeholder": "title className"
-                }
-              },
               "img": {
                 "type": "Image",
                 "config": {

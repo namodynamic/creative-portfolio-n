@@ -259,11 +259,15 @@ const Contact = ({ slice }: ContactProps): JSX.Element => {
             <CardHeader className="gap-2">
               <div className="flex items-center justify-between gap-4">
                 <div>
-                  <CardTitle className="text-2xl">Send a message</CardTitle>
+                  <CardTitle className="text-2xl">
+                    {slice.primary.form_title}
+                  </CardTitle>
                   <CardDescription>
-                    Share the problem, goal, timeline, or the rough idea. I can
-                    help shape the next step.
+                    {slice.primary.form_description}
                   </CardDescription>
+                  <p className="text-muted-foreground mt-2 text-sm">
+                    {slice.primary.form_cta_text}
+                  </p>
                 </div>
                 <div className="bg-muted text-muted-foreground hidden size-10 shrink-0 items-center justify-center rounded-lg border sm:flex">
                   <IconMessageCircle className="size-5" />

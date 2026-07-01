@@ -20,10 +20,17 @@
           "placeholder": ""
         }
       },
-      "footer_text": {
+      "bio": {
         "type": "Text",
         "config": {
-          "label": "Footer Text",
+          "label": "Bio",
+          "placeholder": ""
+        }
+      },
+      "footer_cta_heading": {
+        "type": "Text",
+        "config": {
+          "label": "Footer Cta Heading",
           "placeholder": ""
         }
       },
@@ -31,6 +38,27 @@
         "type": "Text",
         "config": {
           "label": "Footer CTA text",
+          "placeholder": ""
+        }
+      },
+      "footer_cta_button_text": {
+        "type": "Text",
+        "config": {
+          "label": "Footer Cta Button Text",
+          "placeholder": "e.g. Discuss a Project"
+        }
+      },
+      "footer_cta_secondary_text": {
+        "type": "Text",
+        "config": {
+          "label": "Footer Cta Secondary Text",
+          "placeholder": ""
+        }
+      },
+      "footer_bottom_note": {
+        "type": "Text",
+        "config": {
+          "label": "Footer Bottom Note",
           "placeholder": ""
         }
       },
