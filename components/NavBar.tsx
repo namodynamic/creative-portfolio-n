@@ -67,7 +67,7 @@ export default function NavBar({
     >
       <div
         className={cn(
-          "border-border/60 mx-auto flex h-14 w-full max-w-7xl min-w-0 items-center justify-between gap-3 rounded-2xl border px-3 transition-all duration-300 sm:px-4",
+          "ring-foreground/10 mx-auto flex h-14 w-full max-w-7xl min-w-0 items-center justify-between gap-3 rounded-2xl px-3 ring-1 transition-all duration-300 sm:px-4",
           scrolled || mobileMenuOpen
             ? "bg-background/90 shadow-sm shadow-black/5 backdrop-blur-xl"
             : "bg-background/60 backdrop-blur-md",

@@ -1,50 +1,105 @@
 "use client";
 
-import { useEffect, useRef, useState, type JSX } from "react";
+import type { ChangeEvent, FormEvent, JSX, ReactNode } from "react";
+import { useEffect, useRef, useState } from "react";
+import { Content } from "@prismicio/client";
+import { PrismicRichText, SliceComponentProps } from "@prismicio/react";
 import emailjs from "@emailjs/browser";
+import { gsap } from "gsap";
+import Link from "next/link";
+import { toast } from "sonner";
+import {
+  IconArrowRight,
+  IconBrandGithub,
+  IconBrandLinkedin,
+  IconBrandX,
+  IconBriefcase,
+  IconCheck,
+  IconClock,
+  IconLoader2,
+  IconMail,
+  IconMapPin,
+  IconMessageCircle,
+  IconSend,
+  IconShieldLock,
+} from "@tabler/icons-react";
 
 import Bounded from "@/components/Bounded";
-import { Content } from "@prismicio/client";
-import { SliceComponentProps } from "@prismicio/react";
-import { gsap } from "gsap";
-
-import { ToastContainer, toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
-import {
-  Send,
-  Mail,
-  MapPin,
-  Clock,
-  ArrowRight,
-  CheckCheck,
-} from "lucide-react";
-import { FaGithub, FaXTwitter, FaLinkedin } from "react-icons/fa6";
-import { MdOutlinePrivacyTip } from "react-icons/md";
-import { GrServices } from "react-icons/gr";
-import { Icon } from "@/slices/Approach";
-import Link from "next/link";
-import MagicButton from "@/components/ui/MagicButton";
 import {
   Accordion,
   AccordionContent,
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
-import { PrismicRichText } from "@prismicio/react";
+import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+import { Field, FieldGroup, FieldLabel } from "@/components/ui/field";
+import { Input } from "@/components/ui/input";
+import { Textarea } from "@/components/ui/textarea";
 
-/**
- * Props for `Contact`.
- */
 export type ContactProps = SliceComponentProps<Content.ContactSlice>;
 
-/**
- * Component for "Contact" Slices.
- */
+const contactLinks = [
+  {
+    label: "GitHub",
+    href: "https://github.com/namodynamic",
+    icon: IconBrandGithub,
+  },
+  {
+    label: "LinkedIn",
+    href: "https://linkedin.com/in/ekechinnamdi",
+    icon: IconBrandLinkedin,
+  },
+  {
+    label: "X",
+    href: "https://x.com/namodynamic",
+    icon: IconBrandX,
+  },
+];
+
+type ContactFormState = {
+  name: string;
+  email: string;
+  message: string;
+};
+
+function ContactDetail({
+  icon: Icon,
+  label,
+  children,
+}: {
+  icon: typeof IconMail;
+  label: string;
+  children: ReactNode;
+}) {
+  return (
+    <div className="flex items-start gap-3">
+      <div className="bg-muted text-muted-foreground flex size-9 shrink-0 items-center justify-center rounded-lg border">
+        <Icon className="size-4" />
+      </div>
+      <div className="min-w-0">
+        <h3 className="text-foreground text-sm font-medium">{label}</h3>
+        <div className="text-muted-foreground mt-1 text-sm">{children}</div>
+      </div>
+    </div>
+  );
+}
+
 const Contact = ({ slice }: ContactProps): JSX.Element => {
-  const formRef = useRef<HTMLFormElement>(null);
-  const [form, setForm] = useState({ name: "", email: "", message: "" });
-  const [isLoading, setIsLoading] = useState(false);
   const pageRef = useRef(null);
+  const [form, setForm] = useState<ContactFormState>({
+    name: "",
+    email: "",
+    message: "",
+  });
+  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
     const ctx = gsap.context(() => {
@@ -79,28 +134,35 @@ const Contact = ({ slice }: ContactProps): JSX.Element => {
         "-=0.4",
       );
     }, pageRef);
+
     return () => ctx.revert();
   }, []);
 
-  const emailjsServiceId = process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID as string;
-
-  const emailjsTemplateId = process.env
-    .NEXT_PUBLIC_EMAILJS_TEMPLATE_ID as string;
-
-  const emailjsPublicKey = process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY;
-
   const handleChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
-  ): void => {
-    setForm({ ...form, [e.target.name]: e.target.value });
+    event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
+  ) => {
+    setForm((currentForm) => ({
+      ...currentForm,
+      [event.target.name]: event.target.value,
+    }));
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
+  const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+
+    const emailjsServiceId = process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID;
+    const emailjsTemplateId = process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID;
+    const emailjsPublicKey = process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY;
+
+    if (!emailjsServiceId || !emailjsTemplateId || !emailjsPublicKey) {
+      toast.error("Email service is not configured yet.");
+      return;
+    }
+
     setIsLoading(true);
 
-    emailjs
-      .send(
+    try {
+      await emailjs.send(
         emailjsServiceId,
         emailjsTemplateId,
         {
@@ -109,366 +171,265 @@ const Contact = ({ slice }: ContactProps): JSX.Element => {
           message: form.message,
         },
         emailjsPublicKey,
-      )
-      .then(() => {
-        setIsLoading(false);
-        toast.success(
-          "Thank you for your message, I'll get back to you shortly.",
-          {
-            position: "bottom-right",
-            autoClose: 3000,
-            hideProgressBar: true,
-            closeOnClick: true,
-            theme: "dark",
-          },
-        );
+      );
 
-        setForm({ name: "", email: "", message: "" });
-      })
-      .catch((error) => {
-        setIsLoading(false);
-        console.log(error);
-        toast.error("I didn't get your message 😢. Please try again", {
-          position: "bottom-right",
-          autoClose: 3000,
-          hideProgressBar: false,
-          closeOnClick: true,
-          progress: 1,
-          theme: "dark",
-        });
+      toast.success("Message sent", {
+        description: "Thank you. I will get back to you shortly.",
       });
+      setForm({ name: "", email: "", message: "" });
+    } catch (error) {
+      console.error(error);
+      toast.error("Message failed to send", {
+        description: "Please try again or email me directly.",
+      });
+    } finally {
+      setIsLoading(false);
+    }
   };
+
   return (
-    <>
-      <Bounded
-        data-slice-type={slice.slice_type}
-        data-slice-variation={slice.variation}
-        ref={pageRef}
-      >
-        <div className="mx-auto my-8 max-w-7xl sm:py-16">
-          <div className="mb-16 text-center">
-            <p className="heading-anim mb-2 text-sm tracking-wider uppercase dark:text-slate-300">
-              {slice.primary.heading}
-            </p>
-            <h1 className="heading-anim text-foreground mb-4 text-4xl font-bold md:text-5xl dark:text-white">
-              {slice.primary.sub_heading}
-            </h1>
-            <p className="heading-anim mx-auto mt-4 max-w-2xl text-lg text-black/80 dark:text-gray-300">
-              {slice.primary.description}
-            </p>
-          </div>
+    <Bounded
+      as="section"
+      data-slice-type={slice.slice_type}
+      data-slice-variation={slice.variation}
+      ref={pageRef}
+      className="mt-10 py-16 md:py-24 lg:py-28"
+    >
+      <div className="mx-auto flex max-w-7xl flex-col gap-14">
+        <div className="mx-auto flex max-w-3xl flex-col items-center gap-4 text-center">
+          <Badge variant="secondary" className="heading-anim">
+            {slice.primary.heading}
+          </Badge>
+          <h1 className="heading-anim text-foreground text-4xl font-semibold tracking-tight md:text-5xl">
+            {slice.primary.sub_heading}
+          </h1>
+          <p className="heading-anim text-muted-foreground text-base leading-7 md:text-lg">
+            {slice.primary.description}
+          </p>
+        </div>
 
-          <div className="grid grid-cols-1 items-start gap-8 lg:grid-cols-3">
-            {/* Contact Form */}
-            <div className="contact-card dark:bg-card/80 rounded-lg border-[0.5px] border-zinc-400 bg-white/20 p-8 backdrop-blur-sm lg:col-span-2 dark:border-gray-800">
-              <div className="flex items-center justify-between space-x-2">
-                <div className="mb-6 flex space-x-2">
-                  <div className="h-3 w-3 rounded-full bg-red-500"></div>
-                  <div className="h-3 w-3 rounded-full bg-yellow-500"></div>
-                  <div className="h-3 w-3 rounded-full bg-green-500"></div>
+        <div className="grid items-start gap-6 lg:grid-cols-[minmax(0,1fr)_24rem]">
+          <Card
+            id="message"
+            className="contact-card bg-opacity-80 scroll-mt-24"
+          >
+            <CardHeader className="gap-2">
+              <div className="flex items-center justify-between gap-4">
+                <div>
+                  <CardTitle className="text-2xl">Send a message</CardTitle>
+                  <CardDescription>
+                    Share the problem, goal, timeline, or the rough idea. I can
+                    help shape the next step.
+                  </CardDescription>
                 </div>
-                <Icon className="h-6 w-6 text-gray-400" />
+                <div className="bg-muted text-muted-foreground hidden size-10 shrink-0 items-center justify-center rounded-lg border sm:flex">
+                  <IconMessageCircle className="size-5" />
+                </div>
               </div>
+            </CardHeader>
 
-              <h2 className="text-foreground mb-6 text-2xl font-bold dark:text-white">
-                Send Me a Message
-              </h2>
+            <CardContent>
+              <form onSubmit={handleSubmit}>
+                <div className="grid grid-cols-1 gap-8">
+                  <Field>
+                    <FieldLabel htmlFor="name" className="uppercase">
+                      Name
+                    </FieldLabel>
+                    <Input
+                      id="name"
+                      type="text"
+                      name="name"
+                      value={form.name}
+                      onChange={handleChange}
+                      placeholder="Your name"
+                      autoComplete="name"
+                      required
+                    />
+                  </Field>
 
-              <form onSubmit={handleSubmit} ref={formRef} className="space-y-6">
-                <div className="space-y-2">
-                  <label
-                    htmlFor="name"
-                    className="text-foreground block text-sm font-medium dark:text-white"
-                  >
-                    Name
-                  </label>
-                  <input
-                    id="name"
-                    type="text"
-                    name="name"
-                    value={form.name}
-                    onChange={handleChange}
-                    placeholder="Your Name"
-                    className="w-full rounded-lg border-[0.5px] border-zinc-400 bg-white/30 px-2 py-2 transition-all focus:ring-1 focus:ring-purple-500 focus:outline-none dark:border-gray-700 dark:bg-[#131a41]/50"
-                    required
-                  />
+                  <Field>
+                    <FieldLabel htmlFor="email" className="uppercase">
+                      Email
+                    </FieldLabel>
+                    <Input
+                      id="email"
+                      type="email"
+                      name="email"
+                      value={form.email}
+                      onChange={handleChange}
+                      placeholder="you@example.com"
+                      autoComplete="email"
+                      required
+                    />
+                  </Field>
+                  <FieldGroup>
+                    <Field>
+                      <FieldLabel htmlFor="message" className="uppercase">
+                        Project brief
+                      </FieldLabel>
+                      <Textarea
+                        id="message"
+                        name="message"
+                        value={form.message}
+                        onChange={handleChange}
+                        placeholder="Tell me what you are building, what is not working yet, and what a great outcome would look like."
+                        className="min-h-40 resize-none"
+                        required
+                      />
+                    </Field>
+
+                    <Button type="submit" size="lg" disabled={isLoading}>
+                      {isLoading ? (
+                        <IconLoader2
+                          data-icon="inline-start"
+                          className="animate-spin"
+                        />
+                      ) : (
+                        <IconSend data-icon="inline-start" />
+                      )}
+                      {isLoading ? "Sending" : "Send message"}
+                    </Button>
+                  </FieldGroup>
                 </div>
-
-                <div className="space-y-2">
-                  <label
-                    htmlFor="email"
-                    className="text-foreground block text-sm font-medium dark:text-white"
-                  >
-                    Email Address
-                  </label>
-                  <input
-                    id="email"
-                    type="email"
-                    name="email"
-                    value={form.email}
-                    onChange={handleChange}
-                    placeholder="your.email@example.com"
-                    className="w-full rounded-lg border-[0.5px] border-zinc-400 bg-white/30 px-2 py-2 transition-all focus:ring-1 focus:ring-purple-500 focus:outline-none dark:border-gray-700 dark:bg-[#131a41]/50"
-                    required
-                  />
-                </div>
-
-                <div className="space-y-2">
-                  <label
-                    htmlFor="message"
-                    className="text-foreground block text-sm font-medium dark:text-white"
-                  >
-                    Message
-                  </label>
-                  <textarea
-                    id="message"
-                    rows={6}
-                    name="message"
-                    value={form.message}
-                    onChange={handleChange}
-                    placeholder="Tell me about your project, questions, or just say hello!"
-                    className="w-full resize-none rounded-lg border-[0.5px] border-zinc-400 bg-white/30 px-2 py-2 transition-all focus:ring-1 focus:ring-purple-500 focus:outline-none dark:border-gray-700 dark:bg-[#131a41]/50"
-                    required
-                  />
-                </div>
-
-                <button
-                  type="submit"
-                  disabled={isLoading}
-                  className="flex w-full items-center justify-center rounded-lg bg-gradient-to-r from-purple-500 via-violet-500 to-purple-700 px-6 py-3 font-medium text-white shadow-lg transition-all hover:from-purple-700 hover:via-violet-600 hover:to-purple-600 disabled:opacity-70"
-                >
-                  {isLoading ? (
-                    <span className="flex items-center">
-                      <svg
-                        className="mr-3 -ml-1 h-5 w-5 animate-spin text-white"
-                        xmlns="http://www.w3.org/2000/svg"
-                        fill="none"
-                        viewBox="0 0 24 24"
-                      >
-                        <circle
-                          className="opacity-25"
-                          cx="12"
-                          cy="12"
-                          r="10"
-                          stroke="currentColor"
-                          strokeWidth="4"
-                        ></circle>
-                        <path
-                          className="opacity-75"
-                          fill="currentColor"
-                          d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
-                        ></path>
-                      </svg>
-                      Sending...
-                    </span>
-                  ) : (
-                    <span className="flex items-center">
-                      Send Message
-                      <Send className="ml-2 h-4 w-4" />
-                    </span>
-                  )}
-                </button>
               </form>
 
-              <div className="mt-6 flex items-center justify-center text-xs text-black/50 dark:text-white/50">
-                <span>
-                  <MdOutlinePrivacyTip className="mr-1 inline h-4 w-4" />
-                  <span>
-                    Your information is kept confidential and will only be used
-                    to respond to your message. I respect your privacy.
-                  </span>
-                </span>
+              <div className="text-muted-foreground mt-5 flex items-start gap-2 text-sm">
+                <IconShieldLock className="mt-0.5 size-4 shrink-0" />
+                <p>
+                  Your information stays confidential and is only used to
+                  respond to your message.
+                </p>
               </div>
-            </div>
+            </CardContent>
+          </Card>
 
-            {/* Contact Info */}
-            <div className="space-y-6">
-              <div className="contact-card dark:bg-card/80 rounded-lg border-[0.5px] border-zinc-400 bg-white/20 p-6 shadow-lg backdrop-blur-sm dark:border-gray-800">
-                <h2 className="text-foreground mb-6 text-xl font-bold dark:text-white">
-                  Contact Information
-                </h2>
-
-                <div className="space-y-5">
-                  <div className="flex items-start">
-                    <div className="flex-shrink-0">
-                      <div className="bg-primary flex h-10 w-10 items-center justify-center rounded-md text-white dark:bg-purple-600/20 dark:text-white">
-                        <Mail className="h-5 w-5" />
-                      </div>
-                    </div>
-                    <div className="-mt-1 ml-3">
-                      <h3 className="text-sm font-medium dark:text-white">
-                        Email
-                      </h3>
-                      <p className="mt-1 text-black/60 dark:text-gray-400">
-                        <a
-                          href={`mailto:${slice.primary.contact_email}`}
-                          className="hover:text-foreground transition-colors dark:hover:text-purple-100"
-                        >
-                          {slice.primary.contact_email}
-                        </a>
-                      </p>
-                    </div>
-                  </div>
-
-                  <div className="flex items-start">
-                    <div className="flex-shrink-0">
-                      <div className="bg-primary flex h-10 w-10 items-center justify-center rounded-md text-white dark:bg-yellow-700/20 dark:text-yellow-500">
-                        <MapPin className="h-5 w-5" />
-                      </div>
-                    </div>
-                    <div className="-mt-1 ml-3">
-                      <h3 className="text-sm font-medium dark:text-white">
-                        Location
-                      </h3>
-                      <p className="mt-1 text-black/60 dark:text-gray-400">
-                        {slice.primary.location}
-                      </p>
-                    </div>
-                  </div>
-
-                  <div className="flex items-start">
-                    <div className="flex-shrink-0">
-                      <div className="bg-primary flex h-10 w-10 items-center justify-center rounded-md text-white dark:bg-green-700/20 dark:text-green-500">
-                        <Clock className="h-5 w-5" />
-                      </div>
-                    </div>
-                    <div className="-mt-1 ml-3">
-                      <h3 className="text-sm font-medium dark:text-white">
-                        Response Time
-                      </h3>
-                      <p className="mt-1 text-black/60 dark:text-gray-400">
-                        Within 24 hours
-                      </p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              <div className="contact-card dark:bg-card/80 rounded-lg border-[0.5px] border-zinc-400 bg-white/20 p-6 shadow-lg backdrop-blur-sm dark:border-gray-800">
-                <h2 className="text-foreground mb-4 text-xl font-bold dark:text-white">
-                  Connect with me:
-                </h2>
-
-                <div className="mt-4 flex space-x-4">
+          <div className="flex flex-col gap-6">
+            <Card size="sm" className="contact-card bg-opacity-80">
+              <CardHeader>
+                <CardTitle>Contact details</CardTitle>
+                <CardDescription>
+                  Best for project inquiries, collaborations, and technical
+                  consulting.
+                </CardDescription>
+              </CardHeader>
+              <CardContent className="flex flex-col gap-5">
+                <ContactDetail icon={IconMail} label="Email">
                   <a
-                    href="https://github.com/namodynamic"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="bg-primary flex h-10 w-10 items-center justify-center rounded-full border border-gray-700 text-white transition-all hover:border-purple-500 hover:bg-purple-500 dark:bg-[#131a41]/50"
+                    href={`mailto:${slice.primary.contact_email}`}
+                    className="hover:text-foreground wrap-break-word transition-colors"
                   >
-                    <FaGithub className="h-5 w-5" />
-                    <span className="sr-only">GitHub</span>
+                    {slice.primary.contact_email}
                   </a>
+                </ContactDetail>
 
-                  <a
-                    href="https://linkedin.com/in/ekechinnamdi"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="bg-primary flex h-10 w-10 items-center justify-center rounded-full border border-gray-700 text-white transition-all hover:border-purple-500 hover:bg-purple-500 dark:bg-[#131a41]/50"
-                  >
-                    <FaLinkedin className="h-5 w-5" />
-                    <span className="sr-only">LinkedIn</span>
-                  </a>
+                <ContactDetail icon={IconMapPin} label="Location">
+                  {slice.primary.location}
+                </ContactDetail>
 
-                  <a
-                    href="https://x.com/namodynamic"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="bg-primary flex h-10 w-10 items-center justify-center rounded-full border border-gray-700 text-white transition-all hover:border-purple-500 hover:bg-purple-500 dark:bg-[#131a41]/50"
-                  >
-                    <FaXTwitter className="h-5 w-5" />
-                    <span className="sr-only">Twitter</span>
-                  </a>
-                </div>
-              </div>
+                <ContactDetail icon={IconClock} label="Response time">
+                  Within 24 hours
+                </ContactDetail>
+              </CardContent>
+            </Card>
 
-              <div className="contact-card dark:bg-card/80 rounded-lg border-[0.5px] border-zinc-400 bg-white/20 p-6 shadow-lg backdrop-blur-sm dark:border-gray-800">
-                <h2 className="text-foreground mb-4 text-xl font-bold dark:text-white">
-                  Services
-                </h2>
-                <ul className="space-y-3">
-                  {slice.items.map((item, index) => (
-                    <li key={index} className="flex items-center">
-                      <GrServices className="mr-2 h-3 w-3 flex-shrink-0" />
-                      <span className="text-black/80 dark:text-gray-300">
-                        {item.services}
-                      </span>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            </div>
-          </div>
+            <Card size="sm" className="contact-card bg-opacity-80">
+              <CardHeader>
+                <CardTitle>Socials</CardTitle>
+                <CardDescription>
+                  Follow the work, writing, and shipped experiments.
+                </CardDescription>
+              </CardHeader>
+              <CardContent className="flex items-center gap-3">
+                {contactLinks.map(({ href, label, icon: Icon }) => (
+                  <Button key={label} asChild variant="outline" size="icon">
+                    <a href={href} target="_blank" rel="noopener noreferrer">
+                      <Icon />
+                      <span className="sr-only">{label}</span>
+                    </a>
+                  </Button>
+                ))}
+              </CardContent>
+            </Card>
 
-          {/* FAQ Section */}
-          <div className="contact-card mt-20">
-            <div className="mb-10 text-center">
-              <h2 className="text-foreground text-3xl font-bold dark:text-white">
-                {slice.primary.faq_title}
-              </h2>
-              <p className="mt-4 text-black/80 dark:text-gray-300">
-                {slice.primary.faq_intro}
-              </p>
-            </div>
-
-            <Accordion
-              type="single"
-              collapsible
-              className="mx-auto max-w-3xl space-y-4"
-            >
-              {slice.primary.faq.map((item, index) => (
-                <AccordionItem
-                  value={`item-${index + 1}`}
-                  key={index}
-                  className="dark:bg-card/80 text-foreground rounded-lg border-[0.5px] border-zinc-400 bg-white/20 px-6 py-2 shadow-lg backdrop-blur-sm dark:border-gray-800 dark:text-white"
-                >
-                  <AccordionTrigger className="text-lg font-medium">
-                    {item.question}
-                  </AccordionTrigger>
-                  <AccordionContent className="prose prose-base prose-invert text-black dark:text-slate-400">
-                    <PrismicRichText field={item.answer} />
-                  </AccordionContent>
-                </AccordionItem>
-              ))}
-            </Accordion>
-
-            <div className="mt-8 text-center">
-              <Link
-                href="/faq"
-                className="inline-flex items-center text-purple-600 hover:text-purple-500"
-              >
-                View all FAQs
-                <ArrowRight className="ml-1 h-4 w-4" />
-              </Link>
-            </div>
-          </div>
-
-          {/* CTA */}
-          <div className="contact-card dark:bg-card mt-20 rounded-xl border-[0.5px] border-zinc-400 bg-white/20 p-6 shadow-lg backdrop-blur-sm sm:p-12 dark:border-gray-800">
-            <div className="text-center">
-              <h2 className="text-foreground mb-4 text-3xl font-bold dark:text-white">
-                {slice.primary.cta_title}
-              </h2>
-              <p className="mx-auto mb-8 max-w-2xl dark:text-gray-300">
-                {slice.primary.cta_intro}
-              </p>
-              <Link href="#">
-                <MagicButton
-                  title="Send a Message"
-                  icon={
-                    <Send className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
-                  }
-                  position="right"
-                  otherClasses=""
-                  isBeam
-                />
-              </Link>
-            </div>
+            <Card size="sm" className="contact-card bg-opacity-80">
+              <CardHeader>
+                <CardTitle>Services</CardTitle>
+                <CardDescription>
+                  Focus areas I can support from strategy to launch.
+                </CardDescription>
+              </CardHeader>
+              <CardContent className="flex flex-wrap gap-2">
+                {slice.items.map((item, index) => (
+                  <Badge key={index} variant="secondary" className="gap-1.5">
+                    <IconBriefcase className="size-3.5" />
+                    {item.services}
+                  </Badge>
+                ))}
+              </CardContent>
+            </Card>
           </div>
         </div>
-        <ToastContainer />
-      </Bounded>
-    </>
+
+        <div className="contact-card mx-auto flex w-full max-w-3xl flex-col gap-8">
+          <div className="text-center">
+            <h2 className="text-foreground text-3xl font-semibold">
+              {slice.primary.faq_title}
+            </h2>
+            <p className="text-muted-foreground mt-3">
+              {slice.primary.faq_intro}
+            </p>
+          </div>
+
+          <Accordion type="single" collapsible className="flex flex-col gap-3">
+            {slice.primary.faq.map((item, index) => (
+              <AccordionItem
+                value={`item-${index + 1}`}
+                key={index}
+                className="bg-card rounded-xl border px-5"
+              >
+                <AccordionTrigger className="text-left text-base font-medium">
+                  {item.question}
+                </AccordionTrigger>
+                <AccordionContent className="text-muted-foreground [&_p]:leading-7">
+                  <PrismicRichText field={item.answer} />
+                </AccordionContent>
+              </AccordionItem>
+            ))}
+          </Accordion>
+
+          <div className="text-center">
+            <Button asChild variant="link">
+              <Link href="/faq">
+                View all FAQs
+                <IconArrowRight data-icon="inline-end" />
+              </Link>
+            </Button>
+          </div>
+        </div>
+
+        <Card className="contact-card bg-opacity-80">
+          <CardContent className="flex flex-col items-center gap-5 p-8 text-center md:p-12">
+            <div className="bg-muted text-muted-foreground flex size-12 items-center justify-center rounded-xl border">
+              <IconCheck className="size-5" />
+            </div>
+            <div className="max-w-2xl">
+              <h2 className="text-foreground text-3xl font-semibold">
+                {slice.primary.cta_title}
+              </h2>
+              <p className="text-muted-foreground mt-3">
+                {slice.primary.cta_intro}
+              </p>
+            </div>
+            <Button asChild size="lg">
+              <a href="#message">
+                Start the conversation
+                <IconSend data-icon="inline-end" />
+              </a>
+            </Button>
+          </CardContent>
+        </Card>
+      </div>
+    </Bounded>
   );
 };
 

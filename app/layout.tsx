@@ -10,9 +10,10 @@ import { createClient, repositoryName } from "@/prismicio";
 import Header from "../components/Header";
 import Footer from "@/components/Footer";
 import { ThemeProvider } from "@/components/ThemeProvider";
+import { Toaster } from "@/components/ui/sonner";
 import { cn } from "@/lib/utils";
 
-const geist = Geist({subsets:['latin'],variable:'--font-sans'});
+const geist = Geist({ subsets: ["latin"], variable: "--font-sans" });
 
 const urbanist = Urbanist({ subsets: ["latin"] });
 
@@ -62,6 +63,7 @@ export default function RootLayout({
           <main className="relative flex-1">{children}</main>
 
           <Footer />
+          <Toaster position="bottom-right" richColors />
         </ThemeProvider>
         <Analytics />
         <SpeedInsights />

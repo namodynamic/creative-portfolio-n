@@ -14,8 +14,6 @@ import { readingTime } from "reading-time-estimator";
 import { extractTextFromSlices } from "@/utils/extractSliceText";
 import FeaturedProjects from "@/components/FeaturedProjectCard";
 import SharePost from "@/components/SharePost";
-import { ToastContainer } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
 
 type Params = { uid: string };
 
@@ -124,7 +122,7 @@ export default async function BlogPostPage(props: { params: Promise<Params> }) {
                     <Link
                       key={index}
                       href={`/blog/tag/${tag.toLowerCase().replace(/\s+/g, "-")}`}
-                      className="inline-flex items-center gap-1 rounded-full bg-muted px-2 py-1 text-xs text-gray-300 uppercase transition-colors hover:bg-[#1a2150] hover:text-white"
+                      className="bg-muted inline-flex items-center gap-1 rounded-full px-2 py-1 text-xs text-gray-300 uppercase transition-colors hover:bg-[#1a2150] hover:text-white"
                     >
                       <Tag className="h-3 w-3" />
                       {tag}
@@ -136,7 +134,6 @@ export default async function BlogPostPage(props: { params: Promise<Params> }) {
             </div>
           </div>
         </div>
-        <ToastContainer />
       </Bounded>
     </article>
   );

@@ -26,20 +26,20 @@ const Hero = ({ slice }: HeroProps): JSX.Element => {
       data-slice-variation={slice.variation}
       className="relative overflow-hidden"
     >
-      <div className="relative mx-auto flex min-h-[calc(100dvh-28rem)] w-full max-w-6xl flex-col items-center justify-center text-center">
+      <div className="relative z-10 mx-auto flex w-full max-w-6xl flex-col items-center justify-center px-4 pt-16 text-center sm:pt-28 sm:pb-16 md:pt-36">
         <Badge
           variant="secondary"
-          className="animate-in fade-in zoom-in mb-5 text-[9px] uppercase duration-700 sm:text-xs"
+          className="animate-in fade-in zoom-in text-muted-foreground mb-5 text-[9px] uppercase duration-700 sm:text-xs"
         >
           {introText}
         </Badge>
 
         <TextGenerateEffect
           words={headline}
-          className="mx-auto max-w-5xl text-center text-3xl font-semibold tracking-tight text-balance sm:text-5xl md:text-6xl lg:text-7xl"
+          className="mx-auto max-w-5xl text-center text-2xl font-semibold tracking-tight text-balance sm:text-4xl md:text-5xl lg:text-6xl"
         />
 
-        <p className="text-muted-foreground mx-auto mt-1 max-w-3xl text-base leading-7 text-pretty sm:text-lg md:text-xl md:leading-8">
+        <p className="text-muted-foreground mx-auto mt-1 max-w-3xl text-sm leading-7 text-pretty sm:text-lg md:text-xl md:leading-8">
           {introduction}
         </p>
 
