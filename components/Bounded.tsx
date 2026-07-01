@@ -1,5 +1,5 @@
 import React, { ElementType, ReactNode, forwardRef } from "react";
-import clsx from "clsx";
+import { cn } from "@/lib/utils";
 
 type BoundedProps<T extends ElementType = "section"> = {
   as?: T;
@@ -12,13 +12,13 @@ const Bounded = forwardRef<HTMLElement, BoundedProps>(
     return (
       <Component
         ref={ref}
-        className={clsx("px-4 py-20 md:px-6 md:py-14 lg:py-16", className)}
+        className={cn("px-4 py-20 md:px-6 md:py-14 lg:py-16", className)}
         {...rest}
       >
         <div className="mx-auto w-full max-w-7xl">{children}</div>
       </Component>
     );
-  }
+  },
 );
 
 Bounded.displayName = "Bounded";

@@ -1,9 +1,9 @@
-import * as Prismic from "@prismicio/client";
 import { createClient } from "@/prismicio";
 import Link from "next/link";
 import Bounded from "@/components/Bounded";
 import Image from "next/image";
 import { formatDate } from "@/utils/FormatDate";
+import { extractFirstParagraphFromSlices } from "@/utils/extractSliceText";
 import { Badge } from "@/components/ui/badge";
 import { ArrowLeft, Tag } from "lucide-react";
 import Heading from "@/components/Heading";
@@ -35,7 +35,7 @@ export default async function TagPage({ params }: TagPageProps) {
       </div>
 
       {/* Header */}
-      <div className="pb-8 pt-5 md:pt-10">
+      <div className="pt-5 pb-8 md:pt-10">
         <div className="mx-auto max-w-3xl text-center">
           <div className="mb-6 inline-flex items-center justify-center gap-2 rounded-full bg-black/50 px-4 py-2 text-white dark:bg-purple-900/20 dark:text-purple-300">
             <Tag className="h-4 w-4" />
@@ -44,11 +44,11 @@ export default async function TagPage({ params }: TagPageProps) {
           <Heading
             as="h1"
             size="sm"
-            className="mb-4 text-black-50 dark:text-white"
+            className="text-foreground mb-4"
           >
             #{decodedTag}
           </Heading>
-          <p className="mx-auto max-w-2xl text-2xl text-black/50 dark:text-slate-400">
+          <p className="mx-auto max-w-2xl text-2xl text-muted-foreground">
             Articles tagged with &quot;{decodedTag}&quot;
           </p>
         </div>
@@ -59,27 +59,17 @@ export default async function TagPage({ params }: TagPageProps) {
         {posts.length > 0 ? (
           <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
             {posts.map((post) => {
-              const firstParagraph =
-                post.data.slices
-                  .find((slice) => {
-                    return (
-                      slice.slice_type === "text_block" &&
-                      Array.isArray((slice as any).primary?.text) &&
-                      (slice as any).primary.text.some(
-                        (block: any) => block.type === "paragraph",
-                      )
-                    );
-                  })
-                  ?.primary?.text.find(
-                    (block: any) => block.type === "paragraph",
-                  )?.text || "No description available.";
+              const firstParagraph = extractFirstParagraphFromSlices(
+                post.data.slices,
+                "No description available.",
+              );
 
               const formattedDate = formatDate(post.data.date);
 
               return (
                 <article
                   key={post.id}
-                  className="group flex h-full flex-col overflow-hidden rounded-lg border border-zinc-400 bg-white/20 transition-all hover:border-slate-700 hover:bg-white-50 dark:border-slate-800 dark:bg-slate-950/50 dark:hover:bg-slate-900/50"
+                  className="group hover:bg-muted flex h-full flex-col overflow-hidden rounded-lg border border-zinc-400 bg-white/20 transition-all hover:border-slate-700 dark:border-slate-800 dark:bg-slate-950/50 dark:hover:bg-slate-900/50"
                 >
                   <Link href={`/blog/${post.uid}`} className="overflow-hidden">
                     <Image
@@ -90,13 +80,13 @@ export default async function TagPage({ params }: TagPageProps) {
                       className="max-h-48 w-full object-fill transition-transform duration-300 group-hover:scale-105"
                     />
                   </Link>
-                  <div className="flex flex-grow flex-col p-6">
+                  <div className="flex grow flex-col p-6">
                     <div className="mb-4 flex flex-wrap gap-2">
                       {post.tags.slice(0, 3).map((tag) => (
                         <Badge
                           key={tag}
                           variant="secondary"
-                          className="bg-black-50 text-white-50 hover:bg-black/50 dark:bg-violet-900/20 dark:text-violet-300 dark:hover:bg-violet-900/30"
+                          className="bg-primary text-primary-foreground hover:bg-black/50 dark:bg-violet-900/20 dark:text-violet-300 dark:hover:bg-violet-900/30"
                         >
                           #{tag}
                         </Badge>
@@ -111,7 +101,7 @@ export default async function TagPage({ params }: TagPageProps) {
                       href={`/blog/${post.uid}`}
                       className="group-hover:text-blue-300"
                     >
-                      <h2 className="mb-2 line-clamp-2 text-xl font-bold text-black-50 transition-colors dark:text-white">
+                      <h2 className="text-foreground mb-2 line-clamp-2 text-xl font-bold transition-colors dark:text-white">
                         {post.data.title}
                       </h2>
                     </Link>

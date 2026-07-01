@@ -1,189 +1,246 @@
 "use client";
 
-import { cn } from "@/utils/cn";
-import React, { useEffect, useState, type JSX } from "react";
-
+import type { JSX, ReactNode } from "react";
+import { useMemo } from "react";
 import { Content } from "@prismicio/client";
-import { PrismicRichText, SliceComponentProps } from "@prismicio/react";
-import Bounded from "@/components/Bounded";
 import { PrismicNextImage } from "@prismicio/next";
-import { FaStar } from "react-icons/fa6";
+import { PrismicRichText, SliceComponentProps } from "@prismicio/react";
+import AutoScroll from "embla-carousel-auto-scroll";
+import type { MotionProps } from "motion/react";
+import { motion } from "motion/react";
+import { IconMessageCircle } from "@tabler/icons-react";
+import Bounded from "@/components/Bounded";
+import SectionHeader from "@/components/SectionHeader";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+import {
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+} from "@/components/ui/carousel";
+import { cn } from "@/lib/utils";
 
-/**
- * Props for `Testimonial`.
- */
 export type TestimonialProps = SliceComponentProps<Content.TestimonialSlice>;
 
-/**
- * Component for "Testimonial" Slices.
- */
-const Testimonial = ({ slice }: TestimonialProps): JSX.Element => {
-  const InfiniteMovingCards = ({
-    direction = "left",
-    speed = "normal",
-    pauseOnHover = true,
-    className,
-  }: {
-    direction?: "left" | "right";
-    speed?: "fast" | "normal" | "slow";
-    pauseOnHover?: boolean;
-    className?: string;
-  }) => {
-    const containerRef = React.useRef<HTMLDivElement>(null);
-    const scrollerRef = React.useRef<HTMLUListElement>(null);
+type MotionWrapProps = {
+  children: ReactNode;
+  className?: string;
+} & MotionProps;
 
-    useEffect(() => {
-      addAnimation();
-    }, []);
-    const [start, setStart] = useState(false);
-    function addAnimation() {
-      if (containerRef.current && scrollerRef.current) {
-        const scrollerContent = Array.from(scrollerRef.current.children);
+function getInitials(name: string | null | undefined) {
+  if (!name) {
+    return "AN";
+  }
 
-        scrollerContent.forEach((item) => {
-          const duplicatedItem = item.cloneNode(true);
-          if (scrollerRef.current) {
-            scrollerRef.current.appendChild(duplicatedItem);
-          }
-        });
+  return name
+    .split(" ")
+    .filter(Boolean)
+    .slice(0, 2)
+    .map((word) => word.at(0))
+    .join("")
+    .toUpperCase();
+}
 
-        getDirection();
-        getSpeed();
-        setStart(true);
-      }
-    }
-    const getDirection = () => {
-      if (containerRef.current) {
-        if (direction === "left") {
-          containerRef.current.style.setProperty(
-            "--animation-direction",
-            "forwards",
-          );
-        } else {
-          containerRef.current.style.setProperty(
-            "--animation-direction",
-            "reverse",
-          );
-        }
-      }
-    };
-    const getSpeed = () => {
-      if (containerRef.current) {
-        if (speed === "fast") {
-          containerRef.current.style.setProperty("--animation-duration", "20s");
-        } else if (speed === "normal") {
-          containerRef.current.style.setProperty("--animation-duration", "40s");
-        } else {
-          containerRef.current.style.setProperty("--animation-duration", "80s");
-        }
-      }
-    };
-    return (
-      <div
-        ref={containerRef}
-        className={cn(
-          "scroller relative z-20 w-screen overflow-hidden  [mask-image:linear-gradient(to_right,transparent,white_20%,white_80%,transparent)]",
-          className,
-        )}
-      >
-        <ul
-          ref={scrollerRef}
-          className={cn(
-            " flex w-max min-w-full shrink-0 flex-nowrap gap-10 py-4",
-            start && "animate-scroll ",
-            pauseOnHover && "hover:[animation-play-state:paused]",
+function MotionWrap({ children, className, ...props }: MotionWrapProps) {
+  return (
+    <motion.div className={cn(className)} {...props}>
+      {children}
+    </motion.div>
+  );
+}
+
+function TestimonialCard({
+  item,
+}: {
+  item: Content.TestimonialSlice["items"][number];
+}) {
+  return (
+    <Card
+      size="sm"
+      className="bg-opacity-80 hover:bg-card h-52 rounded-xl p-0 shadow-sm transition-colors md:h-56"
+    >
+      <CardHeader className="flex flex-row items-center gap-3 p-4 pb-2">
+        <Avatar className="size-11 rounded-lg">
+          <AvatarImage
+            src={item.avatar.url ?? undefined}
+            alt={item.avatar.alt ?? item.name ?? "Anonymous"}
+            className="rounded-lg"
+          />
+          <AvatarFallback className="rounded-lg">
+            {getInitials(item.name)}
+          </AvatarFallback>
+        </Avatar>
+
+        <div className="min-w-0">
+          <CardTitle className="truncate text-base font-semibold md:text-lg">
+            {item.name || "Anonymous"}
+          </CardTitle>
+          {item.occupation && (
+            <CardDescription className="truncate text-sm">
+              {item.occupation}
+            </CardDescription>
           )}
-        >
-          {slice.items.map((item, idx) => (
-            <li
-              className="relative w-[280px] max-w-full shrink-0 rounded-xl border-[0.5px] border-b-0 border-zinc-100 bg-white/20 p-4 dark:border-slate-800 dark:bg-[linear-gradient(90deg,_rgba(4,7,29,1)_0%,_rgba(12,14,35,1)_100%)] sm:w-[350px] sm:rounded-2xl sm:p-5 md:w-[50vw] md:p-12 lg:p-16"
-              key={idx}
-            >
-              <blockquote>
-                <div
-                  aria-hidden="true"
-                  className="user-select-none -z-1 pointer-events-none absolute -left-0.5 -top-0.5 h-[calc(100%_+_4px)] w-[calc(100%_+_4px)]"
-                ></div>
-                <span className=" prose relative z-20 text-xs font-normal leading-[1.6] text-neutral-800 dark:text-gray-100 sm:text-sm md:text-base">
-                  <PrismicRichText field={item.feedback} />
-                </span>
-                <div className="flex flex-col justify-between gap-3 sm:flex-row sm:gap-0">
-                  <div className="relative z-20 mt-4 flex flex-row items-center sm:mt-6">
-                    <div className="me-2 sm:me-3">
-                      <PrismicNextImage
-                        field={item.avatar}
-                        className="h-8 w-8 rounded-full object-cover sm:h-10 sm:w-10 md:h-12 md:w-12"
-                      />
-                    </div>
-                    <span className="flex flex-col gap-0.5 sm:gap-1">
-                      <span className="text-sm font-bold leading-[1.6] dark:text-white sm:text-base md:text-lg lg:text-xl">
-                        {item.name}
-                      </span>
-                      <span className="text-xs font-normal dark:text-white-200 sm:text-sm">
-                        {item.occupation}
-                      </span>
-                    </span>
-                  </div>
+        </div>
+      </CardHeader>
 
-                  <div className="flex items-center gap-1 self-start sm:gap-1.5 sm:self-end md:gap-2">
-                    {Array.from({ length: 5 }).map((_, i) => (
-                      <FaStar
-                        key={i}
-                        className="h-3 w-3 text-yellow-400 sm:h-3.5 sm:w-3.5 md:h-4 md:w-4"
-                      />
-                    ))}
-                  </div>
-                </div>
-              </blockquote>
-            </li>
-          ))}
-        </ul>
-      </div>
-    );
-  };
+      <CardContent className="overflow-hidden p-4 pt-2">
+        <div className="text-card-foreground text-sm leading-7 [&_p]:m-0 [&_p]:line-clamp-4">
+          <PrismicRichText field={item.feedback} />
+        </div>
+      </CardContent>
+    </Card>
+  );
+}
+
+function TestimonialCarouselRow({
+  items,
+  direction = "forward",
+  className,
+}: {
+  items: Content.TestimonialSlice["items"];
+  direction?: "forward" | "backward";
+  className?: string;
+}) {
+  const repeatedItems = useMemo(() => {
+    if (!items.length) {
+      return [];
+    }
+
+    const repeatCount = Math.max(2, Math.ceil(8 / items.length));
+    return Array.from({ length: repeatCount }, () => items).flat();
+  }, [items]);
+  const autoScroll = useMemo(
+    () =>
+      AutoScroll({
+        direction,
+        playOnInit: true,
+        speed: 0.65,
+        startDelay: 250,
+        stopOnFocusIn: true,
+        stopOnInteraction: false,
+        stopOnMouseEnter: true,
+      }),
+    [direction],
+  );
 
   return (
-    <>
-      <Bounded
-        as="section"
-        data-slice-type={slice.slice_type}
-        data-slice-variation={slice.variation}
-        className="px-4 py-16 max-md:-my-20 sm:px-6 sm:py-20 md:px-8 md:py-24 lg:py-28"
+    <motion.div
+      initial={{ opacity: 0, y: 18 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, amount: 0.2 }}
+      transition={{ duration: 0.45, ease: "easeOut" }}
+      className={cn("w-full", className)}
+    >
+      <Carousel
+        plugins={[autoScroll]}
+        opts={{
+          align: "start",
+          dragFree: true,
+          loop: true,
+        }}
+        className="w-full"
       >
-        <h1 className="text-center text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl">
-          {slice.primary.title?.split(" ").slice(0, -2).join(" ")}{" "}
-          <span className="text-purple-500">
-            {slice.primary.title?.split(" ").slice(-2).join(" ")}
-          </span>
-        </h1>
-      </Bounded>
-
-      <div className="-mt-12 mb-5 flex flex-col items-center max-lg:mt-10 sm:-mt-16 md:-mt-20">
-        <div className="relative flex h-[40vh] flex-col items-center justify-center overflow-hidden rounded-md antialiased sm:h-[45vh] md:h-[30rem]">
-          <InfiniteMovingCards />
-        </div>
-
-        <div className="mt-8 flex flex-wrap items-center justify-center gap-3 px-4 sm:mt-12 sm:gap-4 md:mt-16 md:gap-8 lg:gap-16">
-          {slice.primary.companies.map((item, index) => (
-            <div
-              key={index}
-              className="flex max-w-24 px-2 sm:max-w-32 md:max-w-40 lg:max-w-60"
+        <CarouselContent>
+          {repeatedItems.map((item, index) => (
+            <CarouselItem
+              key={`${direction}-${item.name || "testimonial"}-${index}`}
+              className="basis-[84%] sm:basis-80 md:basis-96 lg:basis-md"
             >
-              <div className="flex flex-row items-center justify-center gap-1.5 sm:gap-2">
-                <PrismicNextImage
-                  field={item.company_logo}
-                  className="h-4 w-4 sm:h-5 sm:w-5 md:h-8 md:w-8 lg:h-10 lg:w-10"
-                />
-
-                <h3 className="text-xs font-bold sm:text-sm md:text-base lg:text-lg">
-                  {item.company_name}
-                </h3>
+              <div className="h-full p-1">
+                <TestimonialCard item={item} />
               </div>
-            </div>
+            </CarouselItem>
           ))}
-        </div>
+        </CarouselContent>
+      </Carousel>
+    </motion.div>
+  );
+}
+
+function CompanyPill({
+  item,
+}: {
+  item: Content.TestimonialSlice["primary"]["companies"][number];
+}) {
+  return (
+    <div className="border-border/60 bg-card flex max-w-48 items-center rounded-full border px-3 py-2">
+      <div className="flex min-w-0 items-center justify-center gap-2">
+        <PrismicNextImage
+          field={item.company_logo}
+          className="size-5 shrink-0 object-contain md:size-6"
+          fallbackAlt=""
+        />
+
+        <h3 className="text-foreground truncate text-sm font-medium">
+          {item.company_name}
+        </h3>
       </div>
-    </>
+    </div>
+  );
+}
+
+const Testimonial = ({ slice }: TestimonialProps): JSX.Element => {
+  const [firstRow, secondRow] = useMemo(() => {
+    const middle = Math.ceil(slice.items.length / 2);
+    return [slice.items.slice(0, middle), slice.items.slice(middle)];
+  }, [slice.items]);
+
+  return (
+    <Bounded
+      as="section"
+      data-slice-type={slice.slice_type}
+      data-slice-variation={slice.variation}
+      className="overflow-hidden py-16 md:py-24 lg:py-28"
+    >
+      <MotionWrap
+        initial={{ opacity: 0, y: 24 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, amount: 0.25 }}
+        transition={{ duration: 0.5, ease: "easeOut" }}
+        className="flex flex-col gap-10 md:gap-14"
+      >
+        <SectionHeader
+          eyebrow="Client feedback"
+          title={slice.primary.title}
+          description="A few signals from teams and clients who trusted me to turn product ideas into reliable shipped software."
+          icon={<IconMessageCircle data-icon="inline-start" />}
+          align="center"
+        />
+
+        <div className="relative flex flex-col items-center justify-center gap-4 overflow-hidden">
+          <TestimonialCarouselRow items={firstRow} />
+
+          {secondRow.length > 0 && (
+            <TestimonialCarouselRow
+              items={secondRow}
+              direction="backward"
+              className="hidden md:block"
+            />
+          )}
+
+          <div className="from-background pointer-events-none absolute inset-y-0 left-0 hidden w-1/5 bg-linear-to-r md:block" />
+          <div className="from-background pointer-events-none absolute inset-y-0 right-0 hidden w-1/5 bg-linear-to-l md:block" />
+        </div>
+
+        <motion.div
+          initial={{ opacity: 0, y: 16 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.3 }}
+          transition={{ duration: 0.45, ease: "easeOut" }}
+          className="flex flex-wrap items-center justify-center gap-4 md:gap-8"
+        >
+          {slice.primary.companies.map((item, index) => (
+            <CompanyPill key={index} item={item} />
+          ))}
+        </motion.div>
+      </MotionWrap>
+    </Bounded>
   );
 };
 

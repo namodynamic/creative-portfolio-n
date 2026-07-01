@@ -14,8 +14,6 @@ import { readingTime } from "reading-time-estimator";
 import { extractTextFromSlices } from "@/utils/extractSliceText";
 import FeaturedProjects from "@/components/FeaturedProjectCard";
 import SharePost from "@/components/SharePost";
-import { ToastContainer } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
 
 type Params = { uid: string };
 
@@ -55,7 +53,7 @@ export default async function BlogPostPage(props: { params: Promise<Params> }) {
             <ChevronLeft className="mr-1 h-4 w-4" />
             Back to all blogs
           </Link>
-          <h1 className="max-w-4xl text-xl font-bold text-black-50 dark:text-white md:text-2xl lg:text-3xl">
+          <h1 className="text-foreground max-w-4xl text-xl font-bold md:text-2xl lg:text-3xl">
             {page.data.title}
           </h1>
         </div>
@@ -63,15 +61,15 @@ export default async function BlogPostPage(props: { params: Promise<Params> }) {
         <div className="relative z-20 grid grid-cols-1 gap-8 lg:grid-cols-12">
           {/* Main Content */}
           <div className="lg:col-span-8">
-            <div className="overflow-hidden rounded-xl border-[0.5px] border-zinc-400 bg-white/20 shadow-xl backdrop-blur-sm dark:border-slate-800 dark:bg-blue-850/50">
-              <div className="border-b-[0.5px] border-zinc-400 p-6 dark:border-slate-800 md:p-8">
-                <div className="flex flex-wrap items-center gap-4 text-sm text-black/50  dark:text-gray-400">
+            <div className="dark:bg-card/80 overflow-hidden rounded-xl border-[0.5px] border-zinc-400 bg-white/20 shadow-xl backdrop-blur-sm dark:border-slate-800">
+              <div className="border-b-[0.5px] border-zinc-400 p-6 md:p-8 dark:border-slate-800">
+                <div className="flex flex-wrap items-center gap-4 text-sm text-black/50 dark:text-gray-400">
                   <div className="flex items-center">
-                    <Calendar className="mr-2 h-4 w-4 text-black-50 dark:text-white-100" />
+                    <Calendar className="text-foreground dark:text-muted-foreground mr-2 h-4 w-4" />
                     {formattedDate}
                   </div>
                   <div className="flex items-center">
-                    <Clock className="mr-2 h-4 w-4 text-black-50 dark:text-white-100" />
+                    <Clock className="text-foreground dark:text-muted-foreground mr-2 h-4 w-4" />
                     {readTime.text}
                   </div>
                 </div>
@@ -80,7 +78,7 @@ export default async function BlogPostPage(props: { params: Promise<Params> }) {
                   {page.tags.map((tag) => (
                     <span
                       key={tag}
-                      className="rounded-full bg-black/80 px-2 py-1 text-[6px] md:text-[8px] font-medium text-white dark:bg-purple-500/20 dark:text-purple-200"
+                      className="rounded-full bg-black/80 px-2 py-1 text-[6px] font-medium text-white md:text-[8px] dark:bg-purple-500/20 dark:text-purple-200"
                     >
                       #{tag}
                     </span>
@@ -89,11 +87,14 @@ export default async function BlogPostPage(props: { params: Promise<Params> }) {
               </div>
 
               {/* Post Content */}
-              <div className="p-4 ">
+              <div className="p-4">
                 <div className="overflow-x-auto">
-                <div className="prose prose-base mx-auto max-w-prose break-words dark:prose-invert md:prose-lg">
-                  <SliceZone slices={page.data.slices} components={components} />
-                </div>
+                  <div className="prose prose-base dark:prose-invert md:prose-lg mx-auto max-w-prose wrap-break-word">
+                    <SliceZone
+                      slices={page.data.slices}
+                      components={components}
+                    />
+                  </div>
                 </div>
               </div>
 
@@ -112,8 +113,8 @@ export default async function BlogPostPage(props: { params: Promise<Params> }) {
           <div className="lg:col-span-4">
             <div className="sticky top-24 space-y-8">
               {/* Popular Tags */}
-              <div className="rounded-xl border-[0.5px] border-zinc-400 bg-white/20 p-6 shadow-xl backdrop-blur-sm dark:border-slate-800 dark:bg-blue-850/50">
-                <h3 className="mb-4 text-lg font-bold text-black-50 dark:text-white">
+              <div className="dark:bg-card/80 rounded-xl border-[0.5px] border-zinc-400 bg-white/20 p-6 shadow-xl backdrop-blur-sm dark:border-slate-800">
+                <h3 className="text-foreground mb-4 text-lg font-bold">
                   Popular Topics By Tags
                 </h3>
                 <div className="flex flex-wrap gap-2">
@@ -121,7 +122,7 @@ export default async function BlogPostPage(props: { params: Promise<Params> }) {
                     <Link
                       key={index}
                       href={`/blog/tag/${tag.toLowerCase().replace(/\s+/g, "-")}`}
-                      className="rounded-full bg-[#131a41] inline-flex items-center gap-1 px-2 py-1 text-xs uppercase text-gray-300 transition-colors hover:bg-[#1a2150] hover:text-white"
+                      className="bg-muted inline-flex items-center gap-1 rounded-full px-2 py-1 text-xs text-gray-300 uppercase transition-colors hover:bg-[#1a2150] hover:text-white"
                     >
                       <Tag className="h-3 w-3" />
                       {tag}
@@ -133,7 +134,6 @@ export default async function BlogPostPage(props: { params: Promise<Params> }) {
             </div>
           </div>
         </div>
-        <ToastContainer />
       </Bounded>
     </article>
   );

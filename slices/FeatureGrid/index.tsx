@@ -3,6 +3,7 @@ import { Content } from "@prismicio/client";
 import { SliceComponentProps } from "@prismicio/react";
 import { BentoGrid, BentoGridItem } from "@/components/ui/BentoGrid";
 import Bounded from "@/components/Bounded";
+import SectionHeader from "@/components/SectionHeader";
 
 export type FeatureGridProps = SliceComponentProps<Content.FeatureGridSlice>;
 
@@ -12,9 +13,16 @@ const FeatureGrid: FC<FeatureGridProps> = ({ slice }) => {
       as="section"
       data-slice-type={slice.slice_type}
       data-slice-variation={slice.variation}
-      className="py-12 max-md:-mt-16 sm:py-16 md:py-20 lg:py-24"
+      className="pt-0!"
     >
-      <BentoGrid className="w-full">
+      <SectionHeader
+        title="Full-stack execution for products that need to feel fast, clear, and trustworthy."
+        description="A focused blend of frontend craft, backend thinking, accessibility, performance, and product judgment."
+        align="center"
+        className="mb-10 md:mb-14"
+      />
+
+      <BentoGrid>
         {slice.primary.items.map((item, i) => (
           <BentoGridItem
             key={i}

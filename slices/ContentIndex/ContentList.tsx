@@ -7,6 +7,7 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { Content } from "@prismicio/client";
 import Link from "next/link";
 import { formatDate } from "@/utils/FormatDate";
+import { extractFirstParagraphFromSlices } from "@/utils/extractSliceText";
 import { Tag, ArrowRight } from "lucide-react";
 import { PrismicNextImage } from "@prismicio/next";
 
@@ -147,19 +148,9 @@ export default function ContentList({
     <section>
       <ul ref={component} onMouseLeave={onMouseLeave}>
         {sortedItems.map((item, index) => {
-          const firstParagraph =
-            item.data.slices
-              .find((slice) => {
-                return (
-                  slice.slice_type === "text_block" &&
-                  Array.isArray((slice as any).primary?.text) &&
-                  (slice as any).primary.text.some(
-                    (block: any) => block.type === "paragraph",
-                  )
-                );
-              })
-              ?.primary?.text.find((block: any) => block.type === "paragraph")
-              ?.text || "";
+          const firstParagraph = extractFirstParagraphFromSlices(
+            item.data.slices,
+          );
 
           return (
             <li

@@ -163,7 +163,7 @@ export default function TechNewsCard() {
   };
 
   return (
-    <Card className="sticky top-24 w-full space-y-8 border-[0.5px] border-zinc-300 bg-white/20 shadow-sm backdrop-blur-sm dark:border-gray-800 dark:bg-blue-850/50">
+    <Card className="dark:bg-card/80 sticky top-24 w-full space-y-8 border-[0.5px] border-zinc-300 bg-white/20 shadow-sm backdrop-blur-sm dark:border-gray-800">
       <CardHeader className="pb-3">
         <div className="mb-2 flex items-center justify-between">
           <CardTitle className="flex items-center gap-2 text-lg">

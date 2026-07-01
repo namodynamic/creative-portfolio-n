@@ -5,7 +5,10 @@ import { ArrowRight, Calendar, Clock, Tag } from "lucide-react";
 import type { Content } from "@prismicio/client";
 import Link from "next/link";
 import { formatDate } from "@/utils/FormatDate";
-import { extractTextFromSlices } from "@/utils/extractSliceText";
+import {
+  extractFirstParagraphFromSlices,
+  extractTextFromSlices,
+} from "@/utils/extractSliceText";
 import { readingTime } from "reading-time-estimator";
 
 interface BlogCardProps {
@@ -15,19 +18,7 @@ interface BlogCardProps {
 }
 
 export default function BlogCard({ item, index, viewMoreText }: BlogCardProps) {
-  const firstParagraph =
-    item.data.slices
-      .find((slice) => {
-        return (
-          slice.slice_type === "text_block" &&
-          Array.isArray((slice as any).primary?.text) &&
-          (slice as any).primary.text.some(
-            (block: any) => block.type === "paragraph",
-          )
-        );
-      })
-      ?.primary?.text.find((block: any) => block.type === "paragraph")?.text ||
-    "";
+  const firstParagraph = extractFirstParagraphFromSlices(item.data.slices);
 
   const textContent = extractTextFromSlices(item.data.slices);
   const readTime = readingTime(textContent);
@@ -41,7 +32,7 @@ export default function BlogCard({ item, index, viewMoreText }: BlogCardProps) {
     >
       <Link
         href={`/blog/${item.uid}`}
-        className="block rounded-2xl  p-6 transition-all  duration-500 hover:scale-[1.02] hover:bg-white/20 hover:shadow-lg dark:border-gray-800 dark:hover:bg-blue-850/50  dark:hover:shadow-xl"
+        className="dark:hover:bg-muted/50 block rounded-2xl p-6 transition-all duration-500 hover:scale-[1.02] hover:bg-white/20 hover:shadow-lg dark:border-gray-800 dark:hover:shadow-xl"
       >
         <div className="mb-3 flex items-center gap-2 text-sm text-gray-500 dark:text-gray-400">
           <Calendar className="h-4 w-4" />
@@ -53,7 +44,7 @@ export default function BlogCard({ item, index, viewMoreText }: BlogCardProps) {
           </>
         </div>
 
-        <h2 className="mb-3 text-xl font-bold text-gray-900 dark:text-white md:text-2xl">
+        <h2 className="mb-3 text-xl font-bold text-gray-900 md:text-2xl dark:text-white">
           {item.data.title}
         </h2>
 
@@ -67,7 +58,7 @@ export default function BlogCard({ item, index, viewMoreText }: BlogCardProps) {
             {item.tags.slice(0, 3).map((tag, tagIndex) => (
               <span
                 key={tagIndex}
-                className="inline-flex items-center gap-1 rounded-full bg-black/50 text-white px-2 py-1 text-xs font-medium dark:bg-slate-800/60 dark:text-slate-300"
+                className="inline-flex items-center gap-1 rounded-full bg-black/50 px-2 py-1 text-xs font-medium text-white dark:bg-slate-800/60 dark:text-slate-300"
               >
                 <Tag className="h-3 w-3" />
                 {tag}

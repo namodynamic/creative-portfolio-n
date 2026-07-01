@@ -3,6 +3,7 @@ import { createClient } from "@/prismicio";
 import Image from "next/image";
 import Link from "next/link";
 import { formatDate } from "@/utils/FormatDate";
+import { extractFirstParagraphFromSlices } from "@/utils/extractSliceText";
 
 type TagPageProps = {
   params: { tag: string };
@@ -26,32 +27,22 @@ export default async function RelatedPosts({ params }: TagPageProps) {
 
   return (
     <div className="mt-12">
-      <h2 className="mb-6 text-2xl font-bold text-black-50 dark:text-white">
+      <h2 className="text-foreground mb-6 text-2xl font-bold dark:text-white">
         Related Posts
       </h2>
       <div className="grid grid-cols-1 gap-6 md:grid-cols-3">
         {relatedPosts.results.map((post) => {
           const formattedDate = formatDate(post.data.date);
 
-          const firstParagraph =
-            post.data.slices
-              .find((slice) => {
-                return (
-                  slice.slice_type === "text_block" &&
-                  Array.isArray((slice as any).primary?.text) &&
-                  (slice as any).primary.text.some(
-                    (block: any) => block.type === "paragraph",
-                  )
-                );
-              })
-              ?.primary?.text.find((block: any) => block.type === "paragraph")
-              ?.text || "";
+          const firstParagraph = extractFirstParagraphFromSlices(
+            post.data.slices,
+          );
 
           return (
             <Link
               key={post.id}
               href={`/blog/${post.uid}`}
-              className="group overflow-hidden rounded-xl border border-zinc-400 bg-white/20 shadow-xl backdrop-blur-sm transition-transform hover:-translate-y-1 dark:border-slate-800 dark:bg-blue-850/50"
+              className="group dark:bg-card/80 overflow-hidden rounded-xl border border-zinc-400 bg-white/20 shadow-xl backdrop-blur-sm transition-transform hover:-translate-y-1 dark:border-slate-800"
             >
               <div className="relative h-40 w-full overflow-hidden">
                 <Image

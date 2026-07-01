@@ -1,15 +1,20 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useEffect, useState } from "react";
 import { type Content, asLink } from "@prismicio/client";
 import { PrismicNextLink } from "@prismicio/next";
 import { usePathname } from "next/navigation";
-import { SendHorizonal, Send } from "lucide-react";
+import { IconMenu2, IconSend2, IconX } from "@tabler/icons-react";
 import { cn } from "@/lib/utils";
-import Image from "next/image";
 import { ThemeToggle } from "@/components/ThemeToggle";
 import { motion } from "motion/react";
 import NameLogo from "./Namelogo";
+import { Button } from "@/components/ui/button";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
 
 export default function NavBar({
   settings,
@@ -17,13 +22,9 @@ export default function NavBar({
   settings: Content.SettingsDocument;
 }) {
   const [scrolled, setScrolled] = useState(false);
-  const [isMobile, setIsMobile] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const [showNav, setShowNav] = useState(true);
-  const [lastScrollY, setLastScrollY] = useState(0);
   const pathname = usePathname();
 
-  // Handle scroll effect
   useEffect(() => {
     let ticking = false;
 
@@ -33,221 +34,157 @@ export default function NavBar({
       if (!ticking) {
         window.requestAnimationFrame(() => {
           setScrolled(currentScrollY > 20);
-
-          if (mobileMenuOpen) {
-            setShowNav(true);
-          } else if (currentScrollY > lastScrollY && currentScrollY > 60) {
-            setShowNav(false);
-          } else {
-            setShowNav(true);
-          }
-          setLastScrollY(currentScrollY);
           ticking = false;
         });
         ticking = true;
       }
     };
 
-    // Check if mobile on mount and when window resizes
-    const handleResize = () => {
-      setIsMobile(window.innerWidth < 768);
-      if (window.innerWidth >= 768) {
-        setMobileMenuOpen(false);
-      }
-    };
-
-    handleResize(); // Initial check
-    window.addEventListener("resize", handleResize);
     window.addEventListener("scroll", handleScroll);
+    handleScroll();
 
     return () => {
-      window.removeEventListener("resize", handleResize);
       window.removeEventListener("scroll", handleScroll);
     };
-  }, [lastScrollY, mobileMenuOpen]);
+  }, []);
+
+  const isActiveLink = (href: string | null | undefined) => {
+    if (!href) {
+      return false;
+    }
+
+    return href === "/"
+      ? pathname === "/"
+      : pathname === href || pathname.startsWith(`${href}/`);
+  };
 
   return (
     <motion.header
-      initial={{ y: 0, opacity: 1 }}
-      animate={{ y: showNav ? 0 : -100, opacity: showNav ? 1 : 0 }}
-      transition={{ duration: 0.2 }}
-      className={cn(
-        "fixed left-0 right-0 top-0 z-50 mx-auto my-4 flex max-w-7xl items-center justify-between px-4 py-2  transition-all duration-300 max-md:px-4 md:rounded-xl",
-        scrolled
-          ? "bg-white-50 bg-opacity-80 backdrop-blur-md dark:bg-black-100/50 md:shadow-lg"
-          : "bg-transparent",
-      )}
+      initial={{ y: -8, opacity: 0 }}
+      animate={{ y: 0, opacity: 1 }}
+      transition={{ duration: 0.25, ease: "easeOut" }}
+      className="fixed top-0 left-0 z-50 w-dvw max-w-dvw overflow-x-clip px-3 py-3 sm:px-4"
     >
-      <NameLogo
-        name={settings.data.name_logo || ""}
-        photoUrl={settings.data.logo.url || ""}
-        href="/"
-      />
+      <div
+        className={cn(
+          "ring-foreground/10 mx-auto flex h-14 w-full max-w-7xl min-w-0 items-center justify-between gap-3 rounded-2xl px-3 ring-1 transition-all duration-300 sm:px-4",
+          scrolled || mobileMenuOpen
+            ? "bg-background/90 shadow-sm shadow-black/5 backdrop-blur-xl"
+            : "bg-background/60 backdrop-blur-md",
+        )}
+      >
+        <NameLogo
+          name={settings.data.name_logo || ""}
+          photoUrl={settings.data.logo.url || ""}
+          href="/"
+        />
 
-      {/* Mobile menu button */}
-      {isMobile && (
-        <div className="flex items-center gap-2">
-          <button
-            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            className="z-50 flex h-10 w-10 flex-col items-center justify-center gap-1.5 rounded-md"
-            aria-label={mobileMenuOpen ? "Close menu" : "Open menu"}
-          >
-            <motion.span
-              animate={
-                mobileMenuOpen ? { rotate: 45, y: 6 } : { rotate: 0, y: 0 }
-              }
-              className="h-0.5 w-6 bg-black-100 transition-all dark:bg-white"
-            />
-            <motion.span
-              animate={mobileMenuOpen ? { opacity: 0 } : { opacity: 1 }}
-              className="h-0.5 w-6 bg-black-100 transition-all dark:bg-white"
-            />
-            <motion.span
-              animate={
-                mobileMenuOpen ? { rotate: -45, y: -6 } : { rotate: 0, y: 0 }
-              }
-              className="h-0.5 w-6 bg-black-100 transition-all dark:bg-white"
-            />
-          </button>
-        </div>
-      )}
+        <nav className="hidden items-center gap-1 md:flex" aria-label="Primary">
+          {settings.data.nav_item.map(({ link, label }) => {
+            const href = asLink(link);
+            const isActive = isActiveLink(href);
 
-      {/* Desktop Navigation */}
-      {!isMobile && (
-        <nav className="flex items-center gap-2">
-          <ul className="flex items-center gap-1">
-            {settings.data.nav_item.map(({ link, label }, index) => (
-              <li key={`${label}-${index}`} className="group relative">
-                <PrismicNextLink
-                  field={link}
-                  className={cn(
-                    "text-md relative px-4 py-2 font-medium text-black-75 transition-colors dark:text-white/70 dark:hover:text-white",
-                    pathname.includes(asLink(link) as string)
-                      ? "text-black dark:text-white"
-                      : "",
-                  )}
-                  aria-current={
-                    pathname.includes(asLink(link) as string)
-                      ? "page"
-                      : undefined
-                  }
-                >
-                  {label}
-                  <span className="absolute bottom-0 left-0 right-0 mx-auto h-0.5 w-0 bg-purple-700 transition-all duration-300 group-hover:w-1/2" />
-                  {pathname.includes(asLink(link) as string) && (
-                    <span className="absolute bottom-0 left-0 right-0 mx-auto h-0.5 w-1/2 bg-black-100 dark:bg-white" />
-                  )}
-                </PrismicNextLink>
-                {index < settings.data.nav_item.length - 1 && (
-                  <span
-                    className="text-md font-thin dark:text-white/50"
-                    aria-hidden="true"
-                  >
-                    /
-                  </span>
-                )}
-              </li>
-            ))}
-          </ul>
-
-          <div className="flex items-center gap-2">
-            <ThemeToggle variant="icon" />
-            <PrismicNextLink
-              field={settings.data.cta_link}
-              className="group relative ml-4 flex w-fit items-center justify-center overflow-hidden rounded-lg bg-slate-50 px-4 py-2 text-sm  font-bold text-slate-800 transition-transform ease-out  hover:text-white"
-            >
-              <span
+            return (
+              <PrismicNextLink
+                key={label}
+                field={link}
                 className={cn(
-                  "absolute inset-0 z-0 h-full translate-y-8 bg-purple-600 transition-transform  duration-300 ease-in-out group-hover:translate-y-0",
+                  "text-muted-foreground hover:text-foreground hover:bg-muted/70 inline-flex h-7 items-center rounded-lg px-3 text-sm font-medium transition-colors",
+                  isActive && "bg-muted text-foreground",
                 )}
-              />
-              <span className="relative flex items-center justify-center gap-2">
-                {settings.data.cta_label}
-                <SendHorizonal className="ml h-3 w-3" />
-              </span>
-            </PrismicNextLink>
-          </div>
+                aria-current={isActive ? "page" : undefined}
+              >
+                {label}
+              </PrismicNextLink>
+            );
+          })}
         </nav>
-      )}
 
-      {/* Mobile Navigation Menu */}
-      {isMobile && (
-        <motion.nav
-          initial={{ opacity: 0, height: 0 }}
-          animate={{
-            opacity: mobileMenuOpen ? 1 : 0,
-            height: mobileMenuOpen ? "auto" : 0,
-          }}
-          className={cn(
-            "absolute -top-4 left-0 z-40 w-full overflow-hidden bg-slate-300 transition-all duration-300 ease-in-out dark:bg-navy-900",
-            mobileMenuOpen ? "flex" : "hidden",
-          )}
-        >
-          <div className="flex h-screen w-full flex-col items-center justify-center gap-6 p-8">
-            <div className="absolute left-0 top-1/2 block h-[380px] w-[960px] -translate-y-1/2 translate-x-[-290px] rotate-90">
-              <Image
-                src="/bg-outlines.svg"
-                width={900}
-                height={380}
-                alt="outline"
-                className="z-2 relative"
-              />
-              <Image
-                src="/bg-outlines-fill.png"
-                width={900}
-                height={380}
-                alt="outline"
-                className="absolute inset-0 opacity-5 mix-blend-soft-light invert dark:invert-0"
-              />
-            </div>
-            <ul className="relative z-10  flex w-full flex-col items-center gap-4">
-              {settings.data.nav_item.map(({ link, label }) => (
-                <motion.li
-                  key={label}
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.3 }}
-                  className="w-full text-center"
-                >
+        <div className="flex shrink-0 items-center gap-2">
+          <ThemeToggle variant="icon" />
+
+          <Button asChild size="sm" className="hidden md:inline-flex">
+            <PrismicNextLink field={settings.data.cta_link}>
+              {settings.data.cta_label}
+              <IconSend2 data-icon="inline-end" />
+            </PrismicNextLink>
+          </Button>
+
+          <DropdownMenu
+            modal={false}
+            open={mobileMenuOpen}
+            onOpenChange={setMobileMenuOpen}
+          >
+            <DropdownMenuTrigger asChild>
+              <Button
+                variant="outline"
+                size="icon"
+                className="md:hidden"
+                aria-label={mobileMenuOpen ? "Close menu" : "Open menu"}
+                aria-controls="mobile-navigation"
+              >
+                {mobileMenuOpen ? <IconX /> : <IconMenu2 />}
+              </Button>
+            </DropdownMenuTrigger>
+
+            <DropdownMenuContent
+              id="mobile-navigation"
+              align="end"
+              sideOffset={8}
+              collisionPadding={12}
+              className="animate-in border-border/60 bg-background/95 fade-in slide-in-from-top-2 mt-2 w-[calc(100vw-1.5rem)] max-w-[calc(100vw-1.5rem)] rounded-2xl p-3 shadow-lg shadow-black/5 backdrop-blur-xl sm:w-[calc(100vw-2rem)] sm:max-w-[calc(100vw-2rem)] md:hidden"
+              onCloseAutoFocus={(event) => event.preventDefault()}
+            >
+              <nav aria-label="Mobile navigation">
+                <ul className="flex flex-col gap-1">
+                  {settings.data.nav_item.map(({ link, label }) => {
+                    const href = asLink(link);
+                    const isActive = isActiveLink(href);
+
+                    return (
+                      <li key={label}>
+                        <PrismicNextLink
+                          field={link}
+                          className={cn(
+                            "text-muted-foreground hover:text-foreground hover:bg-muted flex h-9 items-center rounded-xl px-3 text-base font-medium transition-colors",
+                            isActive && "bg-muted text-foreground",
+                          )}
+                          aria-current={isActive ? "page" : undefined}
+                          onClick={() => setMobileMenuOpen(false)}
+                        >
+                          {label}
+                        </PrismicNextLink>
+                      </li>
+                    );
+                  })}
+                </ul>
+
+                <div className="border-border mt-3 flex items-center justify-between border-t pt-3">
+                  <div className="text-muted-foreground flex flex-col">
+                    <span className="text-foreground text-sm font-medium">
+                      Appearance
+                    </span>
+                    <span className="text-xs">
+                      Switch between light and dark.
+                    </span>
+                  </div>
+                  <ThemeToggle variant="slider" />
+                </div>
+
+                <Button asChild className="mt-3 w-full">
                   <PrismicNextLink
-                    field={link}
-                    className={cn(
-                      "block w-full py-2 text-xl font-semibold text-black-100 dark:text-white/90",
-                      pathname.includes(asLink(link) as string)
-                        ? "text-purple-500 dark:text-purple-500"
-                        : "",
-                    )}
+                    field={settings.data.cta_link}
                     onClick={() => setMobileMenuOpen(false)}
                   >
-                    {label}
+                    {settings.data.cta_label}
+                    <IconSend2 data-icon="inline-end" />
                   </PrismicNextLink>
-                </motion.li>
-              ))}
-            </ul>
-
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.3, delay: 0.1 }}
-              className="flex flex-col items-center gap-3 rounded-lg bg-black/10 p-4 dark:bg-white/10"
-            >
-              <span className="text-xl font-medium text-black-100 dark:text-white/90">
-                Appearance
-              </span>
-              <ThemeToggle variant="slider" />
-            </motion.div>
-
-            <PrismicNextLink
-              field={settings.data.cta_link}
-              className="relative z-10 flex items-center justify-center gap-1 rounded-lg bg-black-50 dark:bg-white px-6 py-2 font-semibold text-white dark:text-navy-900"
-              onClick={() => setMobileMenuOpen(false)}
-            >
-              {settings.data.cta_label}
-              <Send className="ml-1 h-4 w-4" />
-            </PrismicNextLink>
-          </div>
-        </motion.nav>
-      )}
+                </Button>
+              </nav>
+            </DropdownMenuContent>
+          </DropdownMenu>
+        </div>
+      </div>
     </motion.header>
   );
 }

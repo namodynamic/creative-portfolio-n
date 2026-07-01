@@ -1,51 +1,59 @@
-"use client";
-
 import type { JSX } from "react";
 import { Content } from "@prismicio/client";
 import { SliceComponentProps } from "@prismicio/react";
 import Bounded from "@/components/Bounded";
 import { TextGenerateEffect } from "@/components/ui/TextGenerateEffect";
-import { FaArrowDown } from "react-icons/fa6";
+import { Button } from "@/components/ui/button";
+import { IconArrowDownRight } from "@tabler/icons-react";
 import Link from "next/link";
+import { Badge } from "@/components/ui/badge";
 
 export type HeroProps = SliceComponentProps<Content.HeroSlice>;
 
 const Hero = ({ slice }: HeroProps): JSX.Element => {
+  const introText =
+    slice.primary.intro_text || "Available for Full-Time Roles & Freelance";
+  const headline =
+    slice.primary.text_generate ||
+    "Transforming Concepts into Seamless User Experiences.";
+  const introduction =
+    slice.primary.introduction ||
+    "Hi, I'm Nnamdi. I engineer high-performance, scalable web applications with elegant, production-ready codebases.";
+
   return (
     <Bounded
       data-slice-type={slice.slice_type}
       data-slice-variation={slice.variation}
-      className="py-16 sm:py-20 md:py-24 lg:py-28 xl:py-32"
+      className="relative overflow-hidden"
     >
-      <div className="relative mt-3 w-full overflow-hidden px-4 sm:mt-8 md:mt-16 lg:mt-20">
-        <div className="relative flex justify-center">
-          <div className="flex w-full max-w-full flex-col items-center justify-center py-6 sm:py-8 md:max-w-2xl md:py-10 lg:max-w-[60vw]">
-            <p className="max-w-[90%] text-center text-[8px] uppercase tracking-tight dark:text-blue-100 sm:max-w-80 sm:text-xs">
-              {slice.primary.intro_text}
-            </p>
+      <div className="relative z-10 mx-auto flex w-full max-w-6xl flex-col items-center justify-center px-4 pt-16 text-center sm:pt-28 sm:pb-16 md:pt-36">
+        <Badge
+          variant="secondary"
+          className="animate-in fade-in zoom-in text-muted-foreground mb-5 text-[9px] uppercase duration-700 sm:text-xs"
+        >
+          {introText}
+        </Badge>
 
-            <TextGenerateEffect
-              words={slice.primary.text_generate || ""}
-              className="text-center text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl"
-            />
+        <TextGenerateEffect
+          words={headline}
+          className="mx-auto max-w-5xl text-center text-2xl font-semibold tracking-tight text-balance sm:text-4xl md:text-5xl lg:text-6xl"
+        />
 
-            <p className="mb-6 max-w-[95%] text-center text-sm tracking-tight text-black-100 dark:text-blue-100 sm:mb-8 sm:text-base md:text-lg md:tracking-wider lg:text-xl xl:text-2xl">
-              {slice.primary.introduction}
-            </p>
+        <p className="text-muted-foreground mx-auto mt-1 max-w-3xl text-sm leading-7 text-pretty sm:text-lg md:text-xl md:leading-8">
+          {introduction}
+        </p>
 
-            <div className="mb-2 mt-6 text-center sm:mt-8 md:mt-10">
-              <div className="relative inline-block">
-                <div className="absolute inset-0 animate-pulse rounded-2xl bg-gradient-to-r from-blue-500 to-purple-500 opacity-30 blur-lg" />
-                <Link
-                  href="/#featured-projects"
-                  className="group relative inline-flex items-center gap-2 rounded-xl border border-white/20 bg-black-100 px-5 py-3 text-sm font-semibold text-white shadow-2xl backdrop-blur-xl transition-all duration-300 hover:bg-gray-950/80 dark:border-gray-700/30 dark:bg-gray-900/80 dark:text-white dark:hover:bg-gray-900/90 sm:gap-3 sm:rounded-2xl sm:px-6 sm:py-3.5 sm:text-base md:px-8 md:py-4 md:text-lg"
-                >
-                  <span>Explore my Projects</span>
-                  <FaArrowDown className="ml-1 h-4 w-4 rounded-full bg-white p-0.5 text-black transition-transform group-hover:animate-bounce sm:ml-2 sm:h-5 sm:w-5 sm:p-1" />
-                </Link>
-              </div>
-            </div>
-          </div>
+        <div className="mt-10 flex flex-wrap items-center justify-center gap-3">
+          <Button asChild size="lg" className="sm:text-base">
+            <Link href="/#featured-projects">
+              View selected work
+              <IconArrowDownRight data-icon="inline-end" />
+            </Link>
+          </Button>
+
+          <Button asChild variant="outline" size="lg" className="sm:text-base">
+            <Link href="/contact">Start a conversation</Link>
+          </Button>
         </div>
       </div>
     </Bounded>

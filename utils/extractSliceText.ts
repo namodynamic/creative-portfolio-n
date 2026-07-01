@@ -36,3 +36,21 @@ export const extractTextFromSlices = (slices: any[]): string => {
     .join(' ')
     .trim();
 };
+
+export const extractFirstParagraphFromSlices = (
+  slices: any[],
+  fallback = "",
+): string => {
+  const textBlock = slices.find((slice) => {
+    return (
+      slice.slice_type === "text_block" &&
+      Array.isArray(slice.primary?.text) &&
+      slice.primary.text.some((block: any) => block.type === "paragraph")
+    );
+  });
+
+  return (
+    textBlock?.primary?.text.find((block: any) => block.type === "paragraph")
+      ?.text || fallback
+  );
+};

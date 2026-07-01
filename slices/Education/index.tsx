@@ -1,4 +1,4 @@
-'use client';
+"use client";
 
 import Bounded from "@/components/Bounded";
 import { Content } from "@prismicio/client";
@@ -26,7 +26,7 @@ const listItemStyles = [
   },
   {
     bg: "bg-gradient-to-r from-blue-50 to-indigo-50 dark:from-blue-900/20 dark:to-indigo-900/20",
-    border: "border-blue-100 dark:border-blue-800",
+    border: "border-border dark:border-border",
     dot: "bg-blue-500",
     text: "text-slate-700 dark:text-slate-300",
   },
@@ -69,7 +69,7 @@ const Education = ({ slice }: EducationProps): JSX.Element => {
         <TitleHeader
           title={slice.primary.heading || ""}
           subtitle={slice.primary.sub_heading || ""}
-          icon={<BookOpen className="h-5 w-5 text-white-50" />}
+          icon={<BookOpen className="text-primary-foreground h-5 w-5" />}
           intro={slice.primary.intro || ""}
         />
 
@@ -85,7 +85,7 @@ const Education = ({ slice }: EducationProps): JSX.Element => {
               delay: index * 0.15,
             }}
           >
-            <Card className="mb-12 overflow-hidden border-0 bg-gradient-to-br from-white/20 to-white-50 shadow-xl dark:from-blue-850/50 dark:to-blue-850/80">
+            <Card className="to-muted dark:from-card/80 dark:to-card mb-12 overflow-hidden border-0 bg-gradient-to-br from-white/20 shadow-xl">
               <CardContent className="p-8 md:p-12">
                 <div className="flex flex-col gap-8 md:flex-row">
                   <div className="flex-1">
@@ -94,7 +94,7 @@ const Education = ({ slice }: EducationProps): JSX.Element => {
                         <GraduationCap className="h-8 w-8 text-white" />
                       </div>
                       <div>
-                        <h3 className="mb-2 text-2xl font-bold text-black-100 dark:text-white-50 md:text-3xl">
+                        <h3 className="text-foreground dark:text-foreground mb-2 text-2xl font-bold md:text-3xl">
                           {item.degree}
                         </h3>
                         <p className="mb-3 text-xl font-semibold text-purple-600 dark:text-purple-400">
@@ -121,16 +121,16 @@ const Education = ({ slice }: EducationProps): JSX.Element => {
                     </div>
 
                     <div className="space-y-4">
-                      <h4 className="mb-4 text-lg font-semibold text-slate-900 dark:text-white-50">
+                      <h4 className="dark:text-foreground mb-4 text-lg font-semibold text-slate-900">
                         {item.key_achievement}
                       </h4>
                       {renderStyledList(item.achievement_description)}
                     </div>
                   </div>
 
-                  <div className="flex items-center justify-center md:w-80">
-                    <div className="relative">
-                      <div className="absolute -left-4 -top-4 h-48 w-48 rounded-full bg-gradient-to-br from-purple-400 via-violet-500 to-indigo-600 opacity-20"></div>
+                  <div className="flex items-center justify-center overflow-hidden md:w-80">
+                    <div className="relative p-4">
+                      <div className="absolute -top-4 -left-4 h-48 w-48 rounded-full bg-gradient-to-br from-purple-400 via-violet-500 to-indigo-600 opacity-20"></div>
                       <div className="relative z-10 flex h-40 w-40 items-center justify-center rounded-2xl bg-gradient-to-br from-purple-500 to-violet-600 shadow-2xl">
                         <GraduationCap className="h-20 w-20 text-white" />
                       </div>

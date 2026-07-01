@@ -1,13 +1,11 @@
-"use client"
-
-import Link from "next/link"
-import Image from "next/image"
-import { motion } from "framer-motion"
+import Link from "next/link";
+import { motion } from "framer-motion";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 
 interface PhotoNameLogoProps {
-  name?: string
-  photoUrl?: string
-  href?: string
+  name?: string;
+  photoUrl?: string;
+  href?: string;
 }
 
 export default function NameLogo({
@@ -15,23 +13,34 @@ export default function NameLogo({
   photoUrl = "/logo.png",
   href = "/",
 }: PhotoNameLogoProps) {
-  return (
-    <Link href={href} aria-label="Home page" className="flex items-center z-50">
-      <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }} className="flex items-center gap-2">
-        <div className="relative h-9 w-9 overflow-hidden rounded-full border-2 border-white/30 dark:border-black-100">
-          <div className="h-full w-full overflow-hidden rounded-full">
-            <Image
-              src={photoUrl || ""}
-              alt={`${name} profile photo`}
-              width={40}
-              height={40}
-              className="h-full w-full object-cover"
-            />
-          </div>
-        </div>
+  const initials = name
+    .split(" ")
+    .filter(Boolean)
+    .slice(0, 2)
+    .map((part) => part[0])
+    .join("")
+    .toUpperCase();
 
-        <span className="text-lg font-semibold text-black-100 dark:text-white">{name}</span>
+  return (
+    <Link
+      href={href}
+      aria-label="Home page"
+      className="focus-visible:ring-ring relative z-50 flex min-w-0 items-center rounded-full outline-none focus-visible:ring-3"
+    >
+      <motion.div
+        whileHover={{ scale: 1.05 }}
+        whileTap={{ scale: 0.95 }}
+        className="flex min-w-0 items-center gap-2.5"
+      >
+        <Avatar className="shadow-sm">
+          <AvatarImage src={photoUrl || ""} alt={`${name} profile photo`} />
+          <AvatarFallback>{initials || "NE"}</AvatarFallback>
+        </Avatar>
+
+        <span className="text-foreground max-w-28 truncate text-sm font-semibold min-[380px]:max-w-36 sm:max-w-none sm:text-base">
+          {name}
+        </span>
       </motion.div>
     </Link>
-  )
+  );
 }

@@ -78,7 +78,7 @@ export default async function Page({ params }: { params: Promise<Params> }) {
               Projects
             </Link>
             <span className="text-slate-600">/</span>
-            <span className="dark:text-white-50">{page.data.title}</span>
+            <span className="dark:text-foreground">{page.data.title}</span>
           </div>
         </div>
       </div>
@@ -87,11 +87,9 @@ export default async function Page({ params }: { params: Promise<Params> }) {
         <div className="grid grid-cols-1 gap-10 lg:grid-cols-3">
           {/* Main content - 2/3 width on desktop */}
           <div className="lg:col-span-2">
-            <div className="mb-8 overflow-hidden rounded-xl border-[0.5px] border-zinc-400 bg-white/20 p-6 shadow-xl backdrop-blur-sm dark:border-slate-800 dark:bg-blue-850/50 md:p-8">
+            <div className="dark:bg-card/80 mb-8 overflow-hidden rounded-xl border-[0.5px] border-zinc-400 bg-white/20 p-6 shadow-xl backdrop-blur-sm md:p-8 dark:border-slate-800">
               {page.data.accessibility === "Open Source Project" && (
                 <Badge
-                  variant="outline"
-                  className="mb-4 border-[#131a41] bg-[#131a41] text-white-50"
                 >
                   {page.data.accessibility}
                 </Badge>
@@ -99,7 +97,6 @@ export default async function Page({ params }: { params: Promise<Params> }) {
               {page.data.accessibility === "Private Project" && (
                 <Badge
                   variant="outline"
-                  className="mb-4 border-slate-700 bg-slate-800 text-slate-400"
                 >
                   <Lock className="mr-2 h-3 w-3" /> {page.data.accessibility}
                 </Badge>
@@ -108,7 +105,7 @@ export default async function Page({ params }: { params: Promise<Params> }) {
                 {page.data.title}
               </Heading>
 
-              <div className="prose prose-base mb-10 max-w-none dark:prose-invert">
+              <div className="prose prose-base dark:prose-invert mb-10 max-w-none">
                 <SliceZone slices={page.data.slices} components={components} />
               </div>
 
@@ -143,7 +140,7 @@ export default async function Page({ params }: { params: Promise<Params> }) {
                       key={index}
                       className="flex items-start gap-2 dark:text-slate-300"
                     >
-                      <CheckCheck className="mt-0.5 h-4 w-4 flex-shrink-0 text-black/80 dark:text-white/50" />
+                      <CheckCheck className="mt-0.5 h-4 w-4 shrink-0 text-black/80 dark:text-white/50" />
                       <span>{item.challenges || ""}</span>
                     </li>
                   ))}
@@ -163,7 +160,7 @@ export default async function Page({ params }: { params: Promise<Params> }) {
                 <div className="grid grid-cols-1 gap-3 md:grid-cols-2">
                   {page.data.key_features?.map((item, index) => (
                     <div key={index} className="flex items-start gap-2">
-                      <CheckCheck className="mt-0.5 h-4 w-4 flex-shrink-0 text-black/80 dark:text-white/50" />
+                      <CheckCheck className="mt-0.5 h-4 w-4 shrink-0 text-black/80 dark:text-white/50" />
                       <span className="dark:text-slate-300">
                         {item.features || ""}
                       </span>
@@ -191,7 +188,7 @@ export default async function Page({ params }: { params: Promise<Params> }) {
                     {page.data.tech_stack.map((tech, index) => (
                       <span
                         key={index}
-                        className="rounded-full px-3 py-1 text-xs font-medium text-white "
+                        className="rounded-full px-3 py-1 text-xs font-medium text-white"
                         style={{ backgroundColor: tech.color || "" }}
                       >
                         {tech.name}
@@ -209,7 +206,7 @@ export default async function Page({ params }: { params: Promise<Params> }) {
                     components={{
                       listItem: ({ children }) => (
                         <li className="flex items-start">
-                          <CheckCheck className="mr-2 mt-0.5 h-4 w-4 flex-shrink-0 text-black/80 dark:text-white/50" />
+                          <CheckCheck className="mt-0.5 mr-2 h-4 w-4 shrink-0 text-black/80 dark:text-white/50" />
                           <span className="dark:text-slate-300">
                             {children}
                           </span>
@@ -226,14 +223,14 @@ export default async function Page({ params }: { params: Promise<Params> }) {
           <div className="lg:col-span-1">
             <div className="sticky top-10">
               {/* Project links */}
-              <div className="mb-6 rounded-lg border-[0.5px] border-zinc-400 bg-white/20 p-6 dark:border-slate-800 dark:bg-blue-850/50">
-                <h3 className="mb-4 text-lg font-medium text-black-100 dark:text-white">
+              <div className="dark:bg-card/80 mb-6 rounded-lg border-[0.5px] border-zinc-400 bg-white/20 p-6 dark:border-slate-800">
+                <h3 className="text-foreground mb-4 text-lg font-medium dark:text-white">
                   Project Links
                 </h3>
                 <div className="space-y-3">
                   <PrismicNextLink
                     field={page.data.view_live}
-                    className="flex w-full items-center justify-between rounded-md bg-gradient-to-r from-purple-500 to-purple-800 px-4 py-2 text-white transition-colors hover:from-purple-700 hover:to-purple-600"
+                    className="flex w-full items-center justify-between rounded-md bg-linear-to-r from-purple-500 to-purple-800 px-4 py-2 text-white transition-colors hover:from-purple-700 hover:to-purple-600"
                   >
                     <span className="font-medium">View Live Demo</span>
                     <ExternalLink className="h-4 w-4" />
@@ -250,14 +247,14 @@ export default async function Page({ params }: { params: Promise<Params> }) {
               </div>
 
               {/* Project details */}
-              <div className="mb-6 rounded-lg border-[0.5px] border-zinc-400 bg-white/20 p-6 dark:border-slate-800 dark:bg-blue-850/50">
-                <h3 className="mb-4 text-lg font-medium text-black-100 dark:text-white">
+              <div className="dark:bg-card/80 mb-6 rounded-lg border-[0.5px] border-zinc-400 bg-white/20 p-6 dark:border-slate-800">
+                <h3 className="text-foreground mb-4 text-lg font-medium dark:text-white">
                   Project Details
                 </h3>
 
                 <div className="space-y-4">
                   <div>
-                    <h4 className="mb-1 text-sm font-medium text-black-100/50 dark:text-slate-400">
+                    <h4 className="text-muted-foreground mb-1 text-sm font-medium dark:text-slate-400">
                       Development Time
                     </h4>
                     <div className="flex items-center gap-2">
@@ -269,7 +266,7 @@ export default async function Page({ params }: { params: Promise<Params> }) {
                   </div>
 
                   <div>
-                    <h4 className="mb-1 text-sm font-medium text-black-100/50 dark:text-slate-400">
+                    <h4 className="text-muted-foreground mb-1 text-sm font-medium dark:text-slate-400">
                       Current Status
                     </h4>
                     <div className="flex items-center gap-2">
@@ -300,7 +297,7 @@ export default async function Page({ params }: { params: Promise<Params> }) {
                   </div>
 
                   <div>
-                    <h4 className="mb-1 text-sm font-medium text-black-100/50 dark:text-slate-400">
+                    <h4 className="text-muted-foreground mb-1 text-sm font-medium dark:text-slate-400">
                       Key Achievement
                     </h4>
                     <p className="font-medium dark:text-white">
@@ -311,18 +308,18 @@ export default async function Page({ params }: { params: Promise<Params> }) {
               </div>
 
               {/* Development Timeline */}
-              <div className="mb-6 rounded-lg border-[0.5px] border-zinc-400 bg-white/20 p-6 dark:border-slate-800 dark:bg-blue-850/50">
-                <h3 className="mb-4 text-lg font-medium text-black-100 dark:text-white">
+              <div className="dark:bg-card/80 mb-6 rounded-lg border-[0.5px] border-zinc-400 bg-white/20 p-6 dark:border-slate-800">
+                <h3 className="text-foreground mb-4 text-lg font-medium dark:text-white">
                   Development Timeline
                 </h3>
                 <div className="space-y-6">
                   {timeline.map((item, index) => (
                     <div key={index} className="relative pb-6 pl-6 last:pb-0">
                       {index < timeline.length - 1 && (
-                        <div className="absolute left-[11px] top-8 h-full w-[1px] bg-violet-900/50"></div>
+                        <div className="absolute top-8 left-2.75 h-full w-px bg-violet-900/50"></div>
                       )}
                       <div
-                        className={`absolute -left-1 top-1 flex h-8 w-8 items-center justify-center rounded-full ${item.bgColor} ${item.textColor}`}
+                        className={`absolute top-1 -left-1 flex h-8 w-8 items-center justify-center rounded-full ${item.bgColor} ${item.textColor}`}
                       >
                         {item.icon}
                       </div>
@@ -340,8 +337,8 @@ export default async function Page({ params }: { params: Promise<Params> }) {
               </div>
 
               {/* Tags */}
-              <div className="rounded-lg border-[0.5px] border-zinc-400 bg-white/20 p-6 dark:border-slate-800 dark:bg-blue-850/50">
-                <h3 className="mb-4 text-lg font-medium text-black-100 dark:text-white">
+              <div className="dark:bg-card/80 rounded-lg border-[0.5px] border-zinc-400 bg-white/20 p-6 dark:border-slate-800">
+                <h3 className="text-foreground mb-4 text-lg font-medium">
                   Tags
                 </h3>
                 <div className="flex flex-wrap gap-2">
@@ -364,10 +361,10 @@ export default async function Page({ params }: { params: Promise<Params> }) {
       {/* Cta */}
       <Bounded
         as="section"
-        className="mb-20 rounded-xl border-[0.5px] border-zinc-400 bg-white/20 dark:border-slate-800/50 dark:bg-blue-850/50"
+        className="dark:bg-card/80 mb-20 rounded-xl border-[0.5px] border-zinc-400 bg-white/20 dark:border-slate-800/50"
       >
         <div className="mx-auto max-w-3xl text-center">
-          <h2 className="mb-4 text-2xl font-bold text-black-100 dark:text-white md:text-3xl">
+          <h2 className="text-foreground mb-4 text-2xl font-bold md:text-3xl">
             Ready to Build Your Own Project?
           </h2>
           <p className="mb-8 dark:text-slate-300">
@@ -376,7 +373,7 @@ export default async function Page({ params }: { params: Promise<Params> }) {
           </p>
           <div className="flex flex-wrap justify-center gap-4">
             <Link href="/contact">
-              <Button className="bg-gradient-to-r from-purple-600 to-purple-800 text-white hover:from-purple-700 hover:to-purple-600">
+              <Button className="bg-linear-to-r from-purple-600 to-purple-800 text-white hover:from-purple-700 hover:to-purple-600">
                 Start a Conversation
               </Button>
             </Link>
