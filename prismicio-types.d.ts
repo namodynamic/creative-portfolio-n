@@ -2768,6 +2768,27 @@ export interface ImageBlockSliceDefaultPrimary {
    * - **Documentation**: https://prismic.io/docs/fields/image
    */
   image: prismic.ImageField<never>;
+
+  /**
+   * Caption field in *ImageBlock → Default → Primary*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: image_block.default.primary.caption
+   * - **Documentation**: https://prismic.io/docs/fields/text
+   */
+  caption: prismic.KeyTextField;
+
+  /**
+   * Width field in *ImageBlock → Default → Primary*
+   *
+   * - **Field Type**: Select
+   * - **Placeholder**: *None*
+   * - **Default Value**: Contained
+   * - **API ID Path**: image_block.default.primary.width
+   * - **Documentation**: https://prismic.io/docs/fields/select
+   */
+  width: prismic.SelectField<"Contained" | "Wide" | "Full Bleed", "filled">;
 }
 
 /**
