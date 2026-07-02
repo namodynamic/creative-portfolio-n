@@ -1,8 +1,23 @@
 import * as prismic from "@prismicio/client";
-import { createClient } from "@/prismicio";
-import { Tag } from "lucide-react";
+import { isFilled } from "@prismicio/client";
+import {
+  IconArrowRight,
+  IconBriefcase,
+  IconFolder,
+  IconTag,
+} from "@tabler/icons-react";
 import Image from "next/image";
 import Link from "next/link";
+
+import { Badge } from "@/components/ui/badge";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+import { createClient } from "@/prismicio";
 
 type FeaturedProjectsProps = {
   tags: string[];
@@ -21,55 +36,76 @@ export default async function FeaturedProjects({
     pageSize: 2,
   });
 
-  if (!projects.results.length)
+  if (!projects.results.length) {
     return (
-      <div className="dark:bg-card/80 rounded-xl border-[0.5px] border-zinc-400 bg-white/20 p-6 shadow-xl backdrop-blur-sm dark:border-slate-800">
-        <h3 className="mb-4 text-lg font-bold dark:text-white">
-          Featured Projects
-        </h3>
-        <p className="text-muted-foreground text-xs">
-          No featured projects found for this post.
-        </p>
-      </div>
+      <Card size="sm" className="bg-opacity-80 ring-foreground/5 shadow-sm">
+        <CardHeader>
+          <CardTitle>Featured Projects</CardTitle>
+          <CardDescription>
+            Related project work will appear here when available.
+          </CardDescription>
+        </CardHeader>
+      </Card>
     );
+  }
 
   return (
-    <div className="dark:bg-card/80 rounded-xl border-[0.5px] border-zinc-400 bg-white/20 p-6 shadow-xl backdrop-blur-sm dark:border-slate-800">
-      <h3 className="text-foreground mb-4 text-lg font-bold dark:text-white">
-        Featured Projects
-      </h3>
-      <div className="space-y-4">
+    <Card size="sm" className="bg-opacity-80 ring-foreground/5 shadow-sm">
+      <CardHeader>
+        <CardTitle>Featured Projects</CardTitle>
+        <CardDescription>
+          Client-style builds that connect with this post.
+        </CardDescription>
+      </CardHeader>
+      <CardContent className="flex flex-col gap-5">
         {projects.results.map((project) => (
           <Link
             key={project.id}
             href={`/projects/${project.uid}`}
-            className="group block"
+            className="group flex flex-col gap-3"
           >
-            <div className="relative mb-2 h-32 w-full overflow-hidden rounded-lg">
-              <Image
-                src={project.data.hover_image.url || ""}
-                alt={project.data.title || "Project"}
-                fill
-                className="object-fill transition-transform group-hover:scale-105"
-              />
+            <div className="bg-muted relative aspect-video overflow-hidden rounded-lg border">
+              {isFilled.image(project.data.hover_image) ? (
+                <Image
+                  src={project.data.hover_image.url}
+                  alt={project.data.title || "Project"}
+                  fill
+                  className="object-cover transition-transform duration-500 group-hover:scale-105"
+                  sizes="(min-width: 1024px) 33vw, 100vw"
+                />
+              ) : (
+                <div className="text-muted-foreground flex size-full items-center justify-center">
+                  <IconBriefcase className="size-6" />
+                </div>
+              )}
             </div>
-            <h4 className="text-foreground font-medium transition-colors group-hover:text-black/50 dark:text-white dark:group-hover:text-purple-400">
-              {project.data.title}
-            </h4>
-            <p className="flex flex-wrap gap-2 text-sm text-black/50 dark:text-gray-400">
-              {project.tags.map((tag, index) => (
-                <span
-                  key={index}
-                  className="inline-flex items-center gap-1 text-sm font-bold"
-                >
-                  <Tag className="h-3 w-3" />
-                  {tag}
-                </span>
-              ))}
-            </p>
+
+            <div className="flex flex-col gap-2">
+              <div className="flex items-start justify-between gap-3">
+                <h4 className="font-heading text-foreground group-hover:text-primary leading-snug font-medium transition-colors">
+                  {project.data.title}
+                </h4>
+                <IconArrowRight className="text-muted-foreground group-hover:text-primary mt-1 size-4 shrink-0 transition-transform group-hover:translate-x-0.5" />
+              </div>
+
+              <div className="flex flex-wrap gap-1.5">
+                {project.tags.slice(0, 3).map((tag) => (
+                  <Badge key={tag} variant="outline">
+                    <IconTag data-icon="inline-start" />
+                    {tag}
+                  </Badge>
+                ))}
+                {project.tags.length === 0 && (
+                  <Badge variant="outline">
+                    <IconFolder data-icon="inline-start" />
+                    Project
+                  </Badge>
+                )}
+              </div>
+            </div>
           </Link>
         ))}
-      </div>
-    </div>
+      </CardContent>
+    </Card>
   );
 }

@@ -1,6 +1,18 @@
 import Image from "next/image";
 import Link from "next/link";
+
 import { createClient } from "@/prismicio";
+
+import { Button } from "@/components/ui/button";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+import { cn } from "@/lib/utils";
+import { IconArrowRight, IconUserCircle } from "@tabler/icons-react";
 
 export default async function AuthorCard({
   className = "",
@@ -9,37 +21,52 @@ export default async function AuthorCard({
 }) {
   const client = createClient();
   const settings = await client.getSingle("settings");
+  const authorName = settings.data.name || "Nnamdi Ekechi";
 
   return (
-    <div
-      className={`dark:bg-card/80 rounded-xl border-[0.5px] border-zinc-400 bg-white/20 p-6 shadow-xl backdrop-blur-sm dark:border-slate-800 ${className}`}
+    <Card
+      size="sm"
+      className={cn("bg-opacity-80 ring-foreground/5 shadow-sm", className)}
     >
-      <div className="flex items-start gap-4">
-        <div className="flex-shrink-0">
-          <Image
-            src={settings.data.blog_author_img.url || "/placeholder.svg"}
-            alt={settings.data.name || "Author"}
-            width={60}
-            height={60}
-            className="dark:border-foreground/20 rounded-full border-2 border-zinc-200"
-          />
+      <CardHeader className="gap-4 sm:grid-cols-[auto_1fr] sm:items-center">
+        <div className="bg-muted relative flex size-14 shrink-0 items-center justify-center overflow-hidden rounded-full border">
+          {settings.data.blog_author_img.url ? (
+            <Image
+              src={settings.data.blog_author_img.url}
+              alt={authorName}
+              fill
+              className="object-cover"
+              sizes="56px"
+            />
+          ) : (
+            <IconUserCircle className="text-muted-foreground size-7" />
+          )}
         </div>
-        <div>
-          <h3 className="text-foreground text-lg font-bold dark:text-white">
-            {settings.data.name}
-          </h3>
-          <p className="text-sm dark:text-slate-300">{settings.data.role}</p>
-          <p className="mt-2 text-sm dark:text-gray-400">
-            {settings.data.author_bio}
-          </p>
-          <Link
-            href="/contact"
-            className="mt-3 inline-block rounded-lg bg-[#131a41] px-3 py-1 text-sm text-gray-300 transition-colors hover:bg-[#1a2150] hover:text-white"
-          >
-            Let&apos;s work together
-          </Link>
+
+        <div className="flex flex-col gap-1">
+          <CardTitle>{authorName}</CardTitle>
+          {settings.data.role && (
+            <CardDescription>{settings.data.role}</CardDescription>
+          )}
         </div>
-      </div>
-    </div>
+      </CardHeader>
+
+      {(settings.data.author_bio || settings.data.role) && (
+        <CardContent className="flex flex-col items-start gap-4">
+          {settings.data.author_bio && (
+            <p className="text-muted-foreground text-sm leading-7">
+              {settings.data.author_bio}
+            </p>
+          )}
+
+          <Button size="sm" asChild variant="outline">
+            <Link href="/contact">
+              Let&apos;s work together
+              <IconArrowRight data-icon="inline-end" />
+            </Link>
+          </Button>
+        </CardContent>
+      )}
+    </Card>
   );
 }

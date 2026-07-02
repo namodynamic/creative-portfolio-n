@@ -6,10 +6,12 @@ import {
   IconBrandFacebook,
   IconBrandLinkedin,
   IconBrandX,
+  IconShare3,
 } from "@tabler/icons-react";
 import { toast } from "sonner";
 
 import { Button } from "@/components/ui/button";
+import { CardFooter } from "@/components/ui/card";
 
 export default function SharePost({
   title,
@@ -47,38 +49,48 @@ export default function SharePost({
   };
 
   return (
-    <div className="flex flex-wrap items-center justify-between gap-4 border-t-[0.5px] border-zinc-400 p-6 md:p-8 dark:border-slate-800">
-      <div className="flex items-center gap-2">
-        <span className="text-sm text-gray-400">Share:</span>
-        <a
-          href={twitterShareUrl}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="rounded-full bg-[#1a1f3d] p-2 transition-colors hover:bg-black/60 dark:hover:bg-[#252a4d]"
+    <CardFooter className="flex flex-wrap justify-between gap-4">
+      <div className="flex flex-wrap items-center gap-2">
+        <span className="text-muted-foreground inline-flex items-center gap-1.5 text-sm font-medium">
+          <IconShare3 className="size-4" />
+          Share
+        </span>
+        <Button
+          asChild
+          variant="outline"
+          size="icon-sm"
+          aria-label="Share on X"
         >
-          <IconBrandX className="size-4 text-white" />
-        </a>
-        <a
-          href={facebookShareUrl}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="rounded-full bg-[#1a1f3d] p-2 transition-colors hover:bg-black/60 dark:hover:bg-[#252a4d]"
+          <a href={twitterShareUrl} target="_blank" rel="noopener noreferrer">
+            <IconBrandX />
+          </a>
+        </Button>
+        <Button
+          asChild
+          variant="outline"
+          size="icon-sm"
+          aria-label="Share on Facebook"
         >
-          <IconBrandFacebook className="size-4 text-white" />
-        </a>
-        <a
-          href={linkedInShareUrl}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="rounded-full bg-[#1a1f3d] p-2 transition-colors hover:bg-black/60 dark:hover:bg-[#252a4d]"
+          <a href={facebookShareUrl} target="_blank" rel="noopener noreferrer">
+            <IconBrandFacebook />
+          </a>
+        </Button>
+        <Button
+          asChild
+          variant="outline"
+          size="icon-sm"
+          aria-label="Share on LinkedIn"
         >
-          <IconBrandLinkedin className="size-4 text-white" />
-        </a>
+          <a href={linkedInShareUrl} target="_blank" rel="noopener noreferrer">
+            <IconBrandLinkedin />
+          </a>
+        </Button>
       </div>
-      <Button type="button" onClick={handleSaveForLater}>
+
+      <Button type="button" variant="secondary" onClick={handleSaveForLater}>
         <IconBookmarkPlus data-icon="inline-start" />
         Save for later
       </Button>
-    </div>
+    </CardFooter>
   );
 }
