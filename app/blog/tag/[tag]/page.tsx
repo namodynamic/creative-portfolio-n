@@ -1,150 +1,338 @@
-import { createClient } from "@/prismicio";
+import type { Metadata } from "next";
+import { isFilled } from "@prismicio/client";
+import { PrismicNextImage } from "@prismicio/next";
+import {
+  IconArrowLeft,
+  IconArrowRight,
+  IconCalendar,
+  IconClock,
+  IconFileText,
+  IconHash,
+  IconTag,
+} from "@tabler/icons-react";
 import Link from "next/link";
+import { readingTime } from "reading-time-estimator";
+
 import Bounded from "@/components/Bounded";
-import Image from "next/image";
-import { formatDate } from "@/utils/FormatDate";
-import { extractFirstParagraphFromSlices } from "@/utils/extractSliceText";
 import { Badge } from "@/components/ui/badge";
-import { ArrowLeft, Tag } from "lucide-react";
-import Heading from "@/components/Heading";
+import {
+  Breadcrumb,
+  BreadcrumbItem,
+  BreadcrumbLink,
+  BreadcrumbList,
+  BreadcrumbPage,
+  BreadcrumbSeparator,
+} from "@/components/ui/breadcrumb";
+import { Button } from "@/components/ui/button";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+import { createClient } from "@/prismicio";
+import { formatDate } from "@/utils/FormatDate";
+import {
+  extractFirstParagraphFromSlices,
+  extractTextFromSlices,
+} from "@/utils/extractSliceText";
 
 type TagPageProps = {
-  params: { tag: string };
+  params: Promise<{ tag: string }>;
 };
 
-export default async function TagPage({ params }: TagPageProps) {
-  const client = createClient();
-  const decodedTag = decodeURIComponent(params.tag);
+function slugifyTag(tag: string): string {
+  return tag
+    .trim()
+    .toLowerCase()
+    .replace(/&/g, "and")
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/^-+|-+$/g, "");
+}
 
-  // Fetch posts with the specified tag
-  const allPosts = await client.getAllByType("blog_post", { pageSize: 100 });
+function formatTagLabel(tag: string): string {
+  return tag
+    .replace(/-/g, " ")
+    .replace(/\b\w/g, (letter) => letter.toUpperCase());
+}
+
+export default async function TagPage({ params }: TagPageProps) {
+  const { tag } = await params;
+  const tagSlug = slugifyTag(decodeURIComponent(tag));
+  const client = createClient();
+
+  const allPosts = await client.getAllByType("blog_post", {
+    orderings: [
+      { field: "my.blog_post.date", direction: "desc" },
+      { field: "document.first_publication_date", direction: "desc" },
+    ],
+  });
+
   const posts = allPosts.filter((post) =>
-    post.tags.some((tag) => tag.toLowerCase() === decodedTag.toLowerCase()),
+    post.tags.some((postTag) => slugifyTag(postTag) === tagSlug),
   );
 
+  const matchedTag =
+    posts
+      .flatMap((post) => post.tags)
+      .find((postTag) => slugifyTag(postTag) === tagSlug) ??
+    formatTagLabel(tagSlug);
+
+  const tagCounts = allPosts.reduce<
+    Record<string, { label: string; count: number }>
+  >((counts, post) => {
+    post.tags.forEach((postTag) => {
+      const slug = slugifyTag(postTag);
+
+      if (!counts[slug]) {
+        counts[slug] = { label: postTag, count: 0 };
+      }
+
+      counts[slug].count += 1;
+    });
+
+    return counts;
+  }, {});
+
+  const relatedTags = Object.entries(tagCounts)
+    .filter(([slug]) => slug !== tagSlug)
+    .sort(([, a], [, b]) => b.count - a.count)
+    .slice(0, 8);
+
   return (
-    <Bounded className="">
-      <div className="relative z-20 w-full py-6 md:py-10">
-        <Link
-          href="/blog"
-          className="mb-4 inline-flex items-center text-sm transition-colors hover:text-black/50 dark:text-purple-400 dark:hover:text-purple-300"
-        >
-          <ArrowLeft className="mr-1 h-4 w-4" />
-          Back to all blogs
-        </Link>
-      </div>
+    <main>
+      <Bounded className="relative mt-5 sm:mt-10">
+        <Breadcrumb className="mb-8">
+          <BreadcrumbList>
+            <BreadcrumbItem>
+              <BreadcrumbLink asChild>
+                <Link href="/">Home</Link>
+              </BreadcrumbLink>
+            </BreadcrumbItem>
+            <BreadcrumbSeparator />
+            <BreadcrumbItem>
+              <BreadcrumbLink asChild>
+                <Link href="/blog">Blog</Link>
+              </BreadcrumbLink>
+            </BreadcrumbItem>
+            <BreadcrumbSeparator />
+            <BreadcrumbItem>
+              <BreadcrumbPage>{matchedTag}</BreadcrumbPage>
+            </BreadcrumbItem>
+          </BreadcrumbList>
+        </Breadcrumb>
 
-      {/* Header */}
-      <div className="pt-5 pb-8 md:pt-10">
-        <div className="mx-auto max-w-3xl text-center">
-          <div className="mb-6 inline-flex items-center justify-center gap-2 rounded-full bg-black/50 px-4 py-2 text-white dark:bg-purple-900/20 dark:text-purple-300">
-            <Tag className="h-4 w-4" />
-            <span className="text-sm font-medium">Tag</span>
+        <div className="mb-12 grid grid-cols-1 gap-8 lg:grid-cols-12">
+          <div className="lg:col-span-8">
+            <div className="flex flex-col gap-6">
+              <Button asChild variant="ghost" className="w-fit">
+                <Link href="/blog">
+                  <IconArrowLeft data-icon="inline-start" />
+                  Back to all posts
+                </Link>
+              </Button>
+
+              <div className="flex flex-col gap-5">
+                <Badge variant="secondary" className="w-fit">
+                  <IconHash data-icon="inline-start" />
+                  Topic archive
+                </Badge>
+
+                <div className="flex flex-col gap-4">
+                  <h1 className="font-heading text-foreground max-w-4xl text-4xl leading-tight font-semibold text-balance md:text-5xl lg:text-6xl">
+                    {matchedTag}
+                  </h1>
+                  <p className="text-muted-foreground max-w-3xl text-base leading-8 md:text-lg">
+                    {posts.length > 0
+                      ? `A focused collection of ${posts.length} article${
+                          posts.length === 1 ? "" : "s"
+                        } tagged with ${matchedTag}.`
+                      : `No articles are currently tagged with ${matchedTag}. Explore the full blog or browse another topic.`}
+                  </p>
+                </div>
+              </div>
+            </div>
           </div>
-          <Heading
-            as="h1"
-            size="sm"
-            className="text-foreground mb-4"
-          >
-            #{decodedTag}
-          </Heading>
-          <p className="mx-auto max-w-2xl text-2xl text-muted-foreground">
-            Articles tagged with &quot;{decodedTag}&quot;
-          </p>
-        </div>
-      </div>
 
-      {/* Posts Grid */}
-      <div className="mt-5 md:mt-10">
-        {posts.length > 0 ? (
-          <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
-            {posts.map((post) => {
-              const firstParagraph = extractFirstParagraphFromSlices(
-                post.data.slices,
-                "No description available.",
-              );
+          <aside className="lg:col-span-4">
+            <Card className="bg-opacity-80 ring-foreground/5 shadow-sm">
+              <CardHeader>
+                <CardTitle>Archive Summary</CardTitle>
+                <CardDescription>
+                  Quick context for this topic collection.
+                </CardDescription>
+              </CardHeader>
+              <CardContent className="flex flex-col gap-4">
+                <div className="flex items-center gap-3">
+                  <div className="bg-primary/10 text-primary flex size-9 items-center justify-center rounded-xl">
+                    <IconFileText className="size-5" />
+                  </div>
+                  <div className="flex flex-col">
+                    <span className="text-muted-foreground text-sm">
+                      Articles
+                    </span>
+                    <span className="font-medium">{posts.length}</span>
+                  </div>
+                </div>
 
-              const formattedDate = formatDate(post.data.date);
-
-              return (
-                <article
-                  key={post.id}
-                  className="group hover:bg-muted flex h-full flex-col overflow-hidden rounded-lg border border-zinc-400 bg-white/20 transition-all hover:border-slate-700 dark:border-slate-800 dark:bg-slate-950/50 dark:hover:bg-slate-900/50"
-                >
-                  <Link href={`/blog/${post.uid}`} className="overflow-hidden">
-                    <Image
-                      src={post.data.hover_image?.url || ""}
-                      alt={post.data.title || ""}
-                      width={600}
-                      height={340}
-                      className="max-h-48 w-full object-fill transition-transform duration-300 group-hover:scale-105"
-                    />
-                  </Link>
-                  <div className="flex grow flex-col p-6">
-                    <div className="mb-4 flex flex-wrap gap-2">
-                      {post.tags.slice(0, 3).map((tag) => (
-                        <Badge
-                          key={tag}
-                          variant="secondary"
-                          className="bg-primary text-primary-foreground hover:bg-black/50 dark:bg-violet-900/20 dark:text-violet-300 dark:hover:bg-violet-900/30"
-                        >
-                          #{tag}
+                {relatedTags.length > 0 && (
+                  <div className="flex flex-col gap-3">
+                    <span className="text-muted-foreground text-sm font-medium">
+                      Explore more topics
+                    </span>
+                    <div className="flex flex-wrap gap-2">
+                      {relatedTags.map(([slug, topic]) => (
+                        <Badge key={slug} asChild variant="outline">
+                          <Link href={`/blog/tag/${slug}`}>
+                            <IconTag data-icon="inline-start" />
+                            {topic.label}
+                          </Link>
                         </Badge>
                       ))}
-                      {post.tags.length > 3 && (
-                        <span className="inline-flex items-center rounded-full bg-gray-100 px-2 py-1 text-xs font-medium text-gray-500 dark:bg-violet-800/20 dark:text-gray-400">
-                          +{post.tags.length - 3} more
-                        </span>
-                      )}
-                    </div>
-                    <Link
-                      href={`/blog/${post.uid}`}
-                      className="group-hover:text-blue-300"
-                    >
-                      <h2 className="text-foreground mb-2 line-clamp-2 text-xl font-bold transition-colors dark:text-white">
-                        {post.data.title}
-                      </h2>
-                    </Link>
-                    <p className="mb-4 line-clamp-3 text-sm text-black/80 dark:text-slate-400">
-                      {firstParagraph}
-                    </p>
-                    <div className="mt-auto flex items-center justify-between">
-                      <time className="text-xs text-slate-500">
-                        {formattedDate}
-                      </time>
-                      <Link
-                        href={`/blog/${post.uid}`}
-                        className="text-sm font-medium transition-colors hover:text-black/50 dark:text-purple-400 dark:hover:text-purple-300"
-                      >
-                        Read more
-                      </Link>
                     </div>
                   </div>
-                </article>
+                )}
+              </CardContent>
+            </Card>
+          </aside>
+        </div>
+
+        {posts.length > 0 ? (
+          <div className="grid grid-cols-1 gap-6 md:grid-cols-2 xl:grid-cols-3">
+            {posts.map((post) => {
+              const excerpt =
+                post.data.excerpt ||
+                extractFirstParagraphFromSlices(
+                  post.data.slices,
+                  "No description available.",
+                );
+              const textContent = extractTextFromSlices(post.data.slices);
+              const readTime = readingTime(textContent);
+
+              return (
+                <Link
+                  key={post.id}
+                  href={`/blog/${post.uid}`}
+                  className="group"
+                >
+                  <Card
+                    size="sm"
+                    className="bg-opacity-80 ring-foreground/5 h-full pt-0! shadow-sm transition-transform group-hover:-translate-y-1"
+                  >
+                    {isFilled.image(post.data.hover_image) && (
+                      <div className="bg-muted relative aspect-16/10 overflow-hidden">
+                        <PrismicNextImage
+                          field={post.data.hover_image}
+                          className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+                          fallbackAlt=""
+                        />
+                      </div>
+                    )}
+
+                    <CardHeader>
+                      <div className="text-muted-foreground flex flex-wrap items-center gap-2 text-sm">
+                        <span className="inline-flex items-center gap-1.5">
+                          <IconCalendar className="size-4" />
+                          <time>{formatDate(post.data.date)}</time>
+                        </span>
+                        <span aria-hidden="true">/</span>
+                        <span className="inline-flex items-center gap-1.5">
+                          <IconClock className="size-4" />
+                          {readTime.text}
+                        </span>
+                      </div>
+
+                      <CardTitle className="group-hover:text-primary line-clamp-2 text-xl transition-colors">
+                        {post.data.title}
+                      </CardTitle>
+                    </CardHeader>
+
+                    <CardContent className="flex grow flex-col gap-5">
+                      <p className="text-muted-foreground line-clamp-3 text-sm leading-7">
+                        {excerpt}
+                      </p>
+
+                      <div className="flex flex-wrap gap-2">
+                        {post.tags.slice(0, 3).map((postTag) => (
+                          <Badge
+                            key={postTag}
+                            variant={
+                              slugifyTag(postTag) === tagSlug
+                                ? "secondary"
+                                : "outline"
+                            }
+                          >
+                            <IconTag data-icon="inline-start" />
+                            {postTag}
+                          </Badge>
+                        ))}
+                        {post.tags.length > 3 && (
+                          <Badge variant="outline">
+                            +{post.tags.length - 3} more
+                          </Badge>
+                        )}
+                      </div>
+
+                      <span className="text-primary mt-auto inline-flex items-center gap-1 text-sm font-medium">
+                        Read article
+                        <IconArrowRight className="size-4 transition-transform group-hover:translate-x-0.5" />
+                      </span>
+                    </CardContent>
+                  </Card>
+                </Link>
               );
             })}
           </div>
         ) : (
-          <div className="py-20 text-center">
-            <div className="mb-6 inline-flex h-20 w-20 items-center justify-center rounded-full bg-slate-800">
-              <Tag className="h-8 w-8 text-slate-400" />
-            </div>
-            <h2 className="mb-2 text-2xl font-bold text-black dark:text-white">
-              No posts found
-            </h2>
-            <p className="mx-auto mb-8 max-w-md text-slate-400">
-              There are no posts with the tag #{decodedTag}. Try checking out
-              other tags or browse all posts.
-            </p>
-            <Link
-              href="/blog"
-              className="inline-flex items-center justify-center rounded-md bg-violet-600 px-6 py-3 font-medium text-white transition-colors hover:bg-violet-700"
-            >
-              Browse all posts
-            </Link>
-          </div>
+          <Card size="sm" className="bg-opacity-80 ring-foreground/5 shadow-sm">
+            <CardContent className="mx-auto flex max-w-xl flex-col items-center gap-5 py-14 text-center">
+              <div className="bg-primary/10 text-primary flex size-14 items-center justify-center rounded-2xl">
+                <IconTag className="size-7" />
+              </div>
+              <div className="flex flex-col gap-2">
+                <h2 className="font-heading text-2xl font-semibold">
+                  No posts found
+                </h2>
+                <p className="text-muted-foreground leading-7">
+                  There are no posts with the tag {matchedTag}. Try another
+                  topic or browse the full blog archive.
+                </p>
+              </div>
+              <Button asChild>
+                <Link href="/blog">
+                  Browse all posts
+                  <IconArrowRight data-icon="inline-end" />
+                </Link>
+              </Button>
+            </CardContent>
+          </Card>
         )}
-      </div>
-    </Bounded>
+      </Bounded>
+    </main>
   );
+}
+
+export async function generateMetadata({
+  params,
+}: TagPageProps): Promise<Metadata> {
+  const { tag } = await params;
+  const label = formatTagLabel(decodeURIComponent(tag));
+
+  return {
+    title: `${label} Articles`,
+    description: `Articles and notes tagged with ${label}.`,
+  };
+}
+
+export async function generateStaticParams() {
+  const client = createClient();
+  const posts = await client.getAllByType("blog_post");
+  const tagSlugs = new Set<string>();
+
+  posts.forEach((post) => {
+    post.tags.forEach((tag) => tagSlugs.add(slugifyTag(tag)));
+  });
+
+  return Array.from(tagSlugs).map((tag) => ({ tag }));
 }
