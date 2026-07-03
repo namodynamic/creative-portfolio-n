@@ -66,7 +66,8 @@ type ContentRelationshipFieldWithData<
   >;
 }[Exclude<TCustomType[number], string>["id"]];
 
-type BlogPostDocumentDataSlicesSlice = ImageBlockSlice | TextBlockSlice;
+type BlogPostDocumentDataSlicesSlice =
+  CodeBlockSlice | ImageBlockSlice | TextBlockSlice;
 
 /**
  * Content for Blog Post documents
@@ -510,7 +511,8 @@ export interface ProjectDocumentDataChallengesItem {
   challenges: prismic.KeyTextField;
 }
 
-type ProjectDocumentDataSlicesSlice = ImageBlockSlice | TextBlockSlice;
+type ProjectDocumentDataSlicesSlice =
+  CodeBlockSlice | ImageBlockSlice | TextBlockSlice;
 
 /**
  * Content for Project documents
@@ -1447,6 +1449,92 @@ type BiographySliceVariation = BiographySliceDefault;
 export type BiographySlice = prismic.SharedSlice<
   "biography",
   BiographySliceVariation
+>;
+
+/**
+ * Primary content in *CodeBlock → Default → Primary*
+ */
+export interface CodeBlockSliceDefaultPrimary {
+  /**
+   * Code field in *CodeBlock → Default → Primary*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: Syntax-highlighted code
+   * - **API ID Path**: code_block.default.primary.code
+   * - **Documentation**: https://prismic.io/docs/fields/rich-text
+   */
+  code: prismic.RichTextField;
+
+  /**
+   * Language field in *CodeBlock → Default → Primary*
+   *
+   * - **Field Type**: Select
+   * - **Placeholder**: TypeScript, JavaScript, Bash, JSON, CSS, HTML, etc.
+   * - **Default Value**: typeScript
+   * - **API ID Path**: code_block.default.primary.language
+   * - **Documentation**: https://prismic.io/docs/fields/select
+   */
+  language: prismic.SelectField<
+    | "typeScript"
+    | "tsx"
+    | "javascript"
+    | "jsx"
+    | "bash"
+    | "json"
+    | "css"
+    | "html",
+    "filled"
+  >;
+
+  /**
+   * FileName field in *CodeBlock → Default → Primary*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: e.g. index.ts
+   * - **API ID Path**: code_block.default.primary.filename
+   * - **Documentation**: https://prismic.io/docs/fields/text
+   */
+  filename: prismic.KeyTextField;
+
+  /**
+   * Caption field in *CodeBlock → Default → Primary*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: code_block.default.primary.caption
+   * - **Documentation**: https://prismic.io/docs/fields/text
+   */
+  caption: prismic.KeyTextField;
+}
+
+/**
+ * Default variation for CodeBlock Slice
+ *
+ * - **API ID**: `default`
+ * - **Description**: Default
+ * - **Documentation**: https://prismic.io/docs/slices
+ */
+export type CodeBlockSliceDefault = prismic.SharedSliceVariation<
+  "default",
+  Simplify<CodeBlockSliceDefaultPrimary>,
+  never
+>;
+
+/**
+ * Slice variation for *CodeBlock*
+ */
+type CodeBlockSliceVariation = CodeBlockSliceDefault;
+
+/**
+ * CodeBlock Shared Slice
+ *
+ * - **API ID**: `code_block`
+ * - **Description**: CodeBlock
+ * - **Documentation**: https://prismic.io/docs/slices
+ */
+export type CodeBlockSlice = prismic.SharedSlice<
+  "code_block",
+  CodeBlockSliceVariation
 >;
 
 /**
@@ -3497,6 +3585,10 @@ declare module "@prismicio/client" {
       BiographySliceDefaultPrimary,
       BiographySliceVariation,
       BiographySliceDefault,
+      CodeBlockSlice,
+      CodeBlockSliceDefaultPrimary,
+      CodeBlockSliceVariation,
+      CodeBlockSliceDefault,
       ContactSlice,
       ContactSliceDefaultPrimaryFaqItem,
       ContactSliceDefaultPrimary,
