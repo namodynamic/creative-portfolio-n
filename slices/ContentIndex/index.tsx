@@ -4,6 +4,7 @@ import { createClient } from "@/prismicio";
 import ContentList from "./ContentList";
 import BlogList from "./BlogList";
 import Bounded from "@/components/Bounded";
+import BlogTopicsCard from "@/components/BlogTopicsCard";
 import Heading from "@/components/Heading";
 import type { JSX } from "react";
 import TechNewsCard from "@/components/TechNewsCard";
@@ -63,7 +64,8 @@ const ContentIndex = async ({
             />
           </div>
 
-          <aside className="lg:col-span-4">
+          <aside className="flex flex-col gap-6 lg:col-span-4">
+            <BlogTopicsCard posts={blogPosts} />
             <TechNewsCard />
           </aside>
         </div>

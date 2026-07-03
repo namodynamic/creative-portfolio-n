@@ -126,7 +126,9 @@ interface BlogPostDocumentData {
    * - **Tab**: Main
    * - **Documentation**: https://prismic.io/docs/fields/select
    */
-  category: prismic.SelectField<"tutorials" | "guides" | "opinion">;
+  category: prismic.SelectField<
+    "tutorials" | "guides" | "case studies" | "notes"
+  >;
 
   /**
    * Slice Zone field in *Blog Post*
@@ -874,7 +876,7 @@ export interface SettingsDocumentDataBlogCategoriesItem {
    * - **API ID Path**: settings.blog_categories[].value
    * - **Documentation**: https://prismic.io/docs/fields/select
    */
-  value: prismic.SelectField<"tutorials" | "guides" | "opinion">;
+  value: prismic.SelectField<"tutorials" | "guides" | "case studies" | "notes">;
 
   /**
    * Label field in *Settings → Blog Categories*

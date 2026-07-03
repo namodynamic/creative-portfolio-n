@@ -156,7 +156,10 @@ export default async function TagPage({ params }: TagPageProps) {
           </div>
 
           <aside className="lg:col-span-4">
-            <Card className="bg-opacity-80 ring-foreground/5 shadow-sm">
+            <Card
+              size="sm"
+              className="bg-opacity-80 ring-foreground/5 shadow-sm"
+            >
               <CardHeader>
                 <CardTitle>Archive Summary</CardTitle>
                 <CardDescription>

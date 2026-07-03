@@ -46,7 +46,7 @@
         "config": {
           "label": "Category",
           "placeholder": "e.g. tutorials, guides, opinion",
-          "options": ["tutorials", "guides", "opinion"]
+          "options": ["tutorials", "guides", "case studies", "notes"]
         }
       },
       "slices": {

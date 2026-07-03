@@ -33,6 +33,12 @@ type BlogListProps = {
 
 const ITEMS_PER_PAGE = 10;
 
+function formatCategoryLabel(category: string): string {
+  return category
+    .replace(/-/g, " ")
+    .replace(/\b\w/g, (letter) => letter.toUpperCase());
+}
+
 export default function BlogList({
   items,
   viewMoreText,
@@ -46,9 +52,31 @@ export default function BlogList({
   // Debounce search query to avoid excessive filtering
   const debouncedSearchQuery = useDebounce(searchQuery, 300);
 
+  const categoryOptions = useMemo(() => {
+    const categoryMap = new Map<string, string>();
+
+    categories.forEach((category) => {
+      const value = category.value.toLowerCase();
+
+      if (value) {
+        categoryMap.set(value, category.label || formatCategoryLabel(value));
+      }
+    });
+
+    items.forEach((item) => {
+      const category = item.data.category?.toLowerCase();
+
+      if (category && !categoryMap.has(category)) {
+        categoryMap.set(category, formatCategoryLabel(category));
+      }
+    });
+
+    return Array.from(categoryMap, ([value, label]) => ({ value, label }));
+  }, [categories, items]);
+
   // Filter and sort logic with debounced search
   const filteredAndSortedItems = useMemo(() => {
-    let filtered = items;
+    let filtered = [...items];
 
     // Search filter with debounced query
     if (debouncedSearchQuery.trim()) {
@@ -68,13 +96,11 @@ export default function BlogList({
       );
     }
 
-    filtered.sort((a, b) => {
+    return filtered.sort((a, b) => {
       const dateA = new Date(a.data.date || "").getTime();
       const dateB = new Date(b.data.date || "").getTime();
       return sortOrder === "newest" ? dateB - dateA : dateA - dateB;
     });
-
-    return filtered;
   }, [items, debouncedSearchQuery, selectedCategory, sortOrder]);
 
   // Pagination logic
@@ -113,7 +139,7 @@ export default function BlogList({
             placeholder="Search articles..."
             value={searchQuery}
             onChange={(e) => handleSearchChange(e.target.value)}
-            className="pl-10"
+            className="h-10 pl-10"
           />
           {searchQuery !== debouncedSearchQuery && (
             <div className="absolute top-1/2 right-3 -translate-y-1/2">
@@ -125,7 +151,7 @@ export default function BlogList({
         {/* Category Tabs and Sort */}
         <div className="flex flex-col items-start justify-between gap-4 sm:flex-row sm:items-center">
           <div className="flex flex-wrap gap-2">
-            {categories.map((category) => (
+            {categoryOptions.map((category) => (
               <Button
                 key={category.value}
                 type="button"
@@ -188,7 +214,7 @@ export default function BlogList({
             />
           ))
         ) : (
-          <Card className="ring-foreground/5">
+          <Card size="sm" className="ring-foreground/5">
             <CardContent className="flex flex-col items-center gap-3 py-12 text-center">
               <IconFileText className="text-muted-foreground size-12" />
               <h3 className="font-heading text-lg font-medium">

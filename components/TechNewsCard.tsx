@@ -192,7 +192,10 @@ export default function TechNewsCard() {
   )?.subreddit;
 
   return (
-    <Card className="bg-card/80 sticky top-24 w-full backdrop-blur">
+    <Card
+      size="sm"
+      className="bg-opacity-80 ring-foreground/5 sticky top-24 w-full backdrop-blur"
+    >
       <CardHeader className="gap-4">
         <div className="flex items-center justify-between gap-3">
           <CardTitle className="flex items-center gap-2 text-lg">
