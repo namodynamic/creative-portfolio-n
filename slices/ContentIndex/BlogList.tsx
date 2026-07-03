@@ -56,7 +56,7 @@ export default function BlogList({
     const categoryMap = new Map<string, string>();
 
     categories.forEach((category) => {
-      const value = category.value.toLowerCase();
+      const value = category.value?.toLowerCase();
 
       if (value) {
         categoryMap.set(value, category.label || formatCategoryLabel(value));

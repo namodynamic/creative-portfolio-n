@@ -85,12 +85,13 @@ const Faq: FC<FaqProps> = ({ slice }) => {
     categories[0]?.id ?? "services",
   );
 
-  const activeItems = {
-    services: slice.primary.services,
-    process: slice.primary.process,
-    pricing: slice.primary.pricing,
-    support: slice.primary.support,
-  }[activeCategory];
+  const activeItems =
+    {
+      services: slice.primary.services,
+      process: slice.primary.process,
+      pricing: slice.primary.pricing,
+      support: slice.primary.support,
+    }[activeCategory] ?? [];
 
   const activeTitle = categoryTitles[activeCategory];
 
