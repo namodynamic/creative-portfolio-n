@@ -89,6 +89,30 @@ function StatusIndicator({ status }: { status: string | null }) {
   );
 }
 
+function TechBadge({
+  color,
+  name,
+}: {
+  color: string | null;
+  name: string | null;
+}) {
+  if (!color) {
+    return <Badge variant="outline">{name}</Badge>;
+  }
+
+  return (
+    <Badge
+      variant="outline"
+      className="text-white"
+      style={{
+        backgroundColor: color,
+      }}
+    >
+      {name}
+    </Badge>
+  );
+}
+
 export default async function Page({ params }: { params: Promise<Params> }) {
   const { uid } = await params;
   const client = createClient();
@@ -220,15 +244,11 @@ export default async function Page({ params }: { params: Promise<Params> }) {
                       </h3>
                       <div className="flex flex-wrap gap-2">
                         {page.data.tech_stack.map((tech, index) => (
-                          <Badge key={index} variant="outline">
-                            {tech.color && (
-                              <span
-                                className="size-2 rounded-full"
-                                style={{ backgroundColor: tech.color }}
-                              />
-                            )}
-                            {tech.name}
-                          </Badge>
+                          <TechBadge
+                            key={index}
+                            color={tech.color}
+                            name={tech.name}
+                          />
                         ))}
                       </div>
                     </div>
