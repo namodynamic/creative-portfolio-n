@@ -183,6 +183,9 @@
         "fieldset": "Slice Zone",
         "config": {
           "choices": {
+            "code_block": {
+              "type": "SharedSlice"
+            },
             "image_block": {
               "type": "SharedSlice"
             },

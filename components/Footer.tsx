@@ -1,156 +1,153 @@
-import React from "react";
 import { createClient } from "@/prismicio";
 import { PrismicNextLink } from "@prismicio/next";
 import Bounded from "@/components/Bounded";
 import { isFilled } from "@prismicio/client";
-import { FaGithub, FaXTwitter, FaLinkedin } from "react-icons/fa6";
 import Link from "next/link";
-import { ArrowRight } from "lucide-react";
+import {
+  IconArrowRight,
+  IconBrandGithub,
+  IconBrandLinkedin,
+  IconBrandX,
+} from "@tabler/icons-react";
+
+import { Button } from "@/components/ui/button";
+
+const secondaryLinks = [
+  { href: "/contact", label: "Contact" },
+  { href: "/services", label: "Services" },
+  { href: "/faq", label: "FAQs" },
+];
 
 export default async function Footer() {
   const client = createClient();
   const settings = await client.getSingle("settings");
+  const socialLinks = [
+    {
+      field: settings.data.github_link,
+      label: "GitHub",
+      icon: IconBrandGithub,
+    },
+    {
+      field: settings.data.linkedin_link,
+      label: "LinkedIn",
+      icon: IconBrandLinkedin,
+    },
+    {
+      field: settings.data.twitter_link,
+      label: "X",
+      icon: IconBrandX,
+    },
+  ];
 
   return (
-    <footer className="border-border dark:border-border w-full border-t-[0.5px]">
-      <Bounded as="section">
-        <div className="mx-auto max-w-7xl px-6">
-          <div className="relative grid grid-cols-1 gap-12 md:grid-cols-3">
-            {/* Left Column */}
-            <div className="z-20 space-y-6">
-              <div className="items-center border-l-4 border-purple-800 pl-3">
-                <h2 className="text-foreground dark:text-foreground text-2xl font-bold">
+    <footer className="border-border/70 w-full border-t">
+      <Bounded as="section" className="py-10 md:py-14">
+        <div className="mx-auto flex max-w-7xl flex-col gap-10">
+          <div className="relative grid grid-cols-1 gap-10 md:grid-cols-[1.2fr_1fr_1fr]">
+            <div className="flex flex-col gap-5">
+              <div className="border-primary/70 flex flex-col gap-1 border-l-2 pl-4">
+                <h2 className="text-foreground text-2xl font-semibold">
                   {settings.data.name}
                 </h2>
-                <p className="dark:text-gray-400">{settings.data.role}</p>
+                <p className="text-muted-foreground text-sm">
+                  {settings.data.role}
+                </p>
               </div>
-              <p className="text-sm dark:text-gray-400">
-                {settings.data.footer_text}
+              <p className="text-muted-foreground max-w-sm text-sm leading-6">
+                {settings.data.bio}
               </p>
 
-              <div className="flex gap-4">
-                {isFilled.link(settings.data.github_link) && (
-                  <PrismicNextLink
-                    field={settings.data.github_link || ""}
-                    className="transition-colors hover:text-black/50 dark:text-gray-400 dark:hover:text-white"
-                    aria-label={settings.data.name + " on GitHub"}
-                  >
-                    <FaGithub size={20} />
-                    <span className="sr-only">GitHub</span>
-                  </PrismicNextLink>
-                )}
-
-                {isFilled.link(settings.data.linkedin_link) && (
-                  <PrismicNextLink
-                    field={settings.data.linkedin_link}
-                    className="transition-colors hover:text-black/50 dark:text-gray-400 dark:hover:text-white"
-                    aria-label={settings.data.name + " on LinkedIn"}
-                  >
-                    <FaLinkedin size={20} />
-                    <span className="sr-only">LinkedIn</span>
-                  </PrismicNextLink>
-                )}
-                {isFilled.link(settings.data.twitter_link) && (
-                  <PrismicNextLink
-                    field={settings.data.twitter_link}
-                    className="transition-colors hover:text-black/50 dark:text-gray-400 dark:hover:text-white"
-                    aria-label={settings.data.name + " on Twitter"}
-                  >
-                    <FaXTwitter size={20} />
-                    <span className="sr-only">Twitter</span>
-                  </PrismicNextLink>
+              <div className="flex items-center gap-2">
+                {socialLinks.map(({ field, label, icon: Icon }) =>
+                  isFilled.link(field) ? (
+                    <Button
+                      key={label}
+                      asChild
+                      variant="outline"
+                      size="icon-sm"
+                      aria-label={`${settings.data.name} on ${label}`}
+                    >
+                      <PrismicNextLink field={field}>
+                        <Icon />
+                        <span className="sr-only">{label}</span>
+                      </PrismicNextLink>
+                    </Button>
+                  ) : null,
                 )}
               </div>
             </div>
 
-            {/* Quick Links */}
             <nav
-              className="navigation grid grid-cols-2 gap-8"
+              className="navigation grid grid-cols-2 gap-8 text-sm"
               aria-label="Footer Navigation"
             >
-              <div className="space-y-6">
-                <h3 className="text-foreground dark:text-foreground text-lg font-semibold">
+              <div className="flex flex-col gap-4">
+                <h3 className="text-foreground text-base font-semibold">
                   Quick Links
                 </h3>
-                <ul className="space-y-3">
+                <ul className="text-muted-foreground flex flex-col gap-3">
                   <li>
                     <Link
                       href="/"
-                      className="transition-colors hover:text-black/50 dark:text-gray-400 dark:hover:text-white"
+                      className="hover:text-foreground transition-colors"
                     >
                       Home
                     </Link>
                   </li>
-                  {settings.data.nav_item.map(({ link, label }, index) => (
-                    <React.Fragment key={label}>
-                      <li>
-                        <PrismicNextLink
-                          className="transition-colors hover:text-black/50 dark:text-gray-400 dark:hover:text-white"
-                          field={link}
-                        >
-                          {label}
-                        </PrismicNextLink>
-                      </li>
-                    </React.Fragment>
+                  {settings.data.nav_item.map(({ link, label }) => (
+                    <li key={label}>
+                      <PrismicNextLink
+                        className="hover:text-foreground transition-colors"
+                        field={link}
+                      >
+                        {label}
+                      </PrismicNextLink>
+                    </li>
                   ))}
                 </ul>
               </div>
-              <div className="space-y-3 pt-[42px]">
-                <ul className="space-y-3">
-                  <li>
-                    <Link
-                      href="/contact"
-                      className="transition-colors hover:text-black/50 dark:text-gray-400 dark:hover:text-white"
-                    >
-                      Contact
-                    </Link>
-                  </li>
-                  <li>
-                    <Link
-                      href="/services"
-                      className="transition-colors hover:text-black/50 dark:text-gray-400 dark:hover:text-white"
-                    >
-                      Services
-                    </Link>
-                  </li>
-                  <li>
-                    <Link
-                      href="/faq"
-                      className="transition-colors hover:text-black/50 dark:text-gray-400 dark:hover:text-white"
-                    >
-                      FAQs
-                    </Link>
-                  </li>
+              <div className="flex flex-col gap-4 pt-10">
+                <ul className="text-muted-foreground flex flex-col gap-3">
+                  {secondaryLinks.map(({ href, label }) => (
+                    <li key={href}>
+                      <Link
+                        href={href}
+                        className="hover:text-foreground transition-colors"
+                      >
+                        {label}
+                      </Link>
+                    </li>
+                  ))}
                 </ul>
               </div>
             </nav>
 
-            {/* CTA */}
-            <div className="relative space-y-6">
-              <h3 className="text-foreground dark:text-foreground text-lg font-semibold">
-                Let&apos;s Work Together
+            <div className="flex flex-col gap-5">
+              <h3 className="text-foreground text-base font-semibold">
+                {settings.data.footer_cta_heading}
               </h3>
-              <p className="text-sm dark:text-gray-400">
+              <p className="text-muted-foreground text-sm leading-6">
                 {settings.data.footer_cta_text}
               </p>
-              <div className="relative z-20 flex items-center gap-4">
-                <Link
-                  href="/contact"
-                  className="flex items-center gap-2 rounded-lg bg-purple-800 px-6 py-3 font-medium text-white transition-all hover:bg-purple-600"
-                >
-                  Start a Project
-                  <ArrowRight size={16} />
+              <Button asChild className="w-fit">
+                <Link href="/contact">
+                  {settings.data.footer_cta_button_text}
+                  <IconArrowRight data-icon="inline-end" />
                 </Link>
-              </div>
+              </Button>
+              <p className="text-muted-foreground text-xs leading-5">
+                {settings.data.footer_cta_secondary_text}
+              </p>
             </div>
           </div>
-        </div>
 
-        <div className="border-border mt-12 mb-0 border-t-[0.5px] pt-6 text-center dark:border-white/[0.2]">
-          <p className="text-sm dark:text-gray-400">
-            &copy; {new Date().getFullYear()} {settings.data.name}. All rights
-            reserved.
-          </p>
+          <div className="border-border/70 text-muted-foreground flex flex-col gap-2 border-t pt-6 text-xs sm:flex-row sm:items-center sm:justify-between">
+            <p>
+              &copy; {new Date().getFullYear()} {settings.data.name}. All rights
+              reserved.
+            </p>
+            <p>{settings.data.footer_bottom_note}</p>
+          </div>
         </div>
       </Bounded>
     </footer>

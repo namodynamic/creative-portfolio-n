@@ -46,7 +46,7 @@
         "config": {
           "label": "Category",
           "placeholder": "e.g. tutorials, guides, opinion",
-          "options": ["tutorials", "guides", "opinion"]
+          "options": ["tutorials", "guides", "case studies", "notes"]
         }
       },
       "slices": {
@@ -54,6 +54,9 @@
         "fieldset": "Slice Zone",
         "config": {
           "choices": {
+            "code_block": {
+              "type": "SharedSlice"
+            },
             "image_block": {
               "type": "SharedSlice"
             },

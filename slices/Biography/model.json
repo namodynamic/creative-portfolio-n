@@ -19,13 +19,13 @@
             "placeholder": ""
           }
         },
-        "description": {
+        "bio_body": {
           "type": "StructuredText",
           "config": {
-            "label": "Description",
+            "label": "Bio Body",
             "placeholder": "",
-            "allowTargetBlank": true,
-            "multi": "paragraph,preformatted,heading1,heading2,heading3,heading4,heading5,heading6,strong,em,hyperlink,image,embed,list-item,o-list-item,rtl"
+            "allowTargetBlank": false,
+            "multi": "paragraph,strong,em"
           }
         },
         "button_text": {

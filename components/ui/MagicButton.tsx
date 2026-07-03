@@ -37,8 +37,8 @@ export default function MagicButton({
       >
         {isBeam && (
           <span className="relative mr-2 flex h-3 w-3">
-            <span className="btn-ping"></span>
-            <span className="btn-ping_dot"></span>
+            <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-green-400 opacity-75" />
+            <span className="relative inline-flex h-3 w-3 rounded-full bg-green-500" />
           </span>
         )}
         {position === "left" && icon}

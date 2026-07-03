@@ -1,0 +1,35 @@
+[
+	{
+		"__TYPE__": "SharedSliceContent",
+		"variation": "default",
+		"primary": {
+			"code": {
+				"__TYPE__": "StructuredTextContent",
+				"value": [
+					{
+						"type": "paragraph",
+						"content": {
+							"text": "Consectetur ullamco exercitation ex magna exercitation aliqua enim sit anim laboris incididunt culpa veniam aliqua. Incididunt aliqua ad ut ex non id velit dolor officia laborum duis. Est magna incididunt nisi cillum ullamco nostrud occaecat do duis."
+						}
+					}
+				]
+			},
+			"language": {
+				"__TYPE__": "FieldContent",
+				"value": "typeScript",
+				"type": "Select"
+			},
+			"filename": {
+				"__TYPE__": "FieldContent",
+				"value": "tent",
+				"type": "Text"
+			},
+			"caption": {
+				"__TYPE__": "FieldContent",
+				"value": "bet",
+				"type": "Text"
+			}
+		},
+		"items": []
+	}
+]

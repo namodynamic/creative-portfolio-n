@@ -1,33 +1,117 @@
-import { Metadata } from "next";
+import type { Metadata } from "next";
+import type { ComponentType, ReactNode } from "react";
 import { notFound } from "next/navigation";
-import { asImageSrc } from "@prismicio/client";
-import { SliceZone } from "@prismicio/react";
-import { createClient } from "@/prismicio";
-import { components } from "@/slices";
-import Link from "next/link";
+import { asImageSrc, isFilled } from "@prismicio/client";
+import { PrismicNextLink } from "@prismicio/next";
+import { PrismicRichText, SliceZone } from "@prismicio/react";
 import {
-  ExternalLink,
-  Clock,
-  Loader,
-  CodeXml,
-  Calendar1,
-  CircleGauge,
-  GitGraph,
-  Lock,
-  CheckCheck,
-  Tag,
-} from "lucide-react";
-import { FaGithub } from "react-icons/fa6";
-import { PrismicRichText } from "@prismicio/react";
+  IconBrandGithub,
+  IconBriefcase,
+  IconCalendar,
+  IconChecks,
+  IconCircleCheck,
+  IconClock,
+  IconCode,
+  IconExternalLink,
+  IconGauge,
+  IconGitBranch,
+  IconLock,
+  IconRocket,
+  IconStack2,
+  IconTag,
+  type IconProps,
+} from "@tabler/icons-react";
+import Link from "next/link";
 import Bounded from "@/components/Bounded";
 import Heading from "@/components/Heading";
-import { PrismicNextLink } from "@prismicio/next";
+import RelatedProjects from "@/components/RelatedProjects";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { GoStack } from "react-icons/go";
-import RelatedProjects from "@/components/RelatedProjects";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+import { Separator } from "@/components/ui/separator";
+import { createClient } from "@/prismicio";
+import { components } from "@/slices";
+import {
+  Breadcrumb,
+  BreadcrumbItem,
+  BreadcrumbLink,
+  BreadcrumbList,
+  BreadcrumbPage,
+  BreadcrumbSeparator,
+} from "@/components/ui/breadcrumb";
 
 type Params = { uid: string };
+
+type DetailSectionProps = {
+  title: string;
+  icon: ComponentType<IconProps>;
+  children: ReactNode;
+};
+
+function DetailSection({ title, icon: Icon, children }: DetailSectionProps) {
+  return (
+    <section className="flex flex-col gap-5">
+      <div className="flex items-center gap-3">
+        <div className="bg-primary/10 text-primary flex size-9 items-center justify-center rounded-xl">
+          <Icon className="size-5" />
+        </div>
+        <h2 className="font-heading text-foreground text-xl font-semibold">
+          {title}
+        </h2>
+      </div>
+      {children}
+    </section>
+  );
+}
+
+function StatusIndicator({ status }: { status: string | null }) {
+  const isCompleted = status?.trim() === "Completed";
+  const isActive = status?.trim() === "Active Development";
+
+  return (
+    <span className="inline-flex items-center gap-2">
+      <span className="relative flex size-3">
+        {isActive && (
+          <span className="bg-primary absolute inline-flex h-full w-full animate-ping rounded-full opacity-75" />
+        )}
+        <span className="bg-primary relative inline-flex size-3 rounded-full" />
+      </span>
+      <span className="font-medium">
+        {status || (isCompleted ? "Completed" : "In progress")}
+      </span>
+    </span>
+  );
+}
+
+function TechBadge({
+  color,
+  name,
+}: {
+  color: string | null;
+  name: string | null;
+}) {
+  if (!color) {
+    return <Badge variant="outline">{name}</Badge>;
+  }
+
+  return (
+    <Badge
+      variant="outline"
+      className="text-white"
+      style={{
+        backgroundColor: color,
+      }}
+    >
+      {name}
+    </Badge>
+  );
+}
 
 export default async function Page({ params }: { params: Promise<Params> }) {
   const { uid } = await params;
@@ -38,361 +122,319 @@ export default async function Page({ params }: { params: Promise<Params> }) {
     {
       date: page.data.started_data,
       status: "Started",
-      icon: <Calendar1 className="h-4 w-4" />,
-      bgColor: "dark:bg-emerald-900/50 bg-emerald-900 ",
-      textColor: "text-emerald-500",
+      icon: IconCalendar,
     },
     {
       date: page.data.development_time,
       status: "Duration",
-      icon: <Clock className="h-4 w-4" />,
-      bgColor: "dark:bg-blue-900/50 bg-blue-900 ",
-      textColor: "text-blue-500",
+      icon: IconClock,
     },
     {
       date: page.data.current_status,
       status: "Status",
-      icon: <CircleGauge className="h-4 w-4" />,
-      bgColor: "bg-violet-900/50 ",
-      textColor: "text-purple-500",
+      icon: IconGauge,
     },
   ];
 
+  const isPrivate = page.data.accessibility === "Private Project";
+
   return (
-    <Bounded className="relative z-20 py-6 md:py-10">
-      {/* Breadcrumb */}
-      <div>
-        <div className="py-16">
-          <div className="flex items-center gap-2 text-sm">
-            <Link
-              href="/"
-              className="transition-colors hover:text-black/50 dark:text-slate-400 dark:hover:text-slate-300"
-            >
-              Home
-            </Link>
-            <span className="text-slate-600">/</span>
-            <Link
-              href="/projects"
-              className="transition-colors hover:text-black/50 dark:text-slate-400 dark:hover:text-slate-300"
-            >
-              Projects
-            </Link>
-            <span className="text-slate-600">/</span>
-            <span className="dark:text-foreground">{page.data.title}</span>
-          </div>
-        </div>
-      </div>
+    <main>
+      <Bounded className="relative mt-5 sm:mt-10">
+        <Breadcrumb className="mb-10">
+          <BreadcrumbList>
+            <BreadcrumbItem>
+              <BreadcrumbLink asChild>
+                <Link href="/">Home</Link>
+              </BreadcrumbLink>
+            </BreadcrumbItem>
+            <BreadcrumbSeparator />
+            <BreadcrumbItem>
+              <BreadcrumbLink asChild>
+                <Link href="/projects">Projects</Link>
+              </BreadcrumbLink>
+            </BreadcrumbItem>
+            <BreadcrumbSeparator />
+            <BreadcrumbItem>
+              <BreadcrumbPage>{page.data.title}</BreadcrumbPage>
+            </BreadcrumbItem>
+          </BreadcrumbList>
+        </Breadcrumb>
 
-      <div className="mb-20">
-        <div className="grid grid-cols-1 gap-10 lg:grid-cols-3">
-          {/* Main content - 2/3 width on desktop */}
-          <div className="lg:col-span-2">
-            <div className="dark:bg-card/80 mb-8 overflow-hidden rounded-xl border-[0.5px] border-zinc-400 bg-white/20 p-6 shadow-xl backdrop-blur-sm md:p-8 dark:border-slate-800">
-              {page.data.accessibility === "Open Source Project" && (
-                <Badge
-                >
-                  {page.data.accessibility}
-                </Badge>
-              )}
-              {page.data.accessibility === "Private Project" && (
-                <Badge
-                  variant="outline"
-                >
-                  <Lock className="mr-2 h-3 w-3" /> {page.data.accessibility}
-                </Badge>
-              )}
-              <Heading as="h1" size="sm" className="mb-6 dark:text-white">
-                {page.data.title}
-              </Heading>
+        <div className="mb-16 grid grid-cols-1 gap-8 lg:grid-cols-12">
+          <div className="lg:col-span-8">
+            <Card className="bg-opacity-80 ring-foreground/5 shadow-sm backdrop-blur">
+              <CardHeader className="gap-6 p-6 md:p-8">
+                <div className="flex flex-wrap items-center gap-2">
+                  {page.data.accessibility && (
+                    <Badge variant={isPrivate ? "outline" : "secondary"}>
+                      {isPrivate && <IconLock data-icon="inline-start" />}
+                      {page.data.accessibility}
+                    </Badge>
+                  )}
 
-              <div className="prose prose-base dark:prose-invert mb-10 max-w-none">
-                <SliceZone slices={page.data.slices} components={components} />
-              </div>
-
-              {/* Role & Contribution */}
-              <div className="mb-12">
-                <div className="mb-6 flex items-center gap-3">
-                  <div className="flex h-8 w-8 items-center justify-center rounded-full bg-black text-white dark:bg-slate-200 dark:text-black">
-                    <GitGraph className="h-5 w-5" />
-                  </div>
-                  <h2 className="text-xl font-bold text-black/80 dark:text-slate-300">
-                    My Role & Contribution
-                  </h2>
-                </div>
-                <div className="leading-relaxed dark:text-slate-300">
-                  <PrismicRichText field={page.data.role_contribution} />
-                </div>
-              </div>
-
-              {/* Challenges & Solutions */}
-              <div className="mb-12">
-                <div className="mb-6 flex items-center gap-3">
-                  <div className="flex h-8 w-8 items-center justify-center rounded-full bg-black text-white dark:bg-slate-200 dark:text-black">
-                    <Loader className="h-5 w-5" />
-                  </div>
-                  <h2 className="text-xl font-bold text-black/80 dark:text-slate-300">
-                    Technical Challenges & Solutions
-                  </h2>
-                </div>
-                <ul className="space-y-2">
-                  {page.data.challenges?.map((item, index) => (
-                    <li
-                      key={index}
-                      className="flex items-start gap-2 dark:text-slate-300"
-                    >
-                      <CheckCheck className="mt-0.5 h-4 w-4 shrink-0 text-black/80 dark:text-white/50" />
-                      <span>{item.challenges || ""}</span>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-
-              {/* Features */}
-              <div className="mb-12">
-                <div className="mb-6 flex items-center gap-3">
-                  <div className="flex h-8 w-8 items-center justify-center rounded-full bg-black text-white dark:bg-slate-200 dark:text-black">
-                    <GoStack className="h-5 w-5" />
-                  </div>
-                  <h2 className="text-xl font-bold text-black/80 dark:text-slate-300">
-                    Key Features
-                  </h2>
-                </div>
-                <div className="grid grid-cols-1 gap-3 md:grid-cols-2">
-                  {page.data.key_features?.map((item, index) => (
-                    <div key={index} className="flex items-start gap-2">
-                      <CheckCheck className="mt-0.5 h-4 w-4 shrink-0 text-black/80 dark:text-white/50" />
-                      <span className="dark:text-slate-300">
-                        {item.features || ""}
-                      </span>
-                    </div>
-                  ))}
-                </div>
-              </div>
-
-              {/* Technical Details */}
-              <div className="mb-12">
-                <div className="mb-6 flex items-center gap-3">
-                  <div className="flex h-8 w-8 items-center justify-center rounded-full bg-black text-white dark:bg-slate-200 dark:text-black">
-                    <CodeXml className="h-5 w-5" />
-                  </div>
-                  <h2 className="text-xl font-bold text-black/80 dark:text-slate-300">
-                    Technical Details
-                  </h2>
+                  {page.data.current_status && (
+                    <Badge variant="outline">{page.data.current_status}</Badge>
+                  )}
                 </div>
 
-                <div className="mb-6">
-                  <h3 className="mb-3 text-lg font-medium text-black/90 dark:text-white/90">
-                    Technology Stack
-                  </h3>
-                  <div className="flex flex-wrap gap-2">
-                    {page.data.tech_stack.map((tech, index) => (
-                      <span
-                        key={index}
-                        className="rounded-full px-3 py-1 text-xs font-medium text-white"
-                        style={{ backgroundColor: tech.color || "" }}
-                      >
-                        {tech.name}
-                      </span>
-                    ))}
-                  </div>
-                </div>
+                <div className="flex flex-col gap-4">
+                  <Heading as="h1" size="sm" className="text-balance">
+                    {page.data.title}
+                  </Heading>
 
+                  {page.data.meta_description && (
+                    <CardDescription className="max-w-3xl text-base leading-7 md:text-lg">
+                      {page.data.meta_description}
+                    </CardDescription>
+                  )}
+                </div>
+              </CardHeader>
+
+              <CardContent className="flex flex-col gap-12 p-6 pt-0 md:p-8 md:pt-0">
                 <div>
-                  <h3 className="mb-3 text-lg font-medium text-black/90 dark:text-white/90">
-                    Key Results & Impact
-                  </h3>
-                  <PrismicRichText
-                    field={page.data.key_results}
-                    components={{
-                      listItem: ({ children }) => (
-                        <li className="flex items-start">
-                          <CheckCheck className="mt-0.5 mr-2 h-4 w-4 shrink-0 text-black/80 dark:text-white/50" />
-                          <span className="dark:text-slate-300">
-                            {children}
-                          </span>
-                        </li>
-                      ),
-                    }}
+                  <SliceZone
+                    slices={page.data.slices}
+                    components={components}
                   />
                 </div>
-              </div>
-            </div>
-          </div>
 
-          {/* Sidebar - 1/3 width on desktop */}
-          <div className="lg:col-span-1">
-            <div className="sticky top-10">
-              {/* Project links */}
-              <div className="dark:bg-card/80 mb-6 rounded-lg border-[0.5px] border-zinc-400 bg-white/20 p-6 dark:border-slate-800">
-                <h3 className="text-foreground mb-4 text-lg font-medium dark:text-white">
-                  Project Links
-                </h3>
-                <div className="space-y-3">
-                  <PrismicNextLink
-                    field={page.data.view_live}
-                    className="flex w-full items-center justify-between rounded-md bg-linear-to-r from-purple-500 to-purple-800 px-4 py-2 text-white transition-colors hover:from-purple-700 hover:to-purple-600"
-                  >
-                    <span className="font-medium">View Live Demo</span>
-                    <ExternalLink className="h-4 w-4" />
-                  </PrismicNextLink>
-
-                  <PrismicNextLink
-                    field={page.data.source_code}
-                    className="flex w-full items-center justify-between rounded-md bg-slate-800 px-4 py-2 text-white transition-colors hover:bg-slate-700"
-                  >
-                    <span className="font-medium">View Source Code</span>
-                    <FaGithub className="h-4 w-4" />
-                  </PrismicNextLink>
-                </div>
-              </div>
-
-              {/* Project details */}
-              <div className="dark:bg-card/80 mb-6 rounded-lg border-[0.5px] border-zinc-400 bg-white/20 p-6 dark:border-slate-800">
-                <h3 className="text-foreground mb-4 text-lg font-medium dark:text-white">
-                  Project Details
-                </h3>
-
-                <div className="space-y-4">
-                  <div>
-                    <h4 className="text-muted-foreground mb-1 text-sm font-medium dark:text-slate-400">
-                      Development Time
-                    </h4>
-                    <div className="flex items-center gap-2">
-                      <Clock className="h-4 w-4 text-orange-500" />
-                      <p className="font-medium dark:text-white">
-                        {page.data.development_time || ""}
-                      </p>
-                    </div>
+                <DetailSection
+                  title="My Role & Contribution"
+                  icon={IconGitBranch}
+                >
+                  <div className="prose prose-neutral dark:prose-invert prose-p:text-muted-foreground prose-p:leading-8 max-w-none">
+                    <PrismicRichText field={page.data.role_contribution} />
                   </div>
+                </DetailSection>
 
-                  <div>
-                    <h4 className="text-muted-foreground mb-1 text-sm font-medium dark:text-slate-400">
-                      Current Status
-                    </h4>
-                    <div className="flex items-center gap-2">
-                      {page.data.current_status?.trim() ===
-                        "Active Development" && (
-                        <>
-                          <span className="relative flex h-3 w-3">
-                            <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-500 opacity-75" />
-                            <span className="relative inline-flex h-3 w-3 rounded-full bg-emerald-500/80" />
-                          </span>
-                          <p className="font-medium dark:text-white">
-                            {page.data.current_status}
-                          </p>
-                        </>
-                      )}
+                <DetailSection
+                  title="Technical Challenges & Solutions"
+                  icon={IconChecks}
+                >
+                  <ul className="text-muted-foreground grid gap-3">
+                    {page.data.challenges?.map((item, index) => (
+                      <li key={index} className="flex gap-3">
+                        <IconCircleCheck className="text-primary mt-1 size-3.5 shrink-0" />
+                        <span>{item.challenges || ""}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </DetailSection>
 
-                      {page.data.current_status?.trim() === "Completed" && (
-                        <>
-                          <span className="relative flex h-3 w-3">
-                            <span className="relative inline-flex h-3 w-3 rounded-full bg-emerald-400" />
-                          </span>
-                          <p className="font-medium text-emerald-500">
-                            {page.data.current_status}
-                          </p>
-                        </>
-                      )}
-                    </div>
-                  </div>
-
-                  <div>
-                    <h4 className="text-muted-foreground mb-1 text-sm font-medium dark:text-slate-400">
-                      Key Achievement
-                    </h4>
-                    <p className="font-medium dark:text-white">
-                      {page.data.key_achievement || ""}
-                    </p>
-                  </div>
-                </div>
-              </div>
-
-              {/* Development Timeline */}
-              <div className="dark:bg-card/80 mb-6 rounded-lg border-[0.5px] border-zinc-400 bg-white/20 p-6 dark:border-slate-800">
-                <h3 className="text-foreground mb-4 text-lg font-medium dark:text-white">
-                  Development Timeline
-                </h3>
-                <div className="space-y-6">
-                  {timeline.map((item, index) => (
-                    <div key={index} className="relative pb-6 pl-6 last:pb-0">
-                      {index < timeline.length - 1 && (
-                        <div className="absolute top-8 left-2.75 h-full w-px bg-violet-900/50"></div>
-                      )}
+                <DetailSection title="Key Features" icon={IconStack2}>
+                  <div className="grid grid-cols-1 gap-3 md:grid-cols-2">
+                    {page.data.key_features?.map((item, index) => (
                       <div
-                        className={`absolute top-1 -left-1 flex h-8 w-8 items-center justify-center rounded-full ${item.bgColor} ${item.textColor}`}
+                        key={index}
+                        className="text-muted-foreground flex gap-3"
                       >
-                        {item.icon}
+                        <IconCircleCheck className="text-primary mt-1 size-3.5 shrink-0" />
+                        <span>{item.features || ""}</span>
                       </div>
-                      <div className="ml-4">
-                        <h4 className={`text-sm font-medium ${item.textColor}`}>
-                          {item.status}
-                        </h4>
-                        <p className="font-medium dark:text-white">
-                          {item.date}
-                        </p>
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              </div>
+                    ))}
+                  </div>
+                </DetailSection>
 
-              {/* Tags */}
-              <div className="dark:bg-card/80 rounded-lg border-[0.5px] border-zinc-400 bg-white/20 p-6 dark:border-slate-800">
-                <h3 className="text-foreground mb-4 text-lg font-medium">
-                  Tags
-                </h3>
-                <div className="flex flex-wrap gap-2">
-                  {page.tags.map((tag) => (
-                    <div
-                      key={tag}
-                      className="inline-flex items-center gap-1 rounded-full bg-[#131a41] px-2 py-1 text-xs font-medium text-white transition-colors duration-300 hover:text-violet-200"
-                    >
-                      <Tag className="h-3 w-3" />
-                      {tag}
+                <DetailSection title="Technical Details" icon={IconCode}>
+                  <div className="flex flex-col gap-8">
+                    <div className="flex flex-col gap-3">
+                      <h3 className="font-heading text-foreground text-base font-medium">
+                        Technology Stack
+                      </h3>
+                      <div className="flex flex-wrap gap-2">
+                        {page.data.tech_stack.map((tech, index) => (
+                          <TechBadge
+                            key={index}
+                            color={tech.color}
+                            name={tech.name}
+                          />
+                        ))}
+                      </div>
                     </div>
-                  ))}
-                </div>
-              </div>
-            </div>
+
+                    <div className="flex flex-col gap-3">
+                      <h3 className="font-heading text-foreground text-base font-medium">
+                        Key Results & Impact
+                      </h3>
+                      <div className="prose prose-neutral dark:prose-invert prose-li:text-muted-foreground max-w-none">
+                        <PrismicRichText
+                          field={page.data.key_results}
+                          components={{
+                            listItem: ({ children }) => (
+                              <li className="flex gap-3">
+                                <IconCircleCheck className="text-primary mt-1 size-3.5 shrink-0" />
+                                <span>{children}</span>
+                              </li>
+                            ),
+                          }}
+                        />
+                      </div>
+                    </div>
+                  </div>
+                </DetailSection>
+              </CardContent>
+            </Card>
           </div>
-        </div>
-      </div>
 
-      {/* Cta */}
-      <Bounded
-        as="section"
-        className="dark:bg-card/80 mb-20 rounded-xl border-[0.5px] border-zinc-400 bg-white/20 dark:border-slate-800/50"
-      >
-        <div className="mx-auto max-w-3xl text-center">
-          <h2 className="text-foreground mb-4 text-2xl font-bold md:text-3xl">
-            Ready to Build Your Own Project?
-          </h2>
-          <p className="mb-8 dark:text-slate-300">
-            Let&apos;s discuss how I can help you bring your vision to life with
-            custom development solutions.
-          </p>
-          <div className="flex flex-wrap justify-center gap-4">
-            <Link href="/contact">
-              <Button className="bg-linear-to-r from-purple-600 to-purple-800 text-white hover:from-purple-700 hover:to-purple-600">
-                Start a Conversation
-              </Button>
-            </Link>
-            <Link href="/services">
-              <Button
-                variant="outline"
-                className="border-slate-700 hover:bg-slate-800 hover:text-white dark:border-slate-300 dark:text-slate-300"
+          <aside className="lg:col-span-4">
+            <div className="sticky top-24 flex flex-col gap-6">
+              <Card
+                size="sm"
+                className="bg-opacity-80 ring-foreground/5 shadow-sm"
               >
-                View Services
-              </Button>
-            </Link>
-          </div>
-        </div>
-      </Bounded>
+                <CardHeader>
+                  <CardTitle>Project Links</CardTitle>
+                </CardHeader>
+                <CardContent className="flex flex-col gap-3">
+                  {isFilled.link(page.data.view_live) && (
+                    <Button asChild className="w-full justify-between">
+                      <PrismicNextLink field={page.data.view_live}>
+                        View Live Demo
+                        <IconExternalLink data-icon="inline-end" />
+                      </PrismicNextLink>
+                    </Button>
+                  )}
 
-      <div className="my-16">
+                  {isFilled.link(page.data.source_code) && (
+                    <Button
+                      asChild
+                      variant="outline"
+                      className="w-full justify-between"
+                    >
+                      <PrismicNextLink field={page.data.source_code}>
+                        View Source Code
+                        <IconBrandGithub data-icon="inline-end" />
+                      </PrismicNextLink>
+                    </Button>
+                  )}
+                </CardContent>
+              </Card>
+
+              <Card
+                size="sm"
+                className="bg-opacity-80 ring-foreground/5 shadow-sm"
+              >
+                <CardHeader>
+                  <CardTitle>Project Details</CardTitle>
+                </CardHeader>
+                <CardContent className="flex flex-col gap-5">
+                  <div className="flex flex-col gap-1">
+                    <span className="text-muted-foreground text-sm font-medium">
+                      Development Time
+                    </span>
+                    <span className="inline-flex items-center gap-2 font-medium">
+                      <IconClock className="text-primary size-4" />
+                      {page.data.development_time || ""}
+                    </span>
+                  </div>
+
+                  <Separator />
+
+                  <div className="flex flex-col gap-1">
+                    <span className="text-muted-foreground text-sm font-medium">
+                      Current Status
+                    </span>
+                    <StatusIndicator status={page.data.current_status} />
+                  </div>
+
+                  <Separator />
+
+                  <div className="flex flex-col gap-1">
+                    <span className="text-muted-foreground text-sm font-medium">
+                      Key Achievement
+                    </span>
+                    <span className="font-medium">
+                      {page.data.key_achievement || ""}
+                    </span>
+                  </div>
+                </CardContent>
+              </Card>
+
+              <Card
+                size="sm"
+                className="bg-opacity-80 ring-foreground/5 shadow-sm"
+              >
+                <CardHeader>
+                  <CardTitle>Development Timeline</CardTitle>
+                </CardHeader>
+                <CardContent className="flex flex-col gap-6">
+                  {timeline.map((item, index) => {
+                    const Icon = item.icon;
+
+                    return (
+                      <div key={index} className="relative flex gap-4">
+                        {index < timeline.length - 1 && (
+                          <div className="bg-border absolute top-9 left-4 h-full w-px" />
+                        )}
+                        <div className="bg-primary/10 text-primary relative flex size-8 shrink-0 items-center justify-center rounded-full">
+                          <Icon className="size-4" />
+                        </div>
+                        <div className="flex flex-col">
+                          <span className="text-muted-foreground text-sm font-medium">
+                            {item.status}
+                          </span>
+                          <span className="font-medium">{item.date}</span>
+                        </div>
+                      </div>
+                    );
+                  })}
+                </CardContent>
+              </Card>
+
+              {page.tags.length > 0 && (
+                <Card
+                  size="sm"
+                  className="bg-opacity-80 ring-foreground/5 shadow-sm"
+                >
+                  <CardHeader>
+                    <CardTitle>Tags</CardTitle>
+                  </CardHeader>
+                  <CardContent className="flex flex-wrap gap-2">
+                    {page.tags.map((tag) => (
+                      <Badge key={tag} variant="secondary">
+                        <IconTag data-icon="inline-start" />
+                        {tag}
+                      </Badge>
+                    ))}
+                  </CardContent>
+                </Card>
+              )}
+            </div>
+          </aside>
+        </div>
+
+        <Card className="bg-opacity-80 ring-foreground/5 mb-20 shadow-sm backdrop-blur">
+          <CardContent className="mx-auto flex max-w-3xl flex-col items-center gap-6 p-8 text-center md:p-10">
+            <div className="bg-primary/10 text-primary flex size-12 items-center justify-center rounded-2xl">
+              <IconRocket className="size-6" />
+            </div>
+            <div className="flex flex-col gap-3">
+              <h2 className="font-heading text-2xl font-semibold text-balance md:text-3xl">
+                Ready to Build Your Own Project?
+              </h2>
+              <p className="text-muted-foreground leading-7">
+                Let&apos;s discuss how I can help you bring your vision to life
+                with thoughtful product engineering.
+              </p>
+            </div>
+            <div className="flex flex-wrap justify-center gap-3">
+              <Button asChild>
+                <Link href="/contact">
+                  Start a Conversation
+                  <IconBriefcase data-icon="inline-end" />
+                </Link>
+              </Button>
+              <Button asChild variant="outline">
+                <Link href="/services">View Services</Link>
+              </Button>
+            </div>
+          </CardContent>
+        </Card>
+
         <RelatedProjects tags={page.tags} />
-      </div>
-    </Bounded>
+      </Bounded>
+    </main>
   );
 }
 

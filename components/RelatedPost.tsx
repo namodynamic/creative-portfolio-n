@@ -1,17 +1,35 @@
 import * as Prismic from "@prismicio/client";
-import { createClient } from "@/prismicio";
+import { isFilled } from "@prismicio/client";
+import {
+  IconArrowRight,
+  IconCalendar,
+  IconSparkles,
+} from "@tabler/icons-react";
 import Image from "next/image";
 import Link from "next/link";
+
+import { Badge } from "@/components/ui/badge";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+import { createClient } from "@/prismicio";
 import { formatDate } from "@/utils/FormatDate";
 import { extractFirstParagraphFromSlices } from "@/utils/extractSliceText";
 
-type TagPageProps = {
-  params: { tag: string };
+type RelatedPostsProps = {
+  tag: string;
+  currentUid?: string;
 };
 
-export default async function RelatedPosts({ params }: TagPageProps) {
+export default async function RelatedPosts({
+  tag,
+  currentUid,
+}: RelatedPostsProps) {
   const client = createClient();
-  const { tag } = params;
 
   if (!tag) return null;
 
@@ -20,53 +38,77 @@ export default async function RelatedPosts({ params }: TagPageProps) {
     orderings: [
       { field: "document.first_publication_date", direction: "desc" },
     ],
-    pageSize: 3,
+    pageSize: 4,
   });
 
-  if (!relatedPosts.results.length) return null;
+  const posts = relatedPosts.results
+    .filter((post) => post.uid !== currentUid)
+    .slice(0, 3);
+
+  if (!posts.length) return null;
 
   return (
-    <div className="mt-12">
-      <h2 className="text-foreground mb-6 text-2xl font-bold dark:text-white">
-        Related Posts
-      </h2>
-      <div className="grid grid-cols-1 gap-6 md:grid-cols-3">
-        {relatedPosts.results.map((post) => {
-          const formattedDate = formatDate(post.data.date);
+    <section className="mt-12 flex flex-col gap-6">
+      <div className="flex flex-col gap-2">
+        <Badge variant="secondary">
+          <IconSparkles data-icon="inline-start" />
+          Keep reading
+        </Badge>
+        <h2 className="font-heading text-foreground text-2xl font-semibold text-balance md:text-3xl">
+          Related Posts
+        </h2>
+        <p className="text-muted-foreground max-w-2xl text-sm leading-7">
+          More notes and guides connected to this topic.
+        </p>
+      </div>
 
+      <div className="grid grid-cols-1 gap-6 md:grid-cols-3">
+        {posts.map((post) => {
+          const formattedDate = formatDate(post.data.date);
           const firstParagraph = extractFirstParagraphFromSlices(
             post.data.slices,
           );
 
           return (
-            <Link
-              key={post.id}
-              href={`/blog/${post.uid}`}
-              className="group dark:bg-card/80 overflow-hidden rounded-xl border border-zinc-400 bg-white/20 shadow-xl backdrop-blur-sm transition-transform hover:-translate-y-1 dark:border-slate-800"
-            >
-              <div className="relative h-40 w-full overflow-hidden">
-                <Image
-                  src={post.data.hover_image?.url || ""}
-                  alt={post.data.title || "Blog Post"}
-                  fill
-                  className="object-fill transition-transform group-hover:scale-105"
-                />
-              </div>
-              <div className="p-4">
-                <p className="mb-2 text-xs text-black/80 dark:text-gray-400">
-                  {formattedDate}
-                </p>
-                <h3 className="mb-2 font-bold transition-colors group-hover:text-black/50 dark:text-white dark:group-hover:text-purple-400">
-                  {post.data.title}
-                </h3>
-                <p className="line-clamp-3 text-sm text-black/80 dark:text-gray-400">
-                  {post.data.excerpt || firstParagraph}
-                </p>
-              </div>
+            <Link key={post.id} href={`/blog/${post.uid}`} className="group">
+              <Card
+                size="sm"
+                className="bg-opacity-80 ring-foreground/5 h-full pt-0! shadow-sm transition-transform group-hover:-translate-y-1"
+              >
+                {isFilled.image(post.data.hover_image) && (
+                  <div className="bg-muted relative aspect-16/10 overflow-hidden">
+                    <Image
+                      src={post.data.hover_image.url}
+                      alt={post.data.title || "Blog post"}
+                      fill
+                      className="object-cover transition-transform duration-500 group-hover:scale-105"
+                      sizes="(min-width: 768px) 33vw, 100vw"
+                    />
+                  </div>
+                )}
+                <CardHeader>
+                  <CardDescription className="inline-flex items-center gap-1.5">
+                    <IconCalendar className="size-3.5" />
+                    {formattedDate}
+                  </CardDescription>
+                  <CardTitle className="group-hover:text-primary transition-colors">
+                    {post.data.title}
+                  </CardTitle>
+                </CardHeader>
+                <CardContent className="flex flex-col gap-4">
+                  <p className="text-muted-foreground line-clamp-3 text-sm leading-7">
+                    {post.data.excerpt || firstParagraph}
+                  </p>
+                  <span className="text-primary inline-flex items-center gap-1 text-sm font-medium">
+                    Read post
+                    <IconArrowRight className="size-4 transition-transform group-hover:translate-x-0.5" />
+                  </span>
+                </CardContent>
+              </Card>
             </Link>
           );
         })}
       </div>
-    </div>
+    </section>
   );
 }

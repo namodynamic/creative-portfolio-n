@@ -19,10 +19,10 @@
             "placeholder": ""
           }
         },
-        "sub_heading": {
+        "eyebrow": {
           "type": "Text",
           "config": {
-            "label": "Sub Heading",
+            "label": "Eyebrow",
             "placeholder": "Academic Journey"
           }
         },
@@ -31,6 +31,105 @@
           "config": {
             "label": "Intro",
             "placeholder": ""
+          }
+        },
+        "subsection_heading": {
+          "type": "Text",
+          "config": {
+            "label": "Subsection Heading",
+            "placeholder": ""
+          }
+        },
+        "subsection_intro": {
+          "type": "Text",
+          "config": {
+            "label": "Subsection Intro",
+            "placeholder": ""
+          }
+        },
+        "certifications": {
+          "type": "Group",
+          "config": {
+            "label": "Certifications",
+            "repeat": true,
+            "fields": {
+              "title": {
+                "type": "Text",
+                "config": {
+                  "label": "Title",
+                  "placeholder": ""
+                }
+              },
+              "time_period": {
+                "type": "Text",
+                "config": {
+                  "label": "Time Period",
+                  "placeholder": "e.g. 2026"
+                }
+              },
+              "credential_url": {
+                "type": "Link",
+                "config": {
+                  "label": "Credential Url",
+                  "placeholder": "",
+                  "select": null,
+                  "allowTargetBlank": true,
+                  "allowText": false,
+                  "repeat": false
+                }
+              },
+              "issuer": {
+                "type": "Text",
+                "config": {
+                  "label": "Issuer",
+                  "placeholder": "e.g. coursera"
+                }
+              },
+              "description": {
+                "type": "Text",
+                "config": {
+                  "label": "Description",
+                  "placeholder": ""
+                }
+              },
+              "background_image": {
+                "type": "Image",
+                "config": {
+                  "label": "Background Image",
+                  "constraint": {},
+                  "thumbnails": []
+                }
+              },
+              "hover_image": {
+                "type": "Image",
+                "config": {
+                  "label": "Hover Image",
+                  "constraint": {},
+                  "thumbnails": []
+                }
+              },
+              "icon_name": {
+                "type": "Select",
+                "config": {
+                  "label": "Icon Name",
+                  "placeholder": "",
+                  "options": [
+                    "certificate",
+                    "database",
+                    "code",
+                    "users",
+                    "trending",
+                    "globe",
+                    "brain",
+                    "computer",
+                    "server",
+                    "award",
+                    "zap"
+                  ],
+                  "default_value": "certificate"
+                }
+              }
+            }
           }
         }
       },

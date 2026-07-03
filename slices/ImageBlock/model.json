@@ -19,6 +19,26 @@
             "constraint": {},
             "thumbnails": []
           }
+        },
+        "caption": {
+          "type": "Text",
+          "config": {
+            "label": "Caption",
+            "placeholder": ""
+          }
+        },
+        "width": {
+          "type": "Select",
+          "config": {
+            "label": "Width",
+            "placeholder": "",
+            "options": [
+              "Contained",
+              "Wide",
+              "Full Bleed"
+            ],
+            "default_value": "Contained"
+          }
         }
       },
       "items": {}

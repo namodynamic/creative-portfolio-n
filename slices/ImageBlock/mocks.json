@@ -4,7 +4,6 @@
 		"variation": "default",
 		"primary": {
 			"image": {
-				"__TYPE__": "ImageContent",
 				"origin": {
 					"id": "main",
 					"url": "https://images.unsplash.com/photo-1493119508027-2b584f234d6c",
@@ -22,7 +21,20 @@
 					},
 					"background": "transparent"
 				},
+				"credits": null,
+				"alt": null,
+				"__TYPE__": "ImageContent",
 				"thumbnails": {}
+			},
+			"caption": {
+				"__TYPE__": "FieldContent",
+				"value": "share",
+				"type": "Text"
+			},
+			"width": {
+				"__TYPE__": "FieldContent",
+				"value": "Contained",
+				"type": "Select"
 			}
 		},
 		"items": []

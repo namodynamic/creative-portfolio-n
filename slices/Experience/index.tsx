@@ -1,113 +1,113 @@
-"use client";
-
 import Bounded from "@/components/Bounded";
-import Heading from "@/components/Heading";
-import { Content } from "@prismicio/client";
+import SectionHeader from "@/components/SectionHeader";
+import { Badge } from "@/components/ui/badge";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+import { Content, isFilled } from "@prismicio/client";
 import { PrismicNextImage } from "@prismicio/next";
 import { PrismicRichText, SliceComponentProps } from "@prismicio/react";
-import { useTheme } from "next-themes";
-import { Briefcase } from "lucide-react";
-
 import {
-  VerticalTimeline,
-  VerticalTimelineElement,
-} from "react-vertical-timeline-component";
-import "react-vertical-timeline-component/style.min.css";
+  IconBriefcase,
+  IconCalendar,
+  IconCircleCheck,
+} from "@tabler/icons-react";
 
 import type { JSX } from "react";
 
 export type ExperienceProps = SliceComponentProps<Content.ExperienceSlice>;
 
 const Experience = ({ slice }: ExperienceProps): JSX.Element => {
-  const { resolvedTheme } = useTheme();
-  const isDark = resolvedTheme === "dark";
-
-  const dynamicLinearGradient = slice.items
-    .map(
-      (item, index) =>
-        `${item.icon_bg || "#1d1d2f"} ${25 + (index / slice.items.length) * 75}%`,
-    )
-    .join(", ");
-
-  const linearGradient = `linear-gradient(0deg, rgba(145, 40, 207, 0) 0%, ${dynamicLinearGradient})`;
-
   return (
     <Bounded
       as="section"
       data-slice-type={slice.slice_type}
       data-slice-variation={slice.variation}
-      className="max-md:-mt-20"
+      className="pt-0"
     >
-      <div className="text-primary-foreground mb-6 inline-flex w-fit items-center gap-2 rounded-full bg-slate-950 px-4 py-2 text-sm text-nowrap md:text-base dark:bg-slate-900">
-        <Briefcase className="text-primary-foreground h-5 w-5" />
-        <p className="text-primary-foreground text-sm font-medium dark:text-slate-300">
-          {slice.primary.sub_heading}
-        </p>
-      </div>
-      <Heading as="h2" size="md" className="max-md:text-5xl">
-        {slice.primary.heading}
-      </Heading>
+      <SectionHeader
+        eyebrow={slice.primary.sub_heading}
+        title={slice.primary.heading}
+        description={slice.primary.intro}
+        icon={<IconBriefcase data-icon="inline-start" className="size-3.5" />}
+      />
 
-      <div className="prose prose-base prose-invert text-foreground lg:prose-xl col-start-1 mt-5 dark:text-slate-300">
-        <p>{slice.primary.intro}</p>
-      </div>
+      <div className="relative mt-12 grid gap-5 lg:mt-14">
+        <div className="bg-border absolute top-4 bottom-4 left-5 hidden w-px md:block" />
 
-      <div className="mt-8 flex place-items-start sm:mt-16">
-        <VerticalTimeline layout="1-column-left" lineColor={linearGradient}>
-          {slice.items
-            .slice()
-            .reverse()
-            .map((item, index) => (
-              <VerticalTimelineElement
-                key={index}
-                date={item.time_period ? item.time_period : ""}
-                icon={
-                  <div className="flex h-full w-full items-center justify-center">
+        {slice.items
+          .slice()
+          .reverse()
+          .map((item, index) => (
+            <article
+              key={`${item.company}-${item.time_period}-${index}`}
+              className="relative grid gap-4 md:grid-cols-[2.5rem_minmax(0,1fr)]"
+            >
+              <div className="relative z-10 hidden md:flex">
+                <div
+                  className="bg-card ring-background flex size-10 items-center justify-center rounded-full ring-4"
+                  style={{
+                    borderColor: item.icon_bg || undefined,
+                    borderWidth: item.icon_bg ? 1 : undefined,
+                  }}
+                >
+                  {isFilled.image(item.icon) ? (
                     <PrismicNextImage
                       field={item.icon}
-                      className="h-[100%] w-[100%] rounded-full object-contain"
+                      className="size-7 rounded-full object-contain"
+                    />
+                  ) : (
+                    <IconBriefcase className="text-muted-foreground size-5" />
+                  )}
+                </div>
+              </div>
+
+              <Card
+                size="sm"
+                className="bg-opacity-80 hover:bg-card transition-colors duration-500"
+              >
+                <CardHeader className="gap-3">
+                  <div className="flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between">
+                    <div className="min-w-0 space-y-1">
+                      <CardTitle>{item.title}</CardTitle>
+                      <CardDescription>{item.company}</CardDescription>
+                    </div>
+
+                    {item.time_period && (
+                      <Badge variant="outline">
+                        <IconCalendar data-icon="inline-start" />
+                        {item.time_period}
+                      </Badge>
+                    )}
+                  </div>
+                </CardHeader>
+
+                <CardContent>
+                  <div className="text-muted-foreground space-y-3 text-sm leading-7 md:text-base">
+                    <PrismicRichText
+                      field={item.description}
+                      components={{
+                        paragraph: ({ children }) => <p>{children}</p>,
+                        list: ({ children }) => (
+                          <ul className="grid gap-3">{children}</ul>
+                        ),
+                        listItem: ({ children }) => (
+                          <li className="flex gap-3">
+                            <IconCircleCheck className="mt-2 size-3 shrink-0" />
+                            <span>{children}</span>
+                          </li>
+                        ),
+                      }}
                     />
                   </div>
-                }
-                iconStyle={{
-                  background: item.icon_bg ? item.icon_bg : "#1d1d2f",
-                  color: "#708090",
-                  border: `4px solid ${item.icon_bg}`,
-                  borderStyle: "solid",
-                  boxShadow: "none",
-                }}
-                contentStyle={{
-                  background: isDark
-                    ? "rgba(17,25,40,0.125)"
-                    : "rgba(240,245,255,0.125)",
-                  color: isDark ? "#ffffff" : "#000000",
-                  border: "0.2px solid rgba(255, 255, 255, 0.11)",
-                  borderRadius: "12px",
-                  borderStyle: "solid",
-                  boxShadow: `${item.icon_bg} 0px 0.3px 0.3px 0px`,
-                }}
-                contentArrowStyle={{
-                  borderRight: `10px solid  ${item.icon_bg}`,
-                }}
-                className="vertical-timeline-element--work"
-              >
-                <div>
-                  <h3 className="text-foreground text-[24px] font-bold dark:text-white">
-                    {item.title}
-                  </h3>
-                  <p
-                    className="text-base font-semibold text-black/80 dark:text-slate-300"
-                    style={{ margin: 0 }}
-                  >
-                    {item.company}
-                  </p>
-                </div>
-                <div className="prose prose-base prose-invert lg:prose-lg text-black dark:text-slate-400">
-                  <PrismicRichText field={item.description} />
-                </div>
-              </VerticalTimelineElement>
-            ))}
-        </VerticalTimeline>
+                </CardContent>
+              </Card>
+            </article>
+          ))}
       </div>
     </Bounded>
   );

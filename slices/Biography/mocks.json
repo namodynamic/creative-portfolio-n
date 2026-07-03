@@ -8,17 +8,6 @@
 				"value": "cell",
 				"type": "Text"
 			},
-			"description": {
-				"__TYPE__": "StructuredTextContent",
-				"value": [
-					{
-						"type": "paragraph",
-						"content": {
-							"text": "Nostrud labore enim dolor pariatur in est sit veniam dolor laborum. Est id cillum ut."
-						}
-					}
-				]
-			},
 			"button_text": {
 				"__TYPE__": "FieldContent",
 				"value": "lucky",
@@ -54,6 +43,17 @@
 				"alt": null,
 				"__TYPE__": "ImageContent",
 				"thumbnails": {}
+			},
+			"bio_body": {
+				"__TYPE__": "StructuredTextContent",
+				"value": [
+					{
+						"type": "paragraph",
+						"content": {
+							"text": "Laboris ex in amet amet ex aute pariatur sint amet. Ad ut ut laboris officia anim nisi excepteur. Adipisicing ex occaecat dolore aliquip sunt tempor ut amet anim dolor sint consectetur aliqua."
+						}
+					}
+				]
 			}
 		},
 		"items": []

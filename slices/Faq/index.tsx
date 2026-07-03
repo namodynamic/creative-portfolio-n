@@ -1,11 +1,17 @@
 "use client";
 
-import { FC, useState } from "react";
+import type { FC } from "react";
+import { useMemo, useState } from "react";
 import { Content } from "@prismicio/client";
-import { SliceComponentProps, PrismicRichText } from "@prismicio/react";
+import { PrismicRichText, SliceComponentProps } from "@prismicio/react";
+import {
+  IconArrowRight,
+  IconHelpCircle,
+  IconHelpHexagon,
+  IconMessages,
+} from "@tabler/icons-react";
 import Link from "next/link";
-import { ArrowRight } from "lucide-react";
-import MagicButton from "@/components/ui/MagicButton";
+
 import Bounded from "@/components/Bounded";
 import {
   Accordion,
@@ -13,176 +19,185 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
+import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
+import { Card, CardContent } from "@/components/ui/card";
 
-/**
- * Props for `Faq`.
- */
 export type FaqProps = SliceComponentProps<Content.FaqSlice>;
 
-/**
- * Component for "Faq" Slices.
- */
-const Faq: FC<FaqProps> = ({ slice }) => {
-  const [activeCategory, setActiveCategory] = useState("services");
+type CategoryId = "services" | "process" | "pricing" | "support";
+type FaqCategory = {
+  id: CategoryId;
+  label: string;
+};
 
-  const categories = slice.primary.faq_categories.map((item) => ({
-    id: item.category_id,
-    label: item.category_label,
-  }));
+const categoryTitles = {
+  services: "Services & Expertise",
+  process: "Development Process",
+  pricing: "Pricing & Payment",
+  support: "Support & Maintenance",
+} satisfies Record<CategoryId, string>;
+
+function isCategoryId(value: string | null | undefined): value is CategoryId {
+  return (
+    value === "services" ||
+    value === "process" ||
+    value === "pricing" ||
+    value === "support"
+  );
+}
+
+function FaqAnswer({
+  field,
+}: {
+  field:
+    | Content.FaqSliceDefaultPrimaryServicesItem["answer"]
+    | Content.FaqSliceDefaultPrimaryProcessItem["answer"]
+    | Content.FaqSliceDefaultPrimaryPricingItem["answer"]
+    | Content.FaqSliceDefaultPrimarySupportItem["answer"];
+}) {
+  return (
+    <div className="prose prose-neutral dark:prose-invert prose-p:text-muted-foreground prose-p:leading-7 prose-li:text-muted-foreground max-w-none">
+      <PrismicRichText field={field} />
+    </div>
+  );
+}
+
+const Faq: FC<FaqProps> = ({ slice }) => {
+  const categories = useMemo<FaqCategory[]>(
+    () =>
+      slice.primary.faq_categories.reduce<FaqCategory[]>((items, item) => {
+        const categoryId = item.category_id;
+
+        if (!isCategoryId(categoryId)) return items;
+
+        items.push({
+          id: categoryId,
+          label: item.category_label || categoryTitles[categoryId],
+        });
+
+        return items;
+      }, []),
+    [slice.primary.faq_categories],
+  );
+
+  const [activeCategory, setActiveCategory] = useState<CategoryId>(
+    categories[0]?.id ?? "services",
+  );
+
+  const activeItems =
+    {
+      services: slice.primary.services,
+      process: slice.primary.process,
+      pricing: slice.primary.pricing,
+      support: slice.primary.support,
+    }[activeCategory] ?? [];
+
+  const activeTitle = categoryTitles[activeCategory];
 
   return (
     <Bounded
       data-slice-type={slice.slice_type}
       data-slice-variation={slice.variation}
       as="section"
+      className="mt-8 sm:mt-10 md:mt-20"
     >
-      <div className="mx-auto max-w-5xl py-8 md:py-16">
-        <div className="mb-12 text-center">
-          <p className="mb-2 text-sm tracking-wider uppercase dark:text-slate-300">
-            {slice.primary.heading}
-          </p>
-          <h1 className="text-foreground mb-4 text-4xl font-bold md:text-5xl dark:text-white">
+      <div className="mx-auto flex max-w-5xl flex-col gap-12">
+        <div className="mx-auto flex max-w-3xl flex-col items-center gap-4 text-center">
+          {slice.primary.heading && (
+            <Badge variant="secondary" className="w-fit">
+              <IconHelpHexagon data-icon="inline-start" />
+              {slice.primary.heading}
+            </Badge>
+          )}
+
+          <h1 className="font-heading text-foreground text-3xl leading-tight font-semibold text-balance md:text-5xl">
             {slice.primary.sub_heading}
           </h1>
-          <p className="mx-auto mt-4 max-w-2xl text-lg text-black/80 dark:text-gray-300">
-            {slice.primary.intro}
-          </p>
+
+          {slice.primary.intro && (
+            <p className="text-muted-foreground text-base leading-8 md:text-lg">
+              {slice.primary.intro}
+            </p>
+          )}
         </div>
 
-        {/* Category Tabs */}
-        <div className="mb-12 flex flex-wrap justify-center gap-2">
-          {categories.map((category) => (
-            <button
-              key={category.id}
-              onClick={() => setActiveCategory(category.id || "default")}
-              className={`rounded-md px-6 py-3 text-sm font-medium transition-all ${
-                activeCategory === category.id
-                  ? "bg-purple-600 text-white"
-                  : "bg-black/50 text-gray-300 hover:text-white dark:bg-[#0a0e29]/50 dark:hover:bg-[#0a0e29]"
-              }`}
+        {categories.length > 0 && (
+          <div className="flex flex-wrap justify-center gap-2">
+            {categories.map((category) => (
+              <Button
+                key={category.id}
+                type="button"
+                variant={activeCategory === category.id ? "default" : "outline"}
+                size="sm"
+                onClick={() => setActiveCategory(category.id)}
+              >
+                {category.label}
+              </Button>
+            ))}
+          </div>
+        )}
+
+        <Card className="bg-opacity-80 ring-foreground/5 shadow-sm">
+          <CardContent className="flex flex-col gap-6 p-5 md:p-8">
+            <div className="flex flex-col gap-2 md:flex-row md:items-center md:justify-between">
+              <div className="flex items-center gap-3">
+                <div className="bg-primary/10 text-primary flex size-10 items-center justify-center rounded-xl">
+                  <IconHelpCircle className="size-5" />
+                </div>
+                <div className="flex flex-col">
+                  <h2 className="font-heading text-2xl font-semibold">
+                    {activeTitle}
+                  </h2>
+                </div>
+              </div>
+            </div>
+
+            <Accordion
+              type="single"
+              collapsible
+              className="flex flex-col gap-3"
             >
-              {category.label}
-            </button>
-          ))}
-        </div>
+              {activeItems.map((item, index) => (
+                <AccordionItem
+                  key={index}
+                  value={`${activeCategory}-${index}`}
+                  className="bg-background/60 ring-foreground/10 rounded-xl px-5 shadow-sm ring-1"
+                >
+                  <AccordionTrigger className="text-left text-base font-medium">
+                    {item.question}
+                  </AccordionTrigger>
+                  <AccordionContent>
+                    <FaqAnswer field={item.answer} />
+                  </AccordionContent>
+                </AccordionItem>
+              ))}
+            </Accordion>
+          </CardContent>
+        </Card>
 
-        {/* FAQ Content */}
-        <div className="mb-16">
-          {activeCategory === "services" && (
-            <>
-              <h2 className="mb-6 text-2xl font-bold text-purple-600">
-                Services & Expertise
+        <Card className="bg-opacity-80 ring-foreground/5 shadow-sm">
+          <CardContent className="mx-auto flex max-w-3xl flex-col items-center gap-6 p-8 text-center md:p-10">
+            <div className="bg-primary/10 text-primary flex size-12 items-center justify-center rounded-2xl">
+              <IconMessages className="size-6" />
+            </div>
+            <div className="flex flex-col gap-3">
+              <h2 className="font-heading text-2xl font-semibold text-balance md:text-3xl">
+                Still Have Questions?
               </h2>
-              <Accordion type="single" collapsible className="space-y-4">
-                {slice.primary.services.map((item, index) => (
-                  <AccordionItem
-                    key={index}
-                    value={`item-${index}`}
-                    className="dark:bg-card/80 rounded-lg border-[0.5px] border-zinc-400 bg-white/20 px-6 shadow-lg backdrop-blur-sm dark:border-gray-800"
-                  >
-                    <AccordionTrigger className="text-lg font-medium">
-                      {item.question}
-                    </AccordionTrigger>
-                    <AccordionContent className="prose prose-base prose-invert text-black dark:text-slate-400">
-                      <PrismicRichText field={item.answer} />
-                    </AccordionContent>
-                  </AccordionItem>
-                ))}
-              </Accordion>
-            </>
-          )}
-          {activeCategory === "process" && (
-            <>
-              <h2 className="mb-6 text-2xl font-bold text-purple-600">
-                Development Process
-              </h2>
-              <Accordion type="single" collapsible className="space-y-4">
-                {slice.primary.process?.map((item, index) => (
-                  <AccordionItem
-                    key={index}
-                    value={`item-${index}`}
-                    className="dark:bg-card/80 rounded-lg border-[0.5px] border-zinc-400 bg-white/20 px-6 shadow-lg backdrop-blur-sm dark:border-gray-800"
-                  >
-                    <AccordionTrigger className="text-lg font-medium">
-                      {item.question}
-                    </AccordionTrigger>
-                    <AccordionContent className="prose prose-base prose-invert text-black dark:text-slate-400">
-                      <PrismicRichText field={item.answer} />
-                    </AccordionContent>
-                  </AccordionItem>
-                ))}
-              </Accordion>
-            </>
-          )}
-          {activeCategory === "pricing" && (
-            <>
-              <h2 className="mb-6 text-2xl font-bold text-purple-600">
-                Pricing & Payment
-              </h2>
-              <Accordion type="single" collapsible className="space-y-4">
-                {slice.primary.pricing?.map((item, index) => (
-                  <AccordionItem
-                    key={index}
-                    value={`item-${index}`}
-                    className="dark:bg-card/80 rounded-lg border-[0.5px] border-zinc-400 bg-white/20 px-6 shadow-lg backdrop-blur-sm dark:border-gray-800"
-                  >
-                    <AccordionTrigger className="text-lg font-medium">
-                      {item.question}
-                    </AccordionTrigger>
-                    <AccordionContent className="prose prose-base prose-invert text-black dark:text-slate-400">
-                      <PrismicRichText field={item.answer} />
-                    </AccordionContent>
-                  </AccordionItem>
-                ))}
-              </Accordion>
-            </>
-          )}
-          {activeCategory === "support" && (
-            <>
-              <h2 className="mb-6 text-2xl font-bold text-purple-600">
-                Support & Maintenance
-              </h2>
-              <Accordion type="single" collapsible className="space-y-4">
-                {slice.primary.support?.map((item, index) => (
-                  <AccordionItem
-                    key={index}
-                    value={`item-${index}`}
-                    className="dark:bg-card/80 rounded-lg border-[0.5px] border-zinc-400 bg-white/20 px-6 shadow-lg backdrop-blur-sm dark:border-gray-800"
-                  >
-                    <AccordionTrigger className="text-lg font-medium">
-                      {item.question}
-                    </AccordionTrigger>
-                    <AccordionContent className="prose prose-base prose-invert text-black dark:text-slate-400">
-                      <PrismicRichText field={item.answer} />
-                    </AccordionContent>
-                  </AccordionItem>
-                ))}
-              </Accordion>
-            </>
-          )}
-        </div>
-
-        {/* cta */}
-        <div className="dark:bg-card rounded-xl border-[0.5px] border-zinc-400 bg-white/20 p-8 text-center shadow-lg backdrop-blur-sm md:p-12 dark:border-gray-800">
-          <h2 className="text-foreground mb-4 text-2xl font-bold md:text-3xl">
-            Still Have Questions?
-          </h2>
-          <p className="mx-auto mb-8 max-w-2xl text-black/80 dark:text-gray-300">
-            If you couldn&apos;t find the answer you&apos;re looking for, feel
-            free to reach out directly and I&apos;ll be happy to help.
-          </p>
-
-          <Link href="/contact">
-            <MagicButton
-              title="Contact Me"
-              icon={
-                <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
-              }
-              position="right"
-              otherClasses="group"
-            />
-          </Link>
-        </div>
+              <p className="text-muted-foreground leading-7">
+                If you couldn&apos;t find the answer you&apos;re looking for,
+                reach out directly and I&apos;ll be happy to help.
+              </p>
+            </div>
+            <Button asChild>
+              <Link href="/contact">
+                Contact Me
+                <IconArrowRight data-icon="inline-end" />
+              </Link>
+            </Button>
+          </CardContent>
+        </Card>
       </div>
     </Bounded>
   );

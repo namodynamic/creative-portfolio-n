@@ -33,6 +33,27 @@
             "placeholder": ""
           }
         },
+        "form_title": {
+          "type": "Text",
+          "config": {
+            "label": "Form Title",
+            "placeholder": "e.g. Send a message"
+          }
+        },
+        "form_description": {
+          "type": "Text",
+          "config": {
+            "label": "Form Description",
+            "placeholder": ""
+          }
+        },
+        "form_cta_text": {
+          "type": "Text",
+          "config": {
+            "label": "Form Cta text",
+            "placeholder": ""
+          }
+        },
         "location": {
           "type": "Text",
           "config": {
@@ -47,6 +68,13 @@
             "placeholder": ""
           }
         },
+        "faq_title": {
+          "type": "Text",
+          "config": {
+            "label": "Faq Title",
+            "placeholder": ""
+          }
+        },
         "cta_title": {
           "type": "Text",
           "config": {
@@ -58,13 +86,6 @@
           "type": "Text",
           "config": {
             "label": "CTA Intro",
-            "placeholder": ""
-          }
-        },
-        "faq_title": {
-          "type": "Text",
-          "config": {
-            "label": "Faq Title",
             "placeholder": ""
           }
         },

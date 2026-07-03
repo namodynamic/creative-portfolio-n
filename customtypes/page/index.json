@@ -23,9 +23,6 @@
             "faq": {
               "type": "SharedSlice"
             },
-            "certifications": {
-              "type": "SharedSlice"
-            },
             "testimonial": {
               "type": "SharedSlice"
             },

@@ -1,140 +1,136 @@
 "use client";
 
 import Bounded from "@/components/Bounded";
+import CertificationCard, {
+  type CertificationCardItem,
+} from "@/components/CertificationCard";
+import SectionHeader from "@/components/SectionHeader";
 import { Content } from "@prismicio/client";
-import { SliceComponentProps } from "@prismicio/react";
-import TitleHeader from "@/components/TitleHeader";
-import { GraduationCap, BookOpen, Calendar, MapPin, Star } from "lucide-react";
+import { PrismicRichText, SliceComponentProps } from "@prismicio/react";
+import {
+  IconAward,
+  IconCalendar,
+  IconCertificate,
+  IconCircleCheck,
+  IconMapPin,
+  IconSchool,
+} from "@tabler/icons-react";
 import { Badge } from "@/components/ui/badge";
-import { Card, CardContent } from "@/components/ui/card";
-import { motion } from "framer-motion";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+import { motion } from "motion/react";
 
 import type { JSX } from "react";
-
-const listItemStyles = [
-  {
-    bg: "bg-gradient-to-r from-purple-50 to-pink-50 dark:from-purple-900/20 dark:to-pink-900/20",
-    border: "border-purple-100 dark:border-purple-800",
-    dot: "bg-purple-500",
-    text: "text-slate-700 dark:text-slate-300",
-  },
-  {
-    bg: "bg-gradient-to-r from-emerald-50 to-teal-50 dark:from-emerald-900/20 dark:to-teal-900/20",
-    border: "border-emerald-100 dark:border-emerald-800",
-    dot: "bg-emerald-500",
-    text: "text-slate-700 dark:text-slate-300",
-  },
-  {
-    bg: "bg-gradient-to-r from-blue-50 to-indigo-50 dark:from-blue-900/20 dark:to-indigo-900/20",
-    border: "border-border dark:border-border",
-    dot: "bg-blue-500",
-    text: "text-slate-700 dark:text-slate-300",
-  },
-];
 
 export type EducationProps = SliceComponentProps<Content.EducationSlice>;
 
 const Education = ({ slice }: EducationProps): JSX.Element => {
-  const renderStyledList = (field: any) => {
-    const items =
-      field?.filter((block: any) => block.type === "list-item") || [];
-    return (
-      <ul className="space-y-3">
-        {items.map((block: any, idx: number) => {
-          const style = listItemStyles[idx % listItemStyles.length];
-          return (
-            <li
-              key={idx}
-              className={`flex items-start gap-3 rounded-lg p-4 ${style.bg} ${style.border}`}
-            >
-              <div
-                className={`h-2 w-2 ${style.dot} mt-2 flex-shrink-0 rounded-full`}
-              ></div>
-              <p className={`${style.text} text-sm`}>{block.text}</p>
-            </li>
-          );
-        })}
-      </ul>
-    );
-  };
+  const certifications =
+    (
+      slice.primary as Content.EducationSlice["primary"] & {
+        certifications?: CertificationCardItem[];
+      }
+    ).certifications?.filter(
+      (item) => item.title || item.issuer || item.description,
+    ) ?? [];
 
   return (
     <Bounded
       as="section"
       data-slice-type={slice.slice_type}
       data-slice-variation={slice.variation}
-      className="mt-10"
+      className="py-16 md:py-24"
     >
-      <div className="mx-auto max-w-6xl">
-        <TitleHeader
-          title={slice.primary.heading || ""}
-          subtitle={slice.primary.sub_heading || ""}
-          icon={<BookOpen className="text-primary-foreground h-5 w-5" />}
-          intro={slice.primary.intro || ""}
-        />
+      <SectionHeader
+        eyebrow={slice.primary.eyebrow}
+        title={slice.primary.heading}
+        description={slice.primary.intro}
+        icon={<IconSchool data-icon="inline-start" className="size-3.5" />}
+      />
 
+      <div className="mt-10 grid gap-5">
         {slice.items.map((item, index) => (
           <motion.div
-            key={index}
-            initial={{ opacity: 0, y: 40 }}
+            key={`${item.degree}-${item.institution}-${index}`}
+            initial={{ opacity: 0, y: 24 }}
             whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, amount: 0.3 }}
+            viewport={{ once: true, amount: 0.25 }}
             transition={{
-              duration: 0.7,
+              duration: 0.45,
               ease: "easeOut",
-              delay: index * 0.15,
+              delay: index * 0.08,
             }}
           >
-            <Card className="to-muted dark:from-card/80 dark:to-card mb-12 overflow-hidden border-0 bg-gradient-to-br from-white/20 shadow-xl">
-              <CardContent className="p-8 md:p-12">
-                <div className="flex flex-col gap-8 md:flex-row">
-                  <div className="flex-1">
-                    <div className="mb-6 flex items-start gap-4">
-                      <div className="rounded-xl bg-gradient-to-br from-purple-500 to-violet-600 p-3 shadow-lg">
-                        <GraduationCap className="h-8 w-8 text-white" />
-                      </div>
-                      <div>
-                        <h3 className="text-foreground dark:text-foreground mb-2 text-2xl font-bold md:text-3xl">
-                          {item.degree}
-                        </h3>
-                        <p className="mb-3 text-xl font-semibold text-purple-600 dark:text-purple-400">
-                          {item.course_study}
-                        </p>
-                        <div className="flex flex-wrap items-center gap-4 text-slate-600 dark:text-slate-400">
-                          <div className="flex items-center gap-2">
-                            <MapPin className="h-4 w-4" />
-                            <span>{item.institution}</span>
-                          </div>
-                          <div className="flex items-center gap-2">
-                            <Calendar className="h-4 w-4" />
-                            <span>{item.time_period}</span>
-                          </div>
-                        </div>
-                      </div>
+            <Card
+              size="sm"
+              className="bg-opacity hover:bg-card transition-colors duration-500"
+            >
+              <CardHeader className="gap-4">
+                <div className="flex flex-col gap-4 md:flex-row md:items-start md:justify-between">
+                  <div className="flex gap-4">
+                    <div className="bg-primary/10 text-primary flex size-11 shrink-0 items-center justify-center rounded-xl">
+                      <IconSchool className="size-6" />
                     </div>
 
-                    <div className="mb-6">
-                      <Badge className="rounded-2xl border-0 bg-gradient-to-r from-amber-500 to-orange-500 px-4 py-2 text-sm font-semibold text-white">
-                        <Star className="mr-2 h-4 w-4" />
-                        {item.badge}
-                      </Badge>
-                    </div>
-
-                    <div className="space-y-4">
-                      <h4 className="dark:text-foreground mb-4 text-lg font-semibold text-slate-900">
-                        {item.key_achievement}
-                      </h4>
-                      {renderStyledList(item.achievement_description)}
+                    <div className="min-w-0 space-y-2">
+                      <CardTitle>{item.degree}</CardTitle>
+                      <CardDescription>{item.course_study}</CardDescription>
                     </div>
                   </div>
 
-                  <div className="flex items-center justify-center overflow-hidden md:w-80">
-                    <div className="relative p-4">
-                      <div className="absolute -top-4 -left-4 h-48 w-48 rounded-full bg-gradient-to-br from-purple-400 via-violet-500 to-indigo-600 opacity-20"></div>
-                      <div className="relative z-10 flex h-40 w-40 items-center justify-center rounded-2xl bg-gradient-to-br from-purple-500 to-violet-600 shadow-2xl">
-                        <GraduationCap className="h-20 w-20 text-white" />
-                      </div>
-                    </div>
+                  {item.badge && (
+                    <Badge variant="secondary">
+                      <IconAward data-icon="inline-start" />
+                      {item.badge}
+                    </Badge>
+                  )}
+                </div>
+              </CardHeader>
+
+              <CardContent className="space-y-6">
+                <div className="text-muted-foreground flex flex-wrap gap-3 text-sm">
+                  {item.institution && (
+                    <span className="inline-flex items-center gap-1.5">
+                      <IconMapPin className="size-4" />
+                      {item.institution}
+                    </span>
+                  )}
+                  {item.time_period && (
+                    <span className="inline-flex items-center gap-1.5">
+                      <IconCalendar className="size-4" />
+                      {item.time_period}
+                    </span>
+                  )}
+                </div>
+
+                <div className="space-y-3">
+                  {item.key_achievement && (
+                    <h3 className="font-heading text-foreground">
+                      {item.key_achievement}
+                    </h3>
+                  )}
+
+                  <div className="text-muted-foreground space-y-3 text-sm leading-7 md:text-base">
+                    <PrismicRichText
+                      field={item.achievement_description}
+                      components={{
+                        paragraph: ({ children }) => <p>{children}</p>,
+                        list: ({ children }) => (
+                          <ul className="grid gap-3">{children}</ul>
+                        ),
+                        listItem: ({ children }) => (
+                          <li className="bg-muted/50 flex gap-3 rounded-lg p-3">
+                            <IconCircleCheck className="text-primary mt-2 size-4 shrink-0" />
+                            <span>{children}</span>
+                          </li>
+                        ),
+                      }}
+                    />
                   </div>
                 </div>
               </CardContent>
@@ -142,6 +138,30 @@ const Education = ({ slice }: EducationProps): JSX.Element => {
           </motion.div>
         ))}
       </div>
+
+      {certifications.length > 0 && (
+        <div className="mt-16 flex flex-col gap-8 md:mt-20">
+          <div className="flex max-w-3xl flex-col gap-3">
+            <h3 className="font-heading text-xl leading-tight font-semibold text-balance md:text-2xl">
+              {slice.primary.subsection_heading}
+            </h3>
+
+            <p className="text-muted-foreground max-w-2xl text-base leading-7">
+              {slice.primary.subsection_intro}
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 gap-5 md:grid-cols-2 lg:grid-cols-3">
+            {certifications.map((item, index) => (
+              <CertificationCard
+                key={`${item.title}-${item.issuer}-${index}`}
+                item={item}
+                index={index}
+              />
+            ))}
+          </div>
+        </div>
+      )}
     </Bounded>
   );
 };

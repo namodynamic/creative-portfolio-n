@@ -4,7 +4,7 @@ import { useEffect, useRef } from "react";
 import gsap from "gsap";
 import { ImageField } from "@prismicio/client";
 import { PrismicNextImage } from "@prismicio/next";
-import { clsx } from "clsx";
+import { cn } from "@/lib/utils";
 import usePrefersReducedMotion from "@/hooks/usePrefersReducedMotion";
 
 type AvatarProps = {
@@ -12,11 +12,11 @@ type AvatarProps = {
   className?: string;
 };
 export default function Avatar({ image, className }: AvatarProps) {
-  const component = useRef(null);
+  const component = useRef<HTMLDivElement>(null);
   const prefersReducedMotion = usePrefersReducedMotion();
 
   useEffect(() => {
-    let ctx = gsap.context(() => {
+    const ctx = gsap.context(() => {
       gsap.fromTo(
         ".avatar",
         {
@@ -31,18 +31,16 @@ export default function Avatar({ image, className }: AvatarProps) {
         },
       );
 
-      window.onmousemove = (e) => {
+      const handlePointerMove = (e: PointerEvent) => {
         if (!component.current) return; // no component, no animation!
-        const componentRect = (
-          component.current as HTMLElement
-        ).getBoundingClientRect();
+        const componentRect = component.current.getBoundingClientRect();
         const componentCenterX = componentRect.left + componentRect.width / 2;
 
-        let componentPercent = {
+        const componentPercent = {
           x: (e.clientX - componentCenterX) / componentRect.width / 2,
         };
 
-        let distFromCenterX = 1 - Math.abs(componentPercent.x);
+        const distFromCenterX = 1 - Math.abs(componentPercent.x);
 
         gsap
           .timeline({
@@ -66,14 +64,24 @@ export default function Avatar({ image, className }: AvatarProps) {
             0,
           );
       };
+
+      if (!prefersReducedMotion) {
+        window.addEventListener("pointermove", handlePointerMove, {
+          passive: true,
+        });
+      }
+
+      return () => {
+        window.removeEventListener("pointermove", handlePointerMove);
+      };
     }, component);
     return () => ctx.revert(); // cleanup!
   }, [prefersReducedMotion]);
 
   return (
-    <div ref={component} className={clsx("relative h-full w-full", className)}>
+    <div ref={component} className={cn("relative h-full w-full", className)}>
       <div
-        className="avatar aspect-square overflow-hidden rounded-3xl opacity-0 hover:border-2 hover:border-zinc-200 dark:border-2 dark:border-slate-700"
+        className="avatar border-border/70 bg-card shadow-foreground/5 relative aspect-square overflow-hidden rounded-3xl border opacity-0 shadow-2xl will-change-transform"
         style={{ perspective: "500px", perspectiveOrigin: "150% 150%" }}
       >
         <PrismicNextImage
@@ -81,7 +89,7 @@ export default function Avatar({ image, className }: AvatarProps) {
           className="avatar-image h-full w-full object-fill"
           imgixParams={{ q: 90 }}
         />
-        <div className="highlight via-foreground/20 absolute inset-0 hidden w-full scale-110 bg-gradient-to-tr from-transparent to-transparent opacity-0 md:block"></div>
+        <div className="highlight via-foreground/20 pointer-events-none absolute inset-0 hidden w-full scale-110 bg-linear-to-tr from-transparent to-transparent opacity-0 md:block" />
       </div>
     </div>
   );

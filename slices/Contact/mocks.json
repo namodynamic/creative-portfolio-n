@@ -79,6 +79,21 @@
 				"__TYPE__": "FieldContent",
 				"value": "sense",
 				"type": "Text"
+			},
+			"form_title": {
+				"__TYPE__": "FieldContent",
+				"value": "half",
+				"type": "Text"
+			},
+			"form_description": {
+				"__TYPE__": "FieldContent",
+				"value": "ruler",
+				"type": "Text"
+			},
+			"form_cta_text": {
+				"__TYPE__": "FieldContent",
+				"value": "future",
+				"type": "Text"
 			}
 		},
 		"items": [
