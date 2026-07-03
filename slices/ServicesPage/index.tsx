@@ -1,300 +1,338 @@
-import { FC } from "react";
-import { Content } from "@prismicio/client";
-import { SliceComponentProps, PrismicRichText } from "@prismicio/react";
-import Bounded from "@/components/Bounded";
-import Link from "next/link";
+import type { ComponentType, FC } from "react";
+import { Content, isFilled } from "@prismicio/client";
+import { PrismicNextLink } from "@prismicio/next";
+import { PrismicRichText, SliceComponentProps } from "@prismicio/react";
 import {
-  Code,
-  Database,
-  Server,
-  Rocket,
-  FileText,
-  Globe,
-  CheckCircle,
-  ArrowRight,
-  Lock,
-  RefreshCw,
-  CheckCheck,
-} from "lucide-react";
+  IconArrowRight,
+  IconCheck,
+  IconCode,
+  IconDatabase,
+  IconFileText,
+  IconGlobe,
+  IconLock,
+  IconRocket,
+  IconRotateClockwise,
+  IconServer,
+  IconTools,
+  type IconProps,
+} from "@tabler/icons-react";
+import Link from "next/link";
+
+import Bounded from "@/components/Bounded";
 import {
   Accordion,
   AccordionContent,
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
-import { PrismicNextLink } from "@prismicio/next";
+import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
 
-const serviceIcons: { [key: string]: React.ReactNode } = {
-  code: <Code className="h-6 w-6 text-white dark:text-slate-200" />,
-  server: <Server className="h-6 w-6 text-white dark:text-slate-200" />,
-  database: <Database className="h-6 w-6 text-white dark:text-slate-200" />,
-  rocket: <Rocket className="h-6 w-6 text-white dark:text-slate-200" />,
-};
-
-const processIcons: { [key: string]: React.ReactNode } = {
-  lock: <Lock className="h-6 w-6 text-white dark:text-purple-500" />,
-  code: <Code className="h-6 w-6 text-white dark:text-purple-500" />,
-  refresh: <RefreshCw className="h-6 w-6 text-white dark:text-purple-500" />,
-  rocket: <Rocket className="h-6 w-6 text-white dark:text-purple-500" />,
-};
-
-const packageIcons: { [key: string]: React.ReactNode } = {
-  file: <FileText className="h-8 w-8 text-white dark:text-black" />,
-  globe: <Globe className="h-8 w-8 text-white dark:text-black" />,
-  rocket: <Rocket className="h-8 w-8 text-white dark:text-black" />,
-};
-
-/**
- * Props for `Services`.
- */
 export type ServicesProps = SliceComponentProps<Content.ServicesSlice>;
 
-/**
- * Component for "Services" Slices.
- */
+type IconKey = "code" | "server" | "database" | "rocket" | "file" | "globe";
+type ProcessIconKey = "lock" | "code" | "refresh" | "rocket";
+
+const serviceIcons = {
+  code: IconCode,
+  server: IconServer,
+  database: IconDatabase,
+  rocket: IconRocket,
+  file: IconFileText,
+  globe: IconGlobe,
+} satisfies Record<IconKey, ComponentType<IconProps>>;
+
+const processIcons = {
+  lock: IconLock,
+  code: IconCode,
+  refresh: IconRotateClockwise,
+  rocket: IconRocket,
+} satisfies Record<ProcessIconKey, ComponentType<IconProps>>;
+
+function getIcon(
+  icons: Record<string, ComponentType<IconProps>>,
+  key: string | null,
+  fallback: ComponentType<IconProps>,
+) {
+  return icons[key ?? ""] ?? fallback;
+}
+
+function SectionIntro({
+  eyebrow,
+  title,
+  description,
+}: {
+  eyebrow?: string | null;
+  title?: string | null;
+  description?: string | null;
+}) {
+  return (
+    <div className="mx-auto flex max-w-3xl flex-col items-center gap-4 text-center">
+      {eyebrow && (
+        <Badge variant="secondary" className="uppercase">
+          <IconTools data-icon="inline-start" />
+          {eyebrow}
+        </Badge>
+      )}
+      {title && (
+        <h2 className="font-heading text-foreground text-3xl leading-tight font-semibold text-balance md:text-5xl">
+          {title}
+        </h2>
+      )}
+      {description && (
+        <p className="text-muted-foreground text-base leading-8 md:text-lg">
+          {description}
+        </p>
+      )}
+    </div>
+  );
+}
+
+function FeatureList({
+  field,
+}: {
+  field:
+    | Content.ServicesSliceDefaultPrimaryServicesItem["features"]
+    | Content.ServicesSliceDefaultPrimaryPackagesItem["package_features"];
+}) {
+  return (
+    <div className="text-muted-foreground text-sm">
+      <PrismicRichText
+        field={field}
+        components={{
+          list: ({ children }) => (
+            <ul className="flex flex-col gap-3">{children}</ul>
+          ),
+          listItem: ({ children }) => (
+            <li className="flex gap-3">
+              <IconCheck className="text-primary mt-0.5 size-4 shrink-0" />
+              <span>{children}</span>
+            </li>
+          ),
+        }}
+      />
+    </div>
+  );
+}
+
 const Services: FC<ServicesProps> = ({ slice }) => {
   return (
     <Bounded
       as="section"
       data-slice-type={slice.slice_type}
       data-slice-variation={slice.variation}
+      className="mt-8 sm:mt-10 md:mt-20"
     >
-      <div className="px-4 py-8 sm:px-6 sm:py-16 lg:px-8">
-        <div className="mx-auto max-w-6xl text-center">
-          <p className="text-foreground mb-2 text-sm tracking-wider uppercase dark:text-slate-300">
-            {slice.primary.heading}
-          </p>
-          <h1 className="text-foreground mb-4 text-4xl font-bold md:text-5xl dark:text-white">
-            {slice.primary.sub_heading}
-          </h1>
-          <p className="mx-auto max-w-3xl text-xl text-black/80 dark:text-gray-300">
-            {slice.primary.intro}
-          </p>
-        </div>
-      </div>
+      <div className="flex flex-col gap-20">
+        <SectionIntro
+          eyebrow={slice.primary.heading}
+          title={slice.primary.sub_heading}
+          description={slice.primary.intro}
+        />
 
-      {/* Services Grid */}
-      <div className="px-4 py-8 sm:px-6 lg:px-8">
-        <div className="mx-auto grid max-w-6xl grid-cols-1 gap-6 md:grid-cols-2">
-          {slice.primary.services.map((service, index) => (
-            <div
-              key={index}
-              className="dark:bg-card/80 rounded-xl border-[0.5px] border-zinc-400 bg-white/20 p-6 shadow-lg backdrop-blur-sm dark:border-gray-800"
-            >
-              <div className="mb-4 flex items-center">
-                <div className="mr-3 rounded-md bg-black/80 p-2 dark:bg-purple-500/10">
-                  {serviceIcons[service.icons as string]}
-                </div>
-                <h2 className="text-foreground text-xl font-bold dark:text-white">
-                  {service.title}
-                </h2>
-              </div>
-              <p className="mb-4 text-black/80 dark:text-gray-300">
-                {service.description}
-              </p>
-              <div className="mb-6 space-y-2">
-                <div className="flex items-start">
-                  <PrismicRichText
-                    field={service.features}
-                    components={{
-                      listItem: ({ children }) => (
-                        <li className="flex items-start">
-                          <CheckCircle className="mt-0.5 mr-2 h-4 w-4 flex-shrink-0 text-black/50 dark:text-white" />
-                          <span className="text-sm text-black/80 dark:text-gray-300">
-                            {children}
-                          </span>
-                        </li>
-                      ),
-                    }}
-                  />
-                </div>
-              </div>
-              <PrismicNextLink
-                field={service.link_url}
-                className="inline-flex items-center font-medium hover:text-black/50 dark:text-purple-500 dark:hover:text-purple-400"
+        <div className="grid grid-cols-1 gap-5 md:grid-cols-2">
+          {slice.primary.services.map((service, index) => {
+            const Icon = getIcon(serviceIcons, service.icons, IconCode);
+
+            return (
+              <Card
+                key={index}
+                size="sm"
+                className="bg-opacity-80 ring-foreground/5 shadow-sm transition-transform hover:-translate-y-1"
               >
-                {service.link_text}
-                <ArrowRight className="ml-2 h-4 w-4" />
-              </PrismicNextLink>
-            </div>
-          ))}
+                <CardHeader className="gap-5">
+                  <div className="bg-primary/10 text-primary flex size-11 items-center justify-center rounded-2xl">
+                    <Icon className="size-5" />
+                  </div>
+                  <div className="flex flex-col gap-2">
+                    <CardTitle className="text-xl">{service.title}</CardTitle>
+                    <CardDescription className="text-base leading-7">
+                      {service.description}
+                    </CardDescription>
+                  </div>
+                </CardHeader>
+                <CardContent>
+                  <FeatureList field={service.features} />
+                </CardContent>
+                {isFilled.link(service.link_url) && (
+                  <CardFooter className="bg-opacity-80 border-t-0">
+                    <Button asChild variant="outline" className="w-full">
+                      <PrismicNextLink field={service.link_url}>
+                        {service.link_text || "Discuss this service"}
+                        <IconArrowRight data-icon="inline-end" />
+                      </PrismicNextLink>
+                    </Button>
+                  </CardFooter>
+                )}
+              </Card>
+            );
+          })}
         </div>
-      </div>
 
-      {/* Packages */}
-      <div className="px-4 py-16 sm:px-6 lg:px-8">
-        <div className="mx-auto max-w-6xl">
-          <div className="mb-12 text-center">
-            <p className="mb-2 text-sm tracking-wider uppercase dark:text-slate-300">
-              {slice.primary.package_heading}
-            </p>
-            <h2 className="text-foreground mb-4 text-3xl font-bold dark:text-white">
-              {slice.primary.package_sub_heading}
-            </h2>
-            <p className="mx-auto max-w-3xl text-lg text-black/80 dark:text-gray-300">
-              {slice.primary.package_intro}
-            </p>
+        <div className="flex flex-col gap-10">
+          <SectionIntro
+            eyebrow={slice.primary.package_heading}
+            title={slice.primary.package_sub_heading}
+            description={slice.primary.package_intro}
+          />
+
+          <div className="grid grid-cols-1 gap-5 md:grid-cols-3">
+            {slice.primary.packages.map((item, index) => {
+              const Icon = getIcon(serviceIcons, item.icons, IconFileText);
+
+              return (
+                <Card
+                  size="sm"
+                  key={index}
+                  className="bg-opacity-80 ring-foreground/5 shadow-sm transition-transform hover:-translate-y-1"
+                >
+                  <CardHeader className="gap-5">
+                    <div className="flex items-start justify-between gap-4">
+                      <div className="bg-primary/10 text-primary flex size-11 items-center justify-center rounded-2xl">
+                        <Icon className="size-5" />
+                      </div>
+                      {item.tag && (
+                        <Badge variant="secondary">{item.tag}</Badge>
+                      )}
+                    </div>
+                    <div className="flex flex-col gap-2">
+                      <CardTitle className="text-xl">{item.title}</CardTitle>
+                      <CardDescription className="leading-7">
+                        {item.description}
+                      </CardDescription>
+                    </div>
+                  </CardHeader>
+                  <CardContent>
+                    <FeatureList field={item.package_features} />
+                  </CardContent>
+                  {isFilled.link(item.link_url) && (
+                    <CardFooter className="bg-opacity-80 border-t-0">
+                      <Button asChild className="w-full">
+                        <PrismicNextLink field={item.link_url}>
+                          {item.link_text || "Get started"}
+                          <IconArrowRight data-icon="inline-end" />
+                        </PrismicNextLink>
+                      </Button>
+                    </CardFooter>
+                  )}
+                </Card>
+              );
+            })}
           </div>
 
-          <div className="grid grid-cols-1 gap-8 md:grid-cols-3">
-            {slice.primary.packages.map((item, index) => (
-              <div
-                key={index}
-                className="group dark:bg-card/80 relative overflow-hidden rounded-xl border-[0.5px] border-zinc-400 bg-white/20 p-6 shadow-lg backdrop-blur-sm dark:border-gray-800"
-              >
-                <div className="absolute -top-20 -right-20 h-40 w-40 rounded-full bg-purple-500/10 transition-transform duration-500 group-hover:scale-150" />
-                <div className="relative">
-                  <div className="mb-6 flex justify-center">
-                    <div className="transform rounded-full bg-black/80 p-3 transition-transform group-hover:scale-110 dark:bg-slate-200">
-                      {packageIcons[item.icons as string]}
+          <p className="text-muted-foreground mx-auto flex max-w-2xl items-center justify-center gap-2 text-center text-sm leading-7">
+            <IconCheck className="text-primary size-4 shrink-0" />
+            Flexible payment plans available for all packages. Ask about the 50%
+            upfront option.
+          </p>
+        </div>
+
+        <Card className="bg-opacity-80 ring-foreground/5 shadow-sm">
+          <CardHeader className="items-center text-center">
+            <CardTitle className="text-2xl md:text-3xl">
+              {slice.primary.development_process}
+            </CardTitle>
+          </CardHeader>
+          <CardContent>
+            <div className="grid grid-cols-1 gap-6 md:grid-cols-4">
+              {slice.primary.dev_process.map((item, index) => {
+                const Icon = getIcon(processIcons, item.icons, IconCode);
+
+                return (
+                  <div key={index} className="flex flex-col gap-3">
+                    <div className="flex items-center gap-3">
+                      <div className="bg-primary/10 text-primary flex size-10 items-center justify-center rounded-xl">
+                        <Icon className="size-5" />
+                      </div>
+                      <span className="text-muted-foreground text-sm font-medium">
+                        Step {index + 1}
+                      </span>
+                    </div>
+                    <div className="flex flex-col gap-2">
+                      <h3 className="font-heading text-lg font-semibold">
+                        {item.process}
+                      </h3>
+                      <p className="text-muted-foreground text-sm leading-7">
+                        {item.description}
+                      </p>
                     </div>
                   </div>
-                  <h3 className="text-foreground mb-3 text-center text-xl font-bold dark:text-white">
-                    {item.title}
-                  </h3>
-                  <p className="mb-6 h-14 text-center text-black/80 dark:text-gray-300">
-                    {item.description}
-                  </p>
-                  <div className="mb-8 justify-items-center space-y-3">
-                    <PrismicRichText
-                      field={item.package_features}
-                      components={{
-                        listItem: ({ children }) => (
-                          <li className="flex items-start">
-                            <CheckCheck className="mt-0.5 mr-2 h-4 w-4 flex-shrink-0 text-black/80 dark:text-white" />
-                            <span className="text-sm text-black/80 dark:text-gray-300">
-                              {children}
-                            </span>
-                          </li>
-                        ),
-                      }}
-                    />
-                  </div>
-                  <div className="mb-6 text-center">
-                    <span className="inline-block rounded-full bg-black/50 px-4 py-1 text-sm font-medium text-white/80 dark:bg-slate-500/20 dark:text-slate-200">
-                      {item.tag}
-                    </span>
-                  </div>
+                );
+              })}
+            </div>
+          </CardContent>
+        </Card>
 
-                  <div className="text-center">
-                    <PrismicNextLink
-                      field={item.link_url}
-                      className="inline-flex w-full items-center justify-center rounded-2xl bg-gradient-to-r from-purple-600 to-purple-700 px-6 py-3 font-medium text-white shadow-lg transition-all hover:bg-purple-700 hover:from-purple-700 hover:to-purple-800"
-                    >
-                      {item.link_text}
-                      <ArrowRight className="ml-2 h-4 w-4" />
-                    </PrismicNextLink>
-                  </div>
-                </div>
-              </div>
-            ))}
-          </div>
+        <div className="mx-auto flex w-full max-w-4xl flex-col gap-10">
+          <SectionIntro
+            eyebrow="FAQs"
+            title="Frequently Asked Questions"
+            description="Quick answers to common questions about my services and process."
+          />
 
-          <div className="mt-8 items-center justify-center space-x-1 text-center sm:flex">
-            <CheckCircle className="mr-1 inline-block h-4 w-4 text-slate-500" />
-            <p className="text-xs leading-relaxed text-black/50 dark:text-gray-400">
-              Flexible payment plans available for all packages. Ask about our
-              50% upfront option.
-            </p>
-          </div>
-        </div>
-      </div>
-
-      {/* Development Process */}
-      <div className="dark:bg-card/80 relative z-20 mt-10 rounded-xl bg-white/20 px-4 py-16 shadow-lg backdrop-blur-sm sm:px-6 lg:px-8">
-        <div className="mx-auto max-w-6xl">
-          <h2 className="text-foreground mb-12 text-center text-3xl font-bold dark:text-white">
-            {slice.primary.development_process}
-          </h2>
-
-          <div className="grid grid-cols-1 gap-6 md:grid-cols-4">
-            {slice.primary.dev_process.map((item, index) => (
-              <div key={index} className="text-center">
-                <div className="mb-4 flex justify-center">
-                  <div className="rounded-full bg-black/80 p-3 dark:bg-purple-500/10">
-                    {processIcons[item.icons as string]}
-                  </div>
-                </div>
-                <h3 className="text-foreground mb-2 text-xl font-bold dark:text-white">
-                  {item.process}
-                </h3>
-                <p className="text-black/80 dark:text-gray-300">
-                  {item.description}
-                </p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </div>
-
-      {/* FAQ */}
-      <div className="mt-16 px-4 py-16 sm:px-6 lg:px-8">
-        <div className="mx-auto max-w-4xl">
-          <div className="mb-12 text-center">
-            <p className="text-foreground mb-2 text-sm tracking-wider uppercase dark:text-slate-300">
-              FAQs
-            </p>
-            <h2 className="text-foreground mb-4 text-3xl font-bold dark:text-white">
-              Frequently Asked Questions
-            </h2>
-            <p className="text-lg text-black/80 dark:text-gray-300">
-              Quick answers to common questions about my services and process
-            </p>
-          </div>
-          <Accordion type="single" collapsible className="space-y-4">
+          <Accordion type="single" collapsible className="flex flex-col gap-3">
             {slice.primary.services_faq.map((item, index) => (
               <AccordionItem
                 key={index}
                 value={`item-${index}`}
-                className="dark:bg-card/80 rounded-lg border-[0.5px] border-zinc-400 bg-white/20 px-6 shadow-lg backdrop-blur-sm dark:border-gray-800"
+                className="bg-card ring-foreground/10 rounded-xl px-5 shadow-sm ring-1"
               >
-                <AccordionTrigger className="text-lg font-medium">
+                <AccordionTrigger className="text-left text-base font-medium">
                   {item.question}
                 </AccordionTrigger>
-                <AccordionContent className="prose prose-base prose-invert text-black dark:text-slate-400">
-                  <PrismicRichText field={item.answer} />
+                <AccordionContent>
+                  <div className="prose prose-neutral dark:prose-invert prose-p:text-muted-foreground prose-p:leading-7 max-w-none">
+                    <PrismicRichText field={item.answer} />
+                  </div>
                 </AccordionContent>
               </AccordionItem>
             ))}
           </Accordion>
-          <div className="mt-8 text-center">
-            <Link
-              href="/faq"
-              className="inline-flex items-center text-purple-500 hover:text-purple-400"
-            >
-              View all FAQs
-              <ArrowRight className="ml-2 h-4 w-4" />
-            </Link>
-          </div>
-        </div>
-      </div>
 
-      {/* CTA  */}
-      <div className="px-4 py-16 sm:px-6 lg:px-8">
-        <div className="dark:bg-card mx-auto max-w-5xl rounded-lg border-[0.5px] border-zinc-400 bg-white/20 p-6 text-center shadow-lg backdrop-blur-sm sm:p-12 dark:border-gray-800">
-          <h2 className="text-foreground mb-4 text-3xl font-bold dark:text-white">
-            Ready to Transform Your Ideas Into Reality?
-          </h2>
-          <p className="mx-auto mb-8 max-w-3xl text-xl text-black/80 dark:text-gray-300">
-            Let&apos;s discuss your project requirements and how I can help you
-            build a scalable, efficient solution tailored to your business
-            needs.
-          </p>
-          <div className="flex flex-col justify-center gap-4 sm:flex-row">
-            <Link
-              href="/contact"
-              className="rounded-md bg-gradient-to-r from-purple-500 to-purple-700 px-6 py-3 font-medium text-white shadow-lg transition-all hover:from-violet-700 hover:to-purple-600"
-            >
-              Start a Conversation
+          <Button size="sm" asChild variant="outline" className="mx-auto">
+            <Link href="/faq">
+              View all FAQs
+              <IconArrowRight data-icon="inline-end" />
             </Link>
-            <Link
-              href="/projects"
-              className="hover:bg-muted rounded-md border border-gray-700 bg-transparent px-6 py-3 font-medium shadow-lg transition-all hover:text-gray-300 dark:text-white dark:hover:text-gray-400"
-            >
-              View My Projects
-            </Link>
-          </div>
+          </Button>
         </div>
+
+        <Card className="bg-opacity-80 ring-foreground/5 shadow-sm">
+          <CardContent className="mx-auto flex max-w-3xl flex-col items-center gap-6 p-8 text-center md:p-10">
+            <div className="bg-primary/10 text-primary flex size-12 items-center justify-center rounded-2xl">
+              <IconRocket className="size-6" />
+            </div>
+            <div className="flex flex-col gap-3">
+              <h2 className="font-heading text-2xl font-semibold text-balance md:text-3xl">
+                Ready to Transform Your Ideas Into Reality?
+              </h2>
+              <p className="text-muted-foreground leading-7">
+                Let&apos;s discuss your project requirements and how I can help
+                you build a scalable, efficient solution tailored to your
+                business needs.
+              </p>
+            </div>
+            <div className="flex flex-wrap justify-center gap-3">
+              <Button size="sm" asChild>
+                <Link href="/contact">
+                  Start a Conversation
+                  <IconArrowRight data-icon="inline-end" />
+                </Link>
+              </Button>
+              <Button size="sm" asChild variant="outline">
+                <Link href="/projects">View My Projects</Link>
+              </Button>
+            </div>
+          </CardContent>
+        </Card>
       </div>
     </Bounded>
   );
