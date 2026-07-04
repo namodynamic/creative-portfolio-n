@@ -33,12 +33,21 @@
           "placeholder": ""
         }
       },
-      "hover_image": {
+      "cover_image": {
         "type": "Image",
         "config": {
-          "label": "Hover Image",
+          "label": "Cover Image",
           "constraint": {},
           "thumbnails": []
+        }
+      },
+      "show_cover_image": {
+        "type": "Boolean",
+        "config": {
+          "label": "Show Cover Image",
+          "placeholder_false": "false",
+          "placeholder_true": "true",
+          "default_value": true
         }
       },
       "category": {

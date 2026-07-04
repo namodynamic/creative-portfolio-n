@@ -107,15 +107,27 @@ interface BlogPostDocumentData {
   date: prismic.DateField;
 
   /**
-   * Hover Image field in *Blog Post*
+   * Cover Image field in *Blog Post*
    *
    * - **Field Type**: Image
    * - **Placeholder**: *None*
-   * - **API ID Path**: blog_post.hover_image
+   * - **API ID Path**: blog_post.cover_image
    * - **Tab**: Main
    * - **Documentation**: https://prismic.io/docs/fields/image
    */
-  hover_image: prismic.ImageField<never>;
+  cover_image: prismic.ImageField<never>;
+
+  /**
+   * Show Cover Image field in *Blog Post*
+   *
+   * - **Field Type**: Boolean
+   * - **Placeholder**: *None*
+   * - **Default Value**: true
+   * - **API ID Path**: blog_post.show_cover_image
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/fields/boolean
+   */
+  show_cover_image: prismic.BooleanField;
 
   /**
    * Category field in *Blog Post*

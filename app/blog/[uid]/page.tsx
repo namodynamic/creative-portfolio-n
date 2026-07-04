@@ -69,6 +69,9 @@ export default async function BlogPostPage(props: { params: Promise<Params> }) {
   const formattedDate = formatDate(page.data.date);
   const textContent = extractTextFromSlices(page.data.slices);
   const readTime = readingTime(textContent);
+  const shouldShowCoverImage =
+    page.data.show_cover_image !== false &&
+    isFilled.image(page.data.cover_image);
 
   return (
     <main>
@@ -149,10 +152,7 @@ export default async function BlogPostPage(props: { params: Promise<Params> }) {
             </div>
 
             <aside className="lg:col-span-4">
-              <Card
-                size="sm"
-                className="bg-opacity-80 ring-foreground/5 shadow-sm backdrop-blur"
-              >
+              <Card size="sm" className="bg-card/40 ring-foreground/5">
                 <CardHeader>
                   <CardTitle>Article Brief</CardTitle>
                   <CardDescription>
@@ -192,20 +192,19 @@ export default async function BlogPostPage(props: { params: Promise<Params> }) {
             </aside>
           </div>
 
-          {isFilled.image(page.data.hover_image) && (
+          {shouldShowCoverImage && (
             <div className="bg-muted mb-10 overflow-hidden rounded-2xl border shadow-sm md:mb-14">
               <PrismicNextImage
-                field={page.data.hover_image}
+                field={page.data.cover_image}
                 className="aspect-video w-full object-cover"
                 fallbackAlt=""
-                priority
               />
             </div>
           )}
 
           <div className="grid grid-cols-1 gap-8 lg:grid-cols-12">
             <div className="lg:col-span-8">
-              <Card className="bg-opacity-80 ring-foreground/5 shadow-sm backdrop-blur">
+              <Card className="bg-card/40 ring-foreground/5">
                 <CardContent className="px-4 py-6 md:px-8 md:py-8">
                   <div className="mx-auto max-w-3xl overflow-x-auto">
                     <SliceZone
@@ -228,10 +227,7 @@ export default async function BlogPostPage(props: { params: Promise<Params> }) {
 
             <aside className="lg:col-span-4">
               <div className="sticky top-24 flex flex-col gap-6">
-                <Card
-                  size="sm"
-                  className="bg-opacity-80 ring-foreground/5 shadow-sm"
-                >
+                <Card size="sm" className="bg-card/40 ring-foreground/5">
                   <CardHeader>
                     <CardTitle>Popular Topics</CardTitle>
                     <CardDescription>
