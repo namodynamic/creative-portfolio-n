@@ -171,13 +171,6 @@
           "placeholder": "e.g. 2024, 2024"
         }
       },
-      "color": {
-        "type": "Text",
-        "config": {
-          "label": "Color",
-          "placeholder": ""
-        }
-      },
       "slices": {
         "type": "Slices",
         "fieldset": "Slice Zone",

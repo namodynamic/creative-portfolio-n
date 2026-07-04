@@ -720,17 +720,6 @@ interface ProjectDocumentData {
   started_data: prismic.KeyTextField;
 
   /**
-   * Color field in *Project*
-   *
-   * - **Field Type**: Text
-   * - **Placeholder**: *None*
-   * - **API ID Path**: project.color
-   * - **Tab**: Main
-   * - **Documentation**: https://prismic.io/docs/fields/text
-   */
-  color: prismic.KeyTextField;
-
-  /**
    * Slice Zone field in *Project*
    *
    * - **Field Type**: Slice Zone

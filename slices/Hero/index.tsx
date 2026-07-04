@@ -44,14 +44,14 @@ const Hero = ({ slice }: HeroProps): JSX.Element => {
         </p>
 
         <div className="mt-10 flex flex-wrap items-center justify-center gap-3">
-          <Button asChild size="lg" className="sm:text-base">
+          <Button asChild size="sm" className="sm:text-base">
             <Link href="/#featured-projects">
               View selected work
               <IconArrowDownRight data-icon="inline-end" />
             </Link>
           </Button>
 
-          <Button asChild variant="outline" size="lg" className="sm:text-base">
+          <Button asChild variant="outline" size="sm" className="sm:text-base">
             <Link href="/contact">Start a conversation</Link>
           </Button>
         </div>
