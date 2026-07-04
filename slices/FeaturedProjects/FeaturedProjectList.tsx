@@ -1,9 +1,17 @@
+"use client";
+
 import FeaturedProjectsCard from "@/components/FeaturedProjectsCard";
 import type { Content } from "@prismicio/client";
 import { IconArrowRight, IconFolderOpen } from "@tabler/icons-react";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
+import { useGSAP } from "@gsap/react";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { useRef } from "react";
+
+gsap.registerPlugin(useGSAP, ScrollTrigger);
 
 type FeaturedProjectListProps = {
   item: Content.ProjectDocument[];
@@ -12,11 +20,52 @@ type FeaturedProjectListProps = {
 export default function FeaturedProjectList({
   item,
 }: FeaturedProjectListProps) {
+  const sectionRef = useRef<HTMLElement>(null);
+
   const sortedItems = [...item].sort((a, b) => {
     const dateA = new Date(a.data.date || "").getTime();
     const dateB = new Date(b.data.date || "").getTime();
     return dateB - dateA;
   });
+
+  useGSAP(
+    () => {
+      const cards = gsap.utils.toArray<HTMLElement>(
+        "[data-featured-project-card]",
+      );
+
+      if (cards.length === 0) return;
+
+      if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+        gsap.set(cards, { autoAlpha: 1, clearProps: "transform" });
+        return;
+      }
+
+      gsap.fromTo(
+        cards,
+        {
+          autoAlpha: 0,
+          y: 28,
+          scale: 0.98,
+        },
+        {
+          autoAlpha: 1,
+          y: 0,
+          scale: 1,
+          duration: 0.8,
+          ease: "power3.out",
+          stagger: 0.12,
+          clearProps: "transform",
+          scrollTrigger: {
+            trigger: sectionRef.current,
+            start: "top 75%",
+            once: true,
+          },
+        },
+      );
+    },
+    { scope: sectionRef, dependencies: [sortedItems.length] },
+  );
 
   if (sortedItems.length === 0) {
     return (
@@ -45,10 +94,12 @@ export default function FeaturedProjectList({
   }
 
   return (
-    <section aria-label="Featured project case studies">
+    <section ref={sectionRef} aria-label="Featured project case studies">
       <div className="grid grid-cols-1 gap-6 md:grid-cols-2 xl:grid-cols-3">
         {sortedItems.map((item, index) => (
-          <FeaturedProjectsCard key={item.id} item={item} index={index} />
+          <div key={item.id} data-featured-project-card>
+            <FeaturedProjectsCard item={item} index={index} />
+          </div>
         ))}
       </div>
 
