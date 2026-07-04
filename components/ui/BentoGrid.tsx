@@ -1,8 +1,11 @@
 "use client";
 
-import { useState } from "react";
+import { useRef, useState } from "react";
 
 import Lottie from "react-lottie";
+import { useGSAP } from "@gsap/react";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 import { cn } from "@/utils/cn";
 
@@ -16,6 +19,8 @@ import { Badge } from "./badge";
 import { Button } from "./button";
 import { IconCheck, IconCopy } from "@tabler/icons-react";
 
+gsap.registerPlugin(useGSAP, ScrollTrigger);
+
 export const BentoGrid = ({
   className,
   children,
@@ -23,8 +28,47 @@ export const BentoGrid = ({
   className?: string;
   children?: React.ReactNode;
 }) => {
+  const gridRef = useRef<HTMLDivElement>(null);
+
+  useGSAP(
+    () => {
+      const items = gsap.utils.toArray<HTMLElement>("[data-bento-grid-item]");
+
+      if (items.length === 0) return;
+
+      if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+        gsap.set(items, { autoAlpha: 1, clearProps: "transform" });
+        return;
+      }
+
+      gsap.fromTo(
+        items,
+        {
+          autoAlpha: 0,
+          y: 20,
+        },
+        {
+          autoAlpha: 1,
+          y: 0,
+          scale: 1,
+          duration: 0.75,
+          ease: "power3.out",
+          stagger: 0.1,
+          clearProps: "transform",
+          scrollTrigger: {
+            trigger: gridRef.current,
+            start: "top 78%",
+            once: true,
+          },
+        },
+      );
+    },
+    { scope: gridRef },
+  );
+
   return (
     <div
+      ref={gridRef}
       className={cn(
         "md:grid-row-7 mx-auto grid grid-cols-1 gap-5 px-2 sm:px-4 md:grid-cols-6 lg:grid-cols-5",
         className,
@@ -83,6 +127,7 @@ export const BentoGridItem = ({
 
   return (
     <Card
+      data-bento-grid-item
       size="sm"
       className={cn(
         "group/bento text-card-foreground relative row-span-1 flex flex-col justify-between rounded-2xl transition duration-200",
@@ -103,6 +148,7 @@ export const BentoGridItem = ({
               width={400}
               height={400}
               alt={img}
+              loading={id === 1 ? "eager" : undefined}
               className={cn(
                 "object-cover object-center",
                 id === 1 && "h-full w-full",

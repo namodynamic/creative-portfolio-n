@@ -9,6 +9,8 @@ type SectionHeaderProps = {
   description?: ReactNode;
   icon?: ReactNode;
   align?: "left" | "center";
+  titleSize?: "sm" | "xs";
+  descriptionSize?: "default" | "sm";
   className?: string;
 };
 
@@ -18,6 +20,8 @@ export default function SectionHeader({
   description,
   icon,
   align = "left",
+  titleSize = "sm",
+  descriptionSize = "default",
   className,
 }: SectionHeaderProps) {
   return (
@@ -35,12 +39,18 @@ export default function SectionHeader({
         </Badge>
       )}
 
-      <Heading as="h2" size="sm" className="text-balance">
+      <Heading as="h2" size={titleSize} className="text-balance">
         {title}
       </Heading>
 
       {description && (
-        <p className="text-muted-foreground max-w-2xl text-base leading-7 text-pretty md:text-lg">
+        <p
+          className={cn(
+            "text-muted-foreground max-w-2xl text-pretty",
+            descriptionSize === "default" && "text-base leading-7 md:text-lg",
+            descriptionSize === "sm" && "text-sm leading-6 md:text-base",
+          )}
+        >
           {description}
         </p>
       )}
