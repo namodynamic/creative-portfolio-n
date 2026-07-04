@@ -254,7 +254,7 @@ const Contact = ({ slice }: ContactProps): JSX.Element => {
         <div className="grid items-start gap-6 lg:grid-cols-[minmax(0,1fr)_24rem]">
           <Card
             id="message"
-            className="contact-card bg-opacity-80 scroll-mt-24"
+            className="contact-card bg-card/40 ring-foreground/5 scroll-mt-24"
           >
             <CardHeader className="gap-2">
               <div className="flex items-center justify-between gap-4">
@@ -351,7 +351,10 @@ const Contact = ({ slice }: ContactProps): JSX.Element => {
           </Card>
 
           <div className="flex flex-col gap-6">
-            <Card size="sm" className="contact-card bg-opacity-80">
+            <Card
+              size="sm"
+              className="contact-card ring-foreground/5 bg-card/40"
+            >
               <CardHeader>
                 <CardTitle>Contact details</CardTitle>
                 <CardDescription>
@@ -379,7 +382,10 @@ const Contact = ({ slice }: ContactProps): JSX.Element => {
               </CardContent>
             </Card>
 
-            <Card size="sm" className="contact-card bg-opacity-80">
+            <Card
+              size="sm"
+              className="contact-card ring-foreground/5 bg-card/40"
+            >
               <CardHeader>
                 <CardTitle>Socials</CardTitle>
                 <CardDescription>
@@ -398,7 +404,10 @@ const Contact = ({ slice }: ContactProps): JSX.Element => {
               </CardContent>
             </Card>
 
-            <Card size="sm" className="contact-card bg-opacity-80">
+            <Card
+              size="sm"
+              className="contact-card ring-foreground/5 bg-card/40"
+            >
               <CardHeader>
                 <CardTitle>Services</CardTitle>
                 <CardDescription>
@@ -454,7 +463,7 @@ const Contact = ({ slice }: ContactProps): JSX.Element => {
           </div>
         </div>
 
-        <Card className="contact-card ring-foreground/5 bg-opacity-80">
+        <Card className="contact-card ring-foreground/5 bg-card/40">
           <CardContent className="flex flex-col items-center gap-5 p-8 text-center md:p-12">
             <div className="bg-muted text-muted-foreground flex size-12 items-center justify-center rounded-xl border">
               <IconCheck className="size-5" />

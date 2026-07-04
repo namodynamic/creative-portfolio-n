@@ -138,7 +138,7 @@ const Faq: FC<FaqProps> = ({ slice }) => {
           </div>
         )}
 
-        <Card className="bg-opacity-80 ring-foreground/5 shadow-sm">
+        <Card className="bg-card/40 ring-foreground/5">
           <CardContent className="flex flex-col gap-6 p-5 md:p-8">
             <div className="flex flex-col gap-2 md:flex-row md:items-center md:justify-between">
               <div className="flex items-center gap-3">
@@ -162,7 +162,7 @@ const Faq: FC<FaqProps> = ({ slice }) => {
                 <AccordionItem
                   key={index}
                   value={`${activeCategory}-${index}`}
-                  className="bg-background/60 ring-foreground/10 rounded-xl px-5 shadow-sm ring-1"
+                  className="ring-foreground/5 rounded-xl px-5 shadow-sm ring-1"
                 >
                   <AccordionTrigger className="text-left text-base font-medium">
                     {item.question}
@@ -176,7 +176,7 @@ const Faq: FC<FaqProps> = ({ slice }) => {
           </CardContent>
         </Card>
 
-        <Card className="bg-opacity-80 ring-foreground/5 shadow-sm">
+        <Card className="bg-card/40 ring-foreground/5">
           <CardContent className="mx-auto flex max-w-3xl flex-col items-center gap-6 p-8 text-center md:p-10">
             <div className="bg-primary/10 text-primary flex size-12 items-center justify-center rounded-2xl">
               <IconMessages className="size-6" />

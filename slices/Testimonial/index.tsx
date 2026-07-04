@@ -63,7 +63,7 @@ function TestimonialCard({
   return (
     <Card
       size="sm"
-      className="bg-opacity-80 hover:bg-card h-52 rounded-xl p-0 shadow-sm transition-colors md:h-56"
+      className="bg-card/40 ring-foreground/5 hover:bg-card h-52 rounded-xl p-0 shadow-sm transition-colors md:h-56"
     >
       <CardHeader className="flex flex-row items-center gap-3 p-4 pb-2">
         <Avatar className="size-11 rounded-lg">

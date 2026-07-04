@@ -17,7 +17,7 @@ const Cta = ({ slice }: CtaProps): JSX.Element => {
       data-slice-type={slice.slice_type}
       data-slice-variation={slice.variation}
     >
-      <Card className="bg-opacity-80 ring-foreground/5 rounded-2xl py-12 md:py-16">
+      <Card className="bg-card/40 ring-foreground/5 rounded-2xl py-12 md:py-16">
         <CardContent className="flex flex-col items-center">
           <SectionHeader
             eyebrow="Available for select projects"

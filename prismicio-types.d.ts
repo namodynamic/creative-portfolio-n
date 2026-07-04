@@ -2606,6 +2606,26 @@ export interface FeatureGridSliceGridMixedContentPrimaryRightTechListItem {
  */
 export interface FeatureGridSliceGridMixedContentPrimary {
   /**
+   * Heading field in *FeatureGrid → Grid with Mixed Content → Primary*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: feature_grid.grid_mixed_content.primary.heading
+   * - **Documentation**: https://prismic.io/docs/fields/text
+   */
+  heading: prismic.KeyTextField;
+
+  /**
+   * Sub Heading field in *FeatureGrid → Grid with Mixed Content → Primary*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: feature_grid.grid_mixed_content.primary.sub_heading
+   * - **Documentation**: https://prismic.io/docs/fields/text
+   */
+  sub_heading: prismic.KeyTextField;
+
+  /**
    * Grid Items field in *FeatureGrid → Grid with Mixed Content → Primary*
    *
    * - **Field Type**: Group

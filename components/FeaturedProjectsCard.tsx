@@ -57,7 +57,7 @@ const FeaturedProjectsCard: FC<FeaturedProjectProps> = ({ item, index }) => {
   return (
     <Card
       size="sm"
-      className="group/project ring-foreground/5 h-full pt-0! shadow-sm transition-transform hover:-translate-y-1"
+      className="group/project bg-card/40 ring-foreground/5 h-full pt-0! transition-transform hover:-translate-y-1"
     >
       <div className="bg-muted relative aspect-16/10 overflow-hidden">
         <Link
@@ -162,7 +162,7 @@ const FeaturedProjectsCard: FC<FeaturedProjectProps> = ({ item, index }) => {
         )}
       </CardContent>
 
-      <CardFooter className="bg-card flex flex-wrap gap-2 border-t-0">
+      <CardFooter className="bg-card/40 flex flex-wrap gap-2 border-t-0">
         <Button asChild size="sm">
           <Link href={`/projects/${item.uid}`}>
             View case study

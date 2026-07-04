@@ -146,7 +146,7 @@ const Services: FC<ServicesProps> = ({ slice }) => {
               <Card
                 key={index}
                 size="sm"
-                className="bg-opacity-80 ring-foreground/5 shadow-sm transition-transform hover:-translate-y-1"
+                className="bg-card/40 ring-foreground/5 transition-transform hover:-translate-y-1"
               >
                 <CardHeader className="gap-5">
                   <div className="bg-primary/10 text-primary flex size-11 items-center justify-center rounded-2xl">
@@ -192,7 +192,7 @@ const Services: FC<ServicesProps> = ({ slice }) => {
                 <Card
                   size="sm"
                   key={index}
-                  className="bg-opacity-80 ring-foreground/5 shadow-sm transition-transform hover:-translate-y-1"
+                  className="bg-card/40 ring-foreground/5 transition-transform hover:-translate-y-1"
                 >
                   <CardHeader className="gap-5">
                     <div className="flex items-start justify-between gap-4">
@@ -235,7 +235,7 @@ const Services: FC<ServicesProps> = ({ slice }) => {
           </p>
         </div>
 
-        <Card className="bg-opacity-80 ring-foreground/5 shadow-sm">
+        <Card className="bg-card/40 ring-foreground/5">
           <CardHeader className="items-center text-center">
             <CardTitle className="text-2xl md:text-3xl">
               {slice.primary.development_process}
@@ -305,7 +305,7 @@ const Services: FC<ServicesProps> = ({ slice }) => {
           </Button>
         </div>
 
-        <Card className="bg-opacity-80 ring-foreground/5 shadow-sm">
+        <Card className="bg-card/40 ring-foreground/5">
           <CardContent className="mx-auto flex max-w-3xl flex-col items-center gap-6 p-8 text-center md:p-10">
             <div className="bg-primary/10 text-primary flex size-12 items-center justify-center rounded-2xl">
               <IconRocket className="size-6" />

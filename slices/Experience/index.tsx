@@ -68,7 +68,7 @@ const Experience = ({ slice }: ExperienceProps): JSX.Element => {
 
               <Card
                 size="sm"
-                className="bg-opacity-80 hover:bg-card transition-colors duration-500"
+                className="bg-card/40 hover:bg-card ring-foreground/5 transition-colors duration-500"
               >
                 <CardHeader className="gap-3">
                   <div className="flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between">
