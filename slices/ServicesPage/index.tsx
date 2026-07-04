@@ -9,6 +9,7 @@ import {
   IconDatabase,
   IconFileText,
   IconGlobe,
+  IconHelpCircle,
   IconLock,
   IconRocket,
   IconRotateClockwise,
@@ -19,6 +20,7 @@ import {
 import Link from "next/link";
 
 import Bounded from "@/components/Bounded";
+import SectionHeader from "@/components/SectionHeader";
 import {
   Accordion,
   AccordionContent,
@@ -65,37 +67,6 @@ function getIcon(
   return icons[key ?? ""] ?? fallback;
 }
 
-function SectionIntro({
-  eyebrow,
-  title,
-  description,
-}: {
-  eyebrow?: string | null;
-  title?: string | null;
-  description?: string | null;
-}) {
-  return (
-    <div className="mx-auto flex max-w-3xl flex-col items-center gap-4 text-center">
-      {eyebrow && (
-        <Badge variant="secondary" className="uppercase">
-          <IconTools data-icon="inline-start" />
-          {eyebrow}
-        </Badge>
-      )}
-      {title && (
-        <h2 className="font-heading text-foreground text-3xl leading-tight font-semibold text-balance md:text-5xl">
-          {title}
-        </h2>
-      )}
-      {description && (
-        <p className="text-muted-foreground text-base leading-8 md:text-lg">
-          {description}
-        </p>
-      )}
-    </div>
-  );
-}
-
 function FeatureList({
   field,
 }: {
@@ -132,10 +103,12 @@ const Services: FC<ServicesProps> = ({ slice }) => {
       className="mt-8 sm:mt-10 md:mt-20"
     >
       <div className="flex flex-col gap-20">
-        <SectionIntro
+        <SectionHeader
           eyebrow={slice.primary.heading}
           title={slice.primary.sub_heading}
           description={slice.primary.intro}
+          icon={<IconTools data-icon="inline-start" />}
+          align="center"
         />
 
         <div className="grid grid-cols-1 gap-5 md:grid-cols-2">
@@ -178,10 +151,12 @@ const Services: FC<ServicesProps> = ({ slice }) => {
         </div>
 
         <div className="flex flex-col gap-10">
-          <SectionIntro
+          <SectionHeader
             eyebrow={slice.primary.package_heading}
             title={slice.primary.package_sub_heading}
             description={slice.primary.package_intro}
+            icon={<IconFileText data-icon="inline-start" />}
+            align="center"
           />
 
           <div className="grid grid-cols-1 gap-5 md:grid-cols-3">
@@ -272,10 +247,12 @@ const Services: FC<ServicesProps> = ({ slice }) => {
         </Card>
 
         <div className="mx-auto flex w-full max-w-4xl flex-col gap-10">
-          <SectionIntro
+          <SectionHeader
             eyebrow="FAQs"
             title="Frequently Asked Questions"
             description="Quick answers to common questions about my services and process."
+            icon={<IconHelpCircle data-icon="inline-start" />}
+            align="center"
           />
 
           <Accordion type="single" collapsible className="flex flex-col gap-3">

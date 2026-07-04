@@ -22,6 +22,7 @@ import {
   IconMessageCircle,
   IconSend,
   IconShieldLock,
+  IconMessageFilled,
 } from "@tabler/icons-react";
 
 import Bounded from "@/components/Bounded";
@@ -43,6 +44,7 @@ import {
 import { Field, FieldGroup, FieldLabel } from "@/components/ui/field";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
+import SectionHeader from "@/components/SectionHeader";
 
 export type ContactProps = SliceComponentProps<Content.ContactSlice>;
 
@@ -239,17 +241,14 @@ const Contact = ({ slice }: ContactProps): JSX.Element => {
       className="mt-10 py-16 md:py-24 lg:py-28"
     >
       <div className="mx-auto flex max-w-7xl flex-col gap-14">
-        <div className="mx-auto flex max-w-3xl flex-col items-center gap-4 text-center">
-          <Badge variant="secondary" className="heading-anim">
-            {slice.primary.heading}
-          </Badge>
-          <h1 className="heading-anim text-foreground text-4xl font-semibold tracking-tight md:text-5xl">
-            {slice.primary.sub_heading}
-          </h1>
-          <p className="heading-anim text-muted-foreground text-base leading-7 md:text-lg">
-            {slice.primary.description}
-          </p>
-        </div>
+        <SectionHeader
+          eyebrow={slice.primary.heading}
+          title={slice.primary.sub_heading}
+          description={slice.primary.description}
+          align="center"
+          className="mx-auto max-w-3xl text-center"
+          icon={<IconMessageFilled data-icon="inline-start" />}
+        />
 
         <div className="grid items-start gap-6 lg:grid-cols-[minmax(0,1fr)_24rem]">
           <Card
