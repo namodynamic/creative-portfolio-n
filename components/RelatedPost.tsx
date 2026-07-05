@@ -75,10 +75,10 @@ export default async function RelatedPosts({
                 size="sm"
                 className="bg-opacity-80 ring-foreground/5 h-full pt-0! shadow-sm transition-transform group-hover:-translate-y-1"
               >
-                {isFilled.image(post.data.hover_image) && (
+                {isFilled.image(post.data.cover_image) && (
                   <div className="bg-muted relative aspect-16/10 overflow-hidden">
                     <Image
-                      src={post.data.hover_image.url}
+                      src={post.data.cover_image.url || ""}
                       alt={post.data.title || "Blog post"}
                       fill
                       className="object-cover transition-transform duration-500 group-hover:scale-105"

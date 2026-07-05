@@ -223,10 +223,10 @@ export default async function TagPage({ params }: TagPageProps) {
                     size="sm"
                     className="bg-opacity-80 ring-foreground/5 h-full pt-0! shadow-sm transition-transform group-hover:-translate-y-1"
                   >
-                    {isFilled.image(post.data.hover_image) && (
+                    {isFilled.image(post.data.cover_image) && (
                       <div className="bg-muted relative aspect-16/10 overflow-hidden">
                         <PrismicNextImage
-                          field={post.data.hover_image}
+                          field={post.data.cover_image}
                           className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
                           fallbackAlt=""
                         />

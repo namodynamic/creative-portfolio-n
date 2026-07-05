@@ -24,10 +24,7 @@ export default async function AuthorCard({
   const authorName = settings.data.name || "Nnamdi Ekechi";
 
   return (
-    <Card
-      size="sm"
-      className={cn("bg-opacity-80 ring-foreground/5 shadow-sm", className)}
-    >
+    <Card size="sm" className={cn("bg-card/40 ring-foreground/5", className)}>
       <CardHeader className="gap-4 sm:grid-cols-[auto_1fr] sm:items-center">
         <div className="bg-muted relative flex size-14 shrink-0 items-center justify-center overflow-hidden rounded-full border">
           {settings.data.blog_author_img.url ? (

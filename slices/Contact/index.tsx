@@ -22,6 +22,7 @@ import {
   IconMessageCircle,
   IconSend,
   IconShieldLock,
+  IconMessageFilled,
 } from "@tabler/icons-react";
 
 import Bounded from "@/components/Bounded";
@@ -43,6 +44,7 @@ import {
 import { Field, FieldGroup, FieldLabel } from "@/components/ui/field";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
+import SectionHeader from "@/components/SectionHeader";
 
 export type ContactProps = SliceComponentProps<Content.ContactSlice>;
 
@@ -144,23 +146,7 @@ const Contact = ({ slice }: ContactProps): JSX.Element => {
 
   useEffect(() => {
     const ctx = gsap.context(() => {
-      const tl = gsap.timeline();
-
-      tl.fromTo(
-        ".heading-anim",
-        {
-          y: 20,
-          opacity: 0,
-        },
-        {
-          y: 0,
-          opacity: 1,
-          duration: 0.8,
-          stagger: 0.1,
-        },
-      );
-
-      tl.fromTo(
+      gsap.fromTo(
         ".contact-card",
         {
           y: 30,
@@ -172,7 +158,6 @@ const Contact = ({ slice }: ContactProps): JSX.Element => {
           duration: 0.6,
           stagger: 0.2,
         },
-        "-=0.4",
       );
     }, pageRef);
 
@@ -239,22 +224,19 @@ const Contact = ({ slice }: ContactProps): JSX.Element => {
       className="mt-10 py-16 md:py-24 lg:py-28"
     >
       <div className="mx-auto flex max-w-7xl flex-col gap-14">
-        <div className="mx-auto flex max-w-3xl flex-col items-center gap-4 text-center">
-          <Badge variant="secondary" className="heading-anim">
-            {slice.primary.heading}
-          </Badge>
-          <h1 className="heading-anim text-foreground text-4xl font-semibold tracking-tight md:text-5xl">
-            {slice.primary.sub_heading}
-          </h1>
-          <p className="heading-anim text-muted-foreground text-base leading-7 md:text-lg">
-            {slice.primary.description}
-          </p>
-        </div>
+        <SectionHeader
+          eyebrow={slice.primary.heading}
+          title={slice.primary.sub_heading}
+          description={slice.primary.description}
+          align="center"
+          className="mx-auto max-w-3xl text-center"
+          icon={<IconMessageFilled data-icon="inline-start" />}
+        />
 
         <div className="grid items-start gap-6 lg:grid-cols-[minmax(0,1fr)_24rem]">
           <Card
             id="message"
-            className="contact-card bg-opacity-80 scroll-mt-24"
+            className="contact-card bg-card/40 ring-foreground/5 scroll-mt-24"
           >
             <CardHeader className="gap-2">
               <div className="flex items-center justify-between gap-4">
@@ -351,7 +333,10 @@ const Contact = ({ slice }: ContactProps): JSX.Element => {
           </Card>
 
           <div className="flex flex-col gap-6">
-            <Card size="sm" className="contact-card bg-opacity-80">
+            <Card
+              size="sm"
+              className="contact-card ring-foreground/5 bg-card/40"
+            >
               <CardHeader>
                 <CardTitle>Contact details</CardTitle>
                 <CardDescription>
@@ -379,7 +364,10 @@ const Contact = ({ slice }: ContactProps): JSX.Element => {
               </CardContent>
             </Card>
 
-            <Card size="sm" className="contact-card bg-opacity-80">
+            <Card
+              size="sm"
+              className="contact-card ring-foreground/5 bg-card/40"
+            >
               <CardHeader>
                 <CardTitle>Socials</CardTitle>
                 <CardDescription>
@@ -398,7 +386,10 @@ const Contact = ({ slice }: ContactProps): JSX.Element => {
               </CardContent>
             </Card>
 
-            <Card size="sm" className="contact-card bg-opacity-80">
+            <Card
+              size="sm"
+              className="contact-card ring-foreground/5 bg-card/40"
+            >
               <CardHeader>
                 <CardTitle>Services</CardTitle>
                 <CardDescription>
@@ -454,7 +445,7 @@ const Contact = ({ slice }: ContactProps): JSX.Element => {
           </div>
         </div>
 
-        <Card className="contact-card ring-foreground/5 bg-opacity-80">
+        <Card className="contact-card ring-foreground/5 bg-card/40">
           <CardContent className="flex flex-col items-center gap-5 p-8 text-center md:p-12">
             <div className="bg-muted text-muted-foreground flex size-12 items-center justify-center rounded-xl border">
               <IconCheck className="size-5" />

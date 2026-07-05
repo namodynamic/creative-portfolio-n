@@ -107,15 +107,27 @@ interface BlogPostDocumentData {
   date: prismic.DateField;
 
   /**
-   * Hover Image field in *Blog Post*
+   * Cover Image field in *Blog Post*
    *
    * - **Field Type**: Image
    * - **Placeholder**: *None*
-   * - **API ID Path**: blog_post.hover_image
+   * - **API ID Path**: blog_post.cover_image
    * - **Tab**: Main
    * - **Documentation**: https://prismic.io/docs/fields/image
    */
-  hover_image: prismic.ImageField<never>;
+  cover_image: prismic.ImageField<never>;
+
+  /**
+   * Show Cover Image field in *Blog Post*
+   *
+   * - **Field Type**: Boolean
+   * - **Placeholder**: *None*
+   * - **Default Value**: true
+   * - **API ID Path**: blog_post.show_cover_image
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/fields/boolean
+   */
+  show_cover_image: prismic.BooleanField;
 
   /**
    * Category field in *Blog Post*
@@ -718,17 +730,6 @@ interface ProjectDocumentData {
    * - **Documentation**: https://prismic.io/docs/fields/text
    */
   started_data: prismic.KeyTextField;
-
-  /**
-   * Color field in *Project*
-   *
-   * - **Field Type**: Text
-   * - **Placeholder**: *None*
-   * - **API ID Path**: project.color
-   * - **Tab**: Main
-   * - **Documentation**: https://prismic.io/docs/fields/text
-   */
-  color: prismic.KeyTextField;
 
   /**
    * Slice Zone field in *Project*
@@ -2616,6 +2617,26 @@ export interface FeatureGridSliceGridMixedContentPrimaryRightTechListItem {
  * Primary content in *FeatureGrid → Grid with Mixed Content → Primary*
  */
 export interface FeatureGridSliceGridMixedContentPrimary {
+  /**
+   * Heading field in *FeatureGrid → Grid with Mixed Content → Primary*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: feature_grid.grid_mixed_content.primary.heading
+   * - **Documentation**: https://prismic.io/docs/fields/text
+   */
+  heading: prismic.KeyTextField;
+
+  /**
+   * Sub Heading field in *FeatureGrid → Grid with Mixed Content → Primary*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: feature_grid.grid_mixed_content.primary.sub_heading
+   * - **Documentation**: https://prismic.io/docs/fields/text
+   */
+  sub_heading: prismic.KeyTextField;
+
   /**
    * Grid Items field in *FeatureGrid → Grid with Mixed Content → Primary*
    *

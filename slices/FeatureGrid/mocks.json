@@ -128,6 +128,16 @@
 						]
 					}
 				]
+			},
+			"heading": {
+				"__TYPE__": "FieldContent",
+				"value": "rain",
+				"type": "Text"
+			},
+			"sub_heading": {
+				"__TYPE__": "FieldContent",
+				"value": "seldom",
+				"type": "Text"
 			}
 		},
 		"items": []

@@ -38,7 +38,7 @@ export default async function FeaturedProjects({
 
   if (!projects.results.length) {
     return (
-      <Card size="sm" className="bg-opacity-80 ring-foreground/5 shadow-sm">
+      <Card size="sm" className="bg-card/40 ring-foreground/5">
         <CardHeader>
           <CardTitle>Featured Projects</CardTitle>
           <CardDescription>
@@ -50,7 +50,7 @@ export default async function FeaturedProjects({
   }
 
   return (
-    <Card size="sm" className="bg-opacity-80 ring-foreground/5 shadow-sm">
+    <Card size="sm" className="bg-card/40 ring-foreground/5">
       <CardHeader>
         <CardTitle>Featured Projects</CardTitle>
         <CardDescription>
@@ -64,7 +64,7 @@ export default async function FeaturedProjects({
             href={`/projects/${project.uid}`}
             className="group flex flex-col gap-3"
           >
-            <div className="bg-muted relative aspect-video overflow-hidden rounded-lg border">
+            <div className="bg-muted border-foreground/5 relative aspect-video overflow-hidden rounded-lg border">
               {isFilled.image(project.data.hover_image) ? (
                 <Image
                   src={project.data.hover_image.url}
@@ -89,7 +89,7 @@ export default async function FeaturedProjects({
               </div>
 
               <div className="flex flex-wrap gap-1.5">
-                {project.tags.slice(0, 3).map((tag) => (
+                {project.tags.slice(0, 5).map((tag) => (
                   <Badge key={tag} variant="outline">
                     <IconTag data-icon="inline-start" />
                     {tag}

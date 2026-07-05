@@ -13,13 +13,13 @@ import {
 import Link from "next/link";
 
 import Bounded from "@/components/Bounded";
+import SectionHeader from "@/components/SectionHeader";
 import {
   Accordion,
   AccordionContent,
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
-import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 
@@ -103,24 +103,13 @@ const Faq: FC<FaqProps> = ({ slice }) => {
       className="mt-8 sm:mt-10 md:mt-20"
     >
       <div className="mx-auto flex max-w-5xl flex-col gap-12">
-        <div className="mx-auto flex max-w-3xl flex-col items-center gap-4 text-center">
-          {slice.primary.heading && (
-            <Badge variant="secondary" className="w-fit">
-              <IconHelpHexagon data-icon="inline-start" />
-              {slice.primary.heading}
-            </Badge>
-          )}
-
-          <h1 className="font-heading text-foreground text-3xl leading-tight font-semibold text-balance md:text-5xl">
-            {slice.primary.sub_heading}
-          </h1>
-
-          {slice.primary.intro && (
-            <p className="text-muted-foreground text-base leading-8 md:text-lg">
-              {slice.primary.intro}
-            </p>
-          )}
-        </div>
+        <SectionHeader
+          eyebrow={slice.primary.heading}
+          title={slice.primary.sub_heading}
+          description={slice.primary.intro}
+          icon={<IconHelpHexagon data-icon="inline-start" />}
+          align="center"
+        />
 
         {categories.length > 0 && (
           <div className="flex flex-wrap justify-center gap-2">
@@ -138,7 +127,7 @@ const Faq: FC<FaqProps> = ({ slice }) => {
           </div>
         )}
 
-        <Card className="bg-opacity-80 ring-foreground/5 shadow-sm">
+        <Card className="bg-card/40 ring-foreground/5">
           <CardContent className="flex flex-col gap-6 p-5 md:p-8">
             <div className="flex flex-col gap-2 md:flex-row md:items-center md:justify-between">
               <div className="flex items-center gap-3">
@@ -162,7 +151,7 @@ const Faq: FC<FaqProps> = ({ slice }) => {
                 <AccordionItem
                   key={index}
                   value={`${activeCategory}-${index}`}
-                  className="bg-background/60 ring-foreground/10 rounded-xl px-5 shadow-sm ring-1"
+                  className="ring-foreground/5 rounded-xl px-5 shadow-sm ring-1"
                 >
                   <AccordionTrigger className="text-left text-base font-medium">
                     {item.question}
@@ -176,7 +165,7 @@ const Faq: FC<FaqProps> = ({ slice }) => {
           </CardContent>
         </Card>
 
-        <Card className="bg-opacity-80 ring-foreground/5 shadow-sm">
+        <Card className="bg-card/40 ring-foreground/5">
           <CardContent className="mx-auto flex max-w-3xl flex-col items-center gap-6 p-8 text-center md:p-10">
             <div className="bg-primary/10 text-primary flex size-12 items-center justify-center rounded-2xl">
               <IconMessages className="size-6" />

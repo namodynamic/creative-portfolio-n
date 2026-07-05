@@ -157,10 +157,10 @@ function ApproachCard({
             isRevealed && "-translate-y-2 opacity-100",
           )}
         >
-          <h3 className="text-foreground text-2xl leading-tight font-semibold text-balance md:text-white">
+          <h3 className="text-2xl leading-tight font-semibold text-balance text-white">
             {title}
           </h3>
-          <p className="text-muted-foreground mt-4 text-sm leading-7 text-pretty md:text-slate-200">
+          <p className="mt-4 text-sm leading-7 text-pretty text-white">
             {description}
           </p>
         </div>

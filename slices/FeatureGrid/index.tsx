@@ -16,10 +16,12 @@ const FeatureGrid: FC<FeatureGridProps> = ({ slice }) => {
       className="pt-0!"
     >
       <SectionHeader
-        title="Full-stack execution for products that need to feel fast, clear, and trustworthy."
-        description="A focused blend of frontend craft, backend thinking, accessibility, performance, and product judgment."
+        title={slice.primary.heading}
+        description={slice.primary.sub_heading}
         align="center"
-        className="mb-10 md:mb-14"
+        titleSize="xs"
+        descriptionSize="sm"
+        className="mb-8 max-w-2xl md:mb-10"
       />
 
       <BentoGrid>

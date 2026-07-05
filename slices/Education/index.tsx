@@ -68,7 +68,7 @@ const Education = ({ slice }: EducationProps): JSX.Element => {
           >
             <Card
               size="sm"
-              className="bg-opacity hover:bg-card transition-colors duration-500"
+              className="bg-card/40 ring-foreground/5 hover:bg-card transition-colors duration-500"
             >
               <CardHeader className="gap-4">
                 <div className="flex flex-col gap-4 md:flex-row md:items-start md:justify-between">
