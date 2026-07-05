@@ -45,12 +45,12 @@ const FeaturedProjectsCard: FC<FeaturedProjectProps> = ({ item, index }) => {
   const hasLiveLink = isFilled.link(item.data.view_live);
   const hasSourceCode = isFilled.link(item.data.source_code);
   const hasProjectImage = isFilled.image(item.data.hover_image);
-  const visibleTechStack = item.data.tech_stack
-    .filter((tech) => Boolean(tech.name))
-    .slice(0, 4);
+  const filteredTechStack = (item.data.tech_stack ?? []).filter((tech) =>
+    Boolean(tech.name),
+  );
+  const visibleTechStack = filteredTechStack.slice(0, 4);
   const hiddenTechCount = Math.max(
-    item.data.tech_stack.filter((tech) => Boolean(tech.name)).length -
-      visibleTechStack.length,
+    filteredTechStack.length - visibleTechStack.length,
     0,
   );
 

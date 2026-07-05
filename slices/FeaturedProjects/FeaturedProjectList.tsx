@@ -17,15 +17,21 @@ type FeaturedProjectListProps = {
   item: Content.ProjectDocument[];
 };
 
+function getSafeProjectTime(date: Content.ProjectDocument["data"]["date"]) {
+  if (!date) return 0;
+
+  const time = new Date(date).getTime();
+
+  return Number.isNaN(time) ? 0 : time;
+}
+
 export default function FeaturedProjectList({
   item,
 }: FeaturedProjectListProps) {
   const sectionRef = useRef<HTMLElement>(null);
 
   const sortedItems = [...item].sort((a, b) => {
-    const dateA = new Date(a.data.date || "").getTime();
-    const dateB = new Date(b.data.date || "").getTime();
-    return dateB - dateA;
+    return getSafeProjectTime(b.data.date) - getSafeProjectTime(a.data.date);
   });
 
   useGSAP(

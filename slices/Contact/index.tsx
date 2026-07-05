@@ -146,23 +146,7 @@ const Contact = ({ slice }: ContactProps): JSX.Element => {
 
   useEffect(() => {
     const ctx = gsap.context(() => {
-      const tl = gsap.timeline();
-
-      tl.fromTo(
-        ".heading-anim",
-        {
-          y: 20,
-          opacity: 0,
-        },
-        {
-          y: 0,
-          opacity: 1,
-          duration: 0.8,
-          stagger: 0.1,
-        },
-      );
-
-      tl.fromTo(
+      gsap.fromTo(
         ".contact-card",
         {
           y: 30,
@@ -174,7 +158,6 @@ const Contact = ({ slice }: ContactProps): JSX.Element => {
           duration: 0.6,
           stagger: 0.2,
         },
-        "-=0.4",
       );
     }, pageRef);
 

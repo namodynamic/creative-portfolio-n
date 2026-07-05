@@ -78,7 +78,7 @@ export default async function RelatedPosts({
                 {isFilled.image(post.data.cover_image) && (
                   <div className="bg-muted relative aspect-16/10 overflow-hidden">
                     <Image
-                      src={post.data.cover_image.url}
+                      src={post.data.cover_image.url || ""}
                       alt={post.data.title || "Blog post"}
                       fill
                       className="object-cover transition-transform duration-500 group-hover:scale-105"

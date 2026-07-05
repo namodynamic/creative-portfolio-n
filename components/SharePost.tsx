@@ -49,7 +49,7 @@ export default function SharePost({
   };
 
   return (
-    <CardFooter className="bg-opacity flex flex-wrap justify-between gap-4">
+    <CardFooter className="flex flex-wrap justify-between gap-4">
       <div className="flex flex-wrap items-center gap-2">
         <span className="text-muted-foreground inline-flex items-center gap-1.5 text-sm font-medium">
           <IconShare3 className="size-4" />

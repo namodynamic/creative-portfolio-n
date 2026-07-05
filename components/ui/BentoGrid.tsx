@@ -50,7 +50,6 @@ export const BentoGrid = ({
         {
           autoAlpha: 1,
           y: 0,
-          scale: 1,
           duration: 0.75,
           ease: "power3.out",
           stagger: 0.1,
